@@ -1,5 +1,6 @@
 package uy.edu.fing.tsi2.core.rest;
 
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Path;
 
@@ -7,7 +8,7 @@ import javax.ws.rs.Path;
 /**
  * @author Farid
  */
-
+@RequestScoped
 @Path("")
 public class RestServices {
 	
