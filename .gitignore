@@ -1,3 +1,12 @@
 
 **/nb-configuration.xml
 **/target/
+/jatrik-core/jatrik-core-ear/target/
+/jatrik-core/jatrik-core-ejb/target/
+/jatrik-core/jatrik-core-web/target/
+/jatrik-core/jatrik-core/jatrik-core-ejb/target/
+/jatrik-core/jatrik-core/jatrik-core-web/target/
+/jatrik-core/jatrik-core/jatrik-core-ear/target/
+/jatrik-front/jatrik-front-ejb/target/
+/jatrik-front/jatrik-front-web/target/
+/jatrik-front/jatrik-front-ear/target/
