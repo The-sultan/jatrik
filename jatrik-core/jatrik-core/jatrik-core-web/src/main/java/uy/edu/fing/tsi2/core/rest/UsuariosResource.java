@@ -29,8 +29,7 @@ public class UsuariosResource {
 				usuario.getNick(), usuario.getPassword());
 		URI uri = null;
 		try {
-			//uri = new URI("usuarios/" + usuarioId);
-			uri = new URI("usuarios/" + 2L);
+			uri = new URI("usuarios/" + usuarioId);
 			
 		} catch (URISyntaxException ex) {
 			Logger.getLogger(UsuariosResource.class.getName()).log(Level.SEVERE, null, ex);
