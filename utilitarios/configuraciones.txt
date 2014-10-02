@@ -1,0 +1,53 @@
+Server jbossAs 7.1.1 Final
+Postgresql 9.0
+
+Para Configurar dataSource
+
+1- Instalar driver jdbc como modulo 
+
+Ir al directorio donde esta el jbossAs 7.1.1 y dentro de la carpeta
+
+....\modules\org debemos descomprimir el archivo postgresql.7z
+
+nos debe quedar ....\modules\org\postgresql\main\modules.xml
+						\postgresql-9.3-1102.jdbc4.jar
+						\postgresql-9.3-1102.jdbc41.jar
+												
+2- Agregar DataSource
+
+Editar el archivo standalone.xml (....\standalone\configuration)
+
+Buscar el subsystem urn:jboss:domain:datasources:1.0 dentro de las etiquetas <datasources> insertar
+
+
+
+
+                <datasource jta="false" jndi-name="java:jboss/datasources/PostgresDS" pool-name="PostgresDS" enabled="true" use-java-context="true" use-ccm="false">
+                    <connection-url>jdbc:postgresql://127.0.0.1:5432/jatrikDB</connection-url>
+                    <driver-class>org.postgresql.Driver</driver-class>
+                    <driver>postgresql</driver>
+                    <pool>
+                        <min-pool-size>2</min-pool-size>
+                        <max-pool-size>20</max-pool-size>
+                    </pool>
+                    <security>
+                        <user-name>prueba</user-name>
+                        <password>prueba</password>
+                    </security>
+                    <validation>
+                        <validate-on-match>false</validate-on-match>
+                        <background-validation>false</background-validation>
+                        <background-validation-millis>1</background-validation-millis>
+                    </validation>
+                    <statement>
+                        <prepared-statement-cache-size>0</prepared-statement-cache-size>
+                        <share-prepared-statements>false</share-prepared-statements>
+                    </statement>
+                </datasource>
+                
+y dentro de las etiquetas drivers poner
+
+                    <driver name="postgresql" module="org.postgresql">
+                        <xa-datasource-class>org.postgresql.xa.PGXADataSource</xa-datasource-class>
+                    </driver>
+                  
