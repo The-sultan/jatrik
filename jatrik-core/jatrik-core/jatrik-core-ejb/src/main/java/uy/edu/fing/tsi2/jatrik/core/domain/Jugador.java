@@ -17,10 +17,18 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumPuesto;
 
+
+@NamedQueries({ @NamedQuery(name = "findJugadoresLibres", query = "SELECT OBJECT(u) FROM Jugador u WHERE u.equipo is null "),
+				@NamedQuery(name = "findJugadoresdelEquipo", query = "SELECT OBJECT(u) FROM Jugador u WHERE u.equipo= :idEquipo")
+
+})
 @Entity
 @Table(name = "JUAGADORES")
 public class Jugador implements Serializable {
@@ -31,7 +39,8 @@ public class Jugador implements Serializable {
 	private static final long serialVersionUID = -2640962344507593130L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@SequenceGenerator(name = "SEQ_JUGADORES", sequenceName = "SEQ_JUGADORES", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_JUGADORES")
 	@Column(name = "ID")
 	private Long id;
 
@@ -42,10 +51,10 @@ public class Jugador implements Serializable {
 	private int edad;
 
 	@Column(name = "ALTURA")
-	private int altura;
+	private double altura;
 
 	@Column(name = "PESO")
-	private int peso;
+	private double peso;
 
 	@Column(name = "PUESTO")
 	@Enumerated(EnumType.ORDINAL)
@@ -60,17 +69,11 @@ public class Jugador implements Serializable {
 	@ManyToOne(targetEntity = Equipo.class)
 	@JoinColumn(name = "EQUIPO_ID", referencedColumnName = "ID")
 	private Equipo equipo;
-	
-	@ManyToMany( fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable(name = "JUGADORES_HABILIDADES",  
-			joinColumns = {@JoinColumn(name = "JUGADOR_ID")},
-			inverseJoinColumns = {@JoinColumn(name = "HABILIDAD_ID")
-			}
-	)
-	private List<Habilidad> habilidades = new LinkedList<Habilidad>(); 
 
-	
-	
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "JUGADORES_HABILIDADES", joinColumns = { @JoinColumn(name = "JUGADOR_ID") }, inverseJoinColumns = { @JoinColumn(name = "HABILIDAD_ID") })
+	private List<Habilidad> habilidades = new LinkedList<Habilidad>();
+
 	public Jugador() {
 		super();
 	}
@@ -99,19 +102,19 @@ public class Jugador implements Serializable {
 		this.edad = edad;
 	}
 
-	public int getAltura() {
+	public double getAltura() {
 		return altura;
 	}
 
-	public void setAltura(int altura) {
+	public void setAltura(double altura) {
 		this.altura = altura;
 	}
 
-	public int getPeso() {
+	public double getPeso() {
 		return peso;
 	}
 
-	public void setPeso(int peso) {
+	public void setPeso(double peso) {
 		this.peso = peso;
 	}
 
@@ -139,8 +142,6 @@ public class Jugador implements Serializable {
 		this.nro_Camiseta = nro_Camiseta;
 	}
 
-	
-	
 	public Equipo getEquipo() {
 		return equipo;
 	}

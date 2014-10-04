@@ -18,7 +18,8 @@ public class Liga implements Serializable {
 	private static final long serialVersionUID = -3474209761703880892L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@SequenceGenerator(name="SEQ_LIGA",sequenceName="SEQ_LIGA",allocationSize=1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="SEQ_LIGA")
 	@Column(name="ID")
 	private Long id;
 	

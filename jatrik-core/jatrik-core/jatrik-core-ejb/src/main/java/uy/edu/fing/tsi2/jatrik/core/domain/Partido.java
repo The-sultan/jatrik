@@ -20,7 +20,8 @@ public class Partido implements Serializable {
 
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@SequenceGenerator(name="SEQ_PARTIDOS",sequenceName="SEQ_PARTIDOS",allocationSize=1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="SEQ_PARTIDOS")
 	@Column(name="ID")
 	private Long id;    
 

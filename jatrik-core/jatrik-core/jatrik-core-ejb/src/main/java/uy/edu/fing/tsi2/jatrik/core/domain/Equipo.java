@@ -1,18 +1,30 @@
 package uy.edu.fing.tsi2.jatrik.core.domain;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 
+
+@NamedQueries({
+	@NamedQuery(name="findEquipoLibre",query="SELECT OBJECT(u) FROM Equipo u WHERE u.usuario is null ")
+	
+})
 @Entity
 @Table(name="EQUIPOS")
 public class Equipo implements Serializable {
@@ -26,7 +38,8 @@ public class Equipo implements Serializable {
 	private static final long serialVersionUID = -7478814344336185050L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@SequenceGenerator(name="SEQ_EQUIPOS",sequenceName="SEQ_EQUIPOS",allocationSize=1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="SEQ_EQUIPOS")
 	@Column(name="ID")
 	private Long id;
 	
@@ -37,20 +50,23 @@ public class Equipo implements Serializable {
 	private Double fondos=0.0;
 	
 	@Column(name="ALTURA")
-	private Integer altura;
+	private int altura;
 	
 	@Column(name="LATITUD")
-	private Integer latitud;
+	private double latitud;
 	
 	@Column(name="LONGITUD")
-	private Integer longitud;
+	private double longitud;
 	
 	@Column(name="ESTADIO")
 	private String estadio;
 	
-	@ManyToOne(targetEntity = Usuario.class, cascade = CascadeType.ALL)
+	@OneToOne(targetEntity = Usuario.class)
 	@JoinColumn(name="USUARIO_ID", referencedColumnName="ID")
 	private Usuario usuario;
+	
+	@OneToMany(targetEntity = Jugador.class, mappedBy = "equipo", fetch=FetchType.EAGER)
+	private Set<Jugador> jugadores = new HashSet<Jugador>();
 	
 	public Equipo() {
 		super();
@@ -94,37 +110,37 @@ public class Equipo implements Serializable {
 
 
 
-	public Integer getAltura() {
+	public int getAltura() {
 		return altura;
 	}
 
 
 
-	public void setAltura(Integer altura) {
+	public void setAltura(int altura) {
 		this.altura = altura;
 	}
 
 
 
-	public Integer getLatitud() {
+	public double getLatitud() {
 		return latitud;
 	}
 
 
 
-	public void setLatitud(Integer latitud) {
+	public void setLatitud(double latitud) {
 		this.latitud = latitud;
 	}
 
 
 
-	public Integer getLongitud() {
+	public double getLongitud() {
 		return longitud;
 	}
 
 
 
-	public void setLongitud(Integer longitud) {
+	public void setLongitud(double longitud) {
 		this.longitud = longitud;
 	}
 
@@ -149,6 +165,18 @@ public class Equipo implements Serializable {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+
+
+	public Set<Jugador> getJugadores() {
+		return jugadores;
+	}
+
+
+
+	public void setJugadores(Set<Jugador> jugadores) {
+		this.jugadores = jugadores;
 	}
 
 

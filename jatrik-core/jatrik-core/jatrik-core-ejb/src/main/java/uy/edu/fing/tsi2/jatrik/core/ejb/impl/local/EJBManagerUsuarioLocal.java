@@ -1,14 +1,13 @@
-package uy.edu.fing.tsi2.jatrik.core.ejb;
+package uy.edu.fing.tsi2.jatrik.core.ejb.impl.local;
 
-import javax.ejb.Local;
+import uy.edu.fing.tsi2.jatrik.core.ejb.IUsuarios;
+
 
 /**
  *
  * @author Farid
  */
-@Local
-public interface UsuarioEJBLocal {
-	public Long crearUsuario(String nombre,String mail,String nick,String password);
-	public Boolean findUsuarioByNickPassword(String nick,String pass);
-	public boolean findUsuarioByUser(String nick);
+
+public interface EJBManagerUsuarioLocal extends IUsuarios{
+
 }
