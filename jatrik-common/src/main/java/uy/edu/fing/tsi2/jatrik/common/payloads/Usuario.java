@@ -1,5 +1,6 @@
 package uy.edu.fing.tsi2.jatrik.common.payloads;
 
+
 /**
  * @author Farid
  */
@@ -7,13 +8,23 @@ public class Usuario {
 
 	private Long id;    
 
-	private String nombre;
+	private String nombreUsuario;
 
 	private String nick;
 
 	private String password;
 
 	private String email;
+	
+	private int alturaEstadio;
+	
+	private double latitudEstadio;
+	
+	private double longitudEstadio;
+	
+	private String nombreEstadio;
+	
+	private String nombreEquipo;
 
 	public Long getId() {
 		return id;
@@ -23,12 +34,12 @@ public class Usuario {
 		this.id = id;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getNombreUsuario() {
+		return nombreUsuario;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombreUsuario(String nombreUsuario) {
+		this.nombreUsuario = nombreUsuario;
 	}
 
 	public String getNick() {
@@ -55,4 +66,46 @@ public class Usuario {
 		this.email = email;
 	}
 
+	public int getAlturaEstadio() {
+		return alturaEstadio;
+	}
+
+	public void setAlturaEstadio(int alturaEstadio) {
+		this.alturaEstadio = alturaEstadio;
+	}
+
+	public double getLatitudEstadio() {
+		return latitudEstadio;
+	}
+
+	public void setLatitudEstadio(double latitudEstadio) {
+		this.latitudEstadio = latitudEstadio;
+	}
+
+	public double getLongitudEstadio() {
+		return longitudEstadio;
+	}
+
+	public void setLongitudEstadio(double longitudEstadio) {
+		this.longitudEstadio = longitudEstadio;
+	}
+
+	public String getNombreEstadio() {
+		return nombreEstadio;
+	}
+
+	public void setNombreEstadio(String nombreEstadio) {
+		this.nombreEstadio = nombreEstadio;
+	}
+
+	public String getNombreEquipo() {
+		return nombreEquipo;
+	}
+
+	public void setNombreEquipo(String nombreEquipo) {
+		this.nombreEquipo = nombreEquipo;
+	}
+
+	
+	
 }

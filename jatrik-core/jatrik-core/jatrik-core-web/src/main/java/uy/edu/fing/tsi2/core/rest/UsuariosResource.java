@@ -27,8 +27,9 @@ public class UsuariosResource {
 	
 	@POST
 	public Response crearUsuario(Usuario usuario){
-		Long usuarioId = usuarioEJB.crearUsuario(usuario.getNombre(), usuario.getEmail(), 
-				usuario.getNick(), usuario.getPassword(),"Peñarol",100,100,2000,"Cataldi");
+		Long usuarioId = usuarioEJB.crearUsuario(usuario.getNick(), usuario.getNombreUsuario(), usuario.getEmail(),usuario.getPassword(),
+							usuario.getNombreEquipo(),usuario.getLongitudEstadio(),usuario.getLatitudEstadio(),usuario.getAlturaEstadio(),
+							usuario.getNombreEstadio());
 		URI uri = null;
 		try {
 			uri = new URI("usuarios/" + usuarioId);

@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+
 import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumHabilidad;
 
 
@@ -36,6 +37,13 @@ public class Habilidad implements Serializable {
 	}
 	
    
+	public Habilidad(int valor,EnumHabilidad tipo, String descripcion){
+		this.valor = valor;
+		this.tipo = tipo;
+		this.descripcion = descripcion;
+	}
+
+
 	public Long getId() {
 		return id;
 	}
