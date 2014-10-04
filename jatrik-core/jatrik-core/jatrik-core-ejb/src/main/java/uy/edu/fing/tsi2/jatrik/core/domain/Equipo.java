@@ -65,7 +65,7 @@ public class Equipo implements Serializable {
 	@JoinColumn(name="USUARIO_ID", referencedColumnName="ID")
 	private Usuario usuario;
 	
-	@OneToMany(targetEntity = Jugador.class, mappedBy = "equipo", fetch=FetchType.EAGER)
+	@OneToMany(fetch=FetchType.EAGER)
 	private Set<Jugador> jugadores = new HashSet<Jugador>();
 	
 	public Equipo() {

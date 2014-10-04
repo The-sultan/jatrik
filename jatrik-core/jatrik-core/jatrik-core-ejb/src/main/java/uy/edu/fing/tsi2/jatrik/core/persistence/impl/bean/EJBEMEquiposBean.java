@@ -60,6 +60,7 @@ public class EJBEMEquiposBean implements IEMEquipos {
 	public Equipo findEquipoLibre() {
 
 		Query consulta = entityManager.createNamedQuery("findEquipoLibre");
+		//Devuelve el primero de la lista
 		return ((Equipo) consulta.getResultList().get(0));
 
 	}
