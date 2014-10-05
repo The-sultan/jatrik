@@ -7,7 +7,10 @@ import javax.persistence.*;
 
 import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumEstadoPartido;
 
-
+@NamedQueries({
+	@NamedQuery(name="findPartidosDeEquipo",query="SELECT OBJECT(p) FROM Partido p WHERE ((p.local.id = :idEquipo) OR (p.visitante.id = :idEquipo)) AND (p.estado = :estado)")
+	
+})
 @Entity
 @Table(name="PARTIDOS")
 public class Partido implements Serializable {

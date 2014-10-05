@@ -24,7 +24,7 @@ public class UsuarioFrontEJB implements UsuarioFrontEJBLocal {
        try{ 
             Usuario usr = new Usuario();
             usr.setNick(nick);
-            usr.setNombre(nombre);
+            usr.setNombreEquipo(nombre);
             usr.setEmail(mail);
             usr.setPassword(password);
        }catch(Exception e){

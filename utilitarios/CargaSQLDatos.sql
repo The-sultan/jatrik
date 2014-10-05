@@ -202,5 +202,5 @@ INSERT INTO juagadores(id, altura, edad, en_venta, nombre, nro_camiseta, peso, p
 INSERT INTO juagadores(id, altura, edad, en_venta, nombre, nro_camiseta, peso, puesto,equipo_id) 
     VALUES (42,170, 21, false, 'N.Tapia',1, 85, 1,null);
 	
-	
+INSERT  INTO partidos values (1,2,'2004-10-19 10:23:54','2004-10-19 10:23:54',1,1,1,2)	
 	
