@@ -32,10 +32,15 @@ public class PartidosResource {
 	
 	@EJB
 	private EJBManagerPartidoLocal partidoEJB;
+	private Long idEquipo;
+	
+	public void setIdEquipo(Long id){
+		idEquipo = id;
+	}
 	
 	@GET
 	public List<Partido> obtenerPartidos(){
-		List<Partido> prt = partidoEJB.obtenerPartidos(Long.valueOf(1));
+		List<Partido> prt = partidoEJB.obtenerPartidos(idEquipo);
 //		URI uri = null;
 //		try {
 //			uri = new URI("partidos/" + idEquipo);

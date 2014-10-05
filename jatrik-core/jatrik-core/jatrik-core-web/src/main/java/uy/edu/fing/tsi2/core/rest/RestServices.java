@@ -4,6 +4,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 
 
 /**
@@ -23,8 +24,10 @@ public class RestServices {
 		return usuariosResource;
 	}
 	
-	@Path("/partidos")
-	public PartidosResource getPartidosResource(){
+	@Path("/partidos/{idEquipo}")
+	@Produces("application/json")
+	public PartidosResource getPartidosResource(@PathParam("idEquipo") Long idEquipo){
+		partidosResource.setIdEquipo(idEquipo);
 		return partidosResource;
 	}	
 }
