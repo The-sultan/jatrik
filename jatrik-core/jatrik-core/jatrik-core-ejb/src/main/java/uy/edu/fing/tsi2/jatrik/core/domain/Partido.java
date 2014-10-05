@@ -1,9 +1,19 @@
 package uy.edu.fing.tsi2.jatrik.core.domain;
 
 import java.io.Serializable;
-import java.util.Calendar;
+import java.util.Date;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumEstadoPartido;
 
@@ -26,11 +36,9 @@ public class Partido implements Serializable {
 	private Long id;    
 
 	@Column(name="FECHA_INICIO")
-	private Calendar fechaInicio;
+	private Date fechaInicio;
 	
-	@Column(name="FECHA_FIN")
-	private Calendar fechaFin;
-	
+
 	@Column(name = "ESTADO")
 	@Enumerated(EnumType.ORDINAL)
 	private EnumEstadoPartido estado;
@@ -56,6 +64,19 @@ public class Partido implements Serializable {
 	}
 
 
+	public Partido(Date fecha, EnumEstadoPartido estado, Equipo local,
+			Equipo visitante, int golesLocal, int golesVisitante) {
+		
+		super();
+		this.fechaInicio = fecha;
+		this.estado = estado;
+		this.local = local;
+		this.visitante = visitante;
+		this.golesLocal = golesLocal;
+		this.golesVisitante = golesVisitante;
+		//this.relPartidoEventos = new HashSet<RelPartidoEvento>();
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -66,26 +87,17 @@ public class Partido implements Serializable {
 	}
 
 
-	public Calendar getFechaInicio() {
+	public Date getFechaInicio() {
 		return fechaInicio;
 	}
 
 
-	public void setFechaInicio(Calendar fechaInicio) {
+	public void setFechaInicio(Date fechaInicio) {
 		this.fechaInicio = fechaInicio;
 	}
 
 
-	public Calendar getFechaFin() {
-		return fechaFin;
-	}
-
-
-	public void setFechaFin(Calendar fechaFin) {
-		this.fechaFin = fechaFin;
-	}
-
-
+	
 	public EnumEstadoPartido getEstado() {
 		return estado;
 	}
@@ -115,6 +127,28 @@ public class Partido implements Serializable {
 		this.golesVisitante = golesVisitante;
 	}
    
+	
+	
+	public Equipo getLocal() {
+		return local;
+	}
+
+
+	public void setLocal(Equipo local) {
+		this.local = local;
+	}
+
+
+	public Equipo getVisitante() {
+		return visitante;
+	}
+
+
+	public void setVisitante(Equipo visitante) {
+		this.visitante = visitante;
+	}
+
+
 	@Override
 	public int hashCode() {
 		int hash = 0;

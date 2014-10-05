@@ -30,7 +30,7 @@ import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumPuesto;
 
 })
 @Entity
-@Table(name = "JUAGADORES")
+@Table(name = "JUGADORES")
 public class Jugador implements Serializable {
 
 	/**

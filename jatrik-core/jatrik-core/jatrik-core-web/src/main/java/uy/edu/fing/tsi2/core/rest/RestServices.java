@@ -15,10 +15,16 @@ public class RestServices {
 	@Inject
 	UsuariosResource usuariosResource;
 	
+	@Inject
+	LigasResource ligasResource;
+	
 	@Path("/usuarios")
 	public UsuariosResource getUsuariosResource(){
 		return usuariosResource;
 	}
 	
-	
+	@Path("/ligas")
+	public  LigasResource getLigasResource(){
+		return ligasResource;
+	}
 }
