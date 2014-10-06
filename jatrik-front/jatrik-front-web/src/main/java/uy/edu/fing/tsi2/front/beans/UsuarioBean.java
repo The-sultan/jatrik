@@ -10,7 +10,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
-import uy.edu.fing.tsi2.front.ejb.UsuarioFrontEJBLocal;
+import uy.edu.fing.tsi2.front.ejb.interfaces.UsuarioEJBLocal;
 
 
 
@@ -32,7 +32,7 @@ public class UsuarioBean implements Serializable {
 	private Logger logger = Logger.getLogger(UsuarioBean.class.getName());
 
 	@EJB
-    UsuarioFrontEJBLocal AdminUsuarios;
+    UsuarioEJBLocal AdminUsuarios;
     
     private String nick;
     private String password;
