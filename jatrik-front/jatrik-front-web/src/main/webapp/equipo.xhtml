@@ -1,24 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:h="http://java.sun.com/jsf/html"
-    template="/WEB-INF/templates/default.xhtml">
-    <ui:define name="content">
-        <h1>Nombre del equipo</h1>
-	
-        <h2>Formacion</h2>
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="content">
+		<h1>Nombre del equipo</h1>
+
+		<h2>Formacion</h2>
         4-3-3
         
 		<h2>Lista de jugadores titulares</h2>
-        
-        <h:panelGrid columns="5" columnClasses="titleCell">
-        
-        
-        </h:panelGrid>   
-               
-        
-        <h2>Lista de jugadores suplentes</h2>
-        
-    </ui:define>
+		<div id="cancha" class="cancha" align="center">
+			<h:panelGrid columns="3" cellspacing="10" styleClass="delanteros">
+				<p:panelGrid columns="1" styleClass="jugadorFormacion">
+					<f:facet name="header">
+						<img class="foto" src="resources/gfx/Jugador no image.png" />
+					</f:facet>
+					<h:outputText value="C. Ronaldo" />
+				</p:panelGrid>
+				<p:panelGrid columns="1" styleClass="jugadorFormacion">
+					<f:facet name="header">
+						<img class="foto" src="resources/gfx/Jugador no image.png" />
+					</f:facet>
+					<h:outputText value="C. Ronaldo" />
+				</p:panelGrid>
+				<p:panelGrid columns="1" styleClass="jugadorFormacion">
+					<f:facet name="header">
+						<img class="foto" src="resources/gfx/Jugador no image.png" />
+					</f:facet>
+					<h:outputText value="C. Ronaldo" />
+				</p:panelGrid>
+			</h:panelGrid>
+			<h:panelGrid columns="3" cellspacing="10" styleClass="mediocampistas">
+				<p:panelGrid columns="1" styleClass="jugadorFormacion">
+					<f:facet name="header">
+						<img class="foto" src="resources/gfx/Jugador no image.png" />
+					</f:facet>
+					<h:outputText value="C. Ronaldo" />
+				</p:panelGrid>
+				<p:panelGrid columns="1" styleClass="jugadorFormacion">
+					<f:facet name="header">
+						<img class="foto" src="resources/gfx/Jugador no image.png" />
+					</f:facet>
+					<h:outputText value="C. Ronaldo" />
+				</p:panelGrid>
+				<p:panelGrid columns="1" styleClass="jugadorFormacion">
+					<f:facet name="header">
+						<img class="foto" src="resources/gfx/Jugador no image.png" />
+					</f:facet>
+					<h:outputText value="C. Ronaldo" />
+				</p:panelGrid>
+			</h:panelGrid>
+			<h:panelGrid columns="5" cellspacing="10" styleClass="defensas">
+				<p:panelGrid columns="1" styleClass="jugadorFormacion">
+					<f:facet name="header">
+						<img class="foto" src="resources/gfx/Jugador no image.png" />
+					</f:facet>
+					<h:outputText value="C. Ronaldo" />
+				</p:panelGrid>
+				<p:panelGrid columns="1" styleClass="jugadorFormacion">
+					<f:facet name="header">
+						<img class="foto" src="resources/gfx/Jugador no image.png" />
+					</f:facet>
+					<h:outputText value="C. Ronaldo" />
+				</p:panelGrid>
+				<p:panelGrid columns="1" styleClass="jugadorFormacion">
+					<f:facet name="header">
+						<img class="foto" src="resources/gfx/Jugador no image.png" />
+					</f:facet>
+					<h:outputText value="C. Ronaldo" />
+				</p:panelGrid>
+				<p:panelGrid columns="1" styleClass="jugadorFormacion">
+					<f:facet name="header">
+						<img class="foto" src="resources/gfx/Jugador no image.png" />
+					</f:facet>
+					<h:outputText value="C. Ronaldo" />
+				</p:panelGrid>
+			</h:panelGrid>
+
+
+
+
+
+		</div>
+		<h2>Lista de jugadores suplentes</h2>
+
+
+		<h2>Estadio</h2>
+		<ui:insert name="content">
+                    Contenido del estadio insertar aqui
+         </ui:insert>
+
+	</ui:define>
 </ui:composition>

@@ -1,6 +1,7 @@
 package uy.edu.fing.tsi2.front.beans;
 
 import java.io.Serializable;
+import java.util.logging.Logger;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -9,7 +10,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
-import uy.edu.fing.tsi2.front.ejb.interfaces.UsuarioEJBLocal;
+import uy.edu.fing.tsi2.front.ejb.UsuarioFrontEJBLocal;
 
 
 
@@ -28,10 +29,10 @@ public class UsuarioBean implements Serializable {
 	 */
 	private static final long serialVersionUID = 6970101878418966024L;
    
-	//private Logger logger = Logger.getLogger(UsuarioBean.class.getName());
+	private Logger logger = Logger.getLogger(UsuarioBean.class.getName());
 
 	@EJB
-    UsuarioEJBLocal AdminUsuarios;
+    UsuarioFrontEJBLocal AdminUsuarios;
     
     private String nick;
     private String password;
