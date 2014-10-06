@@ -36,7 +36,7 @@ public class UsuarioEJB implements UsuarioEJBLocal {
 			usr.setNombreUsuario(nombre);
 			usr.setNombreEstadio("Estadio 1");
 			Long usuarioId = Long.valueOf(jatrikCoreClient.postNuevoUsuario(usr));
-			return 0L;
+			return usuarioId;
        }catch(RestClientException | NumberFormatException e){
             //logger.error(e.getMessage());
 		   throw e;
