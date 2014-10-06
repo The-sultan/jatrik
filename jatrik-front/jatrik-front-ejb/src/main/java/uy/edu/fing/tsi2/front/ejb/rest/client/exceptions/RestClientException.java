@@ -9,13 +9,13 @@ package uy.edu.fing.tsi2.front.ejb.rest.client.exceptions;
  *
  * @author Farid
  */
-public class JatrikClientException extends RuntimeException{
+public class RestClientException extends RuntimeException{
 
-	public JatrikClientException(String message) {
+	public RestClientException(String message) {
 		super(message);
 	}
 
-	public JatrikClientException(Throwable cause) {
+	public RestClientException(Throwable cause) {
 		super(cause);
 	}
 
