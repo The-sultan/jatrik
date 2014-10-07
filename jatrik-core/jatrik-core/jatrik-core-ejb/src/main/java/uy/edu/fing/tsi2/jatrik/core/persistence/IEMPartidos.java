@@ -15,7 +15,7 @@ public interface IEMPartidos {
 	Partido find(Long id);
 
 	List<Partido> findAll();
-}
 	
 	List<Partido> findPartidosDeEquipo(Long idEquipo);
 }
+	

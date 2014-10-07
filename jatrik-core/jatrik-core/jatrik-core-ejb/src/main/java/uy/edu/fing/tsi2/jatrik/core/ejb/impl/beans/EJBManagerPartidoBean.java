@@ -1,12 +1,6 @@
 package uy.edu.fing.tsi2.jatrik.core.ejb.impl.beans;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.Random;
 
 import javax.ejb.EJB;
 import javax.ejb.Local;
@@ -19,8 +13,6 @@ import uy.edu.fing.tsi2.jatrik.core.domain.Partido;
 import uy.edu.fing.tsi2.jatrik.core.ejb.IPartidos;
 import uy.edu.fing.tsi2.jatrik.core.ejb.impl.local.EJBManagerPartidoLocal;
 import uy.edu.fing.tsi2.jatrik.core.ejb.impl.remote.EJBManagerPartidoRemote;
-import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumHabilidad;
-import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumPuesto;
 import uy.edu.fing.tsi2.jatrik.core.persistence.impl.local.EJBEMPartidosLocal;
 
 /**

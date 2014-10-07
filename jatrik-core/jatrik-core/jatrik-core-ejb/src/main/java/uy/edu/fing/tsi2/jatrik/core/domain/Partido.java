@@ -18,16 +18,22 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapKeyClass;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+
 //import org.hibernate.annotations.CollectionOfElements;
 //import org.hibernate.annotations.MapKey;
 import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumEstadoPartido;
 import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumPuesto;
 
+
 @NamedQueries({
 	@NamedQuery(name="findPartidosDeEquipo",query="SELECT OBJECT(p) FROM Partido p WHERE ((p.local.id = :idEquipo) OR (p.visitante.id = :idEquipo)) AND (p.estado = :estado)")
 	
+})
 //@SuppressWarnings("deprecation")
 @Entity
 @Table(name="PARTIDOS")

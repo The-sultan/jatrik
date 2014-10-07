@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import uy.edu.fing.tsi2.jatrik.core.domain.Partido;
+import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumEstadoPartido;
 import uy.edu.fing.tsi2.jatrik.core.persistence.IEMPartidos;
 import uy.edu.fing.tsi2.jatrik.core.persistence.impl.local.EJBEMPartidosLocal;
 import uy.edu.fing.tsi2.jatrik.core.persistence.impl.remote.EJBEMPartidosRemote;
@@ -47,10 +48,7 @@ public class EJBEMPartidosBean implements IEMPartidos {
 		Query consulta = entityManager.createQuery("select h from " + Partido.class.getName() + " h");
 		return (List<Partido>) consulta.getResultList();
 	}
-
-}
-	}
-   
+	
 	@SuppressWarnings("unchecked")
 	public List<Partido> findPartidosDeEquipo(Long idEquipo) {
 		EnumEstadoPartido Estado = EnumEstadoPartido.FINALIZADO;
@@ -58,5 +56,4 @@ public class EJBEMPartidosBean implements IEMPartidos {
 		return ((List<Partido>) consulta.getResultList());
 
 	}
-
 }

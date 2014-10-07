@@ -12,10 +12,4 @@ import uy.edu.fing.tsi2.jatrik.core.ejb.impl.remote.EJBManagerEquipoBeanRemote;
 @Local(EJBManagerEquipoBeanLocal.class)
 @Remote(EJBManagerEquipoBeanRemote.class)
 public class EJBManagerEquipoBean implements IEquipos {
-
-   
-	
-	
-	
-	
 }
