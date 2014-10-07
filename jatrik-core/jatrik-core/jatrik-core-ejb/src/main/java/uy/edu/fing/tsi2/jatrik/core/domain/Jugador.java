@@ -1,6 +1,7 @@
 package uy.edu.fing.tsi2.jatrik.core.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -21,6 +22,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumPuesto;
 
@@ -74,10 +77,19 @@ public class Jugador implements Serializable {
 	@JoinTable(name = "JUGADORES_HABILIDADES", joinColumns = { @JoinColumn(name = "JUGADOR_ID") }, inverseJoinColumns = { @JoinColumn(name = "HABILIDAD_ID") })
 	private List<Habilidad> habilidades = new LinkedList<Habilidad>();
 
+	@ManyToOne(targetEntity = Ejercicio.class)
+	@JoinColumn(name="EJERCICIO_ID",referencedColumnName="ID")
+	private Ejercicio entrenando;
+	
+	@Column(name = "FECHA_ENTRENAMIENTO")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date fechaEntrena;
+	
 	public Jugador() {
 		super();
 	}
 
+		
 	public Long getId() {
 		return id;
 	}
@@ -156,6 +168,24 @@ public class Jugador implements Serializable {
 
 	public void setHabilidades(List<Habilidad> habilidades) {
 		this.habilidades = habilidades;
+	}
+	
+	
+
+	public Ejercicio getEntrenando() {
+		return entrenando;
+	}
+
+	public void setEntrenando(Ejercicio entrenando) {
+		this.entrenando = entrenando;
+	}
+
+	public Date getFechaEntrena() {
+		return fechaEntrena;
+	}
+
+	public void setFechaEntrena(Date fechaEntrena) {
+		this.fechaEntrena = fechaEntrena;
 	}
 
 	@Override
