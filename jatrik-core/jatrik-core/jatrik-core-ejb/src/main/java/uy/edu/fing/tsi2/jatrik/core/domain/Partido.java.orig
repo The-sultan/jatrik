@@ -25,10 +25,15 @@ import javax.persistence.Table;
 import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumEstadoPartido;
 import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumPuesto;
 
+<<<<<<< HEAD
+
+//@SuppressWarnings("deprecation")
+=======
 @NamedQueries({
 	@NamedQuery(name="findPartidosDeEquipo",query="SELECT OBJECT(p) FROM Partido p WHERE ((p.local.id = :idEquipo) OR (p.visitante.id = :idEquipo)) AND (p.estado = :estado)")
 	
-//@SuppressWarnings("deprecation")
+})
+>>>>>>> 60d3759c65703218b3ef2e94d473ecf1c4a6962d
 @Entity
 @Table(name="PARTIDOS")
 public class Partido implements Serializable {

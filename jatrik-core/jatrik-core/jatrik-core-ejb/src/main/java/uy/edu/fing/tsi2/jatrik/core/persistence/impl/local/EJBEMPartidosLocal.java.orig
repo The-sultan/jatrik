@@ -1,0 +1,11 @@
+package uy.edu.fing.tsi2.jatrik.core.persistence.impl.local;
+
+import uy.edu.fing.tsi2.jatrik.core.persistence.IEMPartidos;
+
+<<<<<<< HEAD
+
+=======
+>>>>>>> 60d3759c65703218b3ef2e94d473ecf1c4a6962d
+public interface EJBEMPartidosLocal extends IEMPartidos{
+
+}

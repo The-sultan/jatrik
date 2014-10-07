@@ -25,7 +25,7 @@ public class UsuariosResource {
 	@EJB
 	private EJBManagerUsuarioLocal usuarioEJB;
 	
-	@POST
+	@POST	
 	public Response crearUsuario(Usuario usuario){
 		Long usuarioId = usuarioEJB.crearUsuario(usuario.getNick(), usuario.getNombreUsuario(), usuario.getEmail(),usuario.getPassword(),
 							usuario.getNombreEquipo(),usuario.getLongitudEstadio(),usuario.getLatitudEstadio(),usuario.getAlturaEstadio(),

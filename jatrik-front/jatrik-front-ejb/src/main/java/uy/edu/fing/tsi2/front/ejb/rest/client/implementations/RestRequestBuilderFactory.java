@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package uy.edu.fing.tsi2.front.ejb.rest.client;
+package uy.edu.fing.tsi2.front.ejb.rest.client.implementations;
 
+import uy.edu.fing.tsi2.front.ejb.rest.client.interfaces.RestRequestBuilderFactoryLocal;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource.Builder;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
@@ -15,14 +11,13 @@ import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.ObjectMapper;
 
 /**
- *
  * @author Farid
  */
 
 @Stateless
-public class JatrikRequestBuilderFactory {
+public class RestRequestBuilderFactory implements RestRequestBuilderFactoryLocal{
 
-	private static final String JATRIK_CORE_URL = "localhost:43543/jatrik-core-web/rest";
+	private static final String JATRIK_CORE_URL = "http://localhost:8080/jatrik-core-web/rest";
 	
 	
 	private Client crearClienteJersey() {
@@ -36,12 +31,16 @@ public class JatrikRequestBuilderFactory {
 		return client;
     }
     
+	@Override
     public Builder makeUsuarioCreateRequestBuilder() {
-        String url = JATRIK_CORE_URL + "/usuario";
+        String url = JATRIK_CORE_URL + "/usuarios";
         return crearClienteJersey()
                 .resource(url)
                 .type(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON);
+	}
+
+	public RestRequestBuilderFactory() {
 	}
 	
 	
