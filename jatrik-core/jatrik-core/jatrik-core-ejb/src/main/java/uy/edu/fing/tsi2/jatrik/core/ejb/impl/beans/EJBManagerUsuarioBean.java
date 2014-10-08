@@ -149,7 +149,7 @@ public class EJBManagerUsuarioBean implements IUsuarios {
 				} else if (players.size() < 8) {
 					jugador.setPuesto(EnumPuesto.DEFENSA);
 				} else if (players.size() < 14) {
-					jugador.setPuesto(EnumPuesto.VOLANTE);
+					jugador.setPuesto(EnumPuesto.MEDIOCAMPISTA);
 				} else {
 					jugador.setPuesto(EnumPuesto.DELANTERO);
 				}

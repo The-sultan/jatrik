@@ -23,9 +23,16 @@ public class RestServices {
 	@Inject
 	LigasResource ligasResource;
 	
+	@Inject
+	EquiposResource equiposResource;
+	
 	@Path("/usuarios")
 	public UsuariosResource getUsuariosResource(){
 		return usuariosResource;
+	}
+	@Path("/equipos")
+	public EquiposResource getEquiposResource(){
+		return equiposResource;
 	}
 	
 	@Path("/ligas")

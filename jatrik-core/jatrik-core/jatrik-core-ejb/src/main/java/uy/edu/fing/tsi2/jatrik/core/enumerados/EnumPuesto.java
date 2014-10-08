@@ -7,10 +7,8 @@ import java.util.List;
 public enum EnumPuesto implements Comparable<EnumPuesto> {
 	ARQUERO(1, "Arquero"),
 	DEFENSA(2, "Defensa"),
-	VOLANTE(3, "Volante"),
-	DELANTERO(4, "Delantero"),
-	RESERVA(5,"Reserva"),
-	FUERA(6,"Fuera");
+	MEDIOCAMPISTA(3, "Mediocampista"),
+	DELANTERO(4, "Delantero");
 	
 	
 	private int codigo;

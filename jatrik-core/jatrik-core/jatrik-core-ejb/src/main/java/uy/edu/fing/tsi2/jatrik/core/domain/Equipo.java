@@ -1,8 +1,8 @@
 package uy.edu.fing.tsi2.jatrik.core.domain;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.CascadeType;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -64,8 +64,12 @@ public class Equipo implements Serializable {
 	@JoinColumn(name="USUARIO_ID", referencedColumnName="ID")
 	private Usuario usuario;
 	
-	@OneToMany(fetch=FetchType.EAGER)
-	private Set<Jugador> jugadores = new HashSet<Jugador>();
+	@OneToOne(targetEntity = Formacion.class, cascade = CascadeType.ALL)
+	@JoinColumn(name="FORMACION_ID", referencedColumnName="ID")
+	private Formacion formacionActual;
+	
+	@OneToMany(fetch=FetchType.EAGER, targetEntity = Jugador.class, mappedBy = "equipo")
+	private Set<Jugador> jugadores;
 	
 	public Equipo() {
 		super();
@@ -178,7 +182,13 @@ public class Equipo implements Serializable {
 		this.jugadores = jugadores;
 	}
 
+	public Formacion getFormacion() {
+		return formacionActual;
+	}
 
+	public void setFormacion(Formacion formacion) {
+		this.formacionActual = formacion;
+	}
 
 	@Override
 	public int hashCode() {
@@ -206,4 +216,5 @@ public class Equipo implements Serializable {
 	public String toString() {
 		return "uy.com.fing.tsi2.entidades.Equipo[ id=" + id + " ]";
 	}
+
 }
