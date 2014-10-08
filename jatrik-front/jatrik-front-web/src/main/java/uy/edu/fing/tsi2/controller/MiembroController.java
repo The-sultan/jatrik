@@ -73,7 +73,7 @@ public class MiembroController {
     public String register() throws Exception {
         try {
         	
-            AdminUsuarios.crearUsuario(newMember.getNombre(), newMember.getEmail(), newMember.getNick(), newMember.getPassword(),newMember.getNombreEquipo(), newMember.getPais());
+            //AdminUsuarios.crearUsuario(newMember.getNombre(), newMember.getEmail(), newMember.getNick(), newMember.getPassword(),newMember.getNombreEquipo(), newMember.getPais());
             return "registroExitoso";
             
         } catch (Exception e) {

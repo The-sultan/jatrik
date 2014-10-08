@@ -9,7 +9,7 @@ import javax.inject.Named;
 
 @Named
 @RequestScoped
-public class TrainningController {
+public class EntrenamientoController {
 
 	private List<String> images;
     
@@ -29,7 +29,7 @@ public class TrainningController {
 	
 	
 	
-	public TrainningController() {
+	public EntrenamientoController() {
 		
 	}
 	

@@ -1,0 +1,66 @@
+@CHARSET "ISO-8859-1";
+
+#uno._4-3-3 {
+	position: absolute;
+    top: 80%;
+    left: 41%;
+}
+#dos._4-3-3 {
+	position: absolute;
+	top: 58%;
+	left: 5%;
+}
+#tres._4-3-3 {
+	position: absolute;
+	top: 60%;
+	left: 30%;
+
+}
+#cuatro._4-3-3 {
+	position: absolute;
+	top: 60%;
+	right: 30%;
+}
+
+#cinco._4-3-3 {
+	position: absolute;
+	top: 58%;
+	right: 5%;
+}
+
+
+
+#seis._4-3-3 {
+	position: absolute;
+	top: 38%;
+	left: 10%;
+}
+#siete._4-3-3 {
+	position: absolute;
+	top: 40%;
+	left: 41%;
+}
+#ocho._4-3-3 {
+	position: absolute;
+	top: 38%;
+	right: 10%;
+}
+
+
+#nueve._4-3-3 {
+	position: absolute;
+	top: 18%;
+	left: 10%;
+}
+#diez._4-3-3 {
+	position: absolute;
+	top: 20%;
+	left: 41%;
+}
+#once._4-3-3 {
+	position: absolute;
+	top: 18%;
+	right: 10%;
+}
+
+

@@ -243,7 +243,7 @@ input {
 	background-image: url("../../resources/gfx/cancha.png");
 	height: 594px;
 	width: 372px;
-	
+	position: relative;
 }
 
 .delanteros{
@@ -266,3 +266,6 @@ input {
 	position: relative;
 	top: 40%;
 }
+
+
+
