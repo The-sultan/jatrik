@@ -46,7 +46,7 @@
 				
 				<p:selectOneMenu id="pais" value="#{newMember.pais}" style="width:90%;">
 					<f:selectItem itemLabel="Pais" itemValue="" />
-					<f:selectItems value="#{memberController.paises}" />
+					<f:selectItems value="#{miembroController.paises}" />
 				</p:selectOneMenu>
 				<h:message for="pais" errorClass="invalid" />
 
@@ -54,13 +54,16 @@
 				<p:inputText id="nombreEquipo" value="#{newMember.nombreEquipo}" />
 				<h:message for="nombreEquipo" errorClass="invalid" />
 
+				<h:outputLabel for="nombreEstadio" value="Nombre del estadio" />
+				<p:inputText id="nombreEstadio" value="#{newMember.nombreEstadio}" />
+				<h:message for="nombreEstadio" errorClass="invalid" />
 
 			</h:panelGrid>
 
 			<p>
 				<h:panelGrid columns="2">
 					<p:commandButton id="register"
-						actionListener="#{memberController.register}" value="Register"
+						actionListener="#{miembroController.register}" value="Register"
 						styleClass="register" ajax="false" />
 					<h:messages styleClass="messages" errorClass="invalid"
 						infoClass="valid" warnClass="warning" globalOnly="true" />

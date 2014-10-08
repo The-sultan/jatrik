@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.enterprise.inject.Model;
 import javax.enterprise.inject.Produces;
 import javax.faces.application.FacesMessage;
@@ -29,7 +30,8 @@ import javax.faces.model.SelectItemGroup;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import uy.edu.fing.tsi2.model.Member;
+import uy.edu.fing.tsi2.front.ejb.interfaces.UsuarioEJBLocal;
+import uy.edu.fing.tsi2.model.Miembro;
 //import uy.edu.fing.tsi2.service.MemberRegistration;
 
 // The @Model stereotype is a convenience mechanism to make this a request-scoped bean that has an
@@ -37,19 +39,15 @@ import uy.edu.fing.tsi2.model.Member;
 // Read more about the @Model stereotype in this FAQ:
 // http://sfwk.org/Documentation/WhatIsThePurposeOfTheModelAnnotation
 @Model
-public class MemberController {
+public class MiembroController {
 
 	
-	//Si pongo esto me da un problema
-    //@Inject
-    //private FacesContext facesContext;
-
-    //@Inject
-    //private MemberRegistration memberRegistration;
+	@EJB
+    UsuarioEJBLocal AdminUsuarios;
 
     @Produces
     @Named
-    private Member newMember;
+    private Miembro newMember;
 
     
 	private List<SelectItem> paises;
@@ -57,7 +55,7 @@ public class MemberController {
     
     @PostConstruct
     public void initNewMember() {
-        newMember = new Member();
+        newMember = new Miembro();
        
         SelectItemGroup g1 = new SelectItemGroup("America");
         g1.setSelectItems(new SelectItem[] {new SelectItem(1, "Argentina"), new SelectItem(2, "Brasil"), new SelectItem(3, "Uruguay")});
@@ -72,14 +70,17 @@ public class MemberController {
         
     }
 
-    public void register() throws Exception {
+    public String register() throws Exception {
         try {
-
+        	
+            AdminUsuarios.crearUsuario(newMember.getNombre(), newMember.getEmail(), newMember.getNick(), newMember.getPassword(),newMember.getNombreEquipo(), newMember.getPais());
+            return "registroExitoso";
             
         } catch (Exception e) {
             String errorMessage = getRootErrorMessage(e);
             FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, "Registration unsuccessful");
             //facesContext.addMessage(null, m);
+            return null;
         }
     }
 

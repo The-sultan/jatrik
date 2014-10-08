@@ -2,8 +2,8 @@ package uy.edu.fing.tsi2.front.ejb.implementations;
 
 
 import java.util.logging.Logger;
-import javax.ejb.EJB;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import uy.edu.fing.tsi2.front.ejb.interfaces.UsuarioEJBLocal;
@@ -23,7 +23,7 @@ public class UsuarioEJB implements UsuarioEJBLocal {
 	
     private static final Logger logger = Logger.getLogger(UsuarioEJB.class.getName());
         
-    public Long crearUsuario(String nombre,String mail,String nick,String password){
+    public Long crearUsuario(String nombre,String mail,String nick,String password, String nombreEquipo, int idPais){
        try{ 
             Usuario usr = new Usuario();
             usr.setNick(nick);

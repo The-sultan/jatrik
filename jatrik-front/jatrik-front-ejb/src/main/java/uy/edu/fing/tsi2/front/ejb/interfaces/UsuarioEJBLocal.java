@@ -9,6 +9,6 @@ import javax.ejb.Local;
 @Local
 public interface UsuarioEJBLocal {
 	
-	 public Long crearUsuario(String nombre,String mail,String nick,String password);
+	 public Long crearUsuario(String nombre,String mail,String nick,String password, String nombreEquipo, int idPais);
     
 }

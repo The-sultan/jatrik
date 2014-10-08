@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @SuppressWarnings("serial")
 @XmlRootElement
-public class Member implements Serializable {
+public class Miembro implements Serializable {
 
 	private Long id;
 
@@ -40,6 +40,10 @@ public class Member implements Serializable {
 	@Size( min = 1, max = 25, message="Debe ingresar un nombre para su equipo")
 	@Pattern(regexp = "[^0-9]*", message = "No debe contener numeros")
 	private String nombreEquipo;
+	
+	@Size( min = 1, max = 25, message="Debe ingresar un nombre para su estadio")
+	@Pattern(regexp = "[^0-9]*", message = "No debe contener numeros")
+	private String nombreEstadio;
 
 	public String getNombreEquipo() {
 		return nombreEquipo;
@@ -105,5 +109,13 @@ public class Member implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getNombreEstadio() {
+		return nombreEstadio;
+	}
+
+	public void setNombreEstadio(String nombreEstadio) {
+		this.nombreEstadio = nombreEstadio;
 	}
 }
