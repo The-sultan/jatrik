@@ -10,7 +10,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.POST;
 import javax.ws.rs.core.Response;
 
-import uy.edu.fing.tsi2.jatrik.common.payloads.Usuario;
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoUsuario;
 import uy.edu.fing.tsi2.jatrik.core.ejb.impl.local.EJBManagerUsuarioLocal;
 
 
@@ -26,10 +26,8 @@ public class UsuariosResource {
 	private EJBManagerUsuarioLocal usuarioEJB;
 	
 	@POST	
-	public Response crearUsuario(Usuario usuario){
-		Long usuarioId = usuarioEJB.crearUsuario(usuario.getNick(), usuario.getNombreUsuario(), usuario.getEmail(),usuario.getPassword(),
-							usuario.getNombreEquipo(),usuario.getLongitudEstadio(),usuario.getLatitudEstadio(),usuario.getAlturaEstadio(),
-							usuario.getNombreEstadio());
+	public Response crearUsuario(InfoUsuario usuario){
+		Long usuarioId = usuarioEJB.crearUsuario(usuario.getNombre(), usuario.getNick(), usuario.getEmail(), usuario.getPassword());
 		URI uri = null;
 		try {
 			uri = new URI("usuarios/" + usuarioId);

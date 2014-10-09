@@ -8,7 +8,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import uy.edu.fing.tsi2.front.ejb.rest.client.exceptions.RestClientException;
-import uy.edu.fing.tsi2.jatrik.common.payloads.Usuario;
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoUsuario;
 
 /**
  *
@@ -21,7 +21,7 @@ public class RestClientEJB implements RestClientEJBLocal{
 	private RestRequestBuilderFactoryLocal jatrikRequestBuilderFactory;
 	
 	@Override
-	public String postNuevoUsuario(Usuario usuario) throws RestClientException{
+	public String postNuevoUsuario(InfoUsuario usuario) throws RestClientException{
 		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory.makeUsuarioCreateRequestBuilder();
 		ClientResponse response = jerseyHttpRequestBuilder.post(ClientResponse.class, usuario);
 		if(response.getStatusInfo().getStatusCode() != ClientResponse.Status.CREATED.getStatusCode()){

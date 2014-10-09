@@ -1,7 +1,6 @@
 package uy.edu.fing.tsi2.jatrik.common.payloads;
 
 import java.util.List;
-import java.util.List;
 
 public class InfoEquipo {
 

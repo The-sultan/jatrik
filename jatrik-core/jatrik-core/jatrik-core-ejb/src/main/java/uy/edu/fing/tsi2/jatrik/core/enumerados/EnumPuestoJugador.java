@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public enum EnumPuesto implements Comparable<EnumPuesto> {
+public enum EnumPuestoJugador implements Comparable<EnumPuestoJugador> {
 	ARQUERO(1, "Arquero"),
 	DEFENSA(2, "Defensa"),
 	MEDIOCAMPISTA(3, "Mediocampista"),
@@ -14,7 +14,7 @@ public enum EnumPuesto implements Comparable<EnumPuesto> {
 	private int codigo;
 	private String posicion;
 
-	private EnumPuesto(int codigo, String posicion) {
+	private EnumPuestoJugador(int codigo, String posicion) {
 		this.codigo = codigo;
 		this.posicion = posicion;
 	}
@@ -27,11 +27,11 @@ public enum EnumPuesto implements Comparable<EnumPuesto> {
 		return this.posicion;
 	}
 	
-	public static List<EnumPuesto> getAllValues() {
-		EnumPuesto[] resultArray = values();
-		List<EnumPuesto> result = new ArrayList<EnumPuesto>();
+	public static List<EnumPuestoJugador> getAllValues() {
+		EnumPuestoJugador[] resultArray = values();
+		List<EnumPuestoJugador> result = new ArrayList<EnumPuestoJugador>();
 		
-		for (EnumPuesto estadosVehiculo : resultArray) {
+		for (EnumPuestoJugador estadosVehiculo : resultArray) {
 			result.add(estadosVehiculo);
 		}
 		Collections.sort(result);
@@ -39,10 +39,10 @@ public enum EnumPuesto implements Comparable<EnumPuesto> {
 		return result;
 	}
 
-	public static EnumPuesto getById(int codigo) {
-		EnumPuesto[] enumList = values();
+	public static EnumPuestoJugador getById(int codigo) {
+		EnumPuestoJugador[] enumList = values();
 		
-		for (EnumPuesto currentEnum : enumList) {
+		for (EnumPuestoJugador currentEnum : enumList) {
 			if (codigo == currentEnum.getCodigo()) {
 				return currentEnum;
 			}

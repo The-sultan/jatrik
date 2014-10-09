@@ -1,6 +1,6 @@
 package uy.edu.fing.tsi2.jatrik.common.payloads;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class InfoJugador {
 	
@@ -20,7 +20,7 @@ public class InfoJugador {
 
 	private int nroCamiseta;
 
-	private ArrayList<InfoHabilidad> habilidades;
+	private List<InfoHabilidad> habilidades;
 
 	public Long getId() {
 		return id;
@@ -86,11 +86,11 @@ public class InfoJugador {
 		this.nroCamiseta = nroCamiseta;
 	}
 
-	public ArrayList<InfoHabilidad> getHabilidades() {
+	public List<InfoHabilidad> getHabilidades() {
 		return habilidades;
 	}
 
-	public void setHabilidades(ArrayList<InfoHabilidad> habilidades) {
+	public void setHabilidades(List<InfoHabilidad> habilidades) {
 		this.habilidades = habilidades;
 	}
 	

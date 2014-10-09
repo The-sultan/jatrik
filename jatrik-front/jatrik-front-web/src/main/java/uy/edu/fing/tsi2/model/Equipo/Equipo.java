@@ -17,6 +17,44 @@ public class Equipo {
 	private ArrayList<InfoJugador> defensas;
 	private ArrayList<InfoJugador> mediocampistas;
 	private ArrayList<InfoJugador> delanteros;
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public String getFormacion() {
+		return formacion;
+	}
+	public void setFormacion(String formacion) {
+		this.formacion = formacion;
+	}
+	public InfoJugador getGolero() {
+		return golero;
+	}
+	public void setGolero(InfoJugador golero) {
+		this.golero = golero;
+	}
+	public ArrayList<InfoJugador> getDefensas() {
+		return defensas;
+	}
+	public void setDefensas(ArrayList<InfoJugador> defensas) {
+		this.defensas = defensas;
+	}
+	public ArrayList<InfoJugador> getMediocampistas() {
+		return mediocampistas;
+	}
+	public void setMediocampistas(ArrayList<InfoJugador> mediocampistas) {
+		this.mediocampistas = mediocampistas;
+	}
+	public ArrayList<InfoJugador> getDelanteros() {
+		return delanteros;
+	}
+	public void setDelanteros(ArrayList<InfoJugador> delanteros) {
+		this.delanteros = delanteros;
+	}
+	
+	
 	
 	
 }

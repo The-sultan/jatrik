@@ -20,7 +20,8 @@ import uy.edu.fing.tsi2.jatrik.core.domain.Equipo;
 import uy.edu.fing.tsi2.jatrik.core.domain.Formacion;
 import uy.edu.fing.tsi2.jatrik.core.domain.Jugador;
 import uy.edu.fing.tsi2.jatrik.core.domain.JugadorEnFormacion;
-import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumPuesto;
+import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumPuestoFormacion;
+import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumPuestoJugador;
 import uy.edu.fing.tsi2.jatrik.core.persistence.IEMEquipos;
 import uy.edu.fing.tsi2.jatrik.core.persistence.impl.local.EJBEMEquiposLocal;
 import uy.edu.fing.tsi2.jatrik.core.persistence.impl.remote.EJBEMEquiposRemote;
@@ -87,7 +88,7 @@ public class EJBEMEquiposBean implements IEMEquipos {
 	}
 	
 	private void generarFormacionPorDefecto(Equipo equipo){
-		Map<EnumPuesto,List<Jugador>> jugadoresMap = new HashMap<>();
+		Map<EnumPuestoJugador,List<Jugador>> jugadoresMap = new HashMap<>();
 		for(Jugador jugador : equipo.getJugadores()){
 			List<Jugador> jugadores;
 			if(jugadoresMap.containsKey(jugador.getPuesto())){
@@ -100,16 +101,17 @@ public class EJBEMEquiposBean implements IEMEquipos {
 			jugadoresMap.put(jugador.getPuesto(),jugadores);
 		}
 		Formacion formacion = new Formacion();
-		Set<JugadorEnFormacion> titulares = new HashSet<>();
 		
-		//elijo uno de todos los arqueros del cuadro de forma random
-		Random generadorRandom = new Random();
-		Jugador arquero = jugadoresMap.get(EnumPuesto.ARQUERO).get(generadorRandom.nextInt(jugadoresMap.get(EnumPuesto.ARQUERO).size()));
 		Set<Jugador> utilizados = new HashSet<>();
-		formacion.setArquero(arquero);
-		formacion.setDefensas(obtenerJugadoresEnPosicion(jugadoresMap,EnumPuesto.DEFENSA,CANTIDAD_DEFENSA_FORMACION_DEFAULT, utilizados));
-		formacion.setMediocampistas(obtenerJugadoresEnPosicion(jugadoresMap,EnumPuesto.MEDIOCAMPISTA,CANTIDAD_MEDIO_FORMACION_DEFAULT, utilizados));
-		formacion.setDelanteros(obtenerJugadoresEnPosicion(jugadoresMap,EnumPuesto.DELANTERO,CANTIDAD_DELANTERA_FORMACION_DEFAULT, utilizados));
+		Set<JugadorEnFormacion> jugadoresConPuestosAsignados = new HashSet<>();
+		jugadoresConPuestosAsignados.addAll(obtenerJugadoresEnPosicion(jugadoresMap,EnumPuestoJugador.ARQUERO,1, 
+				utilizados, EnumPuestoFormacion.ARQUERO));
+		jugadoresConPuestosAsignados.addAll(obtenerJugadoresEnPosicion(jugadoresMap,EnumPuestoJugador.DEFENSA,CANTIDAD_DEFENSA_FORMACION_DEFAULT,
+				utilizados, EnumPuestoFormacion.DEFENSA));
+		jugadoresConPuestosAsignados.addAll(obtenerJugadoresEnPosicion(jugadoresMap,EnumPuestoJugador.MEDIOCAMPISTA,CANTIDAD_MEDIO_FORMACION_DEFAULT,
+				utilizados, EnumPuestoFormacion.MEDIOCAMPISTA));
+		jugadoresConPuestosAsignados.addAll(obtenerJugadoresEnPosicion(jugadoresMap,EnumPuestoJugador.DELANTERO,CANTIDAD_DELANTERA_FORMACION_DEFAULT,
+				utilizados, EnumPuestoFormacion.DELANTERO));
 		
 		Set<Jugador> jugadoresSinUtilizar = new HashSet<Jugador>(equipo.getJugadores());
 		jugadoresSinUtilizar.removeAll(utilizados);
@@ -117,11 +119,15 @@ public class EJBEMEquiposBean implements IEMEquipos {
 		Set<Jugador> suplentes = new HashSet<>();
 		Iterator<Jugador> jugadorIter = jugadoresSinUtilizar.iterator();
 		for(int i=0;i<7;i++){
-			suplentes.add(jugadorIter.next());
+			Jugador jugador = jugadorIter.next();
+			jugadoresConPuestosAsignados.add(new JugadorEnFormacion(jugador,0,EnumPuestoFormacion.SUPLENTE));
+			suplentes.add(jugador);
 		}
-		formacion.setJugadoresSuplentes(suplentes);
 		jugadoresSinUtilizar.removeAll(suplentes);
-		formacion.setJugadoresReserva(jugadoresSinUtilizar);
+		for(Jugador jugador : jugadoresSinUtilizar){
+			jugadoresConPuestosAsignados.add(new JugadorEnFormacion(jugador,0,EnumPuestoFormacion.RESERVA));
+		}
+		formacion.setJugadores(jugadoresConPuestosAsignados);
 		
 		equipo.setFormacion(formacion);
 		update(equipo);
@@ -131,8 +137,8 @@ public class EJBEMEquiposBean implements IEMEquipos {
 		
 	}
 	
-	private Set<JugadorEnFormacion> obtenerJugadoresEnPosicion(Map<EnumPuesto,List<Jugador>> jugadoresMap,
-			EnumPuesto puesto, int cantidad, Set<Jugador> utilizados){
+	private Set<JugadorEnFormacion> obtenerJugadoresEnPosicion(Map<EnumPuestoJugador,List<Jugador>> jugadoresMap,
+			EnumPuestoJugador puestoJugador, int cantidad, Set<Jugador> utilizados, EnumPuestoFormacion puestoFormacion){
 		Random generadorRandom = new Random();
 
 		Set<JugadorEnFormacion> jugadorEnFormacionSeleccionados = new HashSet<>();
@@ -140,14 +146,14 @@ public class EJBEMEquiposBean implements IEMEquipos {
 			boolean agregaJugador = false;
 			while(!agregaJugador){
 				//obtiene un jugador al azar en el puesto proporcionado
-				Jugador jugadorRandom = jugadoresMap.get(puesto).get(generadorRandom.nextInt(jugadoresMap.get(puesto).size()));
+				Jugador jugadorRandom = jugadoresMap.get(puestoJugador).get(generadorRandom.nextInt(jugadoresMap.get(puestoJugador).size()));
 				//si no está en la cancha, seteo la variable agrega en true
 				agregaJugador = !utilizados.contains(jugadorRandom);
 				//si la variable esta en true lo agrego a dos conjuntos, el conjunto resultante y 
 				//el conjunto auxiliar para no repetir dos veces al mismo jugador
 				if(agregaJugador){
 					utilizados.add(jugadorRandom);
-					jugadorEnFormacionSeleccionados.add(new JugadorEnFormacion(jugadorRandom,i));
+					jugadorEnFormacionSeleccionados.add(new JugadorEnFormacion(jugadorRandom,i, puestoFormacion));
 					
 				}
 			}

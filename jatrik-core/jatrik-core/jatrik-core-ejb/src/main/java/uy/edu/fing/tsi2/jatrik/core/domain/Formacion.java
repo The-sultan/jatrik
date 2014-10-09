@@ -1,15 +1,16 @@
 package uy.edu.fing.tsi2.jatrik.core.domain;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
@@ -21,29 +22,19 @@ import javax.persistence.Table;
 @Table(name="FORMACIONES")
 public class Formacion implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1104456436729331947L;
+
 	@Id
+	@SequenceGenerator(name="SEQ_FORMACIONES",sequenceName="SEQ_FORMACIONES",allocationSize=1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="SEQ_FORMACIONES")
 	private Long id;
 
-	@OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-	@OrderBy("indice")
-	private Set<JugadorEnFormacion> defensas;
-	
-	@OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-	@OrderBy("indice")
-	private Set<JugadorEnFormacion> mediocampistas;
-	
-	@OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-	@OrderBy("indice")
-	private Set<JugadorEnFormacion> delanteros;
-	
-	@OneToMany(fetch=FetchType.LAZY)
-	private Set<Jugador> jugadoresSuplentes;
-	
-	@OneToMany(fetch=FetchType.LAZY)
-	private Set<Jugador> jugadoresReserva;
-
-	@Column
-	private Jugador arquero;
+	@OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL, 
+			targetEntity = JugadorEnFormacion.class, mappedBy = "formacion")
+	private Set<JugadorEnFormacion> jugadores;
 	
 	public Long getId() {
 		return id;
@@ -53,57 +44,14 @@ public class Formacion implements Serializable{
 		this.id = id;
 	}
 
-	public Set<JugadorEnFormacion> getDefensas() {
-		return defensas;
+	public Set<JugadorEnFormacion> getJugadores() {
+		return jugadores;
 	}
 
-	public void setDefensas(Set<JugadorEnFormacion> defensas) {
-		this.defensas = defensas;
+	public void setJugadores(Set<JugadorEnFormacion> jugadores) {
+		this.jugadores = jugadores;
 	}
 
-	public Set<JugadorEnFormacion> getMediocampistas() {
-		return mediocampistas;
-	}
-
-	public void setMediocampistas(Set<JugadorEnFormacion> mediocampistas) {
-		this.mediocampistas = mediocampistas;
-	}
-
-	public Set<JugadorEnFormacion> getDelanteros() {
-		return delanteros;
-	}
-
-	public void setDelanteros(Set<JugadorEnFormacion> delanteros) {
-		this.delanteros = delanteros;
-	}
-
-	
-
-	public Set<Jugador> getJugadoresSuplentes() {
-		return jugadoresSuplentes;
-	}
-
-	public void setJugadoresSuplentes(Set<Jugador> jugadoresSuplentes) {
-		this.jugadoresSuplentes = jugadoresSuplentes;
-	}
-
-	public Set<Jugador> getJugadoresReserva() {
-		return jugadoresReserva;
-	}
-
-	public void setJugadoresReserva(Set<Jugador> jugadoresReserva) {
-		this.jugadoresReserva = jugadoresReserva;
-	}
-
-	public Jugador getArquero() {
-		return arquero;
-	}
-
-	public void setArquero(Jugador arquero) {
-		this.arquero = arquero;
-	}
-	
-	
 	public Formacion() {
 	}
 

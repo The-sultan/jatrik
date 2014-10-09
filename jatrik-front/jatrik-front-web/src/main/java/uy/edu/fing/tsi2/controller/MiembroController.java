@@ -23,11 +23,8 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.inject.Model;
 import javax.enterprise.inject.Produces;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.faces.model.SelectItemGroup;
-import javax.inject.Inject;
 import javax.inject.Named;
 
 import uy.edu.fing.tsi2.front.ejb.interfaces.UsuarioEJBLocal;
@@ -45,8 +42,8 @@ public class MiembroController {
 	@EJB
     UsuarioEJBLocal AdminUsuarios;
 
+	@Named
     @Produces
-    @Named
     private Miembro newMember;
 
     
@@ -73,12 +70,12 @@ public class MiembroController {
     public String register() throws Exception {
         try {
         	
-            //AdminUsuarios.crearUsuario(newMember.getNombre(), newMember.getEmail(), newMember.getNick(), newMember.getPassword(),newMember.getNombreEquipo(), newMember.getPais());
+            AdminUsuarios.crearUsuario(newMember.getNombre(), newMember.getEmail(), newMember.getNick(), newMember.getPassword(),newMember.getNombreEquipo(), newMember.getPais());
             return "registroExitoso";
             
         } catch (Exception e) {
-            String errorMessage = getRootErrorMessage(e);
-            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, "Registration unsuccessful");
+            /*String errorMessage = */getRootErrorMessage(e);
+            //FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, "Registration unsuccessful");
             //facesContext.addMessage(null, m);
             return null;
         }

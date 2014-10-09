@@ -2,32 +2,26 @@ package uy.edu.fing.tsi2.jatrik.core.domain;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapKeyClass;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
 
 //import org.hibernate.annotations.CollectionOfElements;
 //import org.hibernate.annotations.MapKey;
 import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumEstadoPartido;
-import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumPuesto;
 
 
 @NamedQueries({
@@ -75,51 +69,13 @@ public class Partido implements Serializable {
 	@JoinColumn(name = "VISITANTE_ID", referencedColumnName = "ID")
 	private Equipo visitante;
 
-/* CON HiBERNATE*/	
-//	@CollectionOfElements(fetch=FetchType.LAZY)
-//	@JoinTable(
-//			name = "ALINEACION_LOCAL",
-//			joinColumns = @JoinColumn(name = "PARTIDO_ID")
-//	)
-//	@org.hibernate.annotations.MapKey(targetElement = Jugador.class, columns = {@Column(name = "JUGADOR_ID")})
-//	@Column(name = "POSICION")
-//	private Map<Jugador, EnumPuesto> alineacionLocal = new HashMap<Jugador, EnumPuesto>();
-/* FIN */	
+	@OneToOne(targetEntity = Formacion.class, cascade = CascadeType.ALL)
+	@JoinColumn(name="FORMACION_LOCAL_ID", referencedColumnName="ID")
+	private Formacion formacionLocal;
 
-	@ElementCollection(fetch=FetchType.LAZY)
-	@JoinTable(
-			name = "ALINEACION_LOCAL",
-			joinColumns = @JoinColumn(name = "PARTIDO_ID")
-	)
-	@MapKeyClass(Jugador.class)
-	//@MapKeyColumn(name="JUGADOR_ID")
-	@Column(name = "POSICION")
-	private Map<Jugador, EnumPuesto> alineacionLocal = new HashMap<Jugador, EnumPuesto>();
-
-	
-	
-	
-
-	/* CON HiBERNATE*/	
-//	@CollectionOfElements(fetch=FetchType.LAZY)
-//	@JoinTable(
-//			name = "ALINEACION_VISITANTE",
-//			joinColumns = @JoinColumn(name = "PARTIDO_ID")
-//	)
-//	@org.hibernate.annotations.MapKey(targetElement = Jugador.class, columns = {@Column(name = "JUGADOR_ID")})
-//	@Column(name = "POSICION")
-//	private Map<Jugador, EnumPuesto> alineacionVisitante = new HashMap<Jugador, EnumPuesto>();
-/* FIN */	
-	@ElementCollection(fetch=FetchType.LAZY)
-	@JoinTable(
-			name = "ALINEACION_VISITANTE",
-			joinColumns = @JoinColumn(name = "PARTIDO_ID")
-	)
-	@MapKeyClass(Jugador.class)
-	//@MapKeyColumn(name="JUGADOR_ID")
-	@Column(name = "POSICION")
-	private Map<Jugador, EnumPuesto> alineacionVisitante = new HashMap<Jugador, EnumPuesto>();
-	
+	@OneToOne(targetEntity = Formacion.class, cascade = CascadeType.ALL)
+	@JoinColumn(name="FORMACION_VISITANTE_ID", referencedColumnName="ID")
+	private Formacion formacionVisitante;	
 	
 	public Partido() {
 		super();

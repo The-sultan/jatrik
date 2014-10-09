@@ -19,6 +19,7 @@ import uy.edu.fing.tsi2.jatrik.core.domain.Equipo;
 import uy.edu.fing.tsi2.jatrik.core.domain.Jugador;
 import uy.edu.fing.tsi2.jatrik.core.domain.JugadorEnFormacion;
 import uy.edu.fing.tsi2.jatrik.core.ejb.impl.local.EJBManagerEquipoBeanLocal;
+import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumPuestoFormacion;
 
 /**
   * @author Farid
@@ -35,14 +36,12 @@ public class EquiposResource {
 	public InfoEquipo getEquipo(@PathParam("id") Long idEquipo){
 		Equipo equipo = equipoEJB.find(idEquipo);
 		InfoEquipo infoEquipo = new InfoEquipo();
-		/*
-		infoEquipo.setDefensas(getDtoFromEntity(equipo.getFormacion().getDefensas()));
-		infoEquipo.setMediocampistas(getDtoFromEntity(equipo.getFormacion().getMediocampistas()));
-		infoEquipo.setDelanteros(getDtoFromEntity(equipo.getFormacion().getDelanteros()));
-		infoEquipo.setReservas(getDtoFromEntitySet(equipo.getFormacion().getJugadoresReserva()));
-		infoEquipo.setSuplentes(getDtoFromEntitySet(equipo.getFormacion().getJugadoresSuplentes()));
-		infoEquipo.setGolero(getDtoFromEntity(equipo.getFormacion().getArquero()));
-		*/
+		infoEquipo.setDefensas(getDtoFromEntity(equipo.getFormacion().getJugadores(),EnumPuestoFormacion.DEFENSA));
+		infoEquipo.setMediocampistas(getDtoFromEntity(equipo.getFormacion().getJugadores(),EnumPuestoFormacion.MEDIOCAMPISTA));
+		infoEquipo.setDelanteros(getDtoFromEntity(equipo.getFormacion().getJugadores(),EnumPuestoFormacion.DELANTERO));
+		infoEquipo.setSuplentes(getDtoFromEntity(equipo.getFormacion().getJugadores(),EnumPuestoFormacion.SUPLENTE));
+		infoEquipo.setReservas(getDtoFromEntity(equipo.getFormacion().getJugadores(),EnumPuestoFormacion.RESERVA));
+		infoEquipo.setGolero(getDtoFromEntity(equipo.getFormacion().getJugadores(),EnumPuestoFormacion.ARQUERO).get(0));
 		infoEquipo.setEstadio(getDtoFromEntity(equipo));
 		
 		infoEquipo.setFondos(equipo.getFondos());
@@ -53,24 +52,17 @@ public class EquiposResource {
 	}
 	
 	
-	private List<InfoJugador> getDtoFromEntity(Set<JugadorEnFormacion> jugadores){
+	private List<InfoJugador> getDtoFromEntity(Set<JugadorEnFormacion> jugadores, EnumPuestoFormacion puestoEnFormacion){
 		List<InfoJugador> infoJugadores = new ArrayList<>();
 		for(JugadorEnFormacion jugadorEnFormacion : jugadores){
-			InfoJugador infoJugador = getDtoFromEntity(jugadorEnFormacion.getJugador());
-			infoJugadores.add(infoJugador);
+			if(jugadorEnFormacion.getPuestoFormacion() == puestoEnFormacion){
+				InfoJugador infoJugador = getDtoFromEntity(jugadorEnFormacion.getJugador());
+				infoJugadores.add(infoJugador);
+			}
 		}
 		return infoJugadores;
 	}
 
-	private List<InfoJugador> getDtoFromEntitySet(Set<Jugador> jugadores){
-		List<InfoJugador> infoJugadores = new ArrayList<>();
-		for(Jugador jugador : jugadores){
-			InfoJugador infoJugador = getDtoFromEntity(jugador);
-			infoJugadores.add(infoJugador);
-		}
-		return infoJugadores;
-	}
-	
 	private InfoJugador getDtoFromEntity(Jugador jugador){
 		InfoJugador infoJugador = new InfoJugador();
 			try {

@@ -1,5 +1,6 @@
 package uy.edu.fing.tsi2.jatrik.core.ejb.impl.beans;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -24,7 +25,7 @@ import uy.edu.fing.tsi2.jatrik.core.ejb.IUsuarios;
 import uy.edu.fing.tsi2.jatrik.core.ejb.impl.local.EJBManagerUsuarioLocal;
 import uy.edu.fing.tsi2.jatrik.core.ejb.impl.remote.EJBManagerUsuarioRemote;
 import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumHabilidad;
-import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumPuesto;
+import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumPuestoJugador;
 import uy.edu.fing.tsi2.jatrik.core.persistence.impl.local.EJBEMDatosJugadoresLocal;
 import uy.edu.fing.tsi2.jatrik.core.persistence.impl.local.EJBEMEquiposLocal;
 import uy.edu.fing.tsi2.jatrik.core.persistence.impl.local.EJBEMJugadoresLocal;
@@ -34,9 +35,10 @@ import uy.edu.fing.tsi2.jatrik.core.persistence.impl.local.EJBEMUsuariosLocal;
  *
  * @author c753388
  */
+
+@Local(value = EJBManagerUsuarioLocal.class)
+@Remote(value = EJBManagerUsuarioRemote.class)
 @Stateless
-@Local(EJBManagerUsuarioLocal.class)
-@Remote(EJBManagerUsuarioRemote.class)
 public class EJBManagerUsuarioBean implements IUsuarios {
 
 	private static final Logger logger = Logger
@@ -54,22 +56,20 @@ public class EJBManagerUsuarioBean implements IUsuarios {
 	@EJB
 	private EJBEMDatosJugadoresLocal datosJugadores;
 
-	public Long crearUsuario(String nick, String nombre, String mail,
-			String password, String nombreEquipo, double longitud,
-			double latitud, int altura, String nombreEstadio) {
+	public Long crearUsuario(String nombre, String nick, String email, String password) {
 		try {
 			logger.info("Voy a Validar al usuario");
-			if (usuarios.findUsuarioByNick(nick)==null){
+			if (usuarios.findUsuarioByNick(nick) ==null){
 				
 				
 			
 					// TODO Aca deberiamos controlar si no hay equipos libres o si no
 					// hay mas jugadores
 					Usuario usr = new Usuario();
-					usr.setNick(nick);
 					usr.setNombre(nombre);
-					usr.setEmail(mail);
+					usr.setEmail(email);
 					usr.setPassword(password);
+					//BeanUtils.copyProperties(usr, infoUsuario);
 		
 		//			Equipo equipo = equipos.findEquipoLibre();
 		//			equipo.setLatitud(latitud);
@@ -81,11 +81,7 @@ public class EJBManagerUsuarioBean implements IUsuarios {
 		//			equipos.update(equipo);
 					
 					Equipo equipo = new Equipo();
-					equipo.setLatitud(latitud);
-					equipo.setLongitud(longitud);
-					equipo.setAltura(altura);
-					equipo.setNombre(nombreEquipo);
-					equipo.setEstadio(nombreEstadio);
+					//BeanUtils.copyProperties(equipo, infoUsuario.getInfoEquipo());
 					
 					//Seteo el Usuario al Equipo
 					equipo.setUsuario(usr);
@@ -100,7 +96,6 @@ public class EJBManagerUsuarioBean implements IUsuarios {
 				logger.info("El usuario ya Existe");
 				return null;
 			}
-			
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 			throw e;
@@ -145,13 +140,13 @@ public class EJBManagerUsuarioBean implements IUsuarios {
 				// 15 jugadores - 2 arqueros, 5 defensas, 5 volantes y 3
 				// delanteros.
 				if (players.size() < 2) {
-					jugador.setPuesto(EnumPuesto.ARQUERO);
+					jugador.setPuesto(EnumPuestoJugador.ARQUERO);
 				} else if (players.size() < 8) {
-					jugador.setPuesto(EnumPuesto.DEFENSA);
+					jugador.setPuesto(EnumPuestoJugador.DEFENSA);
 				} else if (players.size() < 14) {
-					jugador.setPuesto(EnumPuesto.MEDIOCAMPISTA);
+					jugador.setPuesto(EnumPuestoJugador.MEDIOCAMPISTA);
 				} else {
-					jugador.setPuesto(EnumPuesto.DELANTERO);
+					jugador.setPuesto(EnumPuestoJugador.DELANTERO);
 				}
 
 				// Habilidades del jugador entre 30 y 70.

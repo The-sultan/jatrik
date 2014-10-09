@@ -2,7 +2,7 @@ package uy.edu.fing.tsi2.front.ejb.rest.client.interfaces;
 
 import javax.ejb.Local;
 import uy.edu.fing.tsi2.front.ejb.rest.client.exceptions.RestClientException;
-import uy.edu.fing.tsi2.jatrik.common.payloads.Usuario;
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoUsuario;
 
 /**
  * @author Farid
@@ -10,6 +10,6 @@ import uy.edu.fing.tsi2.jatrik.common.payloads.Usuario;
 @Local
 public interface RestClientEJBLocal {
 	
-	public String postNuevoUsuario(Usuario usuario) throws RestClientException;
+	public String postNuevoUsuario(InfoUsuario usuario) throws RestClientException;
 
 }

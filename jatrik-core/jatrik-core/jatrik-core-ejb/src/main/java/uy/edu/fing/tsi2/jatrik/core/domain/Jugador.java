@@ -25,7 +25,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumPuesto;
+import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumPuestoJugador;
 
 
 @NamedQueries({ @NamedQuery(name = "findJugadoresLibres", query = "SELECT OBJECT(u) FROM Jugador u WHERE u.equipo is null "),
@@ -61,7 +61,7 @@ public class Jugador implements Serializable {
 
 	@Column(name = "PUESTO")
 	@Enumerated(EnumType.ORDINAL)
-	private EnumPuesto puesto;
+	private EnumPuestoJugador puesto;
 
 	@Column(name = "EN_VENTA")
 	private Boolean enVenta;
@@ -130,11 +130,11 @@ public class Jugador implements Serializable {
 		this.peso = peso;
 	}
 
-	public EnumPuesto getPuesto() {
+	public EnumPuestoJugador getPuesto() {
 		return puesto;
 	}
 
-	public void setPuesto(EnumPuesto puesto) {
+	public void setPuesto(EnumPuestoJugador puesto) {
 		this.puesto = puesto;
 	}
 

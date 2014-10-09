@@ -3,12 +3,15 @@ package uy.edu.fing.tsi2.jatrik.core.domain;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumPuestoFormacion;
 
 /**
  * @author Farid
@@ -17,12 +20,22 @@ import javax.persistence.Table;
 @Table(name="JUGADOR_FORMACION")
 public class JugadorEnFormacion implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -624425669894529429L;
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@SequenceGenerator(name="SEQ_JUGADOR_FORMACION",sequenceName="SEQ_JUGADOR_FORMACION",allocationSize=1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="SEQ_JUGADOR_FORMACION")
 	private Long id;
 	
 	@Column
 	private Jugador jugador;
+	
+	@Column
+	@Enumerated
+	private EnumPuestoFormacion puestoFormacion;
 	
 	@Column
 	private int indice;
@@ -47,7 +60,6 @@ public class JugadorEnFormacion implements Serializable{
 		this.jugador = jugador;
 	}
 
-	
 	public Formacion getFormacion() {
 		return formacion;
 	}
@@ -56,12 +68,30 @@ public class JugadorEnFormacion implements Serializable{
 		this.formacion = formacion;
 	}
 
+	public EnumPuestoFormacion getPuestoFormacion() {
+		return puestoFormacion;
+	}
+
+	public void setPuestoFormacion(EnumPuestoFormacion puestoFormacion) {
+		this.puestoFormacion = puestoFormacion;
+	}
+
+	public int getIndice() {
+		return indice;
+	}
+
+	public void setIndice(int indice) {
+		this.indice = indice;
+	}
+
+	
 	public JugadorEnFormacion() {
 	}
 
-	public JugadorEnFormacion(Jugador jugador, int indice) {
+	public JugadorEnFormacion(Jugador jugador, int indice, EnumPuestoFormacion puesto) {
 		this.jugador = jugador;
 		this.indice = indice;
+		this.puestoFormacion = puesto;
 	}
 
 	

@@ -2,8 +2,6 @@ package uy.edu.fing.tsi2.model.Equipo;
 
 import java.util.ArrayList;
 
-import uy.edu.fing.tsi2.jatrik.common.payloads.InfoJugador.InfoHabilidad;
-
 public class Jugador {
 
 	private Long id;
