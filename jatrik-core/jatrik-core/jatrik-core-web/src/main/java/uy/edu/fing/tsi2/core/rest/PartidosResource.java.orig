@@ -1,17 +1,24 @@
 package uy.edu.fing.tsi2.core.rest;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.GET;
+<<<<<<< origin/master
+=======
+import javax.ws.rs.POST;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
+>>>>>>> local
 
 import uy.edu.fing.tsi2.jatrik.core.domain.Partido;
+<<<<<<< origin/master
 import uy.edu.fing.tsi2.jatrik.core.ejb.impl.local.EJBManagerPartidoLocal;
-import uy.edu.fing.tsi2.jatrik.common.payloads.InfoPartido;
-import uy.edu.fing.tsi2.jatrik.common.payloads.HistorialPartidos;
+=======
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoPartido;;
+>>>>>>> local
+
 
 /**
  *
@@ -23,7 +30,6 @@ public class PartidosResource {
 	
 	@EJB
 	private EJBManagerPartidoLocal partidoEJB;
-	
 	private Long idEquipo;
 	
 	public void setIdEquipo(Long id){
@@ -32,16 +38,15 @@ public class PartidosResource {
 	
 	@GET
 	@Produces("application/json")
-	public HistorialPartidos obtenerPartidos(){
+	public List<InfoPartido> obtenerPartidos(){
 		List<Partido> prt = partidoEJB.obtenerPartidos(idEquipo);
 		List<InfoPartido> partidos = new ArrayList<InfoPartido>();
 		for (Partido p : prt){
-			InfoPartido ip = new InfoPartido(p.getId(), p.getEstado().getEstado(), p.getLocal().getNombre(),
+			InfoPartido ip = new InfoPartido(p.getId(), p.getFechaInicio(), p.getFechaFin(), p.getEstado().getEstado(), p.getLocal().getNombre(),
 											 p.getVisitante().getNombre(), p.getGolesLocal(), p.getGolesVisitante());
 			partidos.add(ip);
 		}
-		HistorialPartidos historial = new HistorialPartidos(partidos);
-		return historial;
+		return partidos;
 	}
 	
 }

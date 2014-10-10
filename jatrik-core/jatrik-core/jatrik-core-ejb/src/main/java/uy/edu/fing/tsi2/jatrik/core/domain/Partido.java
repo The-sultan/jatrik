@@ -1,6 +1,7 @@
 package uy.edu.fing.tsi2.jatrik.core.domain;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -18,6 +19,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
 
 //import org.hibernate.annotations.CollectionOfElements;
 //import org.hibernate.annotations.MapKey;
@@ -103,7 +105,6 @@ public class Partido implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 
 	public Date getFechaInicio() {
 		return fechaInicio;
