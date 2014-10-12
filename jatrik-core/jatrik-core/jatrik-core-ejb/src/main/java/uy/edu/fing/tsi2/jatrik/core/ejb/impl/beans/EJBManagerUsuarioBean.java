@@ -153,8 +153,7 @@ public class EJBManagerUsuarioBean implements IUsuarios {
 				// Habilidades del jugador entre 30 y 70.
 				List<Habilidad> habilidades = new LinkedList<Habilidad>();
 				habilidad = new Habilidad(r.nextInt(40) + 30,
-						EnumHabilidad.VELOCIDAD, "Velocidad");
-				
+						EnumHabilidad.VELOCIDAD, "Velocidad");			
 				habilidades.add(habilidad);
 				
 				habilidad = new Habilidad(r.nextInt(40) + 30,

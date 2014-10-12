@@ -28,6 +28,10 @@ public class RestServices {
 	
 	@Inject
 	LoginResource loginResource;
+
+	@Inject
+	EntrenamientoResource entrenamientoResource;	
+
 	
 	@Path("/usuarios")
 	public UsuariosResource getUsuariosResource(){
@@ -47,9 +51,14 @@ public class RestServices {
 	public  LoginResource getLoginResource(){
 		return loginResource;
 	}
+
+	@Path("/entrenamiento")
+	public  EntrenamientoResource getEntrenamientoResource(){
+		return entrenamientoResource;
+	}	
+
 	
 	@Path("/partidos/{idEquipo}")
-	@Produces("application/json")
 	public PartidosResource getPartidosResource(@PathParam("idEquipo") Long idEquipo){
 		partidosResource.setIdEquipo(idEquipo);
 		return partidosResource;

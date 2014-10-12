@@ -1,9 +1,11 @@
 package uy.edu.fing.tsi2.jatrik.core.domain;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.persistence.*;
-
 
 import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumHabilidad;
 
@@ -31,7 +33,19 @@ public class Habilidad implements Serializable {
 	
 	@Column(name="TIPO")
 	private EnumHabilidad tipo;
+
+	@Column(name="ULTIMO_ENTRENAMIENTO")
+	private Date ultimoEntrenamiento;
 	
+	public Date getUltimoEntrenamiento() {
+		return ultimoEntrenamiento;
+	}
+
+	public void setUltimoEntrenamiento(Date ultimoEntrenamiento) {
+		this.ultimoEntrenamiento = ultimoEntrenamiento;
+	}
+
+
 	public Habilidad() {
 		super();
 	}
@@ -41,6 +55,8 @@ public class Habilidad implements Serializable {
 		this.valor = valor;
 		this.tipo = tipo;
 		this.descripcion = descripcion;
+		Date date = new Date();
+		this.ultimoEntrenamiento = date;
 	}
 
 

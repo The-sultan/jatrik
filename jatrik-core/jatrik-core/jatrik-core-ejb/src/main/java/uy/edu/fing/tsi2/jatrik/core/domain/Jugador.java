@@ -29,7 +29,7 @@ import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumPuestoJugador;
 
 
 @NamedQueries({ @NamedQuery(name = "findJugadoresLibres", query = "SELECT OBJECT(u) FROM Jugador u WHERE u.equipo is null "),
-				@NamedQuery(name = "findJugadoresdelEquipo", query = "SELECT OBJECT(u) FROM Jugador u WHERE u.equipo= :idEquipo")
+				@NamedQuery(name = "findJugadoresdelEquipo", query = "SELECT OBJECT(u) FROM Jugador u WHERE u.equipo.id = :idEquipo")
 
 })
 @Entity

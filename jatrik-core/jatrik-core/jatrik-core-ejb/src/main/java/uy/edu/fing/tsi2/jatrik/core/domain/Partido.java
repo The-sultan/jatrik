@@ -51,7 +51,6 @@ public class Partido implements Serializable {
 
 	@Column(name="FECHA_INICIO")
 	private Date fechaInicio;
-	
 
 	@Column(name = "ESTADO")
 	@Enumerated(EnumType.ORDINAL)

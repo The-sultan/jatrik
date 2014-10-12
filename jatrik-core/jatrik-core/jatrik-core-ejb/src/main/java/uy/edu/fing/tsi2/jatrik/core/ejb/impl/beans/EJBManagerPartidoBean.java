@@ -38,7 +38,6 @@ public class EJBManagerPartidoBean implements IPartidos {
 	@EJB
 	private EJBEMEventosLocal eventos;
 
-
 	public List<Partido> obtenerPartidos(Long idEquipo) {
 		try {
 			logger.info("Voy a buscar los partidos del equipo " + idEquipo);
