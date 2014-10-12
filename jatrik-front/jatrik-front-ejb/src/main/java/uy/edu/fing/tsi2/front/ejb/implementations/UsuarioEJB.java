@@ -48,5 +48,10 @@ public class UsuarioEJB implements UsuarioEJBLocal {
              
         }
      }
+
+	@Override
+	public InfoUsuario login(String nick, String pass) {
+		return jatrikCoreClient.validarYObtenerUsuario(nick, pass);
+	}
     
 }

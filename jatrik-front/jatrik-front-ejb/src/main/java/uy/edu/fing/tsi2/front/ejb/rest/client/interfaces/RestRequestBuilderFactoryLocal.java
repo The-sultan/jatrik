@@ -13,4 +13,6 @@ public interface RestRequestBuilderFactoryLocal {
 	public WebResource.Builder makeUsuarioCreateRequestBuilder();
 
 	public Builder makeEquipoGetRequestBuilder(long idEquipo);
+	
+	public Builder makeUsuarioLoginRequestBuilder(String nick, String pass);
 }

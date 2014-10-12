@@ -48,8 +48,17 @@ public class RestRequestBuilderFactory implements RestRequestBuilderFactoryLocal
                 .type(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON);
 	}
-
+	
 	public RestRequestBuilderFactory() {
+	}
+
+	@Override
+	public Builder makeUsuarioLoginRequestBuilder(String nick, String pass) {
+		String url = String.format(JATRIK_CORE_URL + "/login?nick=%s&password=%s",nick,pass);
+        return crearClienteJersey()
+            .resource(url)
+            .type(MediaType.APPLICATION_JSON)
+            .accept(MediaType.APPLICATION_JSON);
 	}
 	
 	

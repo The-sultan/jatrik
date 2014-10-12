@@ -13,6 +13,8 @@ import uy.edu.fing.tsi2.jatrik.common.payloads.InfoUsuario;
 public interface RestClientEJBLocal {
 	
 	public String postNuevoUsuario(InfoUsuario usuario) throws RestClientException;
+	
+	public InfoUsuario validarYObtenerUsuario(String nick, String pass) throws RestClientException;
 
 	public InfoEquipo getEquipo(long idEquipo) throws RestClientException;
 	

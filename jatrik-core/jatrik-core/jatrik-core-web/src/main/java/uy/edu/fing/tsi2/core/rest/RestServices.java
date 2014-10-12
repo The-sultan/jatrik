@@ -26,6 +26,9 @@ public class RestServices {
 	@Inject
 	EquiposResource equiposResource;
 	
+	@Inject
+	LoginResource loginResource;
+	
 	@Path("/usuarios")
 	public UsuariosResource getUsuariosResource(){
 		return usuariosResource;
@@ -38,6 +41,11 @@ public class RestServices {
 	@Path("/ligas")
 	public  LigasResource getLigasResource(){
 		return ligasResource;
+	}
+	
+	@Path("/login")
+	public  LoginResource getLoginResource(){
+		return loginResource;
 	}
 	
 	@Path("/partidos/{idEquipo}")

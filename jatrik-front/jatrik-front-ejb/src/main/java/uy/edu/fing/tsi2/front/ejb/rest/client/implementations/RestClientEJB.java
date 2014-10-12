@@ -1,17 +1,16 @@
 package uy.edu.fing.tsi2.front.ejb.rest.client.implementations;
 
-import uy.edu.fing.tsi2.front.ejb.rest.client.interfaces.RestClientEJBLocal;
-import uy.edu.fing.tsi2.front.ejb.rest.client.interfaces.RestRequestBuilderFactoryLocal;
-
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource.Builder;
-
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import uy.edu.fing.tsi2.front.ejb.rest.client.exceptions.RestClientException;
+import uy.edu.fing.tsi2.front.ejb.rest.client.interfaces.RestClientEJBLocal;
+import uy.edu.fing.tsi2.front.ejb.rest.client.interfaces.RestRequestBuilderFactoryLocal;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEquipo;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoUsuario;
+
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource.Builder;
 
 /**
  *
@@ -55,6 +54,23 @@ public class RestClientEJB implements RestClientEJBLocal{
 	};
 	
 	public RestClientEJB() {
+	}
+
+
+	@Override
+	public InfoUsuario validarYObtenerUsuario(String nick, String pass)
+			throws RestClientException {
+		
+		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory.makeUsuarioLoginRequestBuilder(nick, pass);
+		ClientResponse response = jerseyHttpRequestBuilder.get(ClientResponse.class);
+		if(response.getStatusInfo().getStatusCode() != ClientResponse.Status.OK.getStatusCode()){
+			throw new RestClientException("Error al realizar el login, reason: "
+					+ response.getStatusInfo().getReasonPhrase());
+		}
+		else{
+			return response.getEntity(InfoUsuario.class);	
+		}
+
 	}
 	
 	
