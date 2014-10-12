@@ -190,4 +190,14 @@ public class EJBManagerUsuarioBean implements IUsuarios {
 		equipos.add(equipo);
 
 	}
+
+	public Usuario validarUsuario(String nick, String password) {
+			Usuario usuario = this.usuarios.findUsuarioByNick(nick);
+			if (usuario != null) {
+				if (usuario.getNick().equals(nick) && usuario.getPassword().equals(password)){
+					return usuario;
+				}
+			}
+			return null;
+	}
 }

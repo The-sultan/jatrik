@@ -39,4 +39,5 @@ public class UsuariosResource {
 		return Response.created(uri).build();
 	}
 	
+		
 }
