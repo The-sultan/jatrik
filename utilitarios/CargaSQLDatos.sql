@@ -1,7 +1,7 @@
 ﻿-- Codiguera de Evento Manejador
 INSERT INTO eventos(id, descripcion, manejador) VALUES (1, 'Fin del Partido', 'uy.edu.fing.tsi2.jatrik.core.eventos.ManejadorFinPartido');
 INSERT INTO eventos(id, descripcion, manejador) VALUES (2, 'Lesion', 'uy.edu.fing.tsi2.jatrik.core.eventos.ManejadorLesion');
-INSERT INTO eventos(id, descripcion, manejador) VALUES (3, 'Posible Juagada de Gol', 'uy.edu.fing.tsi2.jatrik.core.eventos.ManejadorPosibleJuagadaGol');
+INSERT INTO eventos(id, descripcion, manejador) VALUES (3, 'Posible Jugada de Gol', 'uy.edu.fing.tsi2.jatrik.core.eventos.ManejadorPosibleJugadaGol');
 INSERT INTO eventos(id, descripcion, manejador) VALUES (4, 'Falta', 'uy.edu.fing.tsi2.jatrik.core.eventos.ManejadorFalta');
 
 -- Codiguera de Datos Jugadores
