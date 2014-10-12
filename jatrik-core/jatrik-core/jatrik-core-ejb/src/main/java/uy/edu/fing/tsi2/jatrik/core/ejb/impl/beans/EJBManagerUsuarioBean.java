@@ -69,6 +69,7 @@ public class EJBManagerUsuarioBean implements IUsuarios {
 					usr.setNombre(nombre);
 					usr.setEmail(email);
 					usr.setPassword(password);
+					usr.setNick(nick);
 					//BeanUtils.copyProperties(usr, infoUsuario);
 		
 		//			Equipo equipo = equipos.findEquipoLibre();
