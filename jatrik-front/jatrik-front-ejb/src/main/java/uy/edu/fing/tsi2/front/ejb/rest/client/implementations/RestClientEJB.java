@@ -2,12 +2,15 @@ package uy.edu.fing.tsi2.front.ejb.rest.client.implementations;
 
 import uy.edu.fing.tsi2.front.ejb.rest.client.interfaces.RestClientEJBLocal;
 import uy.edu.fing.tsi2.front.ejb.rest.client.interfaces.RestRequestBuilderFactoryLocal;
+
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource.Builder;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import uy.edu.fing.tsi2.front.ejb.rest.client.exceptions.RestClientException;
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEquipo;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoUsuario;
 
 /**
@@ -35,6 +38,22 @@ public class RestClientEJB implements RestClientEJBLocal{
 		}
 	}
 
+	
+	@Override
+	public InfoEquipo getEquipo(long idEquipo) throws RestClientException {
+		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory.makeEquipoGetRequestBuilder(idEquipo);
+		ClientResponse response = jerseyHttpRequestBuilder.post(ClientResponse.class);
+		
+		
+		if(response.getStatusInfo().getStatusCode() != ClientResponse.Status.OK.getStatusCode()){
+			throw new RestClientException("Error al obtener el equipo, status code: "
+					+ response.getStatusInfo().getReasonPhrase());			
+		}
+		else{
+			return response.getEntity(InfoEquipo.class);
+		}
+	};
+	
 	public RestClientEJB() {
 	}
 	

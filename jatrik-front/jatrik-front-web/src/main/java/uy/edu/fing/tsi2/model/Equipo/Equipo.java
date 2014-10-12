@@ -2,8 +2,11 @@ package uy.edu.fing.tsi2.model.Equipo;
 
 import java.util.ArrayList;
 
+import javax.inject.Named;
+
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoJugador;
 
+@Named
 public class Equipo {
 	private String nombre;
 	

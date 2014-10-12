@@ -1,7 +1,9 @@
 package uy.edu.fing.tsi2.front.ejb.rest.client.interfaces;
 
 import javax.ejb.Local;
+
 import uy.edu.fing.tsi2.front.ejb.rest.client.exceptions.RestClientException;
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEquipo;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoUsuario;
 
 /**
@@ -11,5 +13,9 @@ import uy.edu.fing.tsi2.jatrik.common.payloads.InfoUsuario;
 public interface RestClientEJBLocal {
 	
 	public String postNuevoUsuario(InfoUsuario usuario) throws RestClientException;
+
+	public InfoEquipo getEquipo(long idEquipo) throws RestClientException;
+	
+	
 
 }

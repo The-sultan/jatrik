@@ -39,6 +39,15 @@ public class RestRequestBuilderFactory implements RestRequestBuilderFactoryLocal
                 .type(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON);
 	}
+	
+	@Override
+    public Builder makeEquipoGetRequestBuilder(long idEquipo) {
+        String url = JATRIK_CORE_URL + "/equipos/" + Long.toString(idEquipo) ;
+        return crearClienteJersey()
+                .resource(url)
+                .type(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON);
+	}
 
 	public RestRequestBuilderFactory() {
 	}

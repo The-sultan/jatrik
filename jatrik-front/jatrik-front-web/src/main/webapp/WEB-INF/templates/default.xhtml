@@ -17,39 +17,76 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
-    <title>Jatrik, simulador de ligas mundial</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <h:outputStylesheet name="css/screen.css" />
-    <h:outputStylesheet name="css/Formaciones/4-3-3.css" />
+	<title>Jatrik, simulador de ligas mundial</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<h:outputStylesheet name="css/screen.css" />
+	<h:outputStylesheet name="css/Formaciones/4-3-3.css" />
 </h:head>
 <h:body>
-    <div id="container">
-        <div class="dualbrand">
-            <img src="http://www.hattrick.org/Img/Startpage/hattrick.png" />
-        </div>
-        <div id="content">
-            <ui:insert name="content">
+	<p:growl id="mensajes" showDetail="true" life="2000" />
+	<div id="container">
+		<div class="dualbrand">
+			<img src="http://www.hattrick.org/Img/Startpage/hattrick.png" />
+		</div>
+		<div id="content">
+			<ui:insert name="content">
                     [Template content will be inserted here]
          </ui:insert>
-        </div>
-        <div id="aside">
-            <p>Casos de uso criticos</p>
-            <ul>
-                <li><h:link outcome="registro.xhtml">Registro</h:link></li>
-                <li><h:link outcome="equipo.xhtml">Visualizar equipo</h:link></li>
-                <li><h:link outcome="partido.xhtml">Visualizar detalle de partido</h:link></li>
-                <li><h:link outcome="entrenamiento.xhtml">Entrenar equipo</h:link></li>
-            </ul>
-            
-        </div>
-        <div id="footer">
-            <p>
-                Esta pagina fue desarrollada por el grupo 5 de TSI 2014<br />
-            </p>
-        </div>
-    </div>
+		</div>
+		<div id="aside">
+			<p>Casos de uso criticos</p>
+			<ul>
+				<li><h:link outcome="registro.xhtml">Registro</h:link></li>
+				<li><h:link outcome="equipo.xhtml">Visualizar equipo</h:link></li>
+				<li><h:link outcome="partido.xhtml">Visualizar detalle de partido</h:link></li>
+				<li><h:link outcome="entrenamiento.xhtml">Entrenar equipo</h:link></li>
+			</ul>
+			<div>
+
+
+				<h:form id="loginForm">
+
+					<h:panelGrid columns="3" columnClasses="titleCell">
+						<h:outputLabel for="nick" value="Nick:" />
+						<p:inputText id="nick" value="#{datos.nick}" />
+						<h:message for="nick" errorClass="invalid" />
+
+						<h:outputLabel for="pwd1" value="Password:" />
+						<p:password id="pwd1" value="#{datos.password}" label="Password"
+							required="true" />
+						<h:message for="pwd1" errorClass="invalid" />
+
+
+					</h:panelGrid>
+
+
+					<p>
+						<h:panelGrid columns="2">
+							<p:commandButton id="login"
+								actionListener="#{loginController.loginDelay}" value="Login"
+								styleClass="register" update=":mensajes" />
+							<h:messages styleClass="messages" errorClass="invalid"
+								infoClass="valid" warnClass="warning" globalOnly="true" />
+						</h:panelGrid>
+					</p>
+				</h:form>
+				<h:form id="logoutForm">
+					<p:commandButton id="logout" styleClass="register" value="Logout"
+						actionListener="#{loginController.logout}"
+						style="margin-right:20px;" update=":mensajes">
+					</p:commandButton>
+				</h:form>
+			</div>
+		</div>
+		<div id="footer">
+			<p>
+				Esta pagina fue desarrollada por el grupo 5 de TSI 2014<br />
+			</p>
+		</div>
+	</div>
 </h:body>
 </html>
