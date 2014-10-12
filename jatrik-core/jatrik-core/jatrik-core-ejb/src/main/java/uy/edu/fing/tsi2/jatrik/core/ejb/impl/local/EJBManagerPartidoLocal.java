@@ -10,4 +10,5 @@ import uy.edu.fing.tsi2.jatrik.core.ejb.IPartidos;
 
 public interface EJBManagerPartidoLocal extends IPartidos{
 
+	
 }

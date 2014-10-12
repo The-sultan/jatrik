@@ -1,7 +1,6 @@
 package uy.edu.fing.tsi2.jatrik.core.domain;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -20,15 +19,17 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-
 //import org.hibernate.annotations.CollectionOfElements;
 //import org.hibernate.annotations.MapKey;
 import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumEstadoPartido;
 
 
 @NamedQueries({
-	@NamedQuery(name="findPartidosDeEquipo",query="SELECT OBJECT(p) FROM Partido p WHERE ((p.local.id = :idEquipo) OR (p.visitante.id = :idEquipo)) AND (p.estado = :estado)")
-	
+	@NamedQuery(name="findPartidosDeEquipo",query="SELECT OBJECT(p) FROM Partido p WHERE ((p.local.id = :idEquipo) OR (p.visitante.id = :idEquipo)) AND (p.estado = :estado)"),
+	@NamedQuery(name="findPartidosEntreFechasyPorEstado",
+				query="SELECT OBJECT(p) FROM Partido p WHERE ((p.fechaInicio >= :argFechaDesde) "
+						+ "AND (p.fechaInicio <= :argFechaHasta) AND (p.estado = :estado))")
+	//p.estado in(")
 })
 //@SuppressWarnings("deprecation")
 @Entity

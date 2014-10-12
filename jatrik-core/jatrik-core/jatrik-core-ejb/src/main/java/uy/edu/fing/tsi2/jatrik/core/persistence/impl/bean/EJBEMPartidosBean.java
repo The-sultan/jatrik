@@ -1,6 +1,8 @@
 package uy.edu.fing.tsi2.jatrik.core.persistence.impl.bean;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.Local;
 import javax.ejb.Remote;
@@ -56,4 +58,83 @@ public class EJBEMPartidosBean implements IEMPartidos {
 		return ((List<Partido>) consulta.getResultList());
 
 	}
+
+	@SuppressWarnings("unchecked")
+	public List<Partido> findPartidosPorFechayEstados(Date fechaDesde,
+			Date fechaHasta, Set<EnumEstadoPartido> estados) {
+		
+		Query consulta = this.crearConsulta(fechaDesde, fechaHasta, estados);
+		List<Partido> res = consulta.getResultList();
+		return res;
+	}
+	
+	private Query crearConsulta(Date fechaDesde, Date fechaHasta, Set<EnumEstadoPartido> estados) {
+		StringBuffer consultaString = new StringBuffer();
+		boolean existenCondiciones = false;
+
+		if (estados != null) {
+			int cantEstados = estados.size();
+			if (cantEstados > 0) {
+				if (existenCondiciones) {
+					consultaString.append("and ");
+				}
+				if (cantEstados == 1) {
+					consultaString.append("p.estado = :argEstado ");
+				} else {
+					consultaString.append("p.estado in(");
+					int i;
+					for (i = 1; i < cantEstados; i++) {
+						consultaString.append(":argEstado" + i + ", ");
+					}
+					consultaString.append(":argEstado" + i + ") ");
+				}
+				existenCondiciones = true;
+			}
+		}
+
+		if (fechaDesde != null) {
+			if (existenCondiciones) {
+				consultaString.append("and ");
+			}
+			consultaString.append("p.fecha >= :argFechaDesde ");
+			existenCondiciones = true;
+		}
+		if (fechaHasta != null) {
+			if (existenCondiciones) {
+				consultaString.append("and ");
+			}
+			consultaString.append("p.fecha <= :argFechaHasta ");
+			existenCondiciones = true;
+		}
+
+		String clausulaFrom = "";
+		clausulaFrom = existenCondiciones ? "select p from " + Partido.class.getName() + " p where " : "select p from " + Partido.class.getName() + " p ";
+		consultaString.insert(0, clausulaFrom).append("order by p.fecha");
+
+		Query consulta = entityManager.createQuery(consultaString.toString());
+
+		if (estados != null) {
+			if (estados.size() > 0) {
+				if (estados.size() == 1) {
+					consulta.setParameter("argEstado", estados);
+				} else {
+					int i = 1;
+					for (EnumEstadoPartido estado : estados) {
+						consulta.setParameter("argEstado" + i, estado);
+						i++;
+					}
+				}
+			}
+		}
+		if (fechaDesde != null) {
+			consulta.setParameter("argFechaDesde", fechaDesde);
+		}
+		if (fechaHasta != null) {
+			consulta.setParameter("argFechaHasta", fechaHasta);
+		}
+
+		return consulta;
+	}
+
+	
 }

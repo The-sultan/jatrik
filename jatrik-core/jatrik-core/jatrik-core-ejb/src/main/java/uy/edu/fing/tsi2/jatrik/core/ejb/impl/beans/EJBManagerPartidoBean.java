@@ -1,6 +1,8 @@
 package uy.edu.fing.tsi2.jatrik.core.ejb.impl.beans;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.ejb.Local;
@@ -9,10 +11,13 @@ import javax.ejb.Stateless;
 
 import org.apache.log4j.Logger;
 
+import uy.edu.fing.tsi2.jatrik.core.domain.Evento;
 import uy.edu.fing.tsi2.jatrik.core.domain.Partido;
 import uy.edu.fing.tsi2.jatrik.core.ejb.IPartidos;
 import uy.edu.fing.tsi2.jatrik.core.ejb.impl.local.EJBManagerPartidoLocal;
 import uy.edu.fing.tsi2.jatrik.core.ejb.impl.remote.EJBManagerPartidoRemote;
+import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumEstadoPartido;
+import uy.edu.fing.tsi2.jatrik.core.persistence.impl.local.EJBEMEventosLocal;
 import uy.edu.fing.tsi2.jatrik.core.persistence.impl.local.EJBEMPartidosLocal;
 
 /**
@@ -29,6 +34,9 @@ public class EJBManagerPartidoBean implements IPartidos {
 
 	@EJB
 	private EJBEMPartidosLocal partidos;
+	
+	@EJB
+	private EJBEMEventosLocal eventos;
 
 
 	public List<Partido> obtenerPartidos(Long idEquipo) {
@@ -44,5 +52,13 @@ public class EJBManagerPartidoBean implements IPartidos {
 		}
 	}
 
-	
+	public List<Partido> obtenerPartidos(Date fechaDesde, Date fechaHasta,Set<EnumEstadoPartido> estados){
+		
+			return partidos.findPartidosPorFechayEstados(fechaDesde, fechaHasta, estados);
+	}
+		
+	public Evento encontrarEvento(Long id){
+		
+		return eventos.find(id);
+	}
 }
