@@ -14,8 +14,10 @@ import javax.ws.rs.PathParam;
 import org.apache.commons.beanutils.BeanUtils;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEquipo;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEstadio;
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoHabilidad;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoJugador;
 import uy.edu.fing.tsi2.jatrik.core.domain.Equipo;
+import uy.edu.fing.tsi2.jatrik.core.domain.Habilidad;
 import uy.edu.fing.tsi2.jatrik.core.domain.Jugador;
 import uy.edu.fing.tsi2.jatrik.core.domain.JugadorEnFormacion;
 import uy.edu.fing.tsi2.jatrik.core.ejb.impl.local.EJBManagerEquipoBeanLocal;
@@ -67,6 +69,14 @@ public class EquiposResource {
 		InfoJugador infoJugador = new InfoJugador();
 			try {
 				BeanUtils.copyProperties(infoJugador, jugador);
+				List<InfoHabilidad> infoHabilidades = new ArrayList<>();
+				for(Habilidad habilidad : jugador.getHabilidades()){
+					InfoHabilidad infoHabilidad = new InfoHabilidad();
+					BeanUtils.copyProperties(infoHabilidad, habilidad);
+					infoHabilidades.add(infoHabilidad);
+					infoHabilidad.setNombre(habilidad.getTipo().getHabilidad());
+				}
+				infoJugador.setHabilidades(infoHabilidades);
 			} catch (IllegalAccessException ex) {
 				Logger.getLogger(EquiposResource.class.getName()).log(Level.SEVERE, null, ex);
 			} catch (InvocationTargetException ex) {

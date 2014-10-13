@@ -64,7 +64,8 @@ public class Equipo implements Serializable {
 	@JoinColumn(name="USUARIO_ID", referencedColumnName="ID")
 	private Usuario usuario;
 	
-	@OneToOne(targetEntity = Formacion.class, cascade = CascadeType.ALL)
+	@OneToOne(targetEntity = Formacion.class, cascade = CascadeType.ALL, 
+			fetch = FetchType.EAGER)
 	@JoinColumn(name="FORMACION_ID", referencedColumnName="ID")
 	private Formacion formacionActual;
 	

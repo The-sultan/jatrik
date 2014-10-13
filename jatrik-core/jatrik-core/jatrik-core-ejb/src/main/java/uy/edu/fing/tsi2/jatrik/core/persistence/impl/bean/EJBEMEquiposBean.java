@@ -105,13 +105,13 @@ public class EJBEMEquiposBean implements IEMEquipos {
 		Set<Jugador> utilizados = new HashSet<>();
 		Set<JugadorEnFormacion> jugadoresConPuestosAsignados = new HashSet<>();
 		jugadoresConPuestosAsignados.addAll(obtenerJugadoresEnPosicion(jugadoresMap,EnumPuestoJugador.ARQUERO,1, 
-				utilizados, EnumPuestoFormacion.ARQUERO));
+				utilizados, EnumPuestoFormacion.ARQUERO, formacion));
 		jugadoresConPuestosAsignados.addAll(obtenerJugadoresEnPosicion(jugadoresMap,EnumPuestoJugador.DEFENSA,CANTIDAD_DEFENSA_FORMACION_DEFAULT,
-				utilizados, EnumPuestoFormacion.DEFENSA));
+				utilizados, EnumPuestoFormacion.DEFENSA, formacion));
 		jugadoresConPuestosAsignados.addAll(obtenerJugadoresEnPosicion(jugadoresMap,EnumPuestoJugador.MEDIOCAMPISTA,CANTIDAD_MEDIO_FORMACION_DEFAULT,
-				utilizados, EnumPuestoFormacion.MEDIOCAMPISTA));
+				utilizados, EnumPuestoFormacion.MEDIOCAMPISTA, formacion));
 		jugadoresConPuestosAsignados.addAll(obtenerJugadoresEnPosicion(jugadoresMap,EnumPuestoJugador.DELANTERO,CANTIDAD_DELANTERA_FORMACION_DEFAULT,
-				utilizados, EnumPuestoFormacion.DELANTERO));
+				utilizados, EnumPuestoFormacion.DELANTERO, formacion));
 		
 		Set<Jugador> jugadoresSinUtilizar = new HashSet<Jugador>(equipo.getJugadores());
 		jugadoresSinUtilizar.removeAll(utilizados);
@@ -120,15 +120,14 @@ public class EJBEMEquiposBean implements IEMEquipos {
 		Iterator<Jugador> jugadorIter = jugadoresSinUtilizar.iterator();
 		for(int i=0;i<7;i++){
 			Jugador jugador = jugadorIter.next();
-			jugadoresConPuestosAsignados.add(new JugadorEnFormacion(jugador,0,EnumPuestoFormacion.SUPLENTE));
+			jugadoresConPuestosAsignados.add(new JugadorEnFormacion(jugador,0,EnumPuestoFormacion.SUPLENTE, formacion));
 			suplentes.add(jugador);
 		}
 		jugadoresSinUtilizar.removeAll(suplentes);
 		for(Jugador jugador : jugadoresSinUtilizar){
-			jugadoresConPuestosAsignados.add(new JugadorEnFormacion(jugador,0,EnumPuestoFormacion.RESERVA));
+			jugadoresConPuestosAsignados.add(new JugadorEnFormacion(jugador,0,EnumPuestoFormacion.RESERVA, formacion));
 		}
 		formacion.setJugadores(jugadoresConPuestosAsignados);
-		
 		equipo.setFormacion(formacion);
 		update(equipo);
 		
@@ -138,7 +137,8 @@ public class EJBEMEquiposBean implements IEMEquipos {
 	}
 	
 	private Set<JugadorEnFormacion> obtenerJugadoresEnPosicion(Map<EnumPuestoJugador,List<Jugador>> jugadoresMap,
-			EnumPuestoJugador puestoJugador, int cantidad, Set<Jugador> utilizados, EnumPuestoFormacion puestoFormacion){
+			EnumPuestoJugador puestoJugador, int cantidad, Set<Jugador> utilizados, EnumPuestoFormacion puestoFormacion, 
+			Formacion formacion){
 		Random generadorRandom = new Random();
 
 		Set<JugadorEnFormacion> jugadorEnFormacionSeleccionados = new HashSet<>();
@@ -153,7 +153,7 @@ public class EJBEMEquiposBean implements IEMEquipos {
 				//el conjunto auxiliar para no repetir dos veces al mismo jugador
 				if(agregaJugador){
 					utilizados.add(jugadorRandom);
-					jugadorEnFormacionSeleccionados.add(new JugadorEnFormacion(jugadorRandom,i, puestoFormacion));
+					jugadorEnFormacionSeleccionados.add(new JugadorEnFormacion(jugadorRandom,i, puestoFormacion, formacion));
 					
 				}
 			}

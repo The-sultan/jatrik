@@ -1,6 +1,8 @@
 package uy.edu.fing.tsi2.controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -44,7 +46,15 @@ public class EquipoController  implements Serializable {
 		
 		//TODO:Obtener el id del loginBean
 		InfoEquipo equipoTemp = equipoEJB.getEquipo(sessionBean.getInfo().getInfoEquipo().getId());
-
+		equipoDatos = new Equipo();
+		List<InfoJugador> titulares = new ArrayList<>();
+		titulares.add(equipoTemp.getGolero());
+		titulares.addAll(equipoTemp.getDefensas());
+		titulares.addAll(equipoTemp.getMediocampistas());
+		titulares.addAll(equipoTemp.getDelanteros());
+		equipoDatos.setTitulares(titulares);
+		equipoDatos.setSuplentes(equipoTemp.getSuplentes());
+		equipoDatos.setReserva(equipoTemp.getReservas());
 		
 		//TODO:Traducir 
 		//equipoDatos = new Equipo();

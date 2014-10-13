@@ -41,7 +41,7 @@ public class RestClientEJB implements RestClientEJBLocal{
 	@Override
 	public InfoEquipo getEquipo(long idEquipo) throws RestClientException {
 		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory.makeEquipoGetRequestBuilder(idEquipo);
-		ClientResponse response = jerseyHttpRequestBuilder.post(ClientResponse.class);
+		ClientResponse response = jerseyHttpRequestBuilder.get(ClientResponse.class);
 		
 		
 		if(response.getStatusInfo().getStatusCode() != ClientResponse.Status.OK.getStatusCode()){

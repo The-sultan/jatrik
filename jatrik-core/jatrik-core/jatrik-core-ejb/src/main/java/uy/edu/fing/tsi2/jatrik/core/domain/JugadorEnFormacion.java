@@ -1,6 +1,7 @@
 package uy.edu.fing.tsi2.jatrik.core.domain;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumPuestoFormacion;
@@ -30,7 +32,8 @@ public class JugadorEnFormacion implements Serializable{
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="SEQ_JUGADOR_FORMACION")
 	private Long id;
 	
-	@Column
+	@OneToOne
+	@JoinColumn(name="JUGADOR_ID", referencedColumnName="ID")
 	private Jugador jugador;
 	
 	@Column
@@ -88,10 +91,12 @@ public class JugadorEnFormacion implements Serializable{
 	public JugadorEnFormacion() {
 	}
 
-	public JugadorEnFormacion(Jugador jugador, int indice, EnumPuestoFormacion puesto) {
+	public JugadorEnFormacion(Jugador jugador, int indice, EnumPuestoFormacion puesto,
+	Formacion formacion) {
 		this.jugador = jugador;
 		this.indice = indice;
 		this.puestoFormacion = puesto;
+		this.formacion = formacion;
 	}
 
 	
