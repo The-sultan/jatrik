@@ -10,6 +10,6 @@ import uy.edu.fing.tsi2.jatrik.core.ejb.IPartidos;
 @Local
 public abstract class ManejarEvento {
 	public abstract void manejarEvento(IPartidos partidosManager,
-			Partido partido, int minuto, Evento evento);
+			Partido partido, Evento evento);
 
 }

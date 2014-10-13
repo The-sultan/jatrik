@@ -22,6 +22,8 @@ import uy.edu.fing.tsi2.jatrik.core.ejb.impl.local.EJBManagerSimuladorBeanLocal;
 import uy.edu.fing.tsi2.jatrik.core.ejb.impl.remote.EJBManagerSimuladorBeanRemote;
 import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumEstadoPartido;
 import uy.edu.fing.tsi2.jatrik.core.eventos.ManejarEvento;
+import uy.edu.fing.tsi2.jatrik.core.persistence.impl.local.EJBEMEquiposLocal;
+import uy.edu.fing.tsi2.jatrik.core.persistence.impl.local.EJBEMPartidosLocal;
 import uy.edu.fing.tsi2.jatrik.core.utils.DateUtils;
 import uy.edu.fing.tsi2.jatrik.core.utils.RandomUtil;
 
@@ -34,81 +36,82 @@ public class EJBManagerSimuladorBean implements ISimulacion {
 
 	private Logger logger = Logger.getLogger(EJBManagerSimuladorBean.class);
 	
-	static final private int DURACION_PARTIDO = 30;
-	
-	private Map<Long, Integer> cronometros;
+	static final private int DURACION_PARTIDO = 90;
 	
 	@EJB
 	EJBManagerPartidoLocal partidosManager;
 	
+	@EJB
+	EJBEMEquiposLocal equiposEJB;
+	
+	@EJB
+	EJBEMPartidosLocal partidosEJB;
+	
 	public EJBManagerSimuladorBean() {
 		super();
-		cronometros = new HashMap<Long, Integer>();
 	}
 
-	public void simularEvento() {
+	
+	public void simularEvento(Partido partido) {
 		
 		logger.info("############ ARRANCA Simular Evento #############");
-	   
-		// Me traigo solo los partidos Pendientes y En_Curso
-		Set<EnumEstadoPartido> estados = new HashSet<EnumEstadoPartido>();
-		estados.add(EnumEstadoPartido.PENDIENTE);
-		estados.add(EnumEstadoPartido.EN_CURSO);
-	
-		Date fechaDesde = DateUtils.getDateWithoutTime(new Date());
-		Date fechaHasta = new Date();
-		
-		List<Partido> partidos = partidosManager.obtenerPartidos(fechaDesde, fechaHasta, estados);
-		for (Partido partido : partidos) {
-			if (partido.getEstado() == EnumEstadoPartido.PENDIENTE) {
-				// Esta pendiente - se da comienzo al mismo
-				partido.setEstado(EnumEstadoPartido.EN_CURSO);
-				//TODO Ver como seguimos
-				cronometros.put(partido.getId(), new Integer(0));
-				logger.info("##### Se inicio el partido: " + partido.getId());
-				
-			}else{
-				int minuto = this.cronometros.get(partido.getId()).intValue();
-				minuto++; // Aumento el minuto
-				if (minuto <= DURACION_PARTIDO) {
-					//TODO DEbo sortear el evento 
-					Long id = realizarSorteoDeEvento();
-					// Obtengo el id del manejador en la base
-					//Me traigo el evento de la base
-					Evento evento = partidosManager.encontrarEvento(id);
-					logger.info("Partido :" + partido.getId() + " Minuto: " + minuto);
-
-					manejarEvento(partido, minuto, evento);
-					
-					cronometros.put(partido.getId(), new Integer(minuto));
-				}else{
-					// TODO Se elimina el cronometro del partido y se finaliza el  mismo Actualizar
-					cronometros.remove(partido.getId());
-					partido.setEstado(EnumEstadoPartido.FINALIZADO);
-				}
-				
-			}
+   
+		partido.setMinuto(partido.getMinuto()+1);
+		if (partido.getMinuto() <= DURACION_PARTIDO) {
+			//TODO DEbo sortear el evento 
+			Long id = realizarSorteoDeEvento();
+			// Obtengo el id del manejador en la base
+			//Me traigo el evento de la base
+			Evento evento = partidosManager.encontrarEvento(id);
+			//logger.info("Partido :" + partido.getId() + " Minuto: " + minuto);
+			manejarEvento(partido, evento);
+		}else{
+			// TODO Se elimina el cronometro del partido y se finaliza el  mismo Actualizar
+			partido.setEstado(EnumEstadoPartido.FINALIZADO);
 		}
-				
-		logger.info("############ FIN Simular Evento #############");
+	
+	logger.info("############ FIN Simular Evento #############");
+		
 	}
 	
 	private Long realizarSorteoDeEvento() {
 
 		int random = RandomUtil.random(100);
 		
-		return (long) 1;
-		
+		if(random < 4){
+			//retorno id de manejador lesion
+			return 2L;
+		}
+		else if(random < 25){
+			//retorno id de manejador de falta
+			return 4L;
+		}
+		else if(random < 65){
+			//evento idle, ahora tira jugada de gol pero hay que cambiarlo
+			return 3L;
+		}
+		else{
+			//evento posible jugada de gol
+			return 3L;
+		}
+	}
+	
+	public void simularPartido(Long idPartido){
+		Partido partido = partidosEJB.find(idPartido);
+		partido.setMinuto(0);
+		for(int i=0; i<90;i++){
+			simularEvento(partido);
+		}
 		
 	}
 	
 	@SuppressWarnings("unused")
-	private void manejarEvento(Partido partido, int minuto, Evento evento) {
+	private void manejarEvento(Partido partido, Evento evento) {
 		try {
 			Class manejadorClass = Class.forName(evento.getManejador());
 
 			ManejarEvento manejador = (ManejarEvento) manejadorClass.newInstance();
-			manejador.manejarEvento(partidosManager, partido, minuto, evento);
+			manejador.manejarEvento(partidosManager, partido, evento);
 
 		} catch (ClassNotFoundException e) {
 			logger.info("***** Manejador no implementado *****");

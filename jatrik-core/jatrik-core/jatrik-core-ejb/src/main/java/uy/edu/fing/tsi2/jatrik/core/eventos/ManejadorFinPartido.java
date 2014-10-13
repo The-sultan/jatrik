@@ -12,11 +12,12 @@ import uy.edu.fing.tsi2.jatrik.core.ejb.IPartidos;
 
 @Stateless
 public class ManejadorFinPartido extends ManejarEvento {
-	private Logger log = Logger.getLogger(this.getClass());
+	private Logger log = Logger.getLogger(ManejadorFinPartido.class);
 
 	@Override
-	public void manejarEvento(IPartidos partidosManager, Partido partido, int minuto, Evento evento) {
+	public void manejarEvento(IPartidos partidosManager, Partido partido, Evento evento) {
 		log.info("##### Fin del Partido #####");
+		
 
 	}
 

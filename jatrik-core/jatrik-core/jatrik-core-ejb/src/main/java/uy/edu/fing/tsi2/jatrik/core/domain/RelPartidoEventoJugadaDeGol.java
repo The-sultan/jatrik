@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Table(name = "REL_PARTIDOS_EVENTOS_LESION")
 @DiscriminatorValue(value = "1")
 @PrimaryKeyJoinColumn(name = "ID")
-public class RelPartidoEventoLesion extends RelPartidoEvento {
+public class RelPartidoEventoJugadaDeGol extends RelPartidoEvento {
 
 	
 
@@ -23,16 +23,17 @@ public class RelPartidoEventoLesion extends RelPartidoEvento {
 
 
 
-	public RelPartidoEventoLesion(Integer minuto, Partido partido, Evento evento, int gravedad, Jugador jugador, Equipo equipo) {
+	public RelPartidoEventoJugadaDeGol(Integer minuto, Partido partido, Evento evento, int gravedad, Jugador jugador, Equipo equipo) {
 		super(minuto, partido, evento);
+		this.gravedad = gravedad;
 		this.jugador = jugador;
 		this.jugadorId = jugador.getId();
 		this.equipoId = equipo.getId();
 	}
 
-	@ManyToOne
-	private Comentario comentario;
-	
+	@Column(name = "GRAVEDAD")
+	private int gravedad;
+
 	@Column(name = "JUGADOR_ID")
 	private Long jugadorId;
 
@@ -50,7 +51,16 @@ public class RelPartidoEventoLesion extends RelPartidoEvento {
 	private Equipo equipo;
 
 	
-	public RelPartidoEventoLesion(){
+	
+	public int getGravedad() {
+		return gravedad;
+	}
+
+	public void setGravedad(int gravedad) {
+		this.gravedad = gravedad;
+	}
+	
+	public RelPartidoEventoJugadaDeGol(){
 		super();
 	}
 

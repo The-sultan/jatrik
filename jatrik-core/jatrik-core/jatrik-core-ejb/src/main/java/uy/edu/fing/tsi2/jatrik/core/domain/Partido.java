@@ -77,7 +77,10 @@ public class Partido implements Serializable {
 
 	@OneToOne(targetEntity = Formacion.class, cascade = CascadeType.ALL)
 	@JoinColumn(name="FORMACION_VISITANTE_ID", referencedColumnName="ID")
-	private Formacion formacionVisitante;	
+	private Formacion formacionVisitante;
+	
+	@Column
+	private int minuto;
 	
 	public Partido() {
 		super();
@@ -192,6 +195,38 @@ public class Partido implements Serializable {
 	public String toString() {
 		return "uy.com.fing.tsi2.entidades.Partido[ id=" + id + " ]";
 	}
+
+
+	public Formacion getFormacionLocal() {
+		return formacionLocal;
+	}
+
+
+	public void setFormacionLocal(Formacion formacionLocal) {
+		this.formacionLocal = formacionLocal;
+	}
+
+
+	public Formacion getFormacionVisitante() {
+		return formacionVisitante;
+	}
+
+
+	public void setFormacionVisitante(Formacion formacionVisitante) {
+		this.formacionVisitante = formacionVisitante;
+	}
+
+
+	public int getMinuto() {
+		return minuto;
+	}
+
+
+	public void setMinuto(int minuto) {
+		this.minuto = minuto;
+	}
+	
+	
 	
 	
 }

@@ -27,6 +27,9 @@ public class RestServices {
 	EquiposResource equiposResource;
 	
 	@Inject
+	SimuladorResource simuladorResource;
+	
+	@Inject
 	LoginResource loginResource;
 
 	@Inject
@@ -57,6 +60,11 @@ public class RestServices {
 		return entrenamientoResource;
 	}	
 
+	
+	@Path("/simulacion")
+	public  SimuladorResource getSimuladorResource(){
+		return simuladorResource;
+	}
 	
 	@Path("/partidos/{idEquipo}")
 	public PartidosResource getPartidosResource(@PathParam("idEquipo") Long idEquipo){
