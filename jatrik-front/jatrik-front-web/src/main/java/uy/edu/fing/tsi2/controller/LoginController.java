@@ -1,29 +1,38 @@
 package uy.edu.fing.tsi2.controller;
 
+
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
+import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Model;
 import javax.enterprise.inject.Produces;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
 import org.primefaces.context.RequestContext;
 
+import uy.edu.fing.tsi2.front.ejb.interfaces.UsuarioEJBLocal;
 import uy.edu.fing.tsi2.model.LoginDatos;
+import uy.edu.fing.tsi2.model.SessionBeanJatrik;
 
-import java.io.Serializable;
 
-@SuppressWarnings("serial")
 @Model
-@SessionScoped
-public class LoginController implements Serializable {
+public class LoginController  {
 
 	@Named
 	@Produces
 	private LoginDatos datos;
+
+
+	@Inject
+	SessionBeanJatrik sessionBean;
+	
+	@EJB
+	private UsuarioEJBLocal usuarioEJB;
 
 	@PostConstruct
 	public void initDatos() {
@@ -40,12 +49,19 @@ public class LoginController implements Serializable {
 	public void loginDelay(ActionEvent actionEvent) {
 		RequestContext context = RequestContext.getCurrentInstance();
 		FacesMessage msg = null;
-		if (datos.getNick() != null && datos.getNick().equals("admin")
-				&& datos.getPassword() != null
-				&& datos.getPassword().equals("admin")) {
-			datos.setLogueado(true);
-			msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenid@",
-					datos.getNick());
+		if (datos.getNick() != null && datos.getPassword() != null) {
+			
+			try {
+				sessionBean.setInfo( usuarioEJB.login(datos.getNick(), datos.getPassword()));
+				datos.setLogueado(true);
+				msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenid@",
+						datos.getNick());
+			} catch (RuntimeException e) {
+				datos.setLogueado(false);
+				msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error",
+						"Error en logueo");
+			}
+			
 		} else {
 			datos.setLogueado(false);
 			msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error",
@@ -81,5 +97,7 @@ public class LoginController implements Serializable {
 	public void setDatos(LoginDatos datos) {
 		this.datos = datos;
 	}
+
+
 
 }

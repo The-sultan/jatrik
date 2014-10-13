@@ -16,10 +16,12 @@ public class Equipo {
 	//mediocampistas y delanteros titulares
 	//En caso de que defensas.count=4, mediocampistas.count=3, delanteros.count=3
 	//Entonces la formacion es 4-3-3
-	private InfoJugador golero;
-	private ArrayList<InfoJugador> defensas;
-	private ArrayList<InfoJugador> mediocampistas;
-	private ArrayList<InfoJugador> delanteros;
+
+	private ArrayList<InfoJugador> titulares;
+	private ArrayList<InfoJugador> suplentes;
+	private ArrayList<InfoJugador> reserva;
+	
+	
 	public String getNombre() {
 		return nombre;
 	}
@@ -32,32 +34,23 @@ public class Equipo {
 	public void setFormacion(String formacion) {
 		this.formacion = formacion;
 	}
-	public InfoJugador getGolero() {
-		return golero;
+	public ArrayList<InfoJugador> getTitulares() {
+		return titulares;
 	}
-	public void setGolero(InfoJugador golero) {
-		this.golero = golero;
+	public void setTitulares(ArrayList<InfoJugador> titulares) {
+		this.titulares = titulares;
 	}
-	public ArrayList<InfoJugador> getDefensas() {
-		return defensas;
+	public ArrayList<InfoJugador> getSuplentes() {
+		return suplentes;
 	}
-	public void setDefensas(ArrayList<InfoJugador> defensas) {
-		this.defensas = defensas;
+	public void setSuplentes(ArrayList<InfoJugador> suplentes) {
+		this.suplentes = suplentes;
 	}
-	public ArrayList<InfoJugador> getMediocampistas() {
-		return mediocampistas;
+	public ArrayList<InfoJugador> getReserva() {
+		return reserva;
 	}
-	public void setMediocampistas(ArrayList<InfoJugador> mediocampistas) {
-		this.mediocampistas = mediocampistas;
+	public void setReserva(ArrayList<InfoJugador> reserva) {
+		this.reserva = reserva;
 	}
-	public ArrayList<InfoJugador> getDelanteros() {
-		return delanteros;
-	}
-	public void setDelanteros(ArrayList<InfoJugador> delanteros) {
-		this.delanteros = delanteros;
-	}
-	
-	
-	
-	
+
 }

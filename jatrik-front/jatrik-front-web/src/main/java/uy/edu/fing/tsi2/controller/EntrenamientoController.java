@@ -4,13 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
+
+import uy.edu.fing.tsi2.model.SessionBeanJatrik;
 
 @Named
 @RequestScoped
 public class EntrenamientoController {
-
+	
 	private List<String> images;
     
     @PostConstruct
