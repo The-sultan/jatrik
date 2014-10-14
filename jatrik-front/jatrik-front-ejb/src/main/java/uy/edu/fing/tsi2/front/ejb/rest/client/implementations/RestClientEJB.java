@@ -7,6 +7,7 @@ import uy.edu.fing.tsi2.front.ejb.rest.client.exceptions.RestClientException;
 import uy.edu.fing.tsi2.front.ejb.rest.client.interfaces.RestClientEJBLocal;
 import uy.edu.fing.tsi2.front.ejb.rest.client.interfaces.RestRequestBuilderFactoryLocal;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEquipo;
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoPartido;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoUsuario;
 
 import com.sun.jersey.api.client.ClientResponse;
@@ -73,5 +74,19 @@ public class RestClientEJB implements RestClientEJBLocal{
 
 	}
 	
+	
+	@Override
+	public InfoPartido getInfoPartido(long idPartido)
+			throws RestClientException {
+		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory.makePartidoGetRequestBuilder(idPartido);
+		ClientResponse response = jerseyHttpRequestBuilder.get(ClientResponse.class);
+		if(response.getStatusInfo().getStatusCode() != ClientResponse.Status.OK.getStatusCode()){
+			throw new RestClientException("Error al obtener la informacion del partido, reason: "
+					+ response.getStatusInfo().getReasonPhrase());
+		}
+		else{
+			return response.getEntity(InfoPartido.class);	
+		}
+	}
 	
 }

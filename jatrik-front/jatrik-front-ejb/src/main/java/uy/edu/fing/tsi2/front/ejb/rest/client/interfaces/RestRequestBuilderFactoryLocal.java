@@ -15,4 +15,6 @@ public interface RestRequestBuilderFactoryLocal {
 	public Builder makeEquipoGetRequestBuilder(long idEquipo);
 	
 	public Builder makeUsuarioLoginRequestBuilder(String nick, String pass);
+	
+	public Builder makePartidoGetRequestBuilder(long idPartido);
 }
