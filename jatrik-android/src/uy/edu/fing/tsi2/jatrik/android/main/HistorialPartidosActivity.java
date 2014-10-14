@@ -1,4 +1,4 @@
-package uy.edu.fing.tsi2.jatrik.android;
+package uy.edu.fing.tsi2.jatrik.android.main;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,13 +12,18 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 
+import uy.edu.fing.tsi2.jatrik.android.extras.InfoPartido;
+import uy.edu.fing.tsi2.jatrik.android.extras.InfoUsuario;
+
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.jatrik_android.R;
 import com.google.gson.Gson;
@@ -47,9 +52,11 @@ public class HistorialPartidosActivity extends ActionBarActivity {
 
 		@Override
 		protected String doInBackground(Void... params) {
+			Intent i = getIntent();
+			String id = i.getStringExtra("idEquipo");
 			HttpClient httpClient = new DefaultHttpClient();
 			HttpContext localContext = new BasicHttpContext();
-			HttpGet httpGet = new HttpGet("http://172.16.105.27:8080/jatrik-core-web/rest/partidos/1");
+			HttpGet httpGet = new HttpGet("http://192.168.1.36:8080/jatrik-core-web/rest/equipos/" + id + "/historial");
 			String text = null;
 			try {
 				HttpResponse response = httpClient.execute(httpGet, localContext);
@@ -76,20 +83,17 @@ public class HistorialPartidosActivity extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 		setContentView(R.layout.activity_historial_partidos);
-	    
-	    //Obtiene los partidos
+		Intent i = getIntent();
+		String User = i.getStringExtra("User");
+		TextView WelcomeMessage = (TextView)findViewById(R.id.textWelcome);
+		WelcomeMessage.setText("Bienvenido, " + User );
+		
+		// Pido los partidos y los muestro
 	    new ServiceHistorial().execute();
-//	    InfoPartido ip = new InfoPartido(Long.valueOf(1),"a","a","a",2,2);
-//	    InfoPartido ip2 = new InfoPartido(Long.valueOf(2),"a","b","a",2,2);
-//	    InfoPartido ip3 = new InfoPartido(Long.valueOf(3),"a","b","a",2,2);
-//	    List<InfoPartido> p= new ArrayList<InfoPartido>();
-//	    p.add(ip);
-//	    p.add(ip2);
-//	    p.add(ip3);
         adpt  = new HistorialAdapter(new ArrayList<InfoPartido>(), this);
-        ListView lView = (ListView) findViewById(R.id.PartidosView);
-         
+        ListView lView = (ListView) findViewById(R.id.PartidosView);         
         lView.setAdapter(adpt);
 	  }
 	

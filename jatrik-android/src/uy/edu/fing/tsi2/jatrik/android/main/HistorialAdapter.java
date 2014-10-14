@@ -1,6 +1,8 @@
-package uy.edu.fing.tsi2.jatrik.android;
+package uy.edu.fing.tsi2.jatrik.android.main;
 
 import java.util.List;
+
+import uy.edu.fing.tsi2.jatrik.android.extras.InfoPartido;
 
 import android.content.Context;
 import android.view.LayoutInflater;

@@ -5,6 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.GET;
+import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
@@ -22,6 +23,7 @@ public class LoginResource {
 	private EJBManagerUsuarioLocal usuarioEJB;
 	
 	@GET	
+	@Produces("application/json")
 	public Response validarYObtenerUsuario(@QueryParam("nick") String nick, @QueryParam("password") String password){
 		Usuario usuario = usuarioEJB.validarUsuario(nick, password);
 		InfoUsuario infoUsuario = new InfoUsuario();

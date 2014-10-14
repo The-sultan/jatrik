@@ -1,4 +1,4 @@
-package uy.edu.fing.tsi2.jatrik.android;
+package uy.edu.fing.tsi2.jatrik.android.extras;
 
 import java.util.Date;
 
