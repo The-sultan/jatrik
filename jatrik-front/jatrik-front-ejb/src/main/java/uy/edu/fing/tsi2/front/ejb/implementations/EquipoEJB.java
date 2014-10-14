@@ -4,6 +4,7 @@ package uy.edu.fing.tsi2.front.ejb.implementations;
 import uy.edu.fing.tsi2.front.ejb.interfaces.EquipoEJBLocal;
 import uy.edu.fing.tsi2.front.ejb.rest.client.exceptions.RestClientException;
 import uy.edu.fing.tsi2.front.ejb.rest.client.interfaces.RestClientEJBLocal;
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEntrenamiento;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEquipo;
 
 import javax.ejb.EJB;
@@ -24,6 +25,18 @@ public class EquipoEJB implements EquipoEJBLocal {
 		
 		try {
 			return jatrikCoreClient.getEquipo(id);
+		} catch (RestClientException e) {
+			throw e;
+		}
+	}
+	
+	@Override
+	public String entrenarEquipo(long id, int modo) {
+		InfoEntrenamiento ent = new InfoEntrenamiento();
+		ent.setIdequipo((int)id);
+		ent.setModo(modo);
+		try {
+			return jatrikCoreClient.postEntrenamiento(ent);
 		} catch (RestClientException e) {
 			throw e;
 		}

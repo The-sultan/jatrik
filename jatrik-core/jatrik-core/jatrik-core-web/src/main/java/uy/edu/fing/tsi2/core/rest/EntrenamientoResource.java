@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.POST;
+import javax.ws.rs.core.Response;
 
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEntrenamiento;
 import uy.edu.fing.tsi2.jatrik.core.domain.Equipo;
@@ -22,18 +23,13 @@ public class EntrenamientoResource {
 	private EJBManagerEntrenamientoLocal entrenamientoEJB;
 			
 	@POST
-	public String entrenarEquipo(InfoEntrenamiento entrenamiento) {
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		Date fechaEntrenamiento = new Date();
-		try {
-			fechaEntrenamiento = (Date) dateFormat.parse(entrenamiento.getFecha());
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+	public Response entrenarEquipo(InfoEntrenamiento entrenamiento) {
 		EnumHabilidad modo = EnumHabilidad.getById(entrenamiento.getModo());
-		String response = entrenamientoEJB.entrenarEquipo(Long.valueOf(entrenamiento.getIdequipo()), fechaEntrenamiento, modo);
-
-		return response;
+		String respuesta = entrenamientoEJB.entrenarEquipo(Long.valueOf(entrenamiento.getIdequipo()), new Date(), modo);
+		if (respuesta.contains("Has entrenado"))
+			return Response.ok(respuesta).build();
+		else
+			return Response.status(Response.Status.UNAUTHORIZED).build();
 	}
 
 }

@@ -6,6 +6,7 @@ import javax.ejb.Stateless;
 import uy.edu.fing.tsi2.front.ejb.rest.client.exceptions.RestClientException;
 import uy.edu.fing.tsi2.front.ejb.rest.client.interfaces.RestClientEJBLocal;
 import uy.edu.fing.tsi2.front.ejb.rest.client.interfaces.RestRequestBuilderFactoryLocal;
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEntrenamiento;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEquipo;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoPartido;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoUsuario;
@@ -54,6 +55,8 @@ public class RestClientEJB implements RestClientEJBLocal{
 		}
 	};
 	
+	
+	
 	public RestClientEJB() {
 	}
 
@@ -86,6 +89,21 @@ public class RestClientEJB implements RestClientEJBLocal{
 		}
 		else{
 			return response.getEntity(InfoPartido.class);	
+		}
+	}
+	
+	@Override
+	public String postEntrenamiento(InfoEntrenamiento entrenamiento) throws RestClientException{
+		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory.makeEntrenamientoPostRequestBuilder();
+		ClientResponse response = jerseyHttpRequestBuilder.post(ClientResponse.class, entrenamiento);
+		if(response.getStatusInfo().getStatusCode() != ClientResponse.Status.OK.getStatusCode()){
+			throw new RestClientException("No se pudo realizar el Entrenamiento, status code: "
+					+ response.getStatusInfo().getReasonPhrase());			
+		}
+		else{
+			// Tengo que obtener el Mensaje de respuesta
+			String Resultado = "";
+			return Resultado;
 		}
 	}
 	

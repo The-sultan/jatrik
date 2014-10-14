@@ -10,15 +10,19 @@
 
 
 
-		<p:contentFlow id="panelEntrenamientos" value="#{trainningController.images}" var="image">
+		<p:contentFlow id="panelEntrenamientos" value="#{entrenamientoController.images}" var="image">
 			<p:graphicImage value="#{image}" styleClass="content"  >
 				Defensa
 			</p:graphicImage>
 			<div class="caption">Ataque</div>
 		</p:contentFlow>
 
-		<p:commandButton>
-		
-		</p:commandButton>
+		<p:commandButton value="Entrenar Velocidad" actionListener="#{entrenamientoController.entrenar}"></p:commandButton>
+		<p:commandButton value="Entrenar Tecnica" actionListener="#{entrenamientoController.entrenar}"></p:commandButton>
+		<p:commandButton value="Entrenar Ataque" actionListener="#{entrenamientoController.entrenar}"></p:commandButton>
+		<p:commandButton value="Entrenar Defensa" actionListener="#{entrenamientoController.entrenar}"></p:commandButton>
+		<p:commandButton value="Entrenar Porteria" actionListener="#{entrenamientoController.entrenar}"></p:commandButton>
+
+
 	</ui:define>
 </ui:composition>

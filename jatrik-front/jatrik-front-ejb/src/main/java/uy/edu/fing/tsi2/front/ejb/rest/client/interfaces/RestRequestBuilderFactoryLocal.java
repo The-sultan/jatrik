@@ -17,4 +17,6 @@ public interface RestRequestBuilderFactoryLocal {
 	public Builder makeUsuarioLoginRequestBuilder(String nick, String pass);
 	
 	public Builder makePartidoGetRequestBuilder(long idPartido);
+
+	public WebResource.Builder makeEntrenamientoPostRequestBuilder();
 }

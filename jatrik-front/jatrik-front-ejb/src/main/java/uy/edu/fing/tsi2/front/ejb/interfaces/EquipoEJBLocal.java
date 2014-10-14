@@ -13,4 +13,6 @@ public interface EquipoEJBLocal {
 
 	public InfoEquipo getEquipo(long id);
 
+	String entrenarEquipo(long id, int modo);
+
 }

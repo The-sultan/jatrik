@@ -66,7 +66,7 @@ public class EJBManagerEntrenamientoBean implements IEntrenamiento{
 					}
 					jugadoresEJB.update(j);
 				}
-				return ("Has entrenado la habilidad " + modoEntrenamiento.getHabilidad() + ".");
+				return ("Has entrenado la habilidad " + modoEntrenamiento.getHabilidad() + " .");
 			}			
 		}
 		
