@@ -15,25 +15,25 @@ import javax.ws.rs.Produces;
 public class RestServices {
 	
 	@Inject
-	UsuariosResource usuariosResource;
+	private UsuariosResource usuariosResource;
 	
 	@Inject
-	PartidosResource partidosResource;
+	private LigasResource ligasResource;
 	
 	@Inject
-	LigasResource ligasResource;
+	private EquiposResource equiposResource;
 	
 	@Inject
-	EquiposResource equiposResource;
+	private SimuladorResource simuladorResource;
 	
 	@Inject
-	SimuladorResource simuladorResource;
-	
-	@Inject
-	LoginResource loginResource;
+	private LoginResource loginResource;
 
 	@Inject
-	EntrenamientoResource entrenamientoResource;	
+	private EntrenamientoResource entrenamientoResource;	
+	
+	@Inject
+	private PartidosResource partidosResource;
 
 	
 	@Path("/usuarios")
@@ -66,9 +66,9 @@ public class RestServices {
 		return simuladorResource;
 	}
 	
-	@Path("/partidos/{idEquipo}")
-	public PartidosResource getPartidosResource(@PathParam("idEquipo") Long idEquipo){
-		partidosResource.setIdEquipo(idEquipo);
+	@Path("/partidos")
+	public  PartidosResource getPartidosResource(){
 		return partidosResource;
-	}	
+	}
+	
 }

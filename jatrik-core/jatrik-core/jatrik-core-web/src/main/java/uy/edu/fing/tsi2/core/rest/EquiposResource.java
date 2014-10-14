@@ -8,6 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -32,6 +33,9 @@ public class EquiposResource {
 
 	@EJB
 	private EJBManagerEquipoBeanLocal equipoEJB;
+	
+	@Inject
+	HistorialPartidosResource historialPartidosResource;
 	
 	@GET
 	@Path("/{id}")
@@ -91,5 +95,11 @@ public class EquiposResource {
 		infoEstadio.setLongitud(equipo.getLongitud());
 		infoEstadio.setNombre(equipo.getEstadio());
 		return infoEstadio;
+	}
+	
+	@Path("/{id}/historial")
+	public HistorialPartidosResource getHistorialPartidosResource(@PathParam("id") Long idEquipo){
+			historialPartidosResource.setIdEquipo(idEquipo);
+		return historialPartidosResource;
 	}
 }

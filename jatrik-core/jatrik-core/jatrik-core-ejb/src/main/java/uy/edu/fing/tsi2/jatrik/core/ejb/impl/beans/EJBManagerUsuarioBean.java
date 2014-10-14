@@ -56,7 +56,9 @@ public class EJBManagerUsuarioBean implements IUsuarios {
 	@EJB
 	private EJBEMDatosJugadoresLocal datosJugadores;
 
-	public Long crearUsuario(String nombre, String nick, String email, String password) {
+	@Override
+	public Long crearUsuario(String nombre, String nick, String email, String password,
+	String nombreEquipo) {
 		try {
 			logger.info("Voy a Validar al usuario");
 			if (usuarios.findUsuarioByNick(nick) ==null){

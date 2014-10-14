@@ -1,8 +1,25 @@
-﻿-- Codiguera de Evento Manejador
-INSERT INTO eventos(id, descripcion, manejador) VALUES (1, 'Fin del Partido', 'uy.edu.fing.tsi2.jatrik.core.eventos.ManejadorFinPartido');
-INSERT INTO eventos(id, descripcion, manejador) VALUES (2, 'Lesion', 'uy.edu.fing.tsi2.jatrik.core.eventos.ManejadorLesion');
-INSERT INTO eventos(id, descripcion, manejador) VALUES (3, 'Posible Jugada de Gol', 'uy.edu.fing.tsi2.jatrik.core.eventos.ManejadorPosibleJugadaGol');
-INSERT INTO eventos(id, descripcion, manejador) VALUES (4, 'Falta', 'uy.edu.fing.tsi2.jatrik.core.eventos.ManejadorFalta');
+﻿-- Codiguera de Eventos
+INSERT INTO eventos(id, nombre, comentario) VALUES (1, 'LESION', null);
+INSERT INTO eventos(id, nombre, comentario) VALUES (2, 'JUGADA_GOL', null);
+INSERT INTO eventos(id, nombre, comentario) VALUES (3, 'GOL', 'Goooool de %s para %s |%s $d x $d $s |');
+INSERT INTO eventos(id, nombre, comentario) VALUES (4, 'TARJETA_AMARILLA', 'Tarjeta amarilla para el jugador %s');
+INSERT INTO eventos(id, nombre, comentario) VALUES (5, 'TARJETA_AMARILLA_DOBLE', 'Tarjeta amarilla para el jugador %s, esta es la segunda y se va');
+INSERT INTO eventos(id, nombre, comentario) VALUES (6, 'TARJETA_ROJA', 'Groseeero %s, expulsión directa');
+INSERT INTO eventos(id, nombre, comentario) VALUES (7, 'FALTA', 'Falta cometida sobre el jugador %s');
+INSERT INTO eventos(id, nombre, comentario) VALUES (8, 'INICIO_PARTIDO', 'Comienza el partido');
+INSERT INTO eventos(id, nombre, comentario) VALUES (9, 'FIN_PRIMER_TIEMPO', 'Finaliza el primer tiempo');
+INSERT INTO eventos(id, nombre, comentario) VALUES (10,'INICIO_SEGUNDO_TIEMPO', 'Se inicia el segundo tiempo');
+INSERT INTO eventos(id, nombre, comentario) VALUES (11, 'FIN_PARTIDO', 'Ha finalizado el partido');
+
+-- Codiguera de comentarios
+INSERT INTO comentarios(id, evento_id, descripcion, nivel) VALUES (1,2,'%s escapa por la punta, centro al segundo palo, entran varios!', 1);
+INSERT INTO comentarios(id, evento_id, descripcion, nivel) VALUES (2,2,'%s levanta el corner, centro al medio, puede venir!', 2);
+INSERT INTO comentarios(id, evento_id, descripcion, nivel) VALUES (3,2,'Entra al area el jugador %s, burla a 1 defensa, 2, 3 remataaaa', 3);
+INSERT INTO comentarios(id, evento_id, descripcion, nivel) VALUES (4,7,'Falta cometida sobre el jugador %s', 1);
+INSERT INTO comentarios(id, evento_id, descripcion, nivel) VALUES (5,7,'Falta sobre el jugador %s. El cuerpo medico esta en campo pero el jugador se recupera', 2);
+INSERT INTO comentarios(id, evento_id, descripcion, nivel) VALUES (6,7,'Grosera falta sobre el jugador %s, el cual es retirado del campo de juego', 3);
+
+
 
 -- Codiguera de Datos Jugadores
 

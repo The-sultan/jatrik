@@ -1,5 +1,7 @@
 package uy.edu.fing.tsi2.jatrik.common.payloads;
 
+import java.util.List;
+
 public class InfoPartido {
 
 	private Long idPartido;
@@ -13,6 +15,10 @@ public class InfoPartido {
 	private String equipoLocal;
 
 	private String equipoVisitante;
+
+	
+	
+	private List<InfoEvento> eventos;
 
 	public Long getIdPartido() {
 		return idPartido;
@@ -62,7 +68,13 @@ public class InfoPartido {
 		this.equipoVisitante = equipoVisitante;
 	}
 	
-	
+	public List<InfoEvento> getEventos() {
+		return eventos;
+	}
+
+	public void setEventos(List<InfoEvento> eventos) {
+		this.eventos = eventos;
+	}
 	
 	public InfoPartido (Long id, String Estado, String Local, String Visitante, int golesL, int golesV){
 		idPartido = id;

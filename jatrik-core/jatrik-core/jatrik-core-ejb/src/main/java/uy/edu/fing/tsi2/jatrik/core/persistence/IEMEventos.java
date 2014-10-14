@@ -19,5 +19,7 @@ public interface IEMEventos {
 
 	Evento add(Evento jugador);
 	
+	Evento findByName(String nombre);
+	
 	
 }

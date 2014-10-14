@@ -7,9 +7,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+
+@NamedQueries({
+	@NamedQuery(name="findEventoByName",query="SELECT OBJECT(e) FROM Evento e WHERE e.nombre = :nombre ")
+	
+})
 @Entity
 @Table(name = "EVENTOS")
 public class Evento implements Serializable {
@@ -28,20 +35,19 @@ public class Evento implements Serializable {
 	@Column(name = "ID")
 	private Long id;
 	
-	@Column(name = "DESCRIPCION")
-	private String descripcion;
+	@Column(name = "COMENTARIO")
+	private String comentario;
 
-	@Column(name = "MANEJADOR")
-	private String manejador;
-
+	@Column
+	private String nombre;
+	
 	public Evento() {
 		super();
 	}
 
-	public Evento(String descripcion, String manejador) {
+	public Evento(String comentario) {
 		super();
-		this.descripcion = descripcion;
-		this.manejador = manejador;
+		this.comentario = comentario;
 	}
 
 		
@@ -53,24 +59,22 @@ public class Evento implements Serializable {
 		this.id = id;
 	}
 
-	public String getDescripcion() {
-		return descripcion;
+	public String getComentario() {
+		return comentario;
 	}
 
-	
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
 	}
 
-
-	public String getManejador() {
-		return manejador;
+	public String getNombre() {
+		return nombre;
 	}
 
-	
-	public void setManejador(String manejador) {
-		this.manejador = manejador;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
+
 
 	@Override
 	public int hashCode() {

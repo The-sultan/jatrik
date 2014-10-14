@@ -1,4 +1,4 @@
-package uy.edu.fing.tsi2.jatrik.core.domain;
+package uy.edu.fing.tsi2.jatrik.core.domain.eventos;
 
 import java.io.Serializable;
 
@@ -13,14 +13,21 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import uy.edu.fing.tsi2.jatrik.core.domain.Evento;
+import uy.edu.fing.tsi2.jatrik.core.domain.Partido;
+
+@NamedQueries({ @NamedQuery(name = "findEventosPartidoByPartido", query = "SELECT OBJECT(e) FROM EventoPartido e WHERE e.partido = :partido ")
+})
 
 @Entity
-@Table(name = "REL_PARTIDOS_EVENTOS")
-@Inheritance(strategy=InheritanceType.JOINED)
-@DiscriminatorColumn(name="EVENTO_ID", discriminatorType=DiscriminatorType.INTEGER)
-public class RelPartidoEvento implements Serializable {
+@Table(name = "EVENTOS_PARTIDO")
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="TIPO_EVENTO", discriminatorType=DiscriminatorType.INTEGER)
+public class EventoPartido implements Serializable {
 
 	
 	/**
@@ -34,43 +41,25 @@ public class RelPartidoEvento implements Serializable {
 	@Column(name="ID")
 	private Long id;  
 
-	@Column(name = "PARTIDO_ID")
-	private Long partidoId;
-
-	@Column(name = "EVENTO_ID")
-	private Long eventoId;
-
 	@Column(name = "MINUTO")
 	private Integer minuto;
 
-	public Integer getMinuto() {
-		return minuto;
-	}
-
-	public void setMinuto(Integer minuto) {
-		this.minuto = minuto;
-	}
-
-	@ManyToOne(targetEntity = Partido.class)
-	@JoinColumn(name = "PARTIDO_ID", insertable = false, updatable = false)
+	@ManyToOne()
+	@JoinColumn(name = "PARTIDO_ID", referencedColumnName = "ID")
 	private Partido partido;
 
 	@ManyToOne(targetEntity = Evento.class)
-	@JoinColumn(name = "EVENTO_ID", insertable = false, updatable = false)
+	@JoinColumn(name = "EVENTO_ID",referencedColumnName = "ID")
 	private Evento evento;
 
-	public RelPartidoEvento() {
+	public EventoPartido() {
 		super();
 	}
 
-	public RelPartidoEvento(Integer minuto, Partido partido, Evento evento) {
+	public EventoPartido(Integer minuto, Partido partido, Evento evento) {
 		this.minuto = minuto;
 		this.partido = partido;
 		this.evento = evento;
-
-		// Valores para los identificadores
-		this.partidoId = partido.getId();
-		this.eventoId = evento.getId();
 	}
 
 	
@@ -93,20 +82,12 @@ public class RelPartidoEvento implements Serializable {
 	}
 
 
-	public Long getPartidoId() {
-		return partidoId;
+	public Integer getMinuto() {
+		return minuto;
 	}
 
-	public void setPartidoId(Long partidoId) {
-		this.partidoId = partidoId;
-	}
-
-	public Long getEventoId() {
-		return eventoId;
-	}
-
-	public void setEventoId(Long eventoId) {
-		this.eventoId = eventoId;
+	public void setMinuto(Integer minuto) {
+		this.minuto = minuto;
 	}
 
 	@Override
@@ -120,10 +101,10 @@ public class RelPartidoEvento implements Serializable {
 	public boolean equals(Object object) {
 		// TODO: Warning - this method won't work in the case the id fields are
 		// not set
-		if (!(object instanceof RelPartidoEvento)) {
+		if (!(object instanceof EventoPartido)) {
 			return false;
 		}
-		RelPartidoEvento other = (RelPartidoEvento) object;
+		EventoPartido other = (EventoPartido) object;
 		if ((this.id == null && other.id != null)
 				|| (this.id != null && !this.id.equals(other.id))) {
 			return false;

@@ -2,46 +2,40 @@ package uy.edu.fing.tsi2.core.rest;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.GET;
-import javax.ws.rs.Produces;
-
-import uy.edu.fing.tsi2.jatrik.core.domain.Partido;
-import uy.edu.fing.tsi2.jatrik.core.ejb.impl.local.EJBManagerPartidoLocal;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEvento;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoPartido;
-import uy.edu.fing.tsi2.jatrik.common.payloads.HistorialPartidos;
+import uy.edu.fing.tsi2.jatrik.core.domain.Partido;
+import uy.edu.fing.tsi2.jatrik.core.domain.eventos.EventoPartido;
+import uy.edu.fing.tsi2.jatrik.core.ejb.impl.local.EJBManagerPartidoLocal;
 
 /**
  *
- * @author Rafael
+ * @author Farid
  */
 
 @RequestScoped
 public class PartidosResource {
 	
 	@EJB
-	private EJBManagerPartidoLocal partidoEJB;
+	EJBManagerPartidoLocal partidoEJB;
 	
-	private Long idEquipo;
-	
-	public void setIdEquipo(Long id){
-		idEquipo = id;
-	}
-	
+	@Path("/{id}")
 	@GET
-	@Produces("application/json")
-	public HistorialPartidos obtenerPartidos(){
-		List<Partido> prt = partidoEJB.obtenerPartidos(idEquipo);
-		List<InfoPartido> partidos = new ArrayList<InfoPartido>();
-		for (Partido p : prt){
-			InfoPartido ip = new InfoPartido(p.getId(), p.getEstado().getEstado(), p.getLocal().getNombre(),
-											 p.getVisitante().getNombre(), p.getGolesLocal(), p.getGolesVisitante());
-			partidos.add(ip);
+	public InfoPartido obtenerPartido(@PathParam("id") Long id){
+		Partido partido = partidoEJB.obtenerPartido(id);
+		InfoPartido infoPartido = new InfoPartido(partido.getId(), partido.getEstado().name(),partido.getLocal().getNombre() , partido.getVisitante().getNombre(), partido.getGolesLocal(), partido.getGolesVisitante());
+		List<EventoPartido> eventos = partidoEJB.obtenerEventosPartido(id);
+		List<InfoEvento> infoEventos = new ArrayList<>();
+		for(EventoPartido eventoPartido : eventos){
+			InfoEvento infoEvento = new InfoEvento(eventoPartido.getMinuto(), eventoPartido.toString());
+			infoEventos.add(infoEvento);
 		}
-		HistorialPartidos historial = new HistorialPartidos(partidos);
-		return historial;
+		infoPartido.setEventos(infoEventos);
+		return infoPartido;
 	}
-	
 }

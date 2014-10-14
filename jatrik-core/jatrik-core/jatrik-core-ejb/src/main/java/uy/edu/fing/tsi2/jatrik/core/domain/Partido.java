@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -62,12 +63,12 @@ public class Partido implements Serializable {
 	@Column(name = "GOLES_VISITANTE")
 	private int golesVisitante;
 
-	@ManyToOne(targetEntity = Equipo.class)
+	@ManyToOne(targetEntity = Equipo.class, fetch = FetchType.EAGER)
 	@JoinColumn(name = "LOCAL_ID", referencedColumnName = "ID")
 	private Equipo local;
 
 		
-	@ManyToOne(targetEntity = Equipo.class)
+	@ManyToOne(targetEntity = Equipo.class, fetch = FetchType.EAGER)
 	@JoinColumn(name = "VISITANTE_ID", referencedColumnName = "ID")
 	private Equipo visitante;
 

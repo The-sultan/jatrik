@@ -1,8 +1,10 @@
 package uy.edu.fing.tsi2.jatrik.core.persistence.impl.bean;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javax.ejb.EJB;
 
 import javax.ejb.Local;
 import javax.ejb.Remote;
@@ -10,10 +12,14 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import uy.edu.fing.tsi2.jatrik.core.domain.Equipo;
+import uy.edu.fing.tsi2.jatrik.core.domain.Formacion;
+import uy.edu.fing.tsi2.jatrik.core.domain.JugadorEnFormacion;
 
 import uy.edu.fing.tsi2.jatrik.core.domain.Partido;
 import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumEstadoPartido;
 import uy.edu.fing.tsi2.jatrik.core.persistence.IEMPartidos;
+import uy.edu.fing.tsi2.jatrik.core.persistence.impl.local.EJBEMEquiposLocal;
 import uy.edu.fing.tsi2.jatrik.core.persistence.impl.local.EJBEMPartidosLocal;
 import uy.edu.fing.tsi2.jatrik.core.persistence.impl.remote.EJBEMPartidosRemote;
 
@@ -25,6 +31,9 @@ public class EJBEMPartidosBean implements IEMPartidos {
 
 	@PersistenceContext(name = "Jatrik-ejbPU")
 	private EntityManager entityManager;
+	
+	@EJB
+	EJBEMEquiposLocal EquiposEJB;
 	
 	public Partido add(Partido partido) {				
 		entityManager.persist(partido);
@@ -136,5 +145,36 @@ public class EJBEMPartidosBean implements IEMPartidos {
 		return consulta;
 	}
 
+	@Override
+	public void inicializarPartido(Partido partido){
+		Equipo equipoLocal = EquiposEJB.find(partido.getLocal().getId());
+		Equipo equipoVisitante = EquiposEJB.find(partido.getVisitante().getId());
+		
+		Formacion formacionLocal = clonarFormacion(equipoLocal.getFormacion());
+		Formacion formacionVisitante = clonarFormacion(equipoVisitante.getFormacion());
+		partido.setFormacionLocal(formacionLocal);
+		partido.setFormacionVisitante(formacionVisitante);
+		entityManager.persist(formacionLocal);
+		entityManager.persist(formacionVisitante);
+		partido.setFormacionVisitante(clonarFormacion(equipoVisitante.getFormacion()));
+		partido.setEstado(EnumEstadoPartido.EN_CURSO);
+		partido.setMinuto(0);
+		
+		entityManager.merge(partido);
+		
+	}
+	
+	private Formacion clonarFormacion(Formacion formacion){
+		Formacion formacionClone = new Formacion();
+		Set<JugadorEnFormacion> jugadoresClone = new HashSet<>();
+		for(JugadorEnFormacion jugadorEnFormacion : formacion.getJugadores()){
+			JugadorEnFormacion jugadorClone = new JugadorEnFormacion(jugadorEnFormacion.getJugador(), 
+					jugadorEnFormacion.getIndice(), jugadorEnFormacion.getPuestoFormacion(), formacionClone);
+			jugadoresClone.add(jugadorClone);
+		}
+		formacionClone.setJugadores(jugadoresClone);
+		return formacionClone;
+	}
 	
 }
+

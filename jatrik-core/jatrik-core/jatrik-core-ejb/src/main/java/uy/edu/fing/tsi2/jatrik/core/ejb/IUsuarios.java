@@ -4,7 +4,7 @@ import uy.edu.fing.tsi2.jatrik.core.domain.Usuario;
 
 public interface IUsuarios {
 
-	Long crearUsuario(String nombre, String nick, String email, String password);
+	Long crearUsuario(String nombre, String nick, String email, String password, String nombreEquipo);
 	
 	Usuario validarUsuario(String nick,String password);
 }

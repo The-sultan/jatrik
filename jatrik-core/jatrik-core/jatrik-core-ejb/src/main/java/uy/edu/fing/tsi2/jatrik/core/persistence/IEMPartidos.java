@@ -22,5 +22,8 @@ public interface IEMPartidos {
 	List<Partido> findPartidosDeEquipo(Long idEquipo);
 	
 	List<Partido> findPartidosPorFechayEstados(Date fechaDesde, Date fechaHasta,Set<EnumEstadoPartido> estados);
+	
+	void inicializarPartido(Partido partido);
+	
 }
 	
