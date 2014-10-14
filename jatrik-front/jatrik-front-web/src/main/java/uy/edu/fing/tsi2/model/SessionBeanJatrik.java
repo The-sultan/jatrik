@@ -4,11 +4,6 @@ package uy.edu.fing.tsi2.model;
 import java.io.Serializable;
 
 
-
-
-
-
-import javax.ejb.Stateful;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 

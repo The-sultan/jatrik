@@ -61,5 +61,14 @@ public class RestRequestBuilderFactory implements RestRequestBuilderFactoryLocal
             .accept(MediaType.APPLICATION_JSON);
 	}
 	
+	@Override
+	public Builder makePartidoGetRequestBuilder(long idPartido) {
+		String url = String.format(JATRIK_CORE_URL + "/partidos/%s",idPartido);
+        return crearClienteJersey()
+            .resource(url)
+            .type(MediaType.APPLICATION_JSON)
+            .accept(MediaType.APPLICATION_JSON);
+	}
+	
 	
 }

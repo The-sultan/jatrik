@@ -4,6 +4,7 @@ import javax.ejb.Local;
 
 import uy.edu.fing.tsi2.front.ejb.rest.client.exceptions.RestClientException;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEquipo;
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoPartido;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoUsuario;
 
 /**
@@ -18,6 +19,6 @@ public interface RestClientEJBLocal {
 
 	public InfoEquipo getEquipo(long idEquipo) throws RestClientException;
 	
-	
+	public InfoPartido getInfoPartido(long idPartido)  throws RestClientException;
 
 }
