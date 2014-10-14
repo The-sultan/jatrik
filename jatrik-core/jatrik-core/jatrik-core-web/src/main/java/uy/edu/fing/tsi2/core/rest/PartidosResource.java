@@ -32,7 +32,7 @@ public class PartidosResource {
 		List<EventoPartido> eventos = partidoEJB.obtenerEventosPartido(id);
 		List<InfoEvento> infoEventos = new ArrayList<>();
 		for(EventoPartido eventoPartido : eventos){
-			InfoEvento infoEvento = new InfoEvento(eventoPartido.getMinuto(), eventoPartido.toString());
+			InfoEvento infoEvento = new InfoEvento(eventoPartido.getMinuto(), eventoPartido.toString(), eventoPartido.getEvento().getNombre());
 			infoEventos.add(infoEvento);
 		}
 		infoPartido.setEventos(infoEventos);

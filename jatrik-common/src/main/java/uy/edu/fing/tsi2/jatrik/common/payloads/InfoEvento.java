@@ -7,6 +7,7 @@ package uy.edu.fing.tsi2.jatrik.common.payloads;
 public class InfoEvento {
 	private int minuto;
 	private String descripcion;
+	private String tipo;
 
 	public int getMinuto() {
 		return minuto;
@@ -24,9 +25,18 @@ public class InfoEvento {
 		this.descripcion = descripcion;
 	}
 
-	public InfoEvento(int minuto, String descripcion) {
+	public InfoEvento(int minuto, String descripcion, String tipo) {
 		this.minuto = minuto;
 		this.descripcion = descripcion;
+		this.tipo = tipo;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 	
 	
