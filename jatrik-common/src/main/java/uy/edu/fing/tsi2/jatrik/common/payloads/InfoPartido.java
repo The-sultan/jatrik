@@ -85,4 +85,7 @@ public class InfoPartido {
 		golesVisitante = golesV;
 	}
 
+	public InfoPartido() {
+	}
+
 }

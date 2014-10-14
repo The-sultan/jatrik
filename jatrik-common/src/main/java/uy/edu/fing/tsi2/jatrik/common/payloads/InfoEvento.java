@@ -38,6 +38,9 @@ public class InfoEvento {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
+
+	public InfoEvento() {
+	}
 	
 	
 }
