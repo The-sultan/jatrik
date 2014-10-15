@@ -25,11 +25,11 @@ public class EntrenamientoResource {
 	@POST
 	public Response entrenarEquipo(InfoEntrenamiento entrenamiento) {
 		EnumHabilidad modo = EnumHabilidad.getById(entrenamiento.getModo());
-		String respuesta = entrenamientoEJB.entrenarEquipo(Long.valueOf(entrenamiento.getIdequipo()), new Date(), modo);
+		String respuesta = entrenamientoEJB.entrenarEquipo(Long.valueOf(entrenamiento.getIdequipo()), new Date(), modo);	
 		if (respuesta.contains("Has entrenado"))
 			return Response.ok(respuesta).build();
 		else
-			return Response.status(Response.Status.UNAUTHORIZED).build();
-	}
+			return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+	} 
 
 }

@@ -44,15 +44,17 @@ public class EntrenamientoController {
         return images;
     }
 	
-    public void entrenar() {
+    public String entrenar(Long modo) {
 		FacesMessage msg = null;
-    	String Respuesta = "Funciona";
-    	
     	//Aca esta el servicio para entrenar
-    	//String Result = equipoEJB.entrenarEquipo(sessionBean.getInfo().getInfoEquipo().getId(), 1);
+    	String Respuesta = equipoEJB.entrenarEquipo(sessionBean.getInfoUsuario().getInfoEquipo().getId(), Integer.valueOf(modo.toString()));
     	
-    	msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenid@",Respuesta);
+    	if(Respuesta.contains("Ya"))
+    		msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Respuesta);
+    	else
+    		msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Éxito", Respuesta);
     	FacesContext.getCurrentInstance().addMessage(null, msg);
+    	return null;
     }	
 	
 	public void setImages(List<String> images) {

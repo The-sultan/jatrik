@@ -17,6 +17,7 @@ import uy.edu.fing.tsi2.jatrik.core.ejb.impl.local.EJBManagerEntrenamientoLocal;
 import uy.edu.fing.tsi2.jatrik.core.ejb.impl.remote.EJBManagerEntrenamientoRemote;
 import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumHabilidad;
 import uy.edu.fing.tsi2.jatrik.core.persistence.impl.local.EJBEMJugadoresLocal;
+import uy.edu.fing.tsi2.jatrik.core.utils.DateUtils;
 
 @Stateless
 @Local(EJBManagerEntrenamientoLocal.class)
@@ -38,14 +39,16 @@ public class EJBManagerEntrenamientoBean implements IEntrenamiento{
 			for(Jugador j : jugadores){
 				List<Habilidad> habilidades = j.getHabilidades();
 				for(Habilidad h : habilidades){
-					if ((modoEntrenamiento.compareTo(h.getTipo()) == 0) && (fechaEntrenamiento.compareTo(h.getUltimoEntrenamiento()) <= 0)){
+					Date fecha1 = DateUtils.getDateWithoutTime(fechaEntrenamiento);
+					Date fecha2 = DateUtils.getDateWithoutTime(h.getUltimoEntrenamiento());
+					if ((modoEntrenamiento.compareTo(h.getTipo()) == 0) && (fecha1.compareTo(fecha2) <= 0)){
 						yaEntrene = true;
 						break;
 					}
 				}
-				if (yaEntrene){
+				if (yaEntrene)
 					break;
-				}
+				
 			}
 			// Si no entrene subo las habilidades
 			if (yaEntrene)
@@ -60,7 +63,7 @@ public class EJBManagerEntrenamientoBean implements IEntrenamiento{
 							if (Valor >= 10){
 								Valor = r.nextInt(5)+5;
 							}
-							h.setValor(Valor);
+							h.setValor(h.getValor() + Valor);
 							h.setUltimoEntrenamiento(new Date());
 						}
 					}

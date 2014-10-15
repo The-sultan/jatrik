@@ -21,4 +21,5 @@ public interface RestRequestBuilderFactoryLocal {
 	public WebResource.Builder makeEntrenamientoPostRequestBuilder();
 	
 	Builder makeSimularPartidoRequestBuilder(Long partidoId);
+
 }

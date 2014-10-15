@@ -96,15 +96,14 @@ public class RestClientEJB implements RestClientEJBLocal{
 	public String postEntrenamiento(InfoEntrenamiento entrenamiento) throws RestClientException{
 		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory.makeEntrenamientoPostRequestBuilder();
 		ClientResponse response = jerseyHttpRequestBuilder.post(ClientResponse.class, entrenamiento);
+		String Resultado;
 		if(response.getStatusInfo().getStatusCode() != ClientResponse.Status.OK.getStatusCode()){
-			throw new RestClientException("No se pudo realizar el Entrenamiento, status code: "
-					+ response.getStatusInfo().getReasonPhrase());			
+			Resultado = "Ya has entrenado esta habilidad el día de hoy";	
 		}
 		else{
-			// Tengo que obtener el Mensaje de respuesta
-			String Resultado = "";
-			return Resultado;
+			Resultado = "Has entrenado la habilidad correctamente";
 		}
+		return Resultado;
 	
 	}
 	

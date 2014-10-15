@@ -9,20 +9,23 @@
 		<h1>Entrena tu equipo</h1>
 
 
-
-		<p:contentFlow id="panelEntrenamientos" value="#{entrenamientoController.images}" var="image">
-			<p:graphicImage value="#{image}" styleClass="content"  >
-				Defensa
-			</p:graphicImage>
-			<div class="caption">Ataque</div>
-		</p:contentFlow>
-
-		<p:commandButton value="Entrenar Velocidad" actionListener="#{entrenamientoController.entrenar}"></p:commandButton>
-		<p:commandButton value="Entrenar Tecnica" actionListener="#{entrenamientoController.entrenar}"></p:commandButton>
-		<p:commandButton value="Entrenar Ataque" actionListener="#{entrenamientoController.entrenar}"></p:commandButton>
-		<p:commandButton value="Entrenar Defensa" actionListener="#{entrenamientoController.entrenar}"></p:commandButton>
-		<p:commandButton value="Entrenar Porteria" actionListener="#{entrenamientoController.entrenar}"></p:commandButton>
-
+		<h:form id="ent">
+<!-- 		<p:contentFlow id="panelEntrenamientos" value="#{entrenamientoController.images}" var="image"> -->
+<!-- 			<p:graphicImage value="#{image}" styleClass="content"  > -->
+<!-- 				Defensa -->
+<!-- 			</p:graphicImage> -->
+<!-- 			<div class="caption">Ataque</div> -->
+<!-- 		</p:contentFlow> -->
+			<p>
+				<h:panelGrid columns="5">
+					<p:commandButton value="Entrenar Velocidad" ajax="false" actionListener="#{entrenamientoController.entrenar(1)}"></p:commandButton>
+					<p:commandButton value="Entrenar Tecnica" ajax="false" actionListener="#{entrenamientoController.entrenar(2)}"></p:commandButton>
+					<p:commandButton value="Entrenar Ataque" ajax="false" actionListener="#{entrenamientoController.entrenar(3)}"></p:commandButton>
+					<p:commandButton value="Entrenar Defensa" ajax="false" actionListener="#{entrenamientoController.entrenar(4)}"></p:commandButton>
+					<p:commandButton value="Entrenar Porteria" ajax="false" actionListener="#{entrenamientoController.entrenar(5)}"></p:commandButton>
+				</h:panelGrid>
+			</p>
+		</h:form>
 
 	</ui:define>
 </ui:composition>
