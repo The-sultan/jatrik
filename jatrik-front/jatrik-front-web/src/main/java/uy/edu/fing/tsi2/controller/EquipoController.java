@@ -55,6 +55,7 @@ public class EquipoController  implements Serializable {
 		equipoDatos.setTitulares(titulares);
 		equipoDatos.setSuplentes(equipoTemp.getSuplentes());
 		equipoDatos.setReserva(equipoTemp.getReservas());
+		equipoDatos.setNombre(equipoTemp.getNombre());
 		
 		//TODO:Traducir 
 		//equipoDatos = new Equipo();

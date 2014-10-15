@@ -25,10 +25,12 @@ import javax.enterprise.inject.Model;
 import javax.enterprise.inject.Produces;
 import javax.faces.model.SelectItem;
 import javax.faces.model.SelectItemGroup;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import uy.edu.fing.tsi2.front.ejb.interfaces.UsuarioEJBLocal;
 import uy.edu.fing.tsi2.model.Miembro;
+import uy.edu.fing.tsi2.model.SessionBeanJatrik;
 //import uy.edu.fing.tsi2.service.MemberRegistration;
 
 // The @Model stereotype is a convenience mechanism to make this a request-scoped bean that has an
@@ -41,6 +43,12 @@ public class MiembroController {
 	
 	@EJB
     UsuarioEJBLocal AdminUsuarios;
+	
+	@Inject
+	SessionBeanJatrik sessionBean;
+	
+	@EJB
+	private UsuarioEJBLocal usuarioEJB;
 
 	@Named
     @Produces
@@ -71,6 +79,8 @@ public class MiembroController {
         try {
         	
             AdminUsuarios.crearUsuario(newMember.getNombre(), newMember.getEmail(), newMember.getNick(), newMember.getPassword(),newMember.getNombreEquipo(), newMember.getPais());
+			sessionBean.setInfoUsuario(usuarioEJB.login(newMember.getNick(), newMember.getPassword()));
+			sessionBean.setLogueado(true);
             return "registroExitoso";
             
         } catch (Exception e) {
