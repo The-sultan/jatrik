@@ -25,8 +25,6 @@ public class EstrategiaHito extends EstrategiaSimulacion{
 		this.setPeso(0);
 	}
 	
-	private Logger log = Logger.getLogger(EstrategiaFinPartido.class);
-
 	@Override
 	public void manejarEvento(Partido partido) {
 
