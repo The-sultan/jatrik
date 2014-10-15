@@ -36,7 +36,7 @@ public class LoginController  {
 		return "";
 	}
 
-	public void loginDelay(ActionEvent actionEvent) {
+	public String loginDelay() {
 		RequestContext context = RequestContext.getCurrentInstance();
 		FacesMessage msg = null;
 		if (sessionBean.getNick() != null && sessionBean.getPassword() != null) {
@@ -46,23 +46,25 @@ public class LoginController  {
 				sessionBean.setLogueado(true);
 				msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenid@",
 						sessionBean.getNick());
+				return "equipo";
 			} catch (RuntimeException e) {
 				sessionBean.setLogueado(false);
 				msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error",
 						"Error en logueo");
+				return "index";
 			}
 			
 		} else {
 			sessionBean.setLogueado(false);
 			msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error",
 					"Credenciales no válidas");
+			return "index";
 		}
-		FacesContext.getCurrentInstance().addMessage(null, msg);
-		context.addCallbackParam("estaLogeado", sessionBean.isLogueado());
+		
 
 	}
 
-	public void logout() {
+	public String logout() {
 		FacesMessage msg = null;
 		if(sessionBean.isLogueado()){
 			/*
@@ -78,7 +80,7 @@ public class LoginController  {
 			msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "No esta logueado","");
 		}
 				
-		FacesContext.getCurrentInstance().addMessage(null, msg);
+		return "index";
 		 
 	}
 

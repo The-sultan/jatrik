@@ -67,7 +67,7 @@
 					<p>
 						<h:panelGrid columns="2">
 							<p:commandButton id="login"
-								actionListener="#{loginController.loginDelay}" value="Login"
+								action="#{loginController.loginDelay}" value="Login"
 								styleClass="register" update=":mensajes" ajax="false"/>
 							<!--<h:messages styleClass="messages" errorClass="invalid"
 								infoClass="valid" warnClass="warning" globalOnly="true" />-->
@@ -76,7 +76,7 @@
 				</h:form>
 				<h:form id="logoutForm" rendered="#{loginController.sessionBean.logueado}">
 					<p:commandButton id="logout" styleClass="register" value="Logout" ajax="false"
-						actionListener="#{loginController.logout}"
+						action="#{loginController.logout}"
 						style="margin-right:20px;" update=":mensajes">
 					</p:commandButton>
 				</h:form>
