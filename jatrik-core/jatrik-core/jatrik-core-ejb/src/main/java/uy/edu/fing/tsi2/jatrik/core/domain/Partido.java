@@ -2,6 +2,7 @@ package uy.edu.fing.tsi2.jatrik.core.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,6 +14,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -75,7 +78,23 @@ public class Partido implements Serializable {
 	@OneToOne(targetEntity = Formacion.class, cascade = CascadeType.ALL)
 	@JoinColumn(name="FORMACION_LOCAL_ID", referencedColumnName="ID")
 	private Formacion formacionLocal;
-
+	
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "JUGADORES_PARTIDO_AMARILLA", joinColumns = { @JoinColumn(name = "PARTIDO_ID") }, inverseJoinColumns = { @JoinColumn(name = "JUGADOR_ID") })
+	private Set<Jugador> jugadoresConTarjetaAmarilla;
+	
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "JUGADORES_PARTIDO_ROJA", joinColumns = { @JoinColumn(name = "PARTIDO_ID") }, inverseJoinColumns = { @JoinColumn(name = "JUGADOR_ID") })
+	private Set<Jugador> jugadoresExpulsados;
+	
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "JUGADORES_PARTIDO_LESIONADOS", joinColumns = { @JoinColumn(name = "PARTIDO_ID") }, inverseJoinColumns = { @JoinColumn(name = "JUGADOR_ID") })
+	private Set<Jugador> jugadoresLesionados;
+	
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "JUGADORES_PARTIDO_CAMBIADOS", joinColumns = { @JoinColumn(name = "PARTIDO_ID") }, inverseJoinColumns = { @JoinColumn(name = "JUGADOR_ID") })
+	private Set<Jugador> jugadoresCambiados;
+	
 	@OneToOne(targetEntity = Formacion.class, cascade = CascadeType.ALL)
 	@JoinColumn(name="FORMACION_VISITANTE_ID", referencedColumnName="ID")
 	private Formacion formacionVisitante;
@@ -225,6 +244,38 @@ public class Partido implements Serializable {
 
 	public void setMinuto(int minuto) {
 		this.minuto = minuto;
+	}
+
+	public Set<Jugador> getJugadoresConTarjetaAmarilla() {
+		return jugadoresConTarjetaAmarilla;
+	}
+
+	public void setJugadoresConTarjetaAmarilla(Set<Jugador> jugadoresConTarjetaAmarilla) {
+		this.jugadoresConTarjetaAmarilla = jugadoresConTarjetaAmarilla;
+	}
+
+	public Set<Jugador> getJugadoresExpulsados() {
+		return jugadoresExpulsados;
+	}
+
+	public void setJugadoresExpulsados(Set<Jugador> jugadoresExpulsados) {
+		this.jugadoresExpulsados = jugadoresExpulsados;
+	}
+
+	public Set<Jugador> getJugadoresLesionados() {
+		return jugadoresLesionados;
+	}
+
+	public void setJugadoresLesionados(Set<Jugador> jugadoresLesionados) {
+		this.jugadoresLesionados = jugadoresLesionados;
+	}
+
+	public Set<Jugador> getJugadoresCambiados() {
+		return jugadoresCambiados;
+	}
+
+	public void setJugadoresCambiados(Set<Jugador> jugadoresCambiados) {
+		this.jugadoresCambiados = jugadoresCambiados;
 	}
 	
 	

@@ -84,6 +84,7 @@ public class EJBManagerUsuarioBean implements IUsuarios {
 		//			equipos.update(equipo);
 					
 					Equipo equipo = new Equipo();
+					equipo.setNombre(nombreEquipo);
 					//BeanUtils.copyProperties(equipo, infoUsuario.getInfoEquipo());
 					
 					//Seteo el Usuario al Equipo

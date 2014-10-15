@@ -1,23 +1,23 @@
 ﻿-- Codiguera de Eventos
 INSERT INTO eventos(id, nombre, comentario) VALUES (1, 'LESION', null);
 INSERT INTO eventos(id, nombre, comentario) VALUES (2, 'JUGADA_GOL', null);
-INSERT INTO eventos(id, nombre, comentario) VALUES (3, 'GOL', 'Goooool de %s para %s |%s $d x $d $s |');
-INSERT INTO eventos(id, nombre, comentario) VALUES (4, 'TARJETA_AMARILLA', 'Tarjeta amarilla para el jugador %s');
-INSERT INTO eventos(id, nombre, comentario) VALUES (5, 'TARJETA_AMARILLA_DOBLE', 'Tarjeta amarilla para el jugador %s, esta es la segunda y se va');
-INSERT INTO eventos(id, nombre, comentario) VALUES (6, 'TARJETA_ROJA', 'Groseeero %s, expulsión directa');
-INSERT INTO eventos(id, nombre, comentario) VALUES (7, 'FALTA', 'Falta cometida sobre el jugador %s');
+INSERT INTO eventos(id, nombre, comentario) VALUES (3, 'GOL', 'Goooool de {0} de {1} |{2} {3} x {4} {5} |');
+INSERT INTO eventos(id, nombre, comentario) VALUES (4, 'TARJETA_AMARILLA', 'Tarjeta amarilla para el jugador {0} de {1}');
+INSERT INTO eventos(id, nombre, comentario) VALUES (5, 'TARJETA_AMARILLA_DOBLE', 'Tarjeta amarilla para el jugador {0} de {1}, esta es la segunda y se va');
+INSERT INTO eventos(id, nombre, comentario) VALUES (6, 'TARJETA_ROJA', 'Groseeero {0}, expulsión directa, {1} se queda con {2} jugadores');
+INSERT INTO eventos(id, nombre, comentario) VALUES (7, 'FALTA', 'Falta cometida sobre el jugador {0} de {1}');
 INSERT INTO eventos(id, nombre, comentario) VALUES (8, 'INICIO_PARTIDO', 'Comienza el partido');
 INSERT INTO eventos(id, nombre, comentario) VALUES (9, 'FIN_PRIMER_TIEMPO', 'Finaliza el primer tiempo');
 INSERT INTO eventos(id, nombre, comentario) VALUES (10,'INICIO_SEGUNDO_TIEMPO', 'Se inicia el segundo tiempo');
 INSERT INTO eventos(id, nombre, comentario) VALUES (11, 'FIN_PARTIDO', 'Ha finalizado el partido');
 
 -- Codiguera de comentarios
-INSERT INTO comentarios(id, evento_id, descripcion, nivel) VALUES (1,2,'%s escapa por la punta, centro al segundo palo, entran varios!', 1);
-INSERT INTO comentarios(id, evento_id, descripcion, nivel) VALUES (2,2,'%s levanta el corner, centro al medio, puede venir!', 2);
-INSERT INTO comentarios(id, evento_id, descripcion, nivel) VALUES (3,2,'Entra al area el jugador %s, burla a 1 defensa, 2, 3 remataaaa', 3);
-INSERT INTO comentarios(id, evento_id, descripcion, nivel) VALUES (4,7,'Falta cometida sobre el jugador %s', 1);
-INSERT INTO comentarios(id, evento_id, descripcion, nivel) VALUES (5,7,'Falta sobre el jugador %s. El cuerpo medico esta en campo pero el jugador se recupera', 2);
-INSERT INTO comentarios(id, evento_id, descripcion, nivel) VALUES (6,7,'Grosera falta sobre el jugador %s, el cual es retirado del campo de juego', 3);
+INSERT INTO comentarios(id, evento_id, descripcion, nivel) VALUES (1,2,'{0} escapa por la punta, centro al segundo palo, entran varios!', 1);
+INSERT INTO comentarios(id, evento_id, descripcion, nivel) VALUES (2,2,'{0} levanta el corner, centro al medio, puede venir!', 2);
+INSERT INTO comentarios(id, evento_id, descripcion, nivel) VALUES (3,2,'Entra al area el jugador {0}, burla a 1 defensa, 2, 3 remataaaa', 3);
+INSERT INTO comentarios(id, evento_id, descripcion, nivel) VALUES (4,7,'Falta cometida sobre el jugador {0} del equipo {1}' , 1);
+INSERT INTO comentarios(id, evento_id, descripcion, nivel) VALUES (5,7,'Falta sobre el jugador {0} del equipo {1}. El cuerpo medico esta en campo pero el jugador se recupera', 2);
+INSERT INTO comentarios(id, evento_id, descripcion, nivel) VALUES (6,7,'Grosera falta sobre el jugador {0} del equipo {1}, el cual es retirado del campo de juego', 3);
 
 
 

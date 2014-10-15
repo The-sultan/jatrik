@@ -13,8 +13,8 @@ import uy.edu.fing.tsi2.jatrik.core.domain.Jugador;
 import uy.edu.fing.tsi2.jatrik.core.domain.Partido;
 
 @Entity
-@DiscriminatorValue(value = "2")
-public class EventoPartidoJugadaDeGol extends EventoPartido {
+@DiscriminatorValue(value = "3")
+public class EventoPartidoFalta extends EventoPartido {
 
 	
 
@@ -23,41 +23,36 @@ public class EventoPartidoJugadaDeGol extends EventoPartido {
 	 */
 	private static final long serialVersionUID = -2667783613146078587L;
 
-	public EventoPartidoJugadaDeGol() {
-		super();
-	}
 
 
-
-	public EventoPartidoJugadaDeGol(Integer minuto, Partido partido, Evento evento, Long nivel, Jugador jugador, Equipo equipo) {
+	public EventoPartidoFalta(Integer minuto, Partido partido, Evento evento, Long nivel, Jugador jugador, Equipo equipo) {
 		super(minuto, partido, evento);
 		this.nivel = nivel;
 		this.jugador = jugador;
 		this.equipo = equipo;
 	}
 
-	@Column
-	private Long nivel;
-
+	@ManyToOne
+	private Comentario comentario;
+	
+	
 	@ManyToOne(targetEntity = Jugador.class)
 	@JoinColumn(name = "JUGADOR_ID", referencedColumnName = "ID")
 	private Jugador jugador;
-	
+
+
 	@ManyToOne(targetEntity = Equipo.class)
 	@JoinColumn(name = "EQUIPO_ID", referencedColumnName = "ID")
 	private Equipo equipo;
 	
-	@ManyToOne
-	private Comentario comentario;
+	@Column
+	private Long nivel;
 
-	public Long getNivel() {
-		return nivel;
-	}
-
-	public void setNivel(Long nivel) {
-		this.nivel = nivel;
-	}
 	
+	public EventoPartidoFalta(){
+		super();
+	}
+
 	public Jugador getJugador() {
 		return jugador;
 	}
@@ -82,12 +77,17 @@ public class EventoPartidoJugadaDeGol extends EventoPartido {
 		this.comentario = comentario;
 	}
 
-	
+	public Long getNivel() {
+		return nivel;
+	}
+
+	public void setNivel(Long nivel) {
+		this.nivel = nivel;
+	}
+
+	@Override
 	public String toString(){
-		return MessageFormat.format(this.getComentario().getDescripcion(), this.getJugador().getNombre());
+		return MessageFormat.format(this.getComentario().getDescripcion(),this.getJugador().getNombre(), this.getEquipo().getNombre());
 	}
 	
-	
-	
-
 }

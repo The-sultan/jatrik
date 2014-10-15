@@ -1,6 +1,6 @@
 package uy.edu.fing.tsi2.jatrik.core.domain.eventos;
 
-import javax.persistence.Column;
+import java.text.MessageFormat;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -12,7 +12,7 @@ import uy.edu.fing.tsi2.jatrik.core.domain.Partido;
 
 @Entity
 @DiscriminatorValue(value = "4")
-public class EventoPartidoTarjetaAmarillla extends EventoPartido {
+public class EventoPartidoTarjetaAmarilla extends EventoPartido {
 
 	
 
@@ -23,24 +23,24 @@ public class EventoPartidoTarjetaAmarillla extends EventoPartido {
 
 
 
-	public EventoPartidoTarjetaAmarillla(Integer minuto, Partido partido, Evento evento, Jugador jugador, Equipo equipo) {
+	public EventoPartidoTarjetaAmarilla(Integer minuto, Partido partido, Evento evento, Jugador jugador, Equipo equipo) {
 		super(minuto, partido, evento);
 		this.jugador = jugador;
 		this.equipo = equipo;
 	}
 
 	@ManyToOne(targetEntity = Jugador.class)
-	@JoinColumn(name = "JUGADOR_ID", insertable = false, updatable = false)
+	@JoinColumn(name = "JUGADOR_ID", referencedColumnName = "ID")
 	private Jugador jugador;
 
 
 	@ManyToOne(targetEntity = Equipo.class)
-	@JoinColumn(name = "EQUIPO_ID", insertable = false, updatable = false)
+	@JoinColumn(name = "EQUIPO_ID", referencedColumnName = "ID")
 	private Equipo equipo;
 
 	
 	
-	public EventoPartidoTarjetaAmarillla(){
+	public EventoPartidoTarjetaAmarilla(){
 		super();
 	}
 
@@ -59,6 +59,11 @@ public class EventoPartidoTarjetaAmarillla extends EventoPartido {
 
 	public void setEquipo(Equipo equipo) {
 		this.equipo = equipo;
+	}
+	
+	@Override
+	public String toString(){
+		return MessageFormat.format(this.getEvento().getComentario(), this.getJugador().getNombre(), this.getEquipo().getNombre());
 	}
 
 }

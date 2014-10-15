@@ -1,6 +1,6 @@
 package uy.edu.fing.tsi2.jatrik.core.domain.eventos;
 
-import javax.persistence.Column;
+import java.text.MessageFormat;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -26,15 +26,16 @@ public class EventoPartidoTarjetaRoja extends EventoPartido {
 	public EventoPartidoTarjetaRoja(Integer minuto, Partido partido, Evento evento, Jugador jugador, Equipo equipo) {
 		super(minuto, partido, evento);
 		this.jugador = jugador;
+		this.equipo = equipo;
 	}
 
 	@ManyToOne(targetEntity = Jugador.class)
-	@JoinColumn(name = "JUGADOR_ID", insertable = false, updatable = false)
+	@JoinColumn(name = "JUGADOR_ID", referencedColumnName = "ID")
 	private Jugador jugador;
 
 
 	@ManyToOne(targetEntity = Equipo.class)
-	@JoinColumn(name = "EQUIPO_ID", insertable = false, updatable = false)
+	@JoinColumn(name = "EQUIPO_ID", referencedColumnName = "ID")
 	private Equipo equipo;
 
 	
@@ -59,4 +60,8 @@ public class EventoPartidoTarjetaRoja extends EventoPartido {
 		this.equipo = equipo;
 	}
 
+	@Override
+	public String toString(){
+		return MessageFormat.format(this.getEvento().getComentario(), this.getJugador().getNombre(), this.getEquipo().getNombre());
+	}
 }
