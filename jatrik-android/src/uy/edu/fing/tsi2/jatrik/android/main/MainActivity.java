@@ -91,6 +91,25 @@ public class MainActivity extends ActionBarActivity {
 					// No se hace nada, lo puse para prevenir que explote, el usuario queda en null y no permite el acceso
 				}
 			}
+			if (usuarioValido != null){
+			    Intent intent = new Intent(MainActivity.this, HistorialPartidosActivity.class);
+			    intent.putExtra("User", usuarioValido.getNick());
+			    intent.putExtra("idEquipo", usuarioValido.getInfoEquipo().getId().toString());
+			    startActivity(intent);			
+			} else {
+	            AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(MainActivity.this);
+	            dlgAlert.setMessage("Usuario o contraseña inválida");
+	            dlgAlert.setTitle("Error");
+	            dlgAlert.setPositiveButton("OK", null);
+	            dlgAlert.setCancelable(true);
+	            dlgAlert.create().show();
+	            dlgAlert.setPositiveButton("Ok",
+	                new DialogInterface.OnClickListener() {
+	                    public void onClick(DialogInterface dialog, int which) {
+
+	                }
+	            });		
+			}
 			dialog.dismiss();
 		}
 
@@ -123,24 +142,5 @@ public class MainActivity extends ActionBarActivity {
 	
 	public void LogIn(View view) throws InterruptedException {
 		new ServiceLogin().execute();
-		if (usuarioValido != null){
-		    Intent intent = new Intent(this, HistorialPartidosActivity.class);
-		    intent.putExtra("User", usuarioValido.getNick());
-		    intent.putExtra("idEquipo", usuarioValido.getInfoEquipo().getId().toString());
-		    startActivity(intent);			
-		} else {
-            AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
-            dlgAlert.setMessage("Usuario o contraseña inválida");
-            dlgAlert.setTitle("Error");
-            dlgAlert.setPositiveButton("OK", null);
-            dlgAlert.setCancelable(true);
-            dlgAlert.create().show();
-            dlgAlert.setPositiveButton("Ok",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
-                }
-            });		
-		}
 	}
 }

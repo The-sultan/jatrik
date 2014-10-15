@@ -12,7 +12,8 @@
         android:id="@+id/PartidosView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp" >
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/textUltimos" >
     </ListView>
 
     <TextView
@@ -21,7 +22,20 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/PartidosView"
         android:layout_alignParentTop="true"
-        android:text="Large Text"
+        android:textColor="#00561D"
+        android:textStyle="bold"
+        android:text="Bienvenido"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/textUltimos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/PartidosView"
+        android:layout_below="@+id/textWelcome"
+        android:textColor="#00561D"
+        android:textStyle="bold"
+        android:text="Tus últimos partidos:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

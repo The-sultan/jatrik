@@ -8,36 +8,18 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.jatrik_android.MainActivity" >
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:text="Bienvenido a Jatrik!"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
+     <TextView
         android:id="@+id/textViewUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="18dp"
+        android:layout_alignLeft="@+id/imageLogo"
+        android:layout_below="@+id/imageLogo"
+        android:layout_marginTop="10dp"
+        android:textColor="#00561D"
+        android:textStyle="bold"
         android:text="Usuario:"
         android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <EditText
-        android:id="@+id/editTextUsuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textViewUsuario"
-        android:layout_alignBottom="@+id/textViewUsuario"
-        android:layout_marginLeft="16dp"
-        android:layout_toRightOf="@+id/textViewUsuario"
-        android:ems="10"
-        android:inputType="textPersonName" />
-
+        
     <TextView
         android:id="@+id/textViewClave"
         android:layout_width="wrap_content"
@@ -45,9 +27,22 @@
         android:layout_alignLeft="@+id/textViewUsuario"
         android:layout_below="@+id/editTextUsuario"
         android:layout_marginTop="20dp"
+        android:textColor="#00561D"
+        android:textStyle="bold"
         android:text="Clave:"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
+        <EditText
+            android:id="@+id/editTextUsuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textViewUsuario"
+            android:layout_alignBottom="@+id/textViewUsuario"
+            android:layout_alignRight="@+id/imageLogo"
+            android:layout_toRightOf="@+id/textViewUsuario"
+            android:ems="10"
+            android:inputType="textPersonName" />
+        
     <EditText
         android:id="@+id/editTextClave"
         android:layout_width="wrap_content"
@@ -55,19 +50,32 @@
         android:layout_alignBaseline="@+id/textViewClave"
         android:layout_alignBottom="@+id/textViewClave"
         android:layout_alignLeft="@+id/editTextUsuario"
+        android:layout_alignRight="@+id/buttonEntrar"
         android:ems="10"
         android:inputType="textPassword" >
 
     </EditText>
 
     <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/buttonEntrar"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
         android:layout_below="@+id/editTextClave"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="51dp"
+        android:background="#00561D"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
         android:onClick="LogIn"
         android:text="Entrar" />
+
+    <ImageView
+        android:id="@+id/imageLogo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/hattrick" />
 
 </RelativeLayout>
