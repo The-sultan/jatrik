@@ -15,17 +15,11 @@ import javax.servlet.http.HttpSession;
 import org.primefaces.context.RequestContext;
 
 import uy.edu.fing.tsi2.front.ejb.interfaces.UsuarioEJBLocal;
-import uy.edu.fing.tsi2.model.LoginDatos;
 import uy.edu.fing.tsi2.model.SessionBeanJatrik;
 
 
 @Model
 public class LoginController  {
-
-	@Named
-	@Produces
-	private LoginDatos datos;
-
 
 	@Inject
 	SessionBeanJatrik sessionBean;
@@ -35,9 +29,6 @@ public class LoginController  {
 
 	@PostConstruct
 	public void initDatos() {
-
-		datos = new LoginDatos();
-
 	}
 
 	public String login() throws Exception {
@@ -48,39 +39,41 @@ public class LoginController  {
 	public void loginDelay(ActionEvent actionEvent) {
 		RequestContext context = RequestContext.getCurrentInstance();
 		FacesMessage msg = null;
-		if (datos.getNick() != null && datos.getPassword() != null) {
+		if (sessionBean.getNick() != null && sessionBean.getPassword() != null) {
 			
 			try {
-				sessionBean.setInfo( usuarioEJB.login(datos.getNick(), datos.getPassword()));
-				datos.setLogueado(true);
+				sessionBean.setInfoUsuario(usuarioEJB.login(sessionBean.getNick(), sessionBean.getPassword()));
+				sessionBean.setLogueado(true);
 				msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenid@",
-						datos.getNick());
+						sessionBean.getNick());
 			} catch (RuntimeException e) {
-				datos.setLogueado(false);
+				sessionBean.setLogueado(false);
 				msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error",
 						"Error en logueo");
 			}
 			
 		} else {
-			datos.setLogueado(false);
+			sessionBean.setLogueado(false);
 			msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error",
 					"Credenciales no válidas");
 		}
 		FacesContext.getCurrentInstance().addMessage(null, msg);
-		context.addCallbackParam("estaLogeado", datos.isLogueado());
+		context.addCallbackParam("estaLogeado", sessionBean.isLogueado());
 
 	}
 
 	public void logout() {
 		FacesMessage msg = null;
-		if(datos.isLogueado()){
+		if(sessionBean.isLogueado()){
+			/*
 			HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
 					.getExternalContext().getSession(false);
-			session.invalidate();
-			datos = new LoginDatos();
-			
+			session.invalidate();*/
+			sessionBean.setLogueado(false);
+			sessionBean.setNick(null);
+			sessionBean.setPassword(null);
 			msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Hasta luego ",
-					datos.getNick());
+					sessionBean.getNick());
 		}else{
 			msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "No esta logueado","");
 		}
@@ -89,14 +82,12 @@ public class LoginController  {
 		 
 	}
 
-	public LoginDatos getDatos() {
-		return datos;
+	public SessionBeanJatrik getSessionBean() {
+		return sessionBean;
 	}
 
-	public void setDatos(LoginDatos datos) {
-		this.datos = datos;
+	public void setSessionBean(SessionBeanJatrik sessionBean) {
+		this.sessionBean = sessionBean;
 	}
-
-
 
 }

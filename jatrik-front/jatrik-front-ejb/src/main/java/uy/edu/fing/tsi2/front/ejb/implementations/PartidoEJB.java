@@ -20,4 +20,9 @@ public class PartidoEJB implements PartidoEJBLocal {
 		return jatrikCoreClient.getInfoPartido(idPartido);
 	}
 
+	@Override
+	public void simularPartido(long idPartido) {
+		jatrikCoreClient.simularPartido(idPartido);
+	}
+
 }

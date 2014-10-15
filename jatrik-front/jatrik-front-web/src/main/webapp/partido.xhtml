@@ -3,25 +3,42 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="content">
-		<h1>Visor de partido</h1>
+		<h1>Visor de partido</h1> <p:commandButton id="simular"
+								 actionListener="#{partidoController.simularPartido}" value="Simular Partido"
+								 styleClass="register" />
 
-		<h2>#{partidoDatos.equipoLocal} (#{partidoDatos.golesLocal}) VS
-			#{partidoDatos.equipoVisitante} (#{partidoDatos.golesVisitante})</h2>
+		
 
-		<h:panelGrid value="#{partidoDatos.eventos}" var="evt"
-			columnClasses="eventoPartido">
-			<h:column>
-					#{evt.tipo}
-			</h:column>
-			<h:column>
-					#{evt.minuto}
-			</h:column>
-			<h:column>
-					#{evt.tipo}
-			</h:column>
-		</h:panelGrid>
+			
+		
+		<h:form>
+			
+			<h:panelGroup layout="block" id="updatable" class="resultados">
+			<h2>#{partidoDatos.equipoLocal} #{partidoDatos.golesLocal} VS
+				#{partidoDatos.golesVisitante} #{partidoDatos.equipoVisitante} </h2>
+				
+				<h:dataTable  value="#{partidoDatos.eventos}" var="evt"
+							  columnClasses="eventoPartido" id="table" class="results-table">
+					<h:column>
+						<f:facet name="header">Minuto</f:facet>
+							#{evt.minuto}
+					</h:column>
+					<h:column>
+						<f:facet name="header">Evento</f:facet>
+							#{evt.tipo}
+					</h:column>
+					<h:column>
+						<f:facet name="header">Descripcion</f:facet>
+							#{evt.descripcion}
+					</h:column>
+				</h:dataTable>
+				<p:poll id="poll" interval="2" listener="#{partidoController.update}" update="updatable" stop="#{partidoController.stopPolling}"/>
+			</h:panelGroup>
+			
+		</h:form>
 
 	</ui:define>
 </ui:composition>

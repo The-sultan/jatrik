@@ -23,5 +23,7 @@ public interface RestClientEJBLocal {
 	public InfoPartido getInfoPartido(long idPartido)  throws RestClientException;
 
 	String postEntrenamiento(InfoEntrenamiento entrenamiento) throws RestClientException;
+	
+	void simularPartido(Long partidoId) throws RestClientException;
 
 }

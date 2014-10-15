@@ -1,11 +1,15 @@
 package uy.edu.fing.tsi2.jatrik.core.ejb.impl.beans;
 
 import java.util.Random;
+import java.util.logging.Level;
+import javax.ejb.Asynchronous;
 
 import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 
 import org.apache.log4j.Logger;
 
@@ -68,12 +72,21 @@ public class EJBManagerSimuladorBean implements ISimulacion {
 		}
 	
 	}
-
+	
+	@Override
+	@Asynchronous
 	public void simularPartido(Long idPartido){
 		Partido partido = partidosEJB.find(idPartido);
-		partidosEJB.inicializarPartido(partido);
-		for(int i=0; i<=90;i++){
-			simularEvento(partido);
+		if(partido.getEstado() == EnumEstadoPartido.PENDIENTE){
+			partidosEJB.inicializarPartido(partido);
+			for(int i=0; i<=90;i++){
+				try {
+					Thread.sleep(1000);
+					simularEvento(partido);
+				} catch (InterruptedException ex) {
+					java.util.logging.Logger.getLogger(EJBManagerSimuladorBean.class.getName()).log(Level.SEVERE, null, ex);
+				}
+			}
 		}
 		
 	}

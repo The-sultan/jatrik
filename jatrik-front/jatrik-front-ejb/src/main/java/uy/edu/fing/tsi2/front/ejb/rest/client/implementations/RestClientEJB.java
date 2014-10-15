@@ -105,6 +105,17 @@ public class RestClientEJB implements RestClientEJBLocal{
 			String Resultado = "";
 			return Resultado;
 		}
+	
+	}
+	
+	@Override
+	public void simularPartido(Long partidoId) throws RestClientException{
+		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory.makeSimularPartidoRequestBuilder(partidoId);
+		ClientResponse response = jerseyHttpRequestBuilder.get(ClientResponse.class);
+		if(response.getStatusInfo().getStatusCode() != ClientResponse.Status.OK.getStatusCode()){
+			throw new RestClientException("No se pudo realizar el Entrenamiento, status code: "
+					+ response.getStatusInfo().getReasonPhrase());			
+		}
 	}
 	
 }

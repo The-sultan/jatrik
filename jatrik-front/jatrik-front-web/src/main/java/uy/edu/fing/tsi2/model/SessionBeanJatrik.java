@@ -16,18 +16,46 @@ public class SessionBeanJatrik implements Serializable {
 
 	
 	private InfoUsuario infoUsuario;
+	private String nick;
+	private String password;
+	private boolean logueado;
 	
 	public SessionBeanJatrik() {
 		
 	}
 
-	public InfoUsuario getInfo() {
+	public boolean isLogueado() {
+		return logueado;
+	}
+
+	public void setLogueado(boolean logueado) {
+		this.logueado = logueado;
+	}
+
+	public String getNick() {
+		return nick;
+	}
+
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public InfoUsuario getInfoUsuario() {
 		return infoUsuario;
 	}
 
-	public void setInfo(InfoUsuario infoUsuario) {
+	public void setInfoUsuario(InfoUsuario infoUsuario) {
 		this.infoUsuario = infoUsuario;
 	}
 
+	
 
 }

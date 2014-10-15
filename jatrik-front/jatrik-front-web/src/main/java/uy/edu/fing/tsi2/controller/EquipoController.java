@@ -45,7 +45,7 @@ public class EquipoController  implements Serializable {
 		//cargar el equipo
 		
 		//TODO:Obtener el id del loginBean
-		InfoEquipo equipoTemp = equipoEJB.getEquipo(sessionBean.getInfo().getInfoEquipo().getId());
+		InfoEquipo equipoTemp = equipoEJB.getEquipo(sessionBean.getInfoUsuario().getInfoEquipo().getId());
 		equipoDatos = new Equipo();
 		List<InfoJugador> titulares = new ArrayList<>();
 		titulares.add(equipoTemp.getGolero());

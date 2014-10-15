@@ -7,11 +7,14 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="content">
-		<h1>Bienvenido a Jatrik!</h1>
+		<h1>Bienvenido #{loginController.sessionBean.nick} a Jatrik!</h1>
 
 		<div>
 			<p>El simulador de futbol de nivel mundial</p>
-			<h3>Registrate y conviertete en manager</h3>
+			<h:panelGroup layout="block" rendered="#{!loginController.sessionBean.logueado}">
+				<h3>Registrate y conviertete en manager</h3>
+			</h:panelGroup>
+			
 
 		</div>
 

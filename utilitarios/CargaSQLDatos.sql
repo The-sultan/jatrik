@@ -4,7 +4,7 @@ INSERT INTO eventos(id, nombre, comentario) VALUES (2, 'JUGADA_GOL', null);
 INSERT INTO eventos(id, nombre, comentario) VALUES (3, 'GOL', 'Goooool de {0} de {1} |{2} {3} x {4} {5} |');
 INSERT INTO eventos(id, nombre, comentario) VALUES (4, 'TARJETA_AMARILLA', 'Tarjeta amarilla para el jugador {0} de {1}');
 INSERT INTO eventos(id, nombre, comentario) VALUES (5, 'TARJETA_AMARILLA_DOBLE', 'Tarjeta amarilla para el jugador {0} de {1}, esta es la segunda y se va');
-INSERT INTO eventos(id, nombre, comentario) VALUES (6, 'TARJETA_ROJA', 'Groseeero {0}, expulsión directa, {1} se queda con {2} jugadores');
+INSERT INTO eventos(id, nombre, comentario) VALUES (6, 'TARJETA_ROJA', 'Groseeero {0} del equipo {1}, tarjeta roja');
 INSERT INTO eventos(id, nombre, comentario) VALUES (7, 'FALTA', 'Falta cometida sobre el jugador {0} de {1}');
 INSERT INTO eventos(id, nombre, comentario) VALUES (8, 'INICIO_PARTIDO', 'Comienza el partido');
 INSERT INTO eventos(id, nombre, comentario) VALUES (9, 'FIN_PRIMER_TIEMPO', 'Finaliza el primer tiempo');
