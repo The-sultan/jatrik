@@ -1,12 +1,9 @@
 package uy.edu.fing.tsi2.jatrik.android.extras;
 
-import java.io.Serializable;
-
-
-
 /**
  * @author Rafael
  */
+
 public class InfoUsuario{
 
 	private Long id;    

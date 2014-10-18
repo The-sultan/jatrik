@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.example.jatrik_android;
+package uy.edu.fing.tsi2.jatrik.android.main;
 
 public final class R {
     public static final class anim {
@@ -1506,26 +1506,26 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #ActionBar_background com.example.jatrik_android:background}</code></td><td> Specifies a background drawable for the action bar.</td></tr>
-           <tr><td><code>{@link #ActionBar_backgroundSplit com.example.jatrik_android:backgroundSplit}</code></td><td> Specifies a background drawable for the bottom component of a split action bar.</td></tr>
-           <tr><td><code>{@link #ActionBar_backgroundStacked com.example.jatrik_android:backgroundStacked}</code></td><td> Specifies a background drawable for a second stacked row of the action bar.</td></tr>
-           <tr><td><code>{@link #ActionBar_customNavigationLayout com.example.jatrik_android:customNavigationLayout}</code></td><td> Specifies a layout for custom navigation.</td></tr>
-           <tr><td><code>{@link #ActionBar_displayOptions com.example.jatrik_android:displayOptions}</code></td><td> Options affecting how the action bar is displayed.</td></tr>
-           <tr><td><code>{@link #ActionBar_divider com.example.jatrik_android:divider}</code></td><td> Specifies the drawable used for item dividers.</td></tr>
-           <tr><td><code>{@link #ActionBar_height com.example.jatrik_android:height}</code></td><td> Specifies a fixed height.</td></tr>
-           <tr><td><code>{@link #ActionBar_homeLayout com.example.jatrik_android:homeLayout}</code></td><td> Specifies a layout to use for the "home" section of the action bar.</td></tr>
-           <tr><td><code>{@link #ActionBar_icon com.example.jatrik_android:icon}</code></td><td> Specifies the drawable used for the application icon.</td></tr>
-           <tr><td><code>{@link #ActionBar_indeterminateProgressStyle com.example.jatrik_android:indeterminateProgressStyle}</code></td><td> Specifies a style resource to use for an indeterminate progress spinner.</td></tr>
-           <tr><td><code>{@link #ActionBar_itemPadding com.example.jatrik_android:itemPadding}</code></td><td> Specifies padding that should be applied to the left and right sides of
+           <tr><td><code>{@link #ActionBar_background uy.edu.fing.tsi2.jatrik.android.main:background}</code></td><td> Specifies a background drawable for the action bar.</td></tr>
+           <tr><td><code>{@link #ActionBar_backgroundSplit uy.edu.fing.tsi2.jatrik.android.main:backgroundSplit}</code></td><td> Specifies a background drawable for the bottom component of a split action bar.</td></tr>
+           <tr><td><code>{@link #ActionBar_backgroundStacked uy.edu.fing.tsi2.jatrik.android.main:backgroundStacked}</code></td><td> Specifies a background drawable for a second stacked row of the action bar.</td></tr>
+           <tr><td><code>{@link #ActionBar_customNavigationLayout uy.edu.fing.tsi2.jatrik.android.main:customNavigationLayout}</code></td><td> Specifies a layout for custom navigation.</td></tr>
+           <tr><td><code>{@link #ActionBar_displayOptions uy.edu.fing.tsi2.jatrik.android.main:displayOptions}</code></td><td> Options affecting how the action bar is displayed.</td></tr>
+           <tr><td><code>{@link #ActionBar_divider uy.edu.fing.tsi2.jatrik.android.main:divider}</code></td><td> Specifies the drawable used for item dividers.</td></tr>
+           <tr><td><code>{@link #ActionBar_height uy.edu.fing.tsi2.jatrik.android.main:height}</code></td><td> Specifies a fixed height.</td></tr>
+           <tr><td><code>{@link #ActionBar_homeLayout uy.edu.fing.tsi2.jatrik.android.main:homeLayout}</code></td><td> Specifies a layout to use for the "home" section of the action bar.</td></tr>
+           <tr><td><code>{@link #ActionBar_icon uy.edu.fing.tsi2.jatrik.android.main:icon}</code></td><td> Specifies the drawable used for the application icon.</td></tr>
+           <tr><td><code>{@link #ActionBar_indeterminateProgressStyle uy.edu.fing.tsi2.jatrik.android.main:indeterminateProgressStyle}</code></td><td> Specifies a style resource to use for an indeterminate progress spinner.</td></tr>
+           <tr><td><code>{@link #ActionBar_itemPadding uy.edu.fing.tsi2.jatrik.android.main:itemPadding}</code></td><td> Specifies padding that should be applied to the left and right sides of
              system-provided items in the bar.</td></tr>
-           <tr><td><code>{@link #ActionBar_logo com.example.jatrik_android:logo}</code></td><td> Specifies the drawable used for the application logo.</td></tr>
-           <tr><td><code>{@link #ActionBar_navigationMode com.example.jatrik_android:navigationMode}</code></td><td> The type of navigation to use.</td></tr>
-           <tr><td><code>{@link #ActionBar_progressBarPadding com.example.jatrik_android:progressBarPadding}</code></td><td> Specifies the horizontal padding on either end for an embedded progress bar.</td></tr>
-           <tr><td><code>{@link #ActionBar_progressBarStyle com.example.jatrik_android:progressBarStyle}</code></td><td> Specifies a style resource to use for an embedded progress bar.</td></tr>
-           <tr><td><code>{@link #ActionBar_subtitle com.example.jatrik_android:subtitle}</code></td><td> Specifies subtitle text used for navigationMode="normal" </td></tr>
-           <tr><td><code>{@link #ActionBar_subtitleTextStyle com.example.jatrik_android:subtitleTextStyle}</code></td><td> Specifies a style to use for subtitle text.</td></tr>
-           <tr><td><code>{@link #ActionBar_title com.example.jatrik_android:title}</code></td><td> Specifies title text used for navigationMode="normal" </td></tr>
-           <tr><td><code>{@link #ActionBar_titleTextStyle com.example.jatrik_android:titleTextStyle}</code></td><td> Specifies a style to use for title text.</td></tr>
+           <tr><td><code>{@link #ActionBar_logo uy.edu.fing.tsi2.jatrik.android.main:logo}</code></td><td> Specifies the drawable used for the application logo.</td></tr>
+           <tr><td><code>{@link #ActionBar_navigationMode uy.edu.fing.tsi2.jatrik.android.main:navigationMode}</code></td><td> The type of navigation to use.</td></tr>
+           <tr><td><code>{@link #ActionBar_progressBarPadding uy.edu.fing.tsi2.jatrik.android.main:progressBarPadding}</code></td><td> Specifies the horizontal padding on either end for an embedded progress bar.</td></tr>
+           <tr><td><code>{@link #ActionBar_progressBarStyle uy.edu.fing.tsi2.jatrik.android.main:progressBarStyle}</code></td><td> Specifies a style resource to use for an embedded progress bar.</td></tr>
+           <tr><td><code>{@link #ActionBar_subtitle uy.edu.fing.tsi2.jatrik.android.main:subtitle}</code></td><td> Specifies subtitle text used for navigationMode="normal" </td></tr>
+           <tr><td><code>{@link #ActionBar_subtitleTextStyle uy.edu.fing.tsi2.jatrik.android.main:subtitleTextStyle}</code></td><td> Specifies a style to use for subtitle text.</td></tr>
+           <tr><td><code>{@link #ActionBar_title uy.edu.fing.tsi2.jatrik.android.main:title}</code></td><td> Specifies title text used for navigationMode="normal" </td></tr>
+           <tr><td><code>{@link #ActionBar_titleTextStyle uy.edu.fing.tsi2.jatrik.android.main:titleTextStyle}</code></td><td> Specifies a style to use for title text.</td></tr>
            </table>
            @see #ActionBar_background
            @see #ActionBar_backgroundSplit
@@ -1563,7 +1563,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:background
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:background
         */
         public static final int ActionBar_background = 10;
         /**
@@ -1577,7 +1577,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:backgroundSplit
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:backgroundSplit
         */
         public static final int ActionBar_backgroundSplit = 12;
         /**
@@ -1591,7 +1591,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:backgroundStacked
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:backgroundStacked
         */
         public static final int ActionBar_backgroundStacked = 11;
         /**
@@ -1603,7 +1603,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:customNavigationLayout
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:customNavigationLayout
         */
         public static final int ActionBar_customNavigationLayout = 13;
         /**
@@ -1626,7 +1626,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <tr><td><code>disableHome</code></td><td>0x20</td><td></td></tr>
 </table>
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:displayOptions
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:displayOptions
         */
         public static final int ActionBar_displayOptions = 3;
         /**
@@ -1638,7 +1638,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:divider
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:divider
         */
         public static final int ActionBar_divider = 9;
         /**
@@ -1656,7 +1656,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:height
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:height
         */
         public static final int ActionBar_height = 1;
         /**
@@ -1668,7 +1668,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:homeLayout
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:homeLayout
         */
         public static final int ActionBar_homeLayout = 14;
         /**
@@ -1680,7 +1680,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:icon
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:icon
         */
         public static final int ActionBar_icon = 7;
         /**
@@ -1692,7 +1692,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:indeterminateProgressStyle
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:indeterminateProgressStyle
         */
         public static final int ActionBar_indeterminateProgressStyle = 16;
         /**
@@ -1711,7 +1711,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:itemPadding
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:itemPadding
         */
         public static final int ActionBar_itemPadding = 18;
         /**
@@ -1723,7 +1723,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:logo
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:logo
         */
         public static final int ActionBar_logo = 8;
         /**
@@ -1743,7 +1743,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <tr><td><code>tabMode</code></td><td>2</td><td> The action bar will use a series of horizontal tabs for navigation. </td></tr>
 </table>
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:navigationMode
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:navigationMode
         */
         public static final int ActionBar_navigationMode = 2;
         /**
@@ -1761,7 +1761,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:progressBarPadding
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:progressBarPadding
         */
         public static final int ActionBar_progressBarPadding = 17;
         /**
@@ -1773,7 +1773,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:progressBarStyle
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:progressBarStyle
         */
         public static final int ActionBar_progressBarStyle = 15;
         /**
@@ -1789,7 +1789,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:subtitle
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:subtitle
         */
         public static final int ActionBar_subtitle = 4;
         /**
@@ -1801,7 +1801,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:subtitleTextStyle
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:subtitleTextStyle
         */
         public static final int ActionBar_subtitleTextStyle = 6;
         /**
@@ -1817,7 +1817,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:title
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:title
         */
         public static final int ActionBar_title = 0;
         /**
@@ -1829,7 +1829,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:titleTextStyle
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:titleTextStyle
         */
         public static final int ActionBar_titleTextStyle = 5;
         /**  Valid LayoutParams for views placed in the action bar as custom views. 
@@ -1860,17 +1860,17 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #ActionBarWindow_windowActionBar com.example.jatrik_android:windowActionBar}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBarWindow_windowActionBarOverlay com.example.jatrik_android:windowActionBarOverlay}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBarWindow_windowFixedHeightMajor com.example.jatrik_android:windowFixedHeightMajor}</code></td><td> A fixed height for the window along the major axis of the screen,
+           <tr><td><code>{@link #ActionBarWindow_windowActionBar uy.edu.fing.tsi2.jatrik.android.main:windowActionBar}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBarWindow_windowActionBarOverlay uy.edu.fing.tsi2.jatrik.android.main:windowActionBarOverlay}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBarWindow_windowFixedHeightMajor uy.edu.fing.tsi2.jatrik.android.main:windowFixedHeightMajor}</code></td><td> A fixed height for the window along the major axis of the screen,
              that is, when in portrait.</td></tr>
-           <tr><td><code>{@link #ActionBarWindow_windowFixedHeightMinor com.example.jatrik_android:windowFixedHeightMinor}</code></td><td> A fixed height for the window along the minor axis of the screen,
+           <tr><td><code>{@link #ActionBarWindow_windowFixedHeightMinor uy.edu.fing.tsi2.jatrik.android.main:windowFixedHeightMinor}</code></td><td> A fixed height for the window along the minor axis of the screen,
              that is, when in landscape.</td></tr>
-           <tr><td><code>{@link #ActionBarWindow_windowFixedWidthMajor com.example.jatrik_android:windowFixedWidthMajor}</code></td><td> A fixed width for the window along the major axis of the screen,
+           <tr><td><code>{@link #ActionBarWindow_windowFixedWidthMajor uy.edu.fing.tsi2.jatrik.android.main:windowFixedWidthMajor}</code></td><td> A fixed width for the window along the major axis of the screen,
              that is, when in landscape.</td></tr>
-           <tr><td><code>{@link #ActionBarWindow_windowFixedWidthMinor com.example.jatrik_android:windowFixedWidthMinor}</code></td><td> A fixed width for the window along the minor axis of the screen,
+           <tr><td><code>{@link #ActionBarWindow_windowFixedWidthMinor uy.edu.fing.tsi2.jatrik.android.main:windowFixedWidthMinor}</code></td><td> A fixed width for the window along the minor axis of the screen,
              that is, when in portrait.</td></tr>
-           <tr><td><code>{@link #ActionBarWindow_windowSplitActionBar com.example.jatrik_android:windowSplitActionBar}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBarWindow_windowSplitActionBar uy.edu.fing.tsi2.jatrik.android.main:windowSplitActionBar}</code></td><td></td></tr>
            </table>
            @see #ActionBarWindow_windowActionBar
            @see #ActionBarWindow_windowActionBarOverlay
@@ -1885,7 +1885,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
             0x7f010004, 0x7f010005, 0x7f010006
         };
         /**
-          <p>This symbol is the offset where the {@link com.example.jatrik_android.R.attr#windowActionBar}
+          <p>This symbol is the offset where the {@link uy.edu.fing.tsi2.jatrik.android.main.R.attr#windowActionBar}
           attribute's value can be found in the {@link #ActionBarWindow} array.
 
 
@@ -1895,11 +1895,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.example.jatrik_android:windowActionBar
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:windowActionBar
         */
         public static final int ActionBarWindow_windowActionBar = 0;
         /**
-          <p>This symbol is the offset where the {@link com.example.jatrik_android.R.attr#windowActionBarOverlay}
+          <p>This symbol is the offset where the {@link uy.edu.fing.tsi2.jatrik.android.main.R.attr#windowActionBarOverlay}
           attribute's value can be found in the {@link #ActionBarWindow} array.
 
 
@@ -1909,7 +1909,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.example.jatrik_android:windowActionBarOverlay
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:windowActionBarOverlay
         */
         public static final int ActionBarWindow_windowActionBarOverlay = 1;
         /**
@@ -1932,7 +1932,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:windowFixedHeightMajor
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:windowFixedHeightMajor
         */
         public static final int ActionBarWindow_windowFixedHeightMajor = 6;
         /**
@@ -1955,7 +1955,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:windowFixedHeightMinor
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:windowFixedHeightMinor
         */
         public static final int ActionBarWindow_windowFixedHeightMinor = 4;
         /**
@@ -1978,7 +1978,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:windowFixedWidthMajor
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:windowFixedWidthMajor
         */
         public static final int ActionBarWindow_windowFixedWidthMajor = 3;
         /**
@@ -2001,11 +2001,11 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:windowFixedWidthMinor
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:windowFixedWidthMinor
         */
         public static final int ActionBarWindow_windowFixedWidthMinor = 5;
         /**
-          <p>This symbol is the offset where the {@link com.example.jatrik_android.R.attr#windowSplitActionBar}
+          <p>This symbol is the offset where the {@link uy.edu.fing.tsi2.jatrik.android.main.R.attr#windowSplitActionBar}
           attribute's value can be found in the {@link #ActionBarWindow} array.
 
 
@@ -2015,7 +2015,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.example.jatrik_android:windowSplitActionBar
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:windowSplitActionBar
         */
         public static final int ActionBarWindow_windowSplitActionBar = 2;
         /** Attributes that can be used with a ActionMenuItemView.
@@ -2048,11 +2048,11 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #ActionMode_background com.example.jatrik_android:background}</code></td><td> Specifies a background for the action mode bar.</td></tr>
-           <tr><td><code>{@link #ActionMode_backgroundSplit com.example.jatrik_android:backgroundSplit}</code></td><td> Specifies a background for the split action mode bar.</td></tr>
-           <tr><td><code>{@link #ActionMode_height com.example.jatrik_android:height}</code></td><td> Specifies a fixed height for the action mode bar.</td></tr>
-           <tr><td><code>{@link #ActionMode_subtitleTextStyle com.example.jatrik_android:subtitleTextStyle}</code></td><td> Specifies a style to use for subtitle text.</td></tr>
-           <tr><td><code>{@link #ActionMode_titleTextStyle com.example.jatrik_android:titleTextStyle}</code></td><td> Specifies a style to use for title text.</td></tr>
+           <tr><td><code>{@link #ActionMode_background uy.edu.fing.tsi2.jatrik.android.main:background}</code></td><td> Specifies a background for the action mode bar.</td></tr>
+           <tr><td><code>{@link #ActionMode_backgroundSplit uy.edu.fing.tsi2.jatrik.android.main:backgroundSplit}</code></td><td> Specifies a background for the split action mode bar.</td></tr>
+           <tr><td><code>{@link #ActionMode_height uy.edu.fing.tsi2.jatrik.android.main:height}</code></td><td> Specifies a fixed height for the action mode bar.</td></tr>
+           <tr><td><code>{@link #ActionMode_subtitleTextStyle uy.edu.fing.tsi2.jatrik.android.main:subtitleTextStyle}</code></td><td> Specifies a style to use for subtitle text.</td></tr>
+           <tr><td><code>{@link #ActionMode_titleTextStyle uy.edu.fing.tsi2.jatrik.android.main:titleTextStyle}</code></td><td> Specifies a style to use for title text.</td></tr>
            </table>
            @see #ActionMode_background
            @see #ActionMode_backgroundSplit
@@ -2073,7 +2073,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:background
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:background
         */
         public static final int ActionMode_background = 3;
         /**
@@ -2087,7 +2087,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:backgroundSplit
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:backgroundSplit
         */
         public static final int ActionMode_backgroundSplit = 4;
         /**
@@ -2105,7 +2105,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:height
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:height
         */
         public static final int ActionMode_height = 0;
         /**
@@ -2117,7 +2117,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:subtitleTextStyle
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:subtitleTextStyle
         */
         public static final int ActionMode_subtitleTextStyle = 2;
         /**
@@ -2129,7 +2129,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:titleTextStyle
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:titleTextStyle
         */
         public static final int ActionMode_titleTextStyle = 1;
         /**  Attrbitutes for a ActivityChooserView. 
@@ -2138,8 +2138,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #ActivityChooserView_expandActivityOverflowButtonDrawable com.example.jatrik_android:expandActivityOverflowButtonDrawable}</code></td><td> The drawable to show in the button for expanding the activities overflow popup.</td></tr>
-           <tr><td><code>{@link #ActivityChooserView_initialActivityCount com.example.jatrik_android:initialActivityCount}</code></td><td> The maximal number of items initially shown in the activity list.</td></tr>
+           <tr><td><code>{@link #ActivityChooserView_expandActivityOverflowButtonDrawable uy.edu.fing.tsi2.jatrik.android.main:expandActivityOverflowButtonDrawable}</code></td><td> The drawable to show in the button for expanding the activities overflow popup.</td></tr>
+           <tr><td><code>{@link #ActivityChooserView_initialActivityCount uy.edu.fing.tsi2.jatrik.android.main:initialActivityCount}</code></td><td> The maximal number of items initially shown in the activity list.</td></tr>
            </table>
            @see #ActivityChooserView_expandActivityOverflowButtonDrawable
            @see #ActivityChooserView_initialActivityCount
@@ -2161,7 +2161,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:expandActivityOverflowButtonDrawable
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:expandActivityOverflowButtonDrawable
         */
         public static final int ActivityChooserView_expandActivityOverflowButtonDrawable = 1;
         /**
@@ -2177,7 +2177,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:initialActivityCount
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:initialActivityCount
         */
         public static final int ActivityChooserView_initialActivityCount = 0;
         /** Attributes that can be used with a CompatTextView.
@@ -2186,7 +2186,7 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #CompatTextView_textAllCaps com.example.jatrik_android:textAllCaps}</code></td><td> Present the text in ALL CAPS.</td></tr>
+           <tr><td><code>{@link #CompatTextView_textAllCaps uy.edu.fing.tsi2.jatrik.android.main:textAllCaps}</code></td><td> Present the text in ALL CAPS.</td></tr>
            </table>
            @see #CompatTextView_textAllCaps
          */
@@ -2203,7 +2203,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a boolean value, either "<code>true</code>" or "<code>false</code>".
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:textAllCaps
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:textAllCaps
         */
         public static final int CompatTextView_textAllCaps = 0;
         /** Attributes that can be used with a LinearLayoutICS.
@@ -2212,9 +2212,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #LinearLayoutICS_divider com.example.jatrik_android:divider}</code></td><td> Drawable to use as a vertical divider between buttons.</td></tr>
-           <tr><td><code>{@link #LinearLayoutICS_dividerPadding com.example.jatrik_android:dividerPadding}</code></td><td> Size of padding on either end of a divider.</td></tr>
-           <tr><td><code>{@link #LinearLayoutICS_showDividers com.example.jatrik_android:showDividers}</code></td><td> Setting for which dividers to show.</td></tr>
+           <tr><td><code>{@link #LinearLayoutICS_divider uy.edu.fing.tsi2.jatrik.android.main:divider}</code></td><td> Drawable to use as a vertical divider between buttons.</td></tr>
+           <tr><td><code>{@link #LinearLayoutICS_dividerPadding uy.edu.fing.tsi2.jatrik.android.main:dividerPadding}</code></td><td> Size of padding on either end of a divider.</td></tr>
+           <tr><td><code>{@link #LinearLayoutICS_showDividers uy.edu.fing.tsi2.jatrik.android.main:showDividers}</code></td><td> Setting for which dividers to show.</td></tr>
            </table>
            @see #LinearLayoutICS_divider
            @see #LinearLayoutICS_dividerPadding
@@ -2232,7 +2232,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:divider
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:divider
         */
         public static final int LinearLayoutICS_divider = 0;
         /**
@@ -2250,7 +2250,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:dividerPadding
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:dividerPadding
         */
         public static final int LinearLayoutICS_dividerPadding = 2;
         /**
@@ -2271,7 +2271,7 @@ containing a value of this type.
 <tr><td><code>end</code></td><td>4</td><td></td></tr>
 </table>
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:showDividers
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:showDividers
         */
         public static final int LinearLayoutICS_showDividers = 1;
         /**  Base attributes that are available to all groups. 
@@ -2360,10 +2360,10 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #MenuItem_actionLayout com.example.jatrik_android:actionLayout}</code></td><td> An optional layout to be used as an action view.</td></tr>
-           <tr><td><code>{@link #MenuItem_actionProviderClass com.example.jatrik_android:actionProviderClass}</code></td><td> The name of an optional ActionProvider class to instantiate an action view
+           <tr><td><code>{@link #MenuItem_actionLayout uy.edu.fing.tsi2.jatrik.android.main:actionLayout}</code></td><td> An optional layout to be used as an action view.</td></tr>
+           <tr><td><code>{@link #MenuItem_actionProviderClass uy.edu.fing.tsi2.jatrik.android.main:actionProviderClass}</code></td><td> The name of an optional ActionProvider class to instantiate an action view
              and perform operations such as default action for that menu item.</td></tr>
-           <tr><td><code>{@link #MenuItem_actionViewClass com.example.jatrik_android:actionViewClass}</code></td><td> The name of an optional View class to instantiate and use as an
+           <tr><td><code>{@link #MenuItem_actionViewClass uy.edu.fing.tsi2.jatrik.android.main:actionViewClass}</code></td><td> The name of an optional View class to instantiate and use as an
              action view.</td></tr>
            <tr><td><code>{@link #MenuItem_android_alphabeticShortcut android:alphabeticShortcut}</code></td><td> The alphabetic shortcut key.</td></tr>
            <tr><td><code>{@link #MenuItem_android_checkable android:checkable}</code></td><td> Whether the item is capable of displaying a check mark.</td></tr>
@@ -2379,7 +2379,7 @@ containing a value of this type.
            <tr><td><code>{@link #MenuItem_android_title android:title}</code></td><td> The title associated with the item.</td></tr>
            <tr><td><code>{@link #MenuItem_android_titleCondensed android:titleCondensed}</code></td><td> The condensed title associated with the item.</td></tr>
            <tr><td><code>{@link #MenuItem_android_visible android:visible}</code></td><td> Whether the item is shown/visible.</td></tr>
-           <tr><td><code>{@link #MenuItem_showAsAction com.example.jatrik_android:showAsAction}</code></td><td> How this item should display in the Action Bar, if present.</td></tr>
+           <tr><td><code>{@link #MenuItem_showAsAction uy.edu.fing.tsi2.jatrik.android.main:showAsAction}</code></td><td> How this item should display in the Action Bar, if present.</td></tr>
            </table>
            @see #MenuItem_actionLayout
            @see #MenuItem_actionProviderClass
@@ -2417,7 +2417,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:actionLayout
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:actionLayout
         */
         public static final int MenuItem_actionLayout = 14;
         /**
@@ -2436,7 +2436,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:actionProviderClass
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:actionProviderClass
         */
         public static final int MenuItem_actionProviderClass = 16;
         /**
@@ -2454,7 +2454,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:actionViewClass
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:actionViewClass
         */
         public static final int MenuItem_actionViewClass = 15;
         /**
@@ -2610,7 +2610,7 @@ containing a value of this type.
                  larger segment of its container. </td></tr>
 </table>
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:showAsAction
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:showAsAction
         */
         public static final int MenuItem_showAsAction = 13;
         /** Attributes that can be used with a MenuView.
@@ -2721,8 +2721,8 @@ containing a value of this type.
            <tr><td><code>{@link #SearchView_android_imeOptions android:imeOptions}</code></td><td> The IME options to set on the query text field.</td></tr>
            <tr><td><code>{@link #SearchView_android_inputType android:inputType}</code></td><td> The input type to set on the query text field.</td></tr>
            <tr><td><code>{@link #SearchView_android_maxWidth android:maxWidth}</code></td><td> An optional maximum width of the SearchView.</td></tr>
-           <tr><td><code>{@link #SearchView_iconifiedByDefault com.example.jatrik_android:iconifiedByDefault}</code></td><td> The default state of the SearchView.</td></tr>
-           <tr><td><code>{@link #SearchView_queryHint com.example.jatrik_android:queryHint}</code></td><td> An optional query hint string to be displayed in the empty query field.</td></tr>
+           <tr><td><code>{@link #SearchView_iconifiedByDefault uy.edu.fing.tsi2.jatrik.android.main:iconifiedByDefault}</code></td><td> The default state of the SearchView.</td></tr>
+           <tr><td><code>{@link #SearchView_queryHint uy.edu.fing.tsi2.jatrik.android.main:queryHint}</code></td><td> An optional query hint string to be displayed in the empty query field.</td></tr>
            </table>
            @see #SearchView_android_imeOptions
            @see #SearchView_android_inputType
@@ -2775,7 +2775,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:iconifiedByDefault
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:iconifiedByDefault
         */
         public static final int SearchView_iconifiedByDefault = 3;
         /**
@@ -2791,7 +2791,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:queryHint
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:queryHint
         */
         public static final int SearchView_queryHint = 4;
         /** Attributes that can be used with a Spinner.
@@ -2808,12 +2808,12 @@ containing a value of this type.
            <tr><td><code>{@link #Spinner_android_dropDownWidth android:dropDownWidth}</code></td><td> Width of the dropdown in spinnerMode="dropdown".</td></tr>
            <tr><td><code>{@link #Spinner_android_gravity android:gravity}</code></td><td> Gravity setting for positioning the currently selected item.</td></tr>
            <tr><td><code>{@link #Spinner_android_popupBackground android:popupBackground}</code></td><td> Background drawable to use for the dropdown in spinnerMode="dropdown".</td></tr>
-           <tr><td><code>{@link #Spinner_disableChildrenWhenDisabled com.example.jatrik_android:disableChildrenWhenDisabled}</code></td><td> Whether this spinner should mark child views as enabled/disabled when
+           <tr><td><code>{@link #Spinner_disableChildrenWhenDisabled uy.edu.fing.tsi2.jatrik.android.main:disableChildrenWhenDisabled}</code></td><td> Whether this spinner should mark child views as enabled/disabled when
              the spinner itself is enabled/disabled.</td></tr>
-           <tr><td><code>{@link #Spinner_popupPromptView com.example.jatrik_android:popupPromptView}</code></td><td> Reference to a layout to use for displaying a prompt in the dropdown for
+           <tr><td><code>{@link #Spinner_popupPromptView uy.edu.fing.tsi2.jatrik.android.main:popupPromptView}</code></td><td> Reference to a layout to use for displaying a prompt in the dropdown for
              spinnerMode="dropdown".</td></tr>
-           <tr><td><code>{@link #Spinner_prompt com.example.jatrik_android:prompt}</code></td><td> The prompt to display when the spinner's dialog is shown.</td></tr>
-           <tr><td><code>{@link #Spinner_spinnerMode com.example.jatrik_android:spinnerMode}</code></td><td> Display mode for spinner options.</td></tr>
+           <tr><td><code>{@link #Spinner_prompt uy.edu.fing.tsi2.jatrik.android.main:prompt}</code></td><td> The prompt to display when the spinner's dialog is shown.</td></tr>
+           <tr><td><code>{@link #Spinner_spinnerMode uy.edu.fing.tsi2.jatrik.android.main:spinnerMode}</code></td><td> Display mode for spinner options.</td></tr>
            </table>
            @see #Spinner_android_dropDownHorizontalOffset
            @see #Spinner_android_dropDownSelector
@@ -2901,7 +2901,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:disableChildrenWhenDisabled
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:disableChildrenWhenDisabled
         */
         public static final int Spinner_disableChildrenWhenDisabled = 9;
         /**
@@ -2915,7 +2915,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:popupPromptView
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:popupPromptView
         */
         public static final int Spinner_popupPromptView = 8;
         /**
@@ -2927,7 +2927,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:prompt
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:prompt
         */
         public static final int Spinner_prompt = 6;
         /**
@@ -2947,7 +2947,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
                  anchored to the spinner widget itself. </td></tr>
 </table>
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:spinnerMode
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:spinnerMode
         */
         public static final int Spinner_spinnerMode = 7;
         /**  These are the standard attributes that make up a complete theme. 
@@ -2956,12 +2956,12 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #Theme_actionDropDownStyle com.example.jatrik_android:actionDropDownStyle}</code></td><td> Default ActionBar dropdown style.</td></tr>
-           <tr><td><code>{@link #Theme_dropdownListPreferredItemHeight com.example.jatrik_android:dropdownListPreferredItemHeight}</code></td><td> The preferred item height for dropdown lists.</td></tr>
-           <tr><td><code>{@link #Theme_listChoiceBackgroundIndicator com.example.jatrik_android:listChoiceBackgroundIndicator}</code></td><td> Drawable used as a background for selected list items.</td></tr>
-           <tr><td><code>{@link #Theme_panelMenuListTheme com.example.jatrik_android:panelMenuListTheme}</code></td><td> Default Panel Menu style.</td></tr>
-           <tr><td><code>{@link #Theme_panelMenuListWidth com.example.jatrik_android:panelMenuListWidth}</code></td><td> Default Panel Menu width.</td></tr>
-           <tr><td><code>{@link #Theme_popupMenuStyle com.example.jatrik_android:popupMenuStyle}</code></td><td> Default PopupMenu style.</td></tr>
+           <tr><td><code>{@link #Theme_actionDropDownStyle uy.edu.fing.tsi2.jatrik.android.main:actionDropDownStyle}</code></td><td> Default ActionBar dropdown style.</td></tr>
+           <tr><td><code>{@link #Theme_dropdownListPreferredItemHeight uy.edu.fing.tsi2.jatrik.android.main:dropdownListPreferredItemHeight}</code></td><td> The preferred item height for dropdown lists.</td></tr>
+           <tr><td><code>{@link #Theme_listChoiceBackgroundIndicator uy.edu.fing.tsi2.jatrik.android.main:listChoiceBackgroundIndicator}</code></td><td> Drawable used as a background for selected list items.</td></tr>
+           <tr><td><code>{@link #Theme_panelMenuListTheme uy.edu.fing.tsi2.jatrik.android.main:panelMenuListTheme}</code></td><td> Default Panel Menu style.</td></tr>
+           <tr><td><code>{@link #Theme_panelMenuListWidth uy.edu.fing.tsi2.jatrik.android.main:panelMenuListWidth}</code></td><td> Default Panel Menu width.</td></tr>
+           <tr><td><code>{@link #Theme_popupMenuStyle uy.edu.fing.tsi2.jatrik.android.main:popupMenuStyle}</code></td><td> Default PopupMenu style.</td></tr>
            </table>
            @see #Theme_actionDropDownStyle
            @see #Theme_dropdownListPreferredItemHeight
@@ -2983,7 +2983,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:actionDropDownStyle
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:actionDropDownStyle
         */
         public static final int Theme_actionDropDownStyle = 0;
         /**
@@ -3001,7 +3001,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:dropdownListPreferredItemHeight
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:dropdownListPreferredItemHeight
         */
         public static final int Theme_dropdownListPreferredItemHeight = 1;
         /**
@@ -3013,7 +3013,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:listChoiceBackgroundIndicator
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:listChoiceBackgroundIndicator
         */
         public static final int Theme_listChoiceBackgroundIndicator = 5;
         /**
@@ -3025,7 +3025,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:panelMenuListTheme
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:panelMenuListTheme
         */
         public static final int Theme_panelMenuListTheme = 4;
         /**
@@ -3043,7 +3043,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:panelMenuListWidth
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:panelMenuListWidth
         */
         public static final int Theme_panelMenuListWidth = 3;
         /**
@@ -3055,7 +3055,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:popupMenuStyle
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:popupMenuStyle
         */
         public static final int Theme_popupMenuStyle = 2;
         /** Attributes that can be used with a View.
@@ -3065,8 +3065,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
            <tr><td><code>{@link #View_android_focusable android:focusable}</code></td><td> Boolean that controls whether a view can take focus.</td></tr>
-           <tr><td><code>{@link #View_paddingEnd com.example.jatrik_android:paddingEnd}</code></td><td> Sets the padding, in pixels, of the end edge; see {@link android.R.attr#padding}.</td></tr>
-           <tr><td><code>{@link #View_paddingStart com.example.jatrik_android:paddingStart}</code></td><td> Sets the padding, in pixels, of the start edge; see {@link android.R.attr#padding}.</td></tr>
+           <tr><td><code>{@link #View_paddingEnd uy.edu.fing.tsi2.jatrik.android.main:paddingEnd}</code></td><td> Sets the padding, in pixels, of the end edge; see {@link android.R.attr#padding}.</td></tr>
+           <tr><td><code>{@link #View_paddingStart uy.edu.fing.tsi2.jatrik.android.main:paddingStart}</code></td><td> Sets the padding, in pixels, of the start edge; see {@link android.R.attr#padding}.</td></tr>
            </table>
            @see #View_android_focusable
            @see #View_paddingEnd
@@ -3104,7 +3104,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:paddingEnd
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:paddingEnd
         */
         public static final int View_paddingEnd = 2;
         /**
@@ -3122,7 +3122,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.example.jatrik_android:paddingStart
+          @attr name uy.edu.fing.tsi2.jatrik.android.main:paddingStart
         */
         public static final int View_paddingStart = 1;
     };

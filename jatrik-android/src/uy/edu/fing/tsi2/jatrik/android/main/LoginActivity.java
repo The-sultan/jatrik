@@ -28,10 +28,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.jatrik_android.R;
 import com.google.gson.Gson;
 
-public class MainActivity extends ActionBarActivity {
+public class LoginActivity extends ActionBarActivity {
 
 	private InfoUsuario usuarioValido;
 
@@ -44,7 +43,7 @@ public class MainActivity extends ActionBarActivity {
 	}
 
 	private class ServiceLogin extends AsyncTask <Void, Void, String> 	 {
-	    private final ProgressDialog dialog = new ProgressDialog(MainActivity.this);
+	    private final ProgressDialog dialog = new ProgressDialog(LoginActivity.this);
 		
 		
 		protected String getASCIIContentFromEntity(HttpEntity entity) throws IllegalStateException, IOException {
@@ -68,7 +67,7 @@ public class MainActivity extends ActionBarActivity {
 			String Pass = ((EditText)findViewById(R.id.editTextClave)).getText().toString();
 			HttpClient httpClient = new DefaultHttpClient();
 			HttpContext localContext = new BasicHttpContext();
-			HttpGet httpGet = new HttpGet("http://192.168.1.36:8080/jatrik-core-web/rest/login/?nick=" + User + "&password=" + Pass);
+			HttpGet httpGet = new HttpGet("http://192.168.1.33:8080/jatrik-core-web/rest/login/?nick=" + User + "&password=" + Pass);
 			String text = null;
 			try {
 				HttpResponse response = httpClient.execute(httpGet, localContext);
@@ -86,18 +85,19 @@ public class MainActivity extends ActionBarActivity {
 				try{
 					Gson gson = new Gson();
 					usuarioValido = gson.fromJson(results, InfoUsuario.class);
+					((DatosUsuario)LoginActivity.this.getApplication()).setUsuario(usuarioValido);
 				}
 				catch(Exception e) {
 					// No se hace nada, lo puse para prevenir que explote, el usuario queda en null y no permite el acceso
 				}
 			}
 			if (usuarioValido != null){
-			    Intent intent = new Intent(MainActivity.this, HistorialPartidosActivity.class);
+			    Intent intent = new Intent(LoginActivity.this, HistorialPartidosActivity.class);
 			    intent.putExtra("User", usuarioValido.getNick());
 			    intent.putExtra("idEquipo", usuarioValido.getInfoEquipo().getId().toString());
 			    startActivity(intent);			
 			} else {
-	            AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(MainActivity.this);
+	            AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(LoginActivity.this);
 	            dlgAlert.setMessage("Usuario o contraseña inválida");
 	            dlgAlert.setTitle("Error");
 	            dlgAlert.setPositiveButton("OK", null);

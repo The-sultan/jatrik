@@ -5,17 +5,26 @@ import java.util.List;
 import uy.edu.fing.tsi2.jatrik.android.extras.InfoPartido;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.example.jatrik_android.R;
-
 public class HistorialAdapter extends ArrayAdapter<InfoPartido> {
 	 
 	private List<InfoPartido> partidoList;
+	private String Equipo; 
+	
+	public String getEquipo() {
+		return Equipo;
+	}
+
+	public void setEquipo(String equipo) {
+		Equipo = equipo;
+	}
+
 	private Context context;
 	 
 	public HistorialAdapter(List<InfoPartido> partidoList, Context ctx) {
@@ -50,17 +59,53 @@ public class HistorialAdapter extends ArrayAdapter<InfoPartido> {
 	        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	        convertView = inflater.inflate(R.layout.listview_historial_item, parent, false);
 	    }
-	        // Now we can fill the layout with the right values
-	        TextView tv1 = (TextView) convertView.findViewById(R.id.equipoLocal);
-	        TextView tv2 = (TextView) convertView.findViewById(R.id.golesLocal);
-	        TextView tv3 = (TextView) convertView.findViewById(R.id.golesVisitante);
-	        TextView tv4 = (TextView) convertView.findViewById(R.id.equipoVisitante);
-	        InfoPartido p = partidoList.get(position);
-	 
-	        tv1.setText(p.getEquipoLocal());   
-	        tv2.setText(Integer.toString(p.getGolesLocal()));   
-	        tv3.setText(Integer.toString(p.getGolesVisitante()));   	        
-	        tv4.setText(p.getEquipoVisitante());  
+	    
+        // Now we can fill the layout with the right values
+        TextView tv1 = (TextView) convertView.findViewById(R.id.equipoLocal);
+        TextView tv2 = (TextView) convertView.findViewById(R.id.golesLocal);
+        TextView tv3 = (TextView) convertView.findViewById(R.id.golesVisitante);
+        TextView tv4 = (TextView) convertView.findViewById(R.id.equipoVisitante);
+        InfoPartido p = partidoList.get(position);
+
+        tv1.setText(p.getEquipoLocal());   
+        tv2.setText(Integer.toString(p.getGolesLocal()));   
+        tv3.setText(Integer.toString(p.getGolesVisitante()));   	        
+        tv4.setText(p.getEquipoVisitante());  
+        
+        int golesUsuario;
+        int golesRival;
+       
+        if (p.getEquipoLocal().equals(this.Equipo)) {
+            golesUsuario = p.getGolesLocal();
+            golesRival = p.getGolesVisitante();
+        } else {
+            golesUsuario = p.getGolesVisitante();
+            golesRival = p.getGolesLocal();       	
+        }
+        
+        if (golesUsuario == golesRival){
+        	convertView.setBackgroundColor(Color.parseColor("#CCCCFF"));
+        	tv1.setTextColor(Color.parseColor("#00005C"));
+        	tv2.setTextColor(Color.parseColor("#00005C"));
+        	tv3.setTextColor(Color.parseColor("#00005C"));
+        	tv4.setTextColor(Color.parseColor("#00005C"));
+        }
+        else
+        	if (golesUsuario > golesRival){
+        		convertView.setBackgroundColor(Color.parseColor("#B2FF99"));
+            	tv1.setTextColor(Color.parseColor("#00561D"));
+            	tv2.setTextColor(Color.parseColor("#00561D"));
+            	tv3.setTextColor(Color.parseColor("#00561D"));
+            	tv4.setTextColor(Color.parseColor("#00561D"));
+        	}
+        	else
+        	{
+        		convertView.setBackgroundColor(Color.parseColor("#FFB3B3"));
+            	tv1.setTextColor(Color.parseColor("#8A0000"));
+            	tv2.setTextColor(Color.parseColor("#8A0000"));
+            	tv3.setTextColor(Color.parseColor("#8A0000"));
+            	tv4.setTextColor(Color.parseColor("#8A0000"));
+        	}
 	     
 	    return convertView;
 	}

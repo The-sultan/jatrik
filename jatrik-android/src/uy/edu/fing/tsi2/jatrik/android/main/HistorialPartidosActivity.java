@@ -13,7 +13,6 @@ import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 
 import uy.edu.fing.tsi2.jatrik.android.extras.InfoPartido;
-import uy.edu.fing.tsi2.jatrik.android.extras.InfoUsuario;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -25,7 +24,6 @@ import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.jatrik_android.R;
 import com.google.gson.Gson;
 
 public class HistorialPartidosActivity extends ActionBarActivity {
@@ -52,11 +50,10 @@ public class HistorialPartidosActivity extends ActionBarActivity {
 
 		@Override
 		protected String doInBackground(Void... params) {
-			Intent i = getIntent();
-			String id = i.getStringExtra("idEquipo");
+			String id = ((DatosUsuario)HistorialPartidosActivity.this.getApplication()).getUsuario().getInfoEquipo().getId().toString();
 			HttpClient httpClient = new DefaultHttpClient();
 			HttpContext localContext = new BasicHttpContext();
-			HttpGet httpGet = new HttpGet("http://192.168.1.36:8080/jatrik-core-web/rest/equipos/" + id + "/historial");
+			HttpGet httpGet = new HttpGet("http://192.168.1.33:8080/jatrik-core-web/rest/equipos/" + id + "/historial");
 			String text = null;
 			try {
 				HttpResponse response = httpClient.execute(httpGet, localContext);
@@ -85,14 +82,14 @@ public class HistorialPartidosActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.activity_historial_partidos);
-		Intent i = getIntent();
-		String User = i.getStringExtra("User");
+		String User = ((DatosUsuario)this.getApplication()).getUsuario().getNick();
 		TextView WelcomeMessage = (TextView)findViewById(R.id.textWelcome);
 		WelcomeMessage.setText("Bienvenido, " + User );
 		
 		// Pido los partidos y los muestro
 	    new ServiceHistorial().execute();
         adpt  = new HistorialAdapter(new ArrayList<InfoPartido>(), this);
+        adpt.setEquipo(((DatosUsuario)this.getApplication()).getUsuario().getInfoEquipo().getNombre());
         ListView lView = (ListView) findViewById(R.id.PartidosView);         
         lView.setAdapter(adpt);
 	  }

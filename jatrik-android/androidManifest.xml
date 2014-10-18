@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.jatrik_android"
+    package="uy.edu.fing.tsi2.jatrik.android.main"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -12,12 +12,13 @@
 	    android:name="android.permission.INTERNET"/>
 
     <application
+        android:name="DatosUsuario"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="uy.edu.fing.tsi2.jatrik.android.main.MainActivity"
+            android:name="uy.edu.fing.tsi2.jatrik.android.main.LoginActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,7 +31,7 @@
             android:label="@string/title_activity_historial_partidos">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="uy.edu.fing.tsi2.jatrik.android.main.MainActivity" />
+                android:value="uy.edu.fing.tsi2.jatrik.android.main.LoginActivity" />
         </activity>
     </application>
 
