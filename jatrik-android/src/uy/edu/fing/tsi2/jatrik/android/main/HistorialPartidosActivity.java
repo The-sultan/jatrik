@@ -12,6 +12,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 
+import uy.edu.fing.tsi2.jatrik.android.extras.HistorialPartidos;
 import uy.edu.fing.tsi2.jatrik.android.extras.InfoPartido;
 
 import android.app.ProgressDialog;
@@ -19,8 +20,11 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -53,7 +57,7 @@ public class HistorialPartidosActivity extends ActionBarActivity {
 			String id = ((DatosUsuario)HistorialPartidosActivity.this.getApplication()).getUsuario().getInfoEquipo().getId().toString();
 			HttpClient httpClient = new DefaultHttpClient();
 			HttpContext localContext = new BasicHttpContext();
-			HttpGet httpGet = new HttpGet("http://192.168.1.33:8080/jatrik-core-web/rest/equipos/" + id + "/historial");
+			HttpGet httpGet = new HttpGet(((DatosUsuario)HistorialPartidosActivity.this.getApplication()).getUrlServicios() + "equipos/" + id + "/historial");
 			String text = null;
 			try {
 				HttpResponse response = httpClient.execute(httpGet, localContext);
@@ -82,9 +86,6 @@ public class HistorialPartidosActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.activity_historial_partidos);
-		String User = ((DatosUsuario)this.getApplication()).getUsuario().getNick();
-		TextView WelcomeMessage = (TextView)findViewById(R.id.textWelcome);
-		WelcomeMessage.setText("Bienvenido, " + User );
 		
 		// Pido los partidos y los muestro
 	    new ServiceHistorial().execute();
@@ -92,6 +93,18 @@ public class HistorialPartidosActivity extends ActionBarActivity {
         adpt.setEquipo(((DatosUsuario)this.getApplication()).getUsuario().getInfoEquipo().getNombre());
         ListView lView = (ListView) findViewById(R.id.PartidosView);         
         lView.setAdapter(adpt);
+
+        lView.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                    long id) {
+               
+			    Intent intent = new Intent(HistorialPartidosActivity.this, DetallePartidoActivity.class);
+			    startActivity(intent);
+               
+               
+            }
+        });
 	  }
 	
 	@Override

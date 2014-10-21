@@ -1,6 +1,6 @@
 package uy.edu.fing.tsi2.jatrik.android.extras;
 
-import java.util.Date;
+import java.util.List;
 
 public class InfoPartido {
 
@@ -14,16 +14,11 @@ public class InfoPartido {
 
 	private String equipoLocal;
 
-	private String equipoVisitante;	
+	private String equipoVisitante;
+
 	
-	public InfoPartido (Long id, String Estado, String Local, String Visitante, int golesL, int golesV){
-		idPartido = id;
-		estado = Estado;
-		equipoLocal = Local;
-		equipoVisitante = Visitante;
-		golesLocal = golesL;
-		golesVisitante = golesV;
-	}
+	
+	private List<InfoEvento> eventos;
 
 	public Long getIdPartido() {
 		return idPartido;
@@ -31,8 +26,8 @@ public class InfoPartido {
 
 	public void setIdPartido(Long idPartido) {
 		this.idPartido = idPartido;
-	}
-
+	}	
+	
 	public String getEstado() {
 		return estado;
 	}
@@ -73,4 +68,24 @@ public class InfoPartido {
 		this.equipoVisitante = equipoVisitante;
 	}
 	
+	public List<InfoEvento> getEventos() {
+		return eventos;
+	}
+
+	public void setEventos(List<InfoEvento> eventos) {
+		this.eventos = eventos;
+	}
+	
+	public InfoPartido (Long id, String Estado, String Local, String Visitante, int golesL, int golesV){
+		idPartido = id;
+		estado = Estado;
+		equipoLocal = Local;
+		equipoVisitante = Visitante;
+		golesLocal = golesL;
+		golesVisitante = golesV;
+	}
+
+	public InfoPartido() {
+	}
+
 }

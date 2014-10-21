@@ -1,8 +1,7 @@
-package uy.edu.fing.tsi2.jatrik.android.main;
+package uy.edu.fing.tsi2.jatrik.android.extras;
 
 import java.util.List;
 
-import uy.edu.fing.tsi2.jatrik.android.extras.InfoPartido;
 
 public class HistorialPartidos {
 	

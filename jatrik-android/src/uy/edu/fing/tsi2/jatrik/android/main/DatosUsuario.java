@@ -6,6 +6,15 @@ import android.app.Application;
 public class DatosUsuario extends Application{
 	
 	private InfoUsuario Usuario;
+	private String UrlServicios;
+
+	public String getUrlServicios() {
+		return UrlServicios;
+	}
+
+	public void setUrlServicios(String urlServicios) {
+		UrlServicios = urlServicios;
+	}
 
 	public InfoUsuario getUsuario() {
 		return Usuario;

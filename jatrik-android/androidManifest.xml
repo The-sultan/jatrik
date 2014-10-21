@@ -7,18 +7,17 @@
     <uses-sdk
         android:minSdkVersion="10"
         android:targetSdkVersion="19" />
-    
-	<uses-permission 
-	    android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="DatosUsuario"
+        android:name=".DatosUsuario"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="uy.edu.fing.tsi2.jatrik.android.main.LoginActivity"
+            android:name=".LoginActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,11 +26,31 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="uy.edu.fing.tsi2.jatrik.android.main.HistorialPartidosActivity"
-            android:label="@string/title_activity_historial_partidos">
+            android:name=".HistorialPartidosActivity"
+            android:label="@string/title_activity_historial_partidos" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="uy.edu.fing.tsi2.jatrik.android.main.LoginActivity" />
+                android:value="uy.edu.fing.tsi2.jatrik.android.main.MainActivity" />
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main" >
+        </activity>
+        <activity
+            android:name=".DetallePartidoActivity"
+            android:label="@string/title_activity_detalle_partido"
+            android:parentActivityName=".HistorialPartidosActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="uy.edu.fing.tsi2.jatrik.android.main.HistorialPartidosActivity" />
+        </activity>
+        <activity
+            android:name=".PlantillaActivity"
+            android:label="@string/title_activity_plantilla"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="uy.edu.fing.tsi2.jatrik.android.main.MainActivity" />
         </activity>
     </application>
 

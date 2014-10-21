@@ -67,7 +67,7 @@ public class LoginActivity extends ActionBarActivity {
 			String Pass = ((EditText)findViewById(R.id.editTextClave)).getText().toString();
 			HttpClient httpClient = new DefaultHttpClient();
 			HttpContext localContext = new BasicHttpContext();
-			HttpGet httpGet = new HttpGet("http://192.168.1.33:8080/jatrik-core-web/rest/login/?nick=" + User + "&password=" + Pass);
+			HttpGet httpGet = new HttpGet("http://192.168.1.34:8080/jatrik-core-web/rest/login/?nick=" + User + "&password=" + Pass);
 			String text = null;
 			try {
 				HttpResponse response = httpClient.execute(httpGet, localContext);
@@ -86,15 +86,14 @@ public class LoginActivity extends ActionBarActivity {
 					Gson gson = new Gson();
 					usuarioValido = gson.fromJson(results, InfoUsuario.class);
 					((DatosUsuario)LoginActivity.this.getApplication()).setUsuario(usuarioValido);
+					((DatosUsuario)LoginActivity.this.getApplication()).setUrlServicios("http://192.168.1.34:8080/jatrik-core-web/rest/");
 				}
 				catch(Exception e) {
 					// No se hace nada, lo puse para prevenir que explote, el usuario queda en null y no permite el acceso
 				}
 			}
 			if (usuarioValido != null){
-			    Intent intent = new Intent(LoginActivity.this, HistorialPartidosActivity.class);
-			    intent.putExtra("User", usuarioValido.getNick());
-			    intent.putExtra("idEquipo", usuarioValido.getInfoEquipo().getId().toString());
+			    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 			    startActivity(intent);			
 			} else {
 	            AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(LoginActivity.this);
@@ -118,13 +117,13 @@ public class LoginActivity extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_login);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.login, menu);
 		return true;
 	}
 
