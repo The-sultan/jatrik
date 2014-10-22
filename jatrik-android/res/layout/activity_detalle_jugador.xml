@@ -1,0 +1,146 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="uy.edu.fing.tsi2.jatrik.android.main.DetalleJugadorActivity" >
+
+    <TextView
+        android:id="@+id/textViewNombreJugador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:textColor="#00561D"
+        android:textStyle="bold"
+        android:text="Nombre:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textViewNumeroJugador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textViewNombreJugador"
+        android:layout_marginTop="5sp"
+        android:textColor="#00561D"
+        android:textStyle="bold"
+        android:text="Numero:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    
+    <TextView
+        android:id="@+id/textViewEdadJugador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textViewNumeroJugador"
+        android:layout_marginTop="5sp"
+        android:textColor="#00561D"
+        android:textStyle="bold"
+        android:text="Edad:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />  
+        
+    <TextView
+        android:id="@+id/textViewAlturaJugador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textViewEdadJugador"
+        android:layout_marginTop="5sp"
+        android:textColor="#00561D"
+        android:textStyle="bold"
+        android:text="Altura:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />    
+        
+    <TextView
+        android:id="@+id/textViewPesoJugador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textViewAlturaJugador"
+        android:layout_marginTop="5sp"
+        android:textColor="#00561D"
+        android:textStyle="bold"
+        android:text="Peso:"
+        android:textAppearance="?android:attr/textAppearanceMedium" /> 
+ 
+    <TextView
+        android:id="@+id/textViewPuestoJugador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textViewPesoJugador"
+        android:layout_marginTop="5sp"
+        android:textColor="#00561D"
+        android:textStyle="bold"
+        android:text="Puesto:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/NombreJugador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textViewNombreJugador"
+        android:layout_alignBottom="@+id/textViewNombreJugador"
+        android:layout_toRightOf="@+id/textViewNombreJugador"
+        android:text="Nombre"
+        android:textColor="#3B3B3B"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/NumeroJugador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textViewNumeroJugador"
+        android:layout_alignBottom="@+id/textViewNumeroJugador"
+        android:layout_alignLeft="@+id/NombreJugador"
+        android:text="Numero"
+        android:textColor="#3B3B3B"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/EdadJugador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textViewAlturaJugador"
+        android:layout_alignLeft="@+id/NombreJugador"
+        android:text="Edad"
+        android:textColor="#3B3B3B"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/AlturaJugador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textViewAlturaJugador"
+        android:layout_alignBottom="@+id/textViewAlturaJugador"
+        android:layout_alignLeft="@+id/NombreJugador"
+        android:text="Altura"
+        android:textColor="#3B3B3B"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/PesoJugador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textViewPuestoJugador"
+        android:layout_alignLeft="@+id/NombreJugador"
+        android:text="Peso"
+        android:textColor="#3B3B3B"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/PuestoJugador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textViewPuestoJugador"
+        android:layout_alignBottom="@+id/textViewPuestoJugador"
+        android:layout_alignLeft="@+id/NombreJugador"
+        android:text="Puesto"
+        android:textColor="#3B3B3B"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</RelativeLayout>

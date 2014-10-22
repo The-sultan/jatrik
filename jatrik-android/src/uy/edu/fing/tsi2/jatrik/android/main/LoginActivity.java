@@ -67,7 +67,7 @@ public class LoginActivity extends ActionBarActivity {
 			String Pass = ((EditText)findViewById(R.id.editTextClave)).getText().toString();
 			HttpClient httpClient = new DefaultHttpClient();
 			HttpContext localContext = new BasicHttpContext();
-			HttpGet httpGet = new HttpGet("http://192.168.1.34:8080/jatrik-core-web/rest/login/?nick=" + User + "&password=" + Pass);
+			HttpGet httpGet = new HttpGet(((DatosUsuario)LoginActivity.this.getApplication()).getUrlServicios() + "login/?nick=" + User + "&password=" + Pass);
 			String text = null;
 			try {
 				HttpResponse response = httpClient.execute(httpGet, localContext);
@@ -86,7 +86,6 @@ public class LoginActivity extends ActionBarActivity {
 					Gson gson = new Gson();
 					usuarioValido = gson.fromJson(results, InfoUsuario.class);
 					((DatosUsuario)LoginActivity.this.getApplication()).setUsuario(usuarioValido);
-					((DatosUsuario)LoginActivity.this.getApplication()).setUrlServicios("http://192.168.1.34:8080/jatrik-core-web/rest/");
 				}
 				catch(Exception e) {
 					// No se hace nada, lo puse para prevenir que explote, el usuario queda en null y no permite el acceso
@@ -118,6 +117,8 @@ public class LoginActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
+		((DatosUsuario)LoginActivity.this.getApplication()).setUrlServicios("http://192.168.1.34:8080/jatrik-core-web/rest/");
+		
 	}
 
 	@Override

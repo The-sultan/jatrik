@@ -52,6 +52,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="uy.edu.fing.tsi2.jatrik.android.main.MainActivity" />
         </activity>
+        <activity
+            android:name=".DetalleJugadorActivity"
+            android:label="@string/title_activity_detalle_jugador"
+            android:parentActivityName=".PlantillaActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="uy.edu.fing.tsi2.jatrik.android.main.PlantillaActivity" />
+        </activity>
     </application>
 
 </manifest>

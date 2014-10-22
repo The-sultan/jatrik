@@ -6,6 +6,7 @@ import uy.edu.fing.tsi2.jatrik.android.extras.InfoPartido;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,48 +66,65 @@ public class HistorialAdapter extends ArrayAdapter<InfoPartido> {
         TextView tv2 = (TextView) convertView.findViewById(R.id.golesLocal);
         TextView tv3 = (TextView) convertView.findViewById(R.id.golesVisitante);
         TextView tv4 = (TextView) convertView.findViewById(R.id.equipoVisitante);
+        TextView tv5 = (TextView) convertView.findViewById(R.id.estado);
         InfoPartido p = partidoList.get(position);
 
         tv1.setText(p.getEquipoLocal());   
         tv2.setText(Integer.toString(p.getGolesLocal()));   
         tv3.setText(Integer.toString(p.getGolesVisitante()));   	        
         tv4.setText(p.getEquipoVisitante());  
+        tv5.setText(p.getEstado());
         
         int golesUsuario;
         int golesRival;
        
         if (p.getEquipoLocal().equals(this.Equipo)) {
             golesUsuario = p.getGolesLocal();
-            golesRival = p.getGolesVisitante();
+            golesRival = p.getGolesVisitante(); 
         } else {
             golesUsuario = p.getGolesVisitante();
-            golesRival = p.getGolesLocal();       	
+            golesRival = p.getGolesLocal();    
         }
         
-        if (golesUsuario == golesRival){
-        	convertView.setBackgroundColor(Color.parseColor("#CCCCFF"));
-        	tv1.setTextColor(Color.parseColor("#00005C"));
-        	tv2.setTextColor(Color.parseColor("#00005C"));
-        	tv3.setTextColor(Color.parseColor("#00005C"));
-        	tv4.setTextColor(Color.parseColor("#00005C"));
+        if (p.getEstado().equals("Finalizado")){
+        	
+        	tv5.setTextColor(Color.parseColor("#8D8D8D"));
+        	
+	        if (golesUsuario == golesRival){
+	        	convertView.setBackgroundColor(Color.parseColor("#DDE0FF"));
+	        	tv1.setTextColor(Color.parseColor("#00005C"));
+	        	tv2.setTextColor(Color.parseColor("#00005C"));
+	        	tv3.setTextColor(Color.parseColor("#00005C"));
+	        	tv4.setTextColor(Color.parseColor("#00005C"));
+	        }
+	        else
+	        	if (golesUsuario > golesRival){
+	        		convertView.setBackgroundColor(Color.parseColor("#E3FFE5"));
+	            	tv1.setTextColor(Color.parseColor("#00561D"));
+	            	tv2.setTextColor(Color.parseColor("#00561D"));
+	            	tv3.setTextColor(Color.parseColor("#00561D"));
+	            	tv4.setTextColor(Color.parseColor("#00561D"));
+	        	}
+	        	else
+	        	{
+	        		convertView.setBackgroundColor(Color.parseColor("#FFE3E3"));
+	            	tv1.setTextColor(Color.parseColor("#8A0000"));
+	            	tv2.setTextColor(Color.parseColor("#8A0000"));
+	            	tv3.setTextColor(Color.parseColor("#8A0000"));
+	            	tv4.setTextColor(Color.parseColor("#8A0000"));
+	        	}
+			}
+        else {
+        	convertView.setBackgroundColor(Color.parseColor("#FFFFA6"));
+        	tv1.setTextColor(Color.parseColor("#CBAC25"));
+        	tv2.setTextColor(Color.parseColor("#CBAC25"));
+        	tv3.setTextColor(Color.parseColor("#CBAC25"));
+        	tv4.setTextColor(Color.parseColor("#CBAC25"));
+        	tv5.setTextColor(Color.parseColor("#CBAC25"));
+        	tv5.setTypeface(null, Typeface.BOLD);
+        	
         }
-        else
-        	if (golesUsuario > golesRival){
-        		convertView.setBackgroundColor(Color.parseColor("#B2FF99"));
-            	tv1.setTextColor(Color.parseColor("#00561D"));
-            	tv2.setTextColor(Color.parseColor("#00561D"));
-            	tv3.setTextColor(Color.parseColor("#00561D"));
-            	tv4.setTextColor(Color.parseColor("#00561D"));
-        	}
-        	else
-        	{
-        		convertView.setBackgroundColor(Color.parseColor("#FFB3B3"));
-            	tv1.setTextColor(Color.parseColor("#8A0000"));
-            	tv2.setTextColor(Color.parseColor("#8A0000"));
-            	tv3.setTextColor(Color.parseColor("#8A0000"));
-            	tv4.setTextColor(Color.parseColor("#8A0000"));
-        	}
-	     
+        
 	    return convertView;
 	}
 	

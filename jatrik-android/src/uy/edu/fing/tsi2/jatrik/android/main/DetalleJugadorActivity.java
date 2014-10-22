@@ -1,27 +1,34 @@
 package uy.edu.fing.tsi2.jatrik.android.main;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import uy.edu.fing.tsi2.jatrik.android.extras.InfoJugador;
+
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
 
-public class PlantillaActivity extends ActionBarActivity {
+public class DetalleJugadorActivity extends ActionBarActivity {
 
-	private PlantillaAdapter adpt;
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_plantilla);
+		setContentView(R.layout.activity_detalle_jugador);
+
+		TextView tvNombre = (TextView)findViewById(R.id.NombreJugador);
+		TextView tvNumero = (TextView)findViewById(R.id.NumeroJugador);
+		TextView tvEdad = (TextView)findViewById(R.id.EdadJugador);
+		TextView tvAltura = (TextView)findViewById(R.id.AlturaJugador);		
+		TextView tvPeso = (TextView)findViewById(R.id.PesoJugador);
+		TextView tvPuesto = (TextView)findViewById(R.id.PuestoJugador);			
+		
+		
+		Intent myIntent = getIntent();
+		int idJugador = Integer.valueOf(myIntent.getStringExtra("idJugador"));
 		
 		ArrayList<InfoJugador> jugadores = new ArrayList<InfoJugador>();
 		jugadores.add(((DatosUsuario)this.getApplication()).getUsuario().getInfoEquipo().getGolero());
@@ -30,36 +37,23 @@ public class PlantillaActivity extends ActionBarActivity {
 		jugadores.addAll(((DatosUsuario)this.getApplication()).getUsuario().getInfoEquipo().getDelanteros());
 		jugadores.addAll(((DatosUsuario)this.getApplication()).getUsuario().getInfoEquipo().getSuplentes());
 		jugadores.addAll(((DatosUsuario)this.getApplication()).getUsuario().getInfoEquipo().getReservas());
-		
-//		InfoJugador ij = new InfoJugador();
-//		ij.setId((long) 1);
-//		ij.setNombre("Rafael Olivera");
-//		ij.setNroCamiseta(15);
-//		ij.setPuesto("Delantero");
-//		jugadores.add(ij);
-		
-		adpt  = new PlantillaAdapter(jugadores, this);
-        ListView lView = (ListView) findViewById(R.id.PlantillaView);         
-        lView.setAdapter(adpt);
-
-        lView.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View v, int position,
-                    long id) {
-                TextView TextViewId = (TextView) v.findViewById(R.id.idJugador);
-                String idJugador = (String) TextViewId.getText();
-       
-			    Intent intent = new Intent(PlantillaActivity.this, DetalleJugadorActivity.class);
-			    intent.putExtra("idJugador", idJugador);
-			    startActivity(intent);    
-            }
-        });
-	  }
+		for (InfoJugador j : jugadores) {
+			if (j.getId() == idJugador){
+				tvNombre.setText(j.getNombre());
+				tvNumero.setText(Integer.toString(j.getNroCamiseta()));
+				tvEdad.setText(Integer.toString(j.getEdad()));
+				tvAltura.setText(Double.toString(j.getAltura()));
+				tvPeso.setText(Double.toString(j.getPeso()));
+				tvPuesto.setText(j.getPuesto());
+				break;
+			}
+		}
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.plantilla, menu);
+		getMenuInflater().inflate(R.menu.detalle_jugador, menu);
 		return true;
 	}
 
