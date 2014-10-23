@@ -34,6 +34,9 @@ public class RestServices {
 	
 	@Inject
 	private PartidosResource partidosResource;
+	
+	@Inject 
+	ImportacionResource importacionResource;
 
 	
 	@Path("/usuarios")
@@ -70,5 +73,11 @@ public class RestServices {
 	public  PartidosResource getPartidosResource(){
 		return partidosResource;
 	}
+	
+	@Path("/importacion")
+	public  ImportacionResource getImportacionResource(){
+		return importacionResource;
+	}
+	
 	
 }
