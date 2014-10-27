@@ -18,6 +18,9 @@ public interface IEMTransferencias {
 
 	List<Transferencia> findAll();
 	
+	List<Transferencia> findTransferenciasLibres();
+	
+	List<Transferencia> findTransferenciasdelEquipo(Long idEquipo);
 	
 }
 	

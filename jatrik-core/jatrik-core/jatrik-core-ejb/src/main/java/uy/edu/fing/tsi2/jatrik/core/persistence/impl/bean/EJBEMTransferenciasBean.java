@@ -1,8 +1,6 @@
 package uy.edu.fing.tsi2.jatrik.core.persistence.impl.bean;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.ejb.Local;
 import javax.ejb.Remote;
@@ -60,12 +58,12 @@ public class EJBEMTransferenciasBean implements IEMTransferencias {
 	}
 
 	@SuppressWarnings("unchecked")
-	public Set<Transferencia> findTransferenciasdelEquipo(Long idEquipo) {
+	public List<Transferencia> findTransferenciasdelEquipo(Long idEquipo) {
 
 		Query consulta = entityManager.createNamedQuery("findTransferenciasdelEquipo");
 		consulta.setParameter("idEquipo", idEquipo);
-		Set<Transferencia> foo = new HashSet<Transferencia>(consulta.getResultList());
-		return (foo);
+		return ((List<Transferencia>) consulta.getResultList());
+
 
 	}
 }

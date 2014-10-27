@@ -62,18 +62,20 @@ public class EJBManagerTransferenciaBean implements ITransferencias {
 		return transferencias.findAll();
 	} 
 	
-	public void ponerJugadorEnVenta(Long jugadorId, Long vendedorId,Double precio) {
+	public boolean ponerJugadorEnVenta(Long jugadorId, Long vendedorId,Double precio) {
 		
 				
 		Jugador jugador = jugadores.find(jugadorId);
-		Equipo equipo = jugador.getEquipo();
 		
-		jugador.setEnVenta(new Boolean(true));		
-		jugadores.update(jugador);
-		
-		Transferencia transferencia = new Transferencia(jugador,equipo,precio,null);
-		
-		transferencias.add(transferencia);		
+		if (!jugador.getEnVenta()){
+			Equipo equipo = jugador.getEquipo();
+			jugador.setEnVenta(new Boolean(true));		
+			jugadores.update(jugador);
+			Transferencia transferencia = new Transferencia(jugador,equipo,precio,null);
+			transferencias.add(transferencia);
+			return true;
+		}
+		return false;
 	}
 	
 	
@@ -109,5 +111,16 @@ public class EJBManagerTransferenciaBean implements ITransferencias {
 			return true;
 		}
 		return false;
+	}
+	
+	public List<Transferencia> listadoJugadoresEnVenta(Long idEquipo){
+		
+		List<Transferencia> misJugadores = transferencias.findTransferenciasdelEquipo(idEquipo);
+		
+		List<Transferencia> otrosJugadores = transferencias.findTransferenciasLibres();
+			
+		otrosJugadores.removeAll(misJugadores);
+		
+		return otrosJugadores;
 	}
 }
