@@ -12,6 +12,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 
+import uy.edu.fing.tsi2.jatrik.android.extras.InfoEquipo;
 import uy.edu.fing.tsi2.jatrik.android.extras.InfoUsuario;
 
 import android.app.AlertDialog;
@@ -32,17 +33,7 @@ import com.google.gson.Gson;
 
 public class LoginActivity extends ActionBarActivity {
 
-	private InfoUsuario usuarioValido;
-
-	public InfoUsuario getUsuarioValido() {
-		return usuarioValido;
-	}
-
-	public void setUsuarioValido(InfoUsuario usuarioValido) {
-		this.usuarioValido = usuarioValido;
-	}
-
-	private class ServiceLogin extends AsyncTask <Void, Void, String> 	 {
+	private class ServiceLogin extends AsyncTask <Void, Void, InfoUsuario> 	 {
 	    private final ProgressDialog dialog = new ProgressDialog(LoginActivity.this);
 		
 		
@@ -61,37 +52,44 @@ public class LoginActivity extends ActionBarActivity {
 		}
 
 		@Override
-		protected String doInBackground(Void... params) {
+		protected InfoUsuario doInBackground(Void... params) {
+			
+			InfoUsuario infoUsuario = new InfoUsuario();
+			InfoEquipo infoEquipo = new InfoEquipo();
+			Gson gson = new Gson();
 			
 			String User = ((EditText)findViewById(R.id.editTextUsuario)).getText().toString();
 			String Pass = ((EditText)findViewById(R.id.editTextClave)).getText().toString();
 			HttpClient httpClient = new DefaultHttpClient();
 			HttpContext localContext = new BasicHttpContext();
-			HttpGet httpGet = new HttpGet(((DatosUsuario)LoginActivity.this.getApplication()).getUrlServicios() + "login/?nick=" + User + "&password=" + Pass);
+			HttpGet httpGet1 = new HttpGet(((DatosUsuario)LoginActivity.this.getApplication()).getUrlServicios() + "login/?nick=" + User + "&password=" + Pass);
 			String text = null;
 			try {
-				HttpResponse response = httpClient.execute(httpGet, localContext);
+				HttpResponse response = httpClient.execute(httpGet1, localContext);
 				HttpEntity entity = response.getEntity();
 				text = getASCIIContentFromEntity(entity);
+				if (text!=null) {
+					infoUsuario = gson.fromJson(text, InfoUsuario.class);
+				}
+				if (infoUsuario!=null){
+					HttpGet httpGet2 = new HttpGet(((DatosUsuario)LoginActivity.this.getApplication()).getUrlServicios() + "equipos/" + infoUsuario.getInfoEquipo().getId().toString());
+					response = httpClient.execute(httpGet2, localContext);
+					entity = response.getEntity();
+					text = getASCIIContentFromEntity(entity);
+					infoEquipo = gson.fromJson(text, InfoEquipo.class);		
+					if (infoEquipo!=null){
+						infoUsuario.setInfoEquipo(infoEquipo);
+					}
+				}
 			} catch (Exception e) {
-				return e.getLocalizedMessage();
+				return null;
 			}
-			return text;
+			return infoUsuario;
 		}
 
-		protected void onPostExecute(String results) {
-			usuarioValido = null;
-			if (results!=null) {
-				try{
-					Gson gson = new Gson();
-					usuarioValido = gson.fromJson(results, InfoUsuario.class);
-					((DatosUsuario)LoginActivity.this.getApplication()).setUsuario(usuarioValido);
-				}
-				catch(Exception e) {
-					// No se hace nada, lo puse para prevenir que explote, el usuario queda en null y no permite el acceso
-				}
-			}
-			if (usuarioValido != null){
+		protected void onPostExecute(InfoUsuario infoUsuario) {
+			((DatosUsuario)LoginActivity.this.getApplication()).setUsuario(infoUsuario);
+			if (infoUsuario != null){
 			    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 			    startActivity(intent);			
 			} else {

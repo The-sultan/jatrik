@@ -3,7 +3,7 @@ package uy.edu.fing.tsi2.jatrik.android.extras;
 
 public class InfoHabilidad{
 	private int id;
-	private String Nombre;
+	private String nombre;
 	private int valor;
 	
 	
@@ -14,10 +14,10 @@ public class InfoHabilidad{
 		this.id = id;
 	}
 	public String getNombre() {
-		return Nombre;
+		return nombre;
 	}
 	public void setNombre(String nombre) {
-		Nombre = nombre;
+		this.nombre = nombre;
 	}
 	public int getValor() {
 		return valor;

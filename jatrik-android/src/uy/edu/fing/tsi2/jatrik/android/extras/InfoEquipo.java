@@ -2,11 +2,13 @@ package uy.edu.fing.tsi2.jatrik.android.extras;
 
 import java.util.List;
 
-public class InfoEquipo {
+import android.app.Application;
+
+public class InfoEquipo extends Application{
 
 	private Long id;
 	
-	private String Nombre;
+	private String nombre;
 	
 	private Double fondos;
 	
@@ -32,11 +34,11 @@ public class InfoEquipo {
 	}
 
 	public String getNombre() {
-		return Nombre;
+		return nombre;
 	}
 
 	public void setNombre(String Nombre) {
-		this.Nombre = Nombre;
+		this.nombre = Nombre;
 	}
 
 	public Double getFondos() {

@@ -3,6 +3,7 @@ package uy.edu.fing.tsi2.jatrik.android.main;
 import java.util.ArrayList;
 import java.util.List;
 
+import uy.edu.fing.tsi2.jatrik.android.extras.InfoHabilidad;
 import uy.edu.fing.tsi2.jatrik.android.extras.InfoJugador;
 
 import android.support.v7.app.ActionBarActivity;
@@ -10,10 +11,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class DetalleJugadorActivity extends ActionBarActivity {
 
+	private HabilidadesAdapter adpt;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -37,17 +41,24 @@ public class DetalleJugadorActivity extends ActionBarActivity {
 		jugadores.addAll(((DatosUsuario)this.getApplication()).getUsuario().getInfoEquipo().getDelanteros());
 		jugadores.addAll(((DatosUsuario)this.getApplication()).getUsuario().getInfoEquipo().getSuplentes());
 		jugadores.addAll(((DatosUsuario)this.getApplication()).getUsuario().getInfoEquipo().getReservas());
+		List<InfoHabilidad> habilidades = new ArrayList<InfoHabilidad>();
 		for (InfoJugador j : jugadores) {
 			if (j.getId() == idJugador){
 				tvNombre.setText(j.getNombre());
-				tvNumero.setText(Integer.toString(j.getNroCamiseta()));
+				tvNumero.setText(Integer.toString(j.getNro_Camiseta()));
 				tvEdad.setText(Integer.toString(j.getEdad()));
 				tvAltura.setText(Double.toString(j.getAltura()));
 				tvPeso.setText(Double.toString(j.getPeso()));
 				tvPuesto.setText(j.getPuesto());
+				habilidades = j.getHabilidades();
 				break;
 			}
 		}
+		
+		adpt  = new HabilidadesAdapter(habilidades, this);
+        ListView lView = (ListView) findViewById(R.id.HabilidadesView);         
+        lView.setAdapter(adpt);
+        
 	}
 
 	@Override

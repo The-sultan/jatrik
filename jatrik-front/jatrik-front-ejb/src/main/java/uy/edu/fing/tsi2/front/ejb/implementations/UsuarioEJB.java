@@ -21,7 +21,7 @@ public class UsuarioEJB implements UsuarioEJBLocal {
 	@EJB
 	private RestClientEJBLocal jatrikCoreClient;
 	
-    public Long crearUsuario(String nombre,String mail,String nick,String password, String nombreEquipo, int idPais){
+    public Long crearUsuario(String nombre,String mail,String nick,String password, String nombreEquipo, String nombreEstadio, int idPais){
         try{ 
              InfoUsuario usr = new InfoUsuario();
              usr.setNombre(nombre);
@@ -32,14 +32,15 @@ public class UsuarioEJB implements UsuarioEJBLocal {
              infoEquipo.setNombre(nombreEquipo);
              InfoEstadio infoEstadio = new InfoEstadio();
              
+             infoEstadio.setNombre(nombreEstadio);
              //hardcoded properties------//
              infoEstadio.setAltura(1000);
              infoEstadio.setLatitud(-54);
              infoEstadio.setLongitud(60);
              //--------------------------//
  			
-             usr.setInfoEquipo(infoEquipo);
              infoEquipo.setEstadio(infoEstadio);
+             usr.setInfoEquipo(infoEquipo);
  			
  			Long usuarioId = Long.valueOf(jatrikCoreClient.postNuevoUsuario(usr));
  			return usuarioId;
