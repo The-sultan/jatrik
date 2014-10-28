@@ -13,4 +13,5 @@ public interface ITransferencias {
 	
 	// listado de transferencias de jugadores en venta que no son del equipo idEquipo
 	List<Transferencia> listadoJugadoresEnVenta(Long idEquipo);
+	
 }

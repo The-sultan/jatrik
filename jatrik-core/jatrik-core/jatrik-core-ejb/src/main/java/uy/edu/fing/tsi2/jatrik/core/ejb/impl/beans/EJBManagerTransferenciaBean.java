@@ -81,8 +81,7 @@ public class EJBManagerTransferenciaBean implements ITransferencias {
 	
 	public boolean comprarJugador(Long transferenciaId, Long CompradorId) {
 
-		// ToDo deberiamos controlar que el euipo comprador tenga la plata para
-		// comprarlo
+		
 		Transferencia trans = transferencias.find(transferenciaId);
 		Equipo equipoCompra = equipos.find(CompradorId);
 		Equipo equipoVende = trans.getVendedor();

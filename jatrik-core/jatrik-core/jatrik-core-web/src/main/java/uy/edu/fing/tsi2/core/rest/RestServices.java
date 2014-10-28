@@ -36,6 +36,8 @@ public class RestServices {
 	@Inject 
 	ImportacionResource importacionResource;
 
+	@Inject
+	TransferenciaResource transferenciaResource;
 	
 	@Path("/usuarios")
 	public UsuariosResource getUsuariosResource(){
@@ -77,5 +79,8 @@ public class RestServices {
 		return importacionResource;
 	}
 	
-	
+	@Path("/transferencia")
+	public  TransferenciaResource getTransferenciaResource(){
+		return transferenciaResource;
+	}
 }
