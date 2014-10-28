@@ -1,6 +1,7 @@
 package uy.edu.fing.tsi2.front.ejb.implementations;
 
 
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -21,6 +22,7 @@ public class UsuarioEJB implements UsuarioEJBLocal {
 	@EJB
 	private RestClientEJBLocal jatrikCoreClient;
 	
+	@Override
     public Long crearUsuario(String nombre,String mail,String nick,String password, String nombreEquipo, int idPais){
         try{ 
              InfoUsuario usr = new InfoUsuario();
@@ -54,4 +56,8 @@ public class UsuarioEJB implements UsuarioEJBLocal {
 		return jatrikCoreClient.validarYObtenerUsuario(nick, pass);
 	}
     
+	@Override
+	public List<InfoUsuario> getUsuarios(){
+		return jatrikCoreClient.getUsuarios();
+	}
 }

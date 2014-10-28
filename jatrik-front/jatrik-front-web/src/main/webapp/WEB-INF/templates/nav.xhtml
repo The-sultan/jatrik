@@ -1,0 +1,44 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<h:form>
+	<ul>
+		<h:panelGroup rendered="${!loginController.sessionBean.logueado}">
+			<li>
+				<h:commandLink  action="#{ajaxNav.navigate}">
+					Registro
+					<f:param name='page' value='registro'/>
+					<f:ajax render=":content"/>
+				</h:commandLink>
+			</li>
+		</h:panelGroup>
+		<h:panelGroup rendered="${loginController.sessionBean.logueado}">
+			<li>
+				<h:commandLink  action="#{ajaxNav.navigate}">
+					Visualizar Equipo
+					<f:param name='page' value='equipo'/>
+					<f:ajax render=":content"/>
+				</h:commandLink>
+			</li>
+		</h:panelGroup>
+		<h:panelGroup rendered="${loginController.sessionBean.logueado}">
+			<li><h:commandLink  action="#{ajaxNav.navigate}">
+					Detalle partido
+					<f:param name='page' value='partido'/>
+					<f:ajax render=":content"/>
+				</h:commandLink>
+			</li>
+		</h:panelGroup>
+		<h:panelGroup rendered="${loginController.sessionBean.logueado}">
+			<li><h:commandLink  action="#{ajaxNav.navigate}">
+					Entrenamiento
+					<f:param name='page' value='entrenamiento'/>
+					<f:ajax render=":content"/>
+				</h:commandLink>
+			</li>
+		</h:panelGroup>
+	</ul>
+	</h:form>
+</div>

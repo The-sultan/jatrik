@@ -31,6 +31,7 @@ import javax.inject.Named;
 import uy.edu.fing.tsi2.front.ejb.interfaces.UsuarioEJBLocal;
 import uy.edu.fing.tsi2.model.Miembro;
 import uy.edu.fing.tsi2.model.SessionBeanJatrik;
+import uy.edu.fing.tsi2.navigation.AjaxNavigator;
 //import uy.edu.fing.tsi2.service.MemberRegistration;
 
 // The @Model stereotype is a convenience mechanism to make this a request-scoped bean that has an
@@ -54,7 +55,9 @@ public class MiembroController {
     @Produces
     private Miembro newMember;
 
-    
+    @Inject
+	AjaxNavigator ajaxNav;
+	
 	private List<SelectItem> paises;
     
     
@@ -75,19 +78,19 @@ public class MiembroController {
         
     }
 
-    public String register() throws Exception {
+    public void register() throws Exception {
         try {
         	
             AdminUsuarios.crearUsuario(newMember.getNombre(), newMember.getEmail(), newMember.getNick(), newMember.getPassword(),newMember.getNombreEquipo(), newMember.getPais());
 			sessionBean.setInfoUsuario(usuarioEJB.login(newMember.getNick(), newMember.getPassword()));
 			sessionBean.setLogueado(true);
-            return "registroExitoso";
+			ajaxNav.controllerNavigate("home");
+            //return "registroExitoso";
             
         } catch (Exception e) {
             /*String errorMessage = */getRootErrorMessage(e);
             //FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, "Registration unsuccessful");
             //facesContext.addMessage(null, m);
-            return null;
         }
     }
 

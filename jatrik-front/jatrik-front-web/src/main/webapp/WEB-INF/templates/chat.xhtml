@@ -1,0 +1,30 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml" id="chat">
+	<label for="chat-autocomplete"/>
+	<input type="text" id="chat-autocomplete"/>
+	
+	<script type="text/javascript">
+		usuarios = [];
+		<ui:repeat value="#{chatController.usuarios}" var="usuario">
+			usuarios.push('<h:outputText value="${usuario.nick}"/>');
+		</ui:repeat>
+		
+		currentUser = {
+			nick : "#{loginController.sessionBean.nick}"
+		}
+		var index = usuarios.indexOf(currentUser.nick);
+		usuarios.splice(index, 1);
+	</script>
+	<link type="text/css" rel="stylesheet" href="resources/css/jquery-ui.min.css" />
+	<link type="text/css" rel="stylesheet" href="resources/css/jquery-ui.structure.min.css" />
+	<link type="text/css" rel="stylesheet" href="resources/css/jquery-ui.theme.min.css" />
+	<link type="text/css" rel="stylesheet" href="resources/css/jquery.ui.chatbox.css" />
+	<script type="text/javascript" src="resources/js/jquery-ui.min.js" />
+	<script type="text/javascript" src="resources/js/jquery.ui.chatbox.js" />
+	<script type="text/javascript" src="resources/js/chat.js" />
+	
+</div>

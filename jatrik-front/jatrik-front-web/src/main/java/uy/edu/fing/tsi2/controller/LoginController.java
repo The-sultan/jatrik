@@ -4,12 +4,9 @@ package uy.edu.fing.tsi2.controller;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.inject.Model;
-import javax.enterprise.inject.Produces;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
 import org.primefaces.context.RequestContext;
@@ -44,6 +41,9 @@ public class LoginController  {
 			try {
 				sessionBean.setInfoUsuario(usuarioEJB.login(sessionBean.getNick(), sessionBean.getPassword()));
 				sessionBean.setLogueado(true);
+				FacesContext facesContext = FacesContext.getCurrentInstance();
+				HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);
+				session.setAttribute("nick", sessionBean.getNick());
 				msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenid@",
 						sessionBean.getNick());
 				return "equipo";

@@ -203,4 +203,8 @@ public class EJBManagerUsuarioBean implements IUsuarios {
 			}
 			return null;
 	}
+	
+	public List<Usuario> obtenerUsuarios(){
+		return usuarios.findAll();
+	}
 }

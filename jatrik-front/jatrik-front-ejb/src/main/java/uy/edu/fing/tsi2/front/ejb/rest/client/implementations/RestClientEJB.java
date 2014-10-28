@@ -13,6 +13,8 @@ import uy.edu.fing.tsi2.jatrik.common.payloads.InfoUsuario;
 
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource.Builder;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -114,6 +116,18 @@ public class RestClientEJB implements RestClientEJBLocal{
 		if(response.getStatusInfo().getStatusCode() != ClientResponse.Status.OK.getStatusCode()){
 			throw new RestClientException("No se pudo realizar el Entrenamiento, status code: "
 					+ response.getStatusInfo().getReasonPhrase());			
+		}
+	}
+
+	@Override
+	public List<InfoUsuario> getUsuarios() {
+		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory.makeUsuariosGetRequest();
+		ClientResponse response = jerseyHttpRequestBuilder.get(ClientResponse.class);
+		if(response.getStatusInfo().getStatusCode() != ClientResponse.Status.OK.getStatusCode()){
+			throw new RestClientException("No se pudo realizar el Entrenamiento, status code: "
+					+ response.getStatusInfo().getReasonPhrase());			
+		}else{
+			return response.getEntity(ArrayList.class);
 		}
 	}
 	

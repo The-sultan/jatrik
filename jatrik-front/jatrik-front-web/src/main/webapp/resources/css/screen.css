@@ -15,6 +15,11 @@
  * limitations under the License.
  */
 /* Core styles for the page */
+html, body{
+	height: 100%;
+	overflow-x: hidden;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -26,22 +31,23 @@ body {
 
 #container {
   margin: 0 auto;
-  padding: 0 20px 10px 20px;
-  border-top: 5px solid #000000;
-  border-left: 5px solid #8c8f91;
-  border-right: 5px solid #8c8f91;
-  border-bottom: 25px solid #8c8f91;
-  width: 1200px; /* subtract 40px from banner width for padding */
+  //padding: 0 20px 10px 20px;
+  //border-top: 5px solid #000000;
+  //border-left: 5px solid #8c8f91;
+  //border-right: 5px solid #8c8f91;
+  //border-bottom: 25px solid #8c8f91;
+  //width: 1200px; /* subtract 40px from banner width for padding */
   background: #FFFFFF;
   background-image: url(#{request.contextPath}/resources/gfx/headerbkg.png);
   background-repeat: repeat-x;
-  padding-top: 30px;
+  //padding-top: 30px;
   box-shadow: 3px 3px 15px #d5d5d5;
+  height: 100%;
 }
 #content {
   float: left;
   width: 500px;
-  margin: 20px;
+  margin: 50px;
 }
 #aside {
   font-size: 0.9em;
@@ -49,7 +55,7 @@ body {
   
   float: right;
   clear: right;
-  margin: 20px 0px;
+  margin: 70px 20px;
   border: 1px solid #D5D5D5;
   background: #F1F1F1;
   background-image: url(#{request.contextPath}/resources/gfx/asidebkg.png);
@@ -64,11 +70,25 @@ body {
   float: right;
   padding-right: 10px;
 }
+
+#header{
+	height:50px;
+    width:100%;
+    top:0px;
+    left:0px;
+    background: #CCCCCC;
+    position:absolute;
+}
 #footer {
-  clear: both;
+  height: 50px;
   text-align: center;
   color: #666666;
   font-size: 0.85em;
+  background: #CCCCCC;
+  position:absolute;
+  bottom : 0px;
+  left: 0px;
+  width: 100%;
 }
 code {
   font-size: 1.1em;
@@ -102,11 +122,7 @@ span.invalid {
   padding-left: 3px;
   color: red;
 }
-form {
-  padding: 1em;
-  //border: 1px solid #D5D5D5;
-  width: 860px;
-}
+
 label {
   float: left;
   width: 90%;
@@ -273,4 +289,8 @@ input {
 }
 .results-table{
 	clear : left;
+}
+
+#logoutForm{
+	display: inline-block;
 }

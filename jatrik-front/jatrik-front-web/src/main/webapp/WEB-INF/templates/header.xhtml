@@ -1,0 +1,17 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml" id="header">
+	<div class="dualbrand">
+		
+		<h:form id="logoutForm" rendered="#{loginController.sessionBean.logueado}">
+			<p:commandButton id="logout" styleClass="register" value="Logout" ajax="false"
+				action="#{loginController.logout}"
+				style="margin-right:20px;" update=":mensajes">
+			</p:commandButton>
+		</h:form>
+		<img src="http://www.hattrick.org/Img/Startpage/hattrick.png" />
+	</div>
+</div>

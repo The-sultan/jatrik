@@ -1,5 +1,6 @@
 package uy.edu.fing.tsi2.front.ejb.rest.client.interfaces;
 
+import java.util.List;
 import javax.ejb.Local;
 
 import uy.edu.fing.tsi2.front.ejb.rest.client.exceptions.RestClientException;
@@ -25,5 +26,7 @@ public interface RestClientEJBLocal {
 	String postEntrenamiento(InfoEntrenamiento entrenamiento) throws RestClientException;
 	
 	void simularPartido(Long partidoId) throws RestClientException;
+	
+	List<InfoUsuario> getUsuarios();
 
 }

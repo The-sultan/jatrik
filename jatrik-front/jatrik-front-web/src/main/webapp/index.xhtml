@@ -5,21 +5,14 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	template="/WEB-INF/templates/default.xhtml">
+	template="/WEB-INF/templates/layout.xhtml">
+	<ui:define name="header">
+		<ui:include src="/WEB-INF/templates/header.xhtml"/>
+	</ui:define>
 	<ui:define name="content">
-		<h1>Bienvenido #{loginController.sessionBean.nick} a Jatrik!</h1>
-
-		<div>
-			<p>El simulador de futbol de nivel mundial</p>
-			<h:panelGroup layout="block" rendered="#{!loginController.sessionBean.logueado}">
-				<h3>Registrate y conviertete en manager</h3>
-			</h:panelGroup>
-			
-
-		</div>
+		<ui:include src="#{ajaxNav.content}"/>
 
 		
-
 		<script type="text/javascript">
 		  //<![CDATA[
 		  function manejarLogin(xhr, status, args) {
@@ -33,6 +26,18 @@
 		</script>
 
 
+	</ui:define>
+	<ui:define name="nav">
+		<ui:include src="/WEB-INF/templates/nav.xhtml" />
+	</ui:define>
+	<ui:define name="login">
+		<ui:include src="/WEB-INF/templates/login.xhtml"/>
+	</ui:define>
+	
+	<ui:define name="chat">
+		<h:panelGroup rendered="#{loginController.sessionBean.logueado}">
+			<ui:include src="/WEB-INF/templates/chat.xhtml"/>
+		</h:panelGroup>
 	</ui:define>
 	
 </ui:composition>
