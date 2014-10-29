@@ -7,12 +7,22 @@ var chatbox = {
 	getNextOffset : function(){
 			return (this.config.width + this.config.gap) * Object.keys(self.openChats).length;
 	},
+	keepAlive : function(){
+		var sendingMsg = {
+			message : "",
+			sender : currentUser.nick,
+			receiver : ""
+		}
+		self.websocket.send(JSON.stringify(sendingMsg));
+		setTimeout(self.keepAlive, 10000);
+	},
 	init : function(){
 		this.websocket = new WebSocket('ws://' + document.location.host + '/jatrik-front-web/chat'); 
 		self = this;
 		
 		this.websocket.onmessage = this.onMessageReceived;
 		this.websocket.onclose = this.onSocketClose;
+		setTimeout(self.keepAlive, 10000);
 		$("#chat-autocomplete").autocomplete({
 			source: usuarios,
 			select: function(evt,ui){
@@ -47,6 +57,10 @@ var chatbox = {
 	},
 
 	onMessageReceived : function(evt){
+		if(!evt.data){
+			console.log("pong");
+			return;
+		}
 		var msg = JSON.parse(evt.data); // native API
 		var id = msg.sender + "-chat-window";
 		if(!self.openChats[msg.sender]){
