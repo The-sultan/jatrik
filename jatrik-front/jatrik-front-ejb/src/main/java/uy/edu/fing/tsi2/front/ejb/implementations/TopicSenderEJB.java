@@ -38,6 +38,7 @@ public class TopicSenderEJB implements TopicSenderEJBLocal{
 			ObjectMessage jmsMessage = session.createObjectMessage(message);
 			
 			messageProducer.send(jmsMessage);
+			connection.close();
 		} catch (JMSException ex) {
 			Logger.getLogger(TopicSenderEJB.class.getName()).log(Level.SEVERE, null, ex);
 		}

@@ -76,9 +76,10 @@ public class WebSocketServer implements Serializable{
 			} catch (IOException ex) {
 				Logger.getLogger(WebSocketServer.class.getName()).log(Level.SEVERE, null, ex);
 			}
+		}else{
+			TopicSenderEJBLocal topicSenderEJB = getContextualBeanInstance(TopicSenderEJBLocal.class);
+			topicSenderEJB.sendMessage(chatMessage);
 		}
-		TopicSenderEJBLocal topicSenderEJB = getContextualBeanInstance(TopicSenderEJBLocal.class);
-		topicSenderEJB.sendMessage(chatMessage);
 	}
 	
 	@OnClose public void onClose(final Session session) { 
