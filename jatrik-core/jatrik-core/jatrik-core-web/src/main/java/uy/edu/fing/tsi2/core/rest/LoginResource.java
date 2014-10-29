@@ -1,6 +1,7 @@
 package uy.edu.fing.tsi2.core.rest;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -12,7 +13,13 @@ import javax.ws.rs.core.Response;
 import org.apache.commons.beanutils.BeanUtils;
 
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEquipo;
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEstadio;
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoHabilidad;
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoJugador;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoUsuario;
+import uy.edu.fing.tsi2.jatrik.core.domain.Habilidad;
+import uy.edu.fing.tsi2.jatrik.core.domain.Jugador;
+import uy.edu.fing.tsi2.jatrik.core.domain.JugadorEnFormacion;
 import uy.edu.fing.tsi2.jatrik.core.domain.Usuario;
 import uy.edu.fing.tsi2.jatrik.core.ejb.impl.local.EJBManagerUsuarioLocal;
 

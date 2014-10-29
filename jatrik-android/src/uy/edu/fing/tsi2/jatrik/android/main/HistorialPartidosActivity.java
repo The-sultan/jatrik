@@ -73,6 +73,7 @@ public class HistorialPartidosActivity extends ActionBarActivity {
 		if (results!=null) {
 			Gson gson = new Gson();
 			HistorialPartidos historial = gson.fromJson(results, HistorialPartidos.class);
+			((DatosUsuario)HistorialPartidosActivity.this.getApplication()).setPartidos(historial);
 			dialog.dismiss();
 			adpt.setPartidoList(historial.getPartidos());
 			adpt.notifyDataSetChanged();
@@ -96,10 +97,14 @@ public class HistorialPartidosActivity extends ActionBarActivity {
 
         lView.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position,
+            public void onItemClick(AdapterView<?> parent, View v, int position,
                     long id) {
                
+            	TextView TextViewId = (TextView) v.findViewById(R.id.idPartido);
+                String idPartido = (String) TextViewId.getText();
+            	
 			    Intent intent = new Intent(HistorialPartidosActivity.this, DetallePartidoActivity.class);
+			    intent.putExtra("idPartido", idPartido);
 			    startActivity(intent);
                
                

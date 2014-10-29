@@ -8,9 +8,75 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="uy.edu.fing.tsi2.jatrik.android.main.DetallePartidoActivity" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Aca se va a mostrar el minuto a minuto del partido" />
+	<LinearLayout
+	    android:id="@+id/layoutResultado"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:weightSum="4">
 
+	    <TextView
+	        android:id="@+id/equipoLocalDetalle"
+	        android:layout_width="0px"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1.5"
+	        android:layout_marginTop="10sp"
+	        android:layout_marginBottom="2sp"
+	        android:layout_marginLeft="5sp"
+	        android:gravity="start"   
+	        android:textColor="#000000"
+	        android:textSize="18sp" />
+	 
+	    <TextView android:id="@+id/golesLocalDetalle"
+	        android:layout_width="0px"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="0.5" 
+	        android:layout_marginTop="10sp"
+	        android:layout_marginBottom="2sp"
+	        android:gravity="center" 
+	        android:textColor="#000000"
+	        android:textSize="18sp" />
+	 
+	     <TextView android:id="@+id/golesVisitanteDetalle"
+	        android:layout_width="0px"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="0.5" 
+	        android:layout_marginTop="10sp"
+	        android:layout_marginBottom="2sp" 
+	        android:gravity="center"  
+	        android:textColor="#000000"
+	        android:textSize="18sp" />   
+	    
+	     <TextView android:id="@+id/equipoVisitanteDetalle"
+	        android:layout_width="0px"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1.5" 
+	        android:layout_marginTop="10sp"
+	        android:layout_marginBottom="2sp"
+	        android:layout_marginRight="5sp"
+	        android:gravity="end"  
+	        android:textColor="#000000"
+	        android:textSize="18sp" />
+     
+     </LinearLayout>    
+     
+     <TextView
+        android:id="@+id/estadoPartidoDetalle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+		android:textColor="#000000"
+        android:textAppearance="?android:attr/textAppearanceMedium" 
+        android:layout_below="@+id/layoutResultado"
+     	android:gravity="center" />
+     
+     <ListView
+        android:id="@+id/EventosView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="10sp"
+        android:layout_marginLeft="10sp"
+        android:layout_below="@+id/estadoPartidoDetalle" >
+    </ListView>
+    
 </RelativeLayout>

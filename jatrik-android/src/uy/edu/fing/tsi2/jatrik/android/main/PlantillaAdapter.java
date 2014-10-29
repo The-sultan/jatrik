@@ -1,13 +1,12 @@
 package uy.edu.fing.tsi2.jatrik.android.main;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import uy.edu.fing.tsi2.jatrik.android.extras.InfoEquipo;
 import uy.edu.fing.tsi2.jatrik.android.extras.InfoJugador;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +16,15 @@ import android.widget.TextView;
 public class PlantillaAdapter extends ArrayAdapter<InfoJugador> {
 	 
 	private List<InfoJugador> jugadorList;
+	private InfoEquipo equipo;
+	public InfoEquipo getEquipo() {
+		return equipo;
+	}
+
+	public void setEquipo(InfoEquipo equipo) {
+		this.equipo = equipo;
+	}
+
 	private Context context;
 	 
 	public PlantillaAdapter(List<InfoJugador> arrayList, Context ctx) {
@@ -59,18 +67,38 @@ public class PlantillaAdapter extends ArrayAdapter<InfoJugador> {
         TextView tv4 = (TextView) convertView.findViewById(R.id.idJugador);
         InfoJugador j = jugadorList.get(position);
 
-        tv1.setText(Integer.toString(j.getNroCamiseta())); 
+        tv1.setText(Integer.toString(j.getNro_Camiseta())); 
         tv2.setText(j.getNombre());   
         tv3.setText(j.getPuesto()); 
         tv4.setText(Long.toString(j.getId()));
-
-		convertView.setBackgroundColor(Color.parseColor("#E4E4E4"));
+  
+        convertView.setBackgroundColor(Color.parseColor("#E4E4E4"));
 		tv1.setTextColor(Color.parseColor("#3B3B3B"));
 		tv2.setTextColor(Color.parseColor("#3B3B3B"));
-		tv3.setTextColor(Color.parseColor("#9F9F9F"));
 		tv4.setTextColor(Color.parseColor("#E4E4E4"));
-	      
-        
+		
+		if (equipo.getSuplentes().contains(j))
+			tv3.setText("SUPLENTE"); 
+		else
+			if (equipo.getReservas().contains(j))
+				tv3.setText("RESERVA"); 
+		
+        switch ((String)tv3.getText()){
+        case "ARQUERO": tv3.setTextColor(Color.parseColor("#110E6B"));
+						break;
+        case "DEFENSA": tv3.setTextColor(Color.parseColor("#1C6B0E"));
+        				break;
+        case "MEDIOCAMPISTA": tv3.setTextColor(Color.parseColor("#A8AD1C"));
+						      break;   
+        case "DELANTERO": tv3.setTextColor(Color.parseColor("#A41A1A"));
+						  break;
+		case "SUPLENTE": tv3.setTextColor(Color.parseColor("#565656"));
+						 break; 
+		case "RESERVA": tv3.setTextColor(Color.parseColor("#151515"));
+						break;
+
+        }
+
 	    return convertView;
 	}
 	

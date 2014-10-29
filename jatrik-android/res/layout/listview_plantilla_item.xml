@@ -25,7 +25,7 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_marginTop="2sp"
-	        android:layout_marginLeft="3sp"
+	        android:layout_marginLeft="10sp"
 	        android:layout_toRightOf="@id/numeroJugador"
 	        android:textColor="#B7B7B7"
 	        android:textSize="18sp" />
@@ -57,7 +57,7 @@
 	        android:layout_marginRight="5sp"
 	        android:gravity="end" 
 	        android:textColor="#B7B7B7"
-	        android:textSize="18sp" />
+	        android:textSize="16sp" />
     
     </LinearLayout>
  

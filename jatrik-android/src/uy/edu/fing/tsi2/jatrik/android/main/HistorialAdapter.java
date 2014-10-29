@@ -67,6 +67,7 @@ public class HistorialAdapter extends ArrayAdapter<InfoPartido> {
         TextView tv3 = (TextView) convertView.findViewById(R.id.golesVisitante);
         TextView tv4 = (TextView) convertView.findViewById(R.id.equipoVisitante);
         TextView tv5 = (TextView) convertView.findViewById(R.id.estado);
+        TextView tv6 = (TextView) convertView.findViewById(R.id.idPartido);
         InfoPartido p = partidoList.get(position);
 
         tv1.setText(p.getEquipoLocal());   
@@ -74,6 +75,7 @@ public class HistorialAdapter extends ArrayAdapter<InfoPartido> {
         tv3.setText(Integer.toString(p.getGolesVisitante()));   	        
         tv4.setText(p.getEquipoVisitante());  
         tv5.setText(p.getEstado());
+        tv6.setText(p.getIdPartido().toString());
         
         int golesUsuario;
         int golesRival;
@@ -96,6 +98,7 @@ public class HistorialAdapter extends ArrayAdapter<InfoPartido> {
 	        	tv2.setTextColor(Color.parseColor("#00005C"));
 	        	tv3.setTextColor(Color.parseColor("#00005C"));
 	        	tv4.setTextColor(Color.parseColor("#00005C"));
+	        	tv6.setTextColor(Color.parseColor("#DDE0FF"));
 	        }
 	        else
 	        	if (golesUsuario > golesRival){
@@ -104,6 +107,7 @@ public class HistorialAdapter extends ArrayAdapter<InfoPartido> {
 	            	tv2.setTextColor(Color.parseColor("#00561D"));
 	            	tv3.setTextColor(Color.parseColor("#00561D"));
 	            	tv4.setTextColor(Color.parseColor("#00561D"));
+	            	tv6.setTextColor(Color.parseColor("#E3FFE5"));
 	        	}
 	        	else
 	        	{
@@ -112,6 +116,7 @@ public class HistorialAdapter extends ArrayAdapter<InfoPartido> {
 	            	tv2.setTextColor(Color.parseColor("#8A0000"));
 	            	tv3.setTextColor(Color.parseColor("#8A0000"));
 	            	tv4.setTextColor(Color.parseColor("#8A0000"));
+	            	tv6.setTextColor(Color.parseColor("#FFE3E3"));
 	        	}
 			}
         else {
@@ -122,6 +127,7 @@ public class HistorialAdapter extends ArrayAdapter<InfoPartido> {
         	tv4.setTextColor(Color.parseColor("#CBAC25"));
         	tv5.setTextColor(Color.parseColor("#CBAC25"));
         	tv5.setTypeface(null, Typeface.BOLD);
+        	tv6.setTextColor(Color.parseColor("#FFFFA6"));
         	
         }
         

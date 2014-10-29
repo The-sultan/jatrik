@@ -58,7 +58,7 @@ public class EJBManagerUsuarioBean implements IUsuarios {
 
 	@Override
 	public Long crearUsuario(String nombre, String nick, String email, String password,
-	String nombreEquipo) {
+	String nombreEquipo, String nombreEstadio) {
 		try {
 			logger.info("Voy a Validar al usuario");
 			if (usuarios.findUsuarioByNick(nick) ==null){
@@ -85,6 +85,7 @@ public class EJBManagerUsuarioBean implements IUsuarios {
 					
 					Equipo equipo = new Equipo();
 					equipo.setNombre(nombreEquipo);
+					equipo.setEstadio(nombreEstadio);
 					//BeanUtils.copyProperties(equipo, infoUsuario.getInfoEquipo());
 					
 					//Seteo el Usuario al Equipo

@@ -31,14 +31,8 @@ public class PlantillaActivity extends ActionBarActivity {
 		jugadores.addAll(((DatosUsuario)this.getApplication()).getUsuario().getInfoEquipo().getSuplentes());
 		jugadores.addAll(((DatosUsuario)this.getApplication()).getUsuario().getInfoEquipo().getReservas());
 		
-//		InfoJugador ij = new InfoJugador();
-//		ij.setId((long) 1);
-//		ij.setNombre("Rafael Olivera");
-//		ij.setNroCamiseta(15);
-//		ij.setPuesto("Delantero");
-//		jugadores.add(ij);
-		
 		adpt  = new PlantillaAdapter(jugadores, this);
+		adpt.setEquipo(((DatosUsuario)this.getApplication()).getUsuario().getInfoEquipo());
         ListView lView = (ListView) findViewById(R.id.PlantillaView);         
         lView.setAdapter(adpt);
 

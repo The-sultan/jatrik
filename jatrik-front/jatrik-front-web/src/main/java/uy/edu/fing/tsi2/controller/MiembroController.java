@@ -81,7 +81,7 @@ public class MiembroController {
     public void register() throws Exception {
         try {
         	
-            AdminUsuarios.crearUsuario(newMember.getNombre(), newMember.getEmail(), newMember.getNick(), newMember.getPassword(),newMember.getNombreEquipo(), newMember.getPais());
+            AdminUsuarios.crearUsuario(newMember.getNombre(), newMember.getEmail(), newMember.getNick(), newMember.getPassword(),newMember.getNombreEquipo(), newMember.getNombreEstadio(), newMember.getPais());
 			sessionBean.setInfoUsuario(usuarioEJB.login(newMember.getNick(), newMember.getPassword()));
 			sessionBean.setLogueado(true);
 			ajaxNav.controllerNavigate("home");

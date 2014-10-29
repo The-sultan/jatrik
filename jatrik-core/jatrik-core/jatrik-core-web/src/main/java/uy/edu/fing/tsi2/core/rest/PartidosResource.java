@@ -2,11 +2,14 @@ package uy.edu.fing.tsi2.core.rest;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEvento;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoPartido;
 import uy.edu.fing.tsi2.jatrik.core.domain.Partido;
@@ -25,6 +28,7 @@ public class PartidosResource {
 	EJBManagerPartidoLocal partidoEJB;
 	
 	@Path("/{id}")
+	@Produces("application/json")
 	@GET
 	public InfoPartido obtenerPartido(@PathParam("id") Long id){
 		Partido partido = partidoEJB.obtenerPartido(id);

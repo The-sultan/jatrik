@@ -9,7 +9,9 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Produces;
 
 import uy.edu.fing.tsi2.jatrik.core.domain.Partido;
+import uy.edu.fing.tsi2.jatrik.core.domain.eventos.EventoPartido;
 import uy.edu.fing.tsi2.jatrik.core.ejb.impl.local.EJBManagerPartidoLocal;
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEvento;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoPartido;
 import uy.edu.fing.tsi2.jatrik.common.payloads.HistorialPartidos;
 
@@ -36,10 +38,17 @@ public class HistorialPartidosResource {
 		List<Partido> prt = partidoEJB.obtenerPartidos(idEquipo);
 		List<InfoPartido> partidos = new ArrayList<InfoPartido>();
 		for (Partido p : prt){
-			InfoPartido ip = new InfoPartido(p.getId(), p.getEstado().getEstado(), p.getLocal().getNombre(),
-											 p.getVisitante().getNombre(), p.getGolesLocal(), p.getGolesVisitante());
+			InfoPartido ip = new InfoPartido(p.getId(), p.getEstado().getEstado(), p.getLocal().getNombre(),p.getVisitante().getNombre(), p.getGolesLocal(), p.getGolesVisitante());
+//			List<EventoPartido> eventos = partidoEJB.obtenerEventosPartido(p.getId());
+//			List<InfoEvento> infoEventos = new ArrayList<>();
+//			for(EventoPartido eventoPartido : eventos){
+//				InfoEvento infoEvento = new InfoEvento(eventoPartido.getMinuto(), eventoPartido.toString(), eventoPartido.getEvento().getNombre());
+//				infoEventos.add(infoEvento);
+//			}
+//			ip.setEventos(infoEventos);
 			partidos.add(ip);
 		}
+		
 		HistorialPartidos historial = new HistorialPartidos(partidos);
 		return historial;
 	}

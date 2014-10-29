@@ -18,7 +18,7 @@ public class InfoJugador {
 
 	private Boolean enVenta;
 
-	private int nroCamiseta;
+	private int nro_Camiseta;
 
 	private List<InfoHabilidad> habilidades;
 
@@ -78,12 +78,12 @@ public class InfoJugador {
 		this.enVenta = enVenta;
 	}
 
-	public int getNroCamiseta() {
-		return nroCamiseta;
+	public int getNro_Camiseta() {
+		return nro_Camiseta;
 	}
 
-	public void setNroCamiseta(int nroCamiseta) {
-		this.nroCamiseta = nroCamiseta;
+	public void setNro_Camiseta(int nro_Camiseta) {
+		this.nro_Camiseta = nro_Camiseta;
 	}
 
 	public List<InfoHabilidad> getHabilidades() {
