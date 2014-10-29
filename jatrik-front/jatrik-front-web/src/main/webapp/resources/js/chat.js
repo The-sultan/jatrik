@@ -13,8 +13,23 @@ var chatbox = {
 			sender : currentUser.nick,
 			receiver : ""
 		}
-		self.websocket.send(JSON.stringify(sendingMsg));
-		setTimeout(self.keepAlive, 10000);
+	
+		try{
+			self.websocket.send(JSON.stringify(sendingMsg ));
+		}
+		catch(error){
+			
+			this.websocket = new WebSocket('ws://' + document.location.host + '/jatrik-front-web/chat'); 
+			this.websocket.onmessage = this.onMessageReceived;
+			this.websocket.onclose = this.onSocketClose;
+			setTimeout(function(){
+				console.log("re attempting after 2 seconds");
+				self.websocket.send(msg);
+			},2000);
+		}
+		finally {
+			setTimeout(self.keepAlive,10000);
+		}
 	},
 	init : function(){
 		this.websocket = new WebSocket('ws://' + document.location.host + '/jatrik-front-web/chat'); 
@@ -22,7 +37,7 @@ var chatbox = {
 		
 		this.websocket.onmessage = this.onMessageReceived;
 		this.websocket.onclose = this.onSocketClose;
-		setTimeout(self.keepAlive, 10000);
+		setTimeout(self.keepAlive,10000);
 		$("#chat-autocomplete").autocomplete({
 			source: usuarios,
 			select: function(evt,ui){
@@ -89,7 +104,19 @@ var chatbox = {
 		console.log(msg.message);
 	},
 	sendMessage : function(msg){
-		this.websocket.send(msg);
+		try{
+			this.websocket.send(msg);
+		}
+		catch(error){
+			
+			this.websocket = new WebSocket('ws://' + document.location.host + '/jatrik-front-web/chat'); 
+			this.websocket.onmessage = this.onMessageReceived;
+			this.websocket.onclose = this.onSocketClose;
+			setTimeout(function(){
+				console.log("re attempting after 2 seconds");
+				self.websocket.send(msg);
+			},2000);
+		}
 	},
 	
 	onSocketClose : function(){

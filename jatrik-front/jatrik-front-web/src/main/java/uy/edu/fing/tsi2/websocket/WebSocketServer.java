@@ -72,6 +72,7 @@ public class WebSocketServer implements Serializable{
 		if(chatMessage.getReceiver().equals("")){
 			try {
 				client.getBasicRemote().sendText("");
+				return;
 			} catch (IOException ex) {
 				Logger.getLogger(WebSocketServer.class.getName()).log(Level.SEVERE, null, ex);
 			}
