@@ -2,8 +2,10 @@ package uy.edu.fing.tsi2.jatrik.core.ejb.impl.beans;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -52,7 +54,7 @@ public class EJBManagerUsuarioBean implements IUsuarios {
 
 	@EJB
 	private EJBEMJugadoresLocal jugadores;
-	
+
 	@EJB
 	private EJBEMDatosJugadoresLocal datosJugadores;
 
@@ -61,43 +63,42 @@ public class EJBManagerUsuarioBean implements IUsuarios {
 	String nombreEquipo, String nombreEstadio) {
 		try {
 			logger.info("Voy a Validar al usuario");
-			if (usuarios.findUsuarioByNick(nick) ==null){
-				
-				
-			
-					// TODO Aca deberiamos controlar si no hay equipos libres o si no
-					// hay mas jugadores
-					Usuario usr = new Usuario();
-					usr.setNombre(nombre);
-					usr.setEmail(email);
-					usr.setPassword(password);
-					usr.setNick(nick);
-					//BeanUtils.copyProperties(usr, infoUsuario);
-		
-		//			Equipo equipo = equipos.findEquipoLibre();
-		//			equipo.setLatitud(latitud);
-		//			equipo.setLongitud(longitud);
-		//			equipo.setAltura(altura);
-		//			equipo.setNombre(nombreEquipo);
-		//			equipo.setEstadio(nombreEstadio);
-		//			equipo.setUsuario(usr);
-		//			equipos.update(equipo);
-					
-					Equipo equipo = new Equipo();
-					equipo.setNombre(nombreEquipo);
+			if (usuarios.findUsuarioByNick(nick) == null) {
+
+				// TODO Aca deberiamos controlar si no hay equipos libres o si
+				// no
+				// hay mas jugadores
+				Usuario usr = new Usuario();
+				usr.setNombre(nombre);
+				usr.setEmail(email);
+				usr.setPassword(password);
+				usr.setNick(nick);
+				// BeanUtils.copyProperties(usr, infoUsuario);
+
+				// Equipo equipo = equipos.findEquipoLibre();
+				// equipo.setLatitud(latitud);
+				// equipo.setLongitud(longitud);
+				// equipo.setAltura(altura);
+				// equipo.setNombre(nombreEquipo);
+				// equipo.setEstadio(nombreEstadio);
+				// equipo.setUsuario(usr);
+				// equipos.update(equipo);
+
+				Equipo equipo = new Equipo();
+				equipo.setNombre(nombreEquipo);
 					equipo.setEstadio(nombreEstadio);
-					//BeanUtils.copyProperties(equipo, infoUsuario.getInfoEquipo());
-					
-					//Seteo el Usuario al Equipo
-					equipo.setUsuario(usr);
-					
-					inicializaEquipo(equipo);
-					usr.setEquipo(equipo);
-					usuarios.add(usr);
-					logger.info("Usuario Creado");
-					return usr.getId();
-			}else{
-				//Ver que retornamos al servicio rest
+				// infoUsuario.getInfoEquipo());
+
+				// Seteo el Usuario al Equipo
+				equipo.setUsuario(usr);
+
+				inicializaEquipo2(equipo);
+				usr.setEquipo(equipo);
+				usuarios.add(usr);
+				logger.info("Usuario Creado");
+				return usr.getId();
+			} else {
+				// Ver que retornamos al servicio rest
 				logger.info("El usuario ya Existe");
 				return null;
 			}
@@ -109,7 +110,7 @@ public class EJBManagerUsuarioBean implements IUsuarios {
 	}
 
 	public void inicializaEquipo(Equipo equipo) {
-		
+
 		Map<String, String> mapNombres = new HashMap<String, String>();
 		List<Jugador> players = new ArrayList<Jugador>();
 		Jugador jugador = null;
@@ -117,7 +118,6 @@ public class EJBManagerUsuarioBean implements IUsuarios {
 		Habilidad habilidad = null;
 
 		List<DatosJugador> nombresJugadores = datosJugadores.findAll();
-				
 
 		while (players.size() < 18) {
 
@@ -135,11 +135,12 @@ public class EJBManagerUsuarioBean implements IUsuarios {
 				jugador = new Jugador();
 				jugador.setNombre(datosJugador.getNombre());
 				jugador.setNro_Camiseta(numeroCamiseta);
-				
-				jugador.setEdad(r.nextInt(20) + 20); //edad entre 20 y 39 años.
-				jugador.setAltura(r.nextInt(155)+ 40); // altura entre 155 y 195
-				jugador.setPeso(r.nextInt(70) + 25); //peso entre 70 y 85
-				
+
+				jugador.setEdad(r.nextInt(20) + 20); // edad entre 20 y 39 años.
+				jugador.setAltura(r.nextInt(155) + 40); // altura entre 155 y
+														// 195
+				jugador.setPeso(r.nextInt(70) + 25); // peso entre 70 y 85
+
 				jugador.setEnVenta(new Boolean(false));
 
 				// 15 jugadores - 2 arqueros, 5 defensas, 5 volantes y 3
@@ -157,25 +158,25 @@ public class EJBManagerUsuarioBean implements IUsuarios {
 				// Habilidades del jugador entre 30 y 70.
 				List<Habilidad> habilidades = new LinkedList<Habilidad>();
 				habilidad = new Habilidad(r.nextInt(40) + 30,
-						EnumHabilidad.VELOCIDAD, "Velocidad");			
+						EnumHabilidad.VELOCIDAD, "Velocidad");
 				habilidades.add(habilidad);
-				
+
 				habilidad = new Habilidad(r.nextInt(40) + 30,
 						EnumHabilidad.PORTERIA, "Porteria");
 				habilidades.add(habilidad);
-				
+
 				habilidad = new Habilidad(r.nextInt(40) + 30,
 						EnumHabilidad.DEFENSA, "Defensa");
 				habilidades.add(habilidad);
-				
+
 				habilidad = new Habilidad(r.nextInt(40) + 30,
 						EnumHabilidad.ATAQUE, "Ataque");
 				habilidades.add(habilidad);
-				
+
 				habilidad = new Habilidad(r.nextInt(40) + 30,
 						EnumHabilidad.TECNICA, "Tecnica");
 				habilidades.add(habilidad);
-				
+
 				jugador.setHabilidades(habilidades);
 
 				jugador.setEquipo(equipo);
@@ -190,19 +191,125 @@ public class EJBManagerUsuarioBean implements IUsuarios {
 		}
 
 		equipo.setJugadores(new HashSet<Jugador>(players));
-		//Guardo en Base
+		// Guardo en Base
+		equipos.add(equipo);
+
+	}
+
+	public void inicializaEquipo2(Equipo equipo) {
+		Random r = new Random((new Date()).getTime());
+		int random;
+		List<Jugador> players = new ArrayList<Jugador>();
+		Jugador player;
+		int camisetaTitular = 1;
+		int camisetaSuplente = 12;
+
+		// 2 GOLEROS
+		List<Jugador> golerosLibres = jugadores
+				.findJugadoresPuestoLibres(EnumPuestoJugador.ARQUERO);
+
+		random = r.nextInt(golerosLibres.size());
+		player = golerosLibres.get(random);
+		golerosLibres.remove(random);
+		player.setNro_Camiseta(camisetaTitular);
+		camisetaTitular++;
+		players.add(player);
+
+		random = r.nextInt(golerosLibres.size());
+		player = golerosLibres.get(random);
+		golerosLibres.remove(random);
+		player.setNro_Camiseta(camisetaSuplente);
+		camisetaSuplente++;
+		players.add(player);
+
+		// DEFENSAS
+		List<Jugador> defensasLibres = jugadores
+				.findJugadoresPuestoLibres(EnumPuestoJugador.DEFENSA);
+		// 4 DEFENSAS TITULARES
+		for (int i = 1; i <= 4; i++) {
+			random = r.nextInt(defensasLibres.size());
+			player = defensasLibres.get(random);
+			defensasLibres.remove(random);
+			player.setNro_Camiseta(camisetaTitular);
+			camisetaTitular++;
+			players.add(player);
+		}
+		// 2 DEFENSAS TITULARES
+		for (int i = 1; i <= 2; i++) {
+			random = r.nextInt(defensasLibres.size());
+			player = defensasLibres.get(random);
+			defensasLibres.remove(random);
+			player.setNro_Camiseta(camisetaSuplente);
+			camisetaSuplente++;
+			players.add(player);
+		}
+
+		// MEDIOCAMPISTAS
+		List<Jugador> mediocampistasLibres = jugadores
+				.findJugadoresPuestoLibres(EnumPuestoJugador.MEDIOCAMPISTA);
+		// 3 MEDIOCAMPISTAS TITULARES
+		for (int i = 1; i <= 3; i++) {
+			random = r.nextInt(mediocampistasLibres.size());
+			player = mediocampistasLibres.get(random);
+			mediocampistasLibres.remove(random);
+			player.setNro_Camiseta(camisetaTitular);
+			camisetaTitular++;
+			players.add(player);
+		}
+		// 3 MEDIOCAMPISTAS TITULARES
+		for (int i = 1; i <= 3; i++) {
+			random = r.nextInt(mediocampistasLibres.size());
+			player = mediocampistasLibres.get(random);
+			mediocampistasLibres.remove(random);
+			player.setNro_Camiseta(camisetaSuplente);
+			camisetaSuplente++;
+			players.add(player);
+		}
+
+		// DELANTEROS
+		List<Jugador> delanterosLibres = jugadores
+				.findJugadoresPuestoLibres(EnumPuestoJugador.DELANTERO);
+		// 3 DELANTEROS TITULARES
+		for (int i = 1; i <= 3; i++) {
+			random = r.nextInt(delanterosLibres.size());
+			player = delanterosLibres.get(random);
+			delanterosLibres.remove(random);
+			player.setNro_Camiseta(camisetaTitular);
+			camisetaTitular++;
+			players.add(player);
+		}
+		// 2 DELANTEROS TITULARES
+		for (int i = 1; i <= 2; i++) {
+			random = r.nextInt(delanterosLibres.size());
+			player = delanterosLibres.get(random);
+			delanterosLibres.remove(random);
+			player.setNro_Camiseta(camisetaSuplente);
+			camisetaSuplente++;
+			players.add(player);
+		}
+
+		// Le asigno el equipo al jugador
+		for (Jugador jugador : players) {
+			jugador.setEquipo(equipo);
+			jugadores.update(jugador);
+		}
+
+		//Le asigno los jugadores al equipo
+		equipo.setJugadores(new HashSet<Jugador>(players));
+		// Guardo en Base
 		equipos.add(equipo);
 
 	}
 
 	public Usuario validarUsuario(String nick, String password) {
-			Usuario usuario = this.usuarios.findUsuarioByNick(nick);
-			if (usuario != null) {
-				if (usuario.getNick().equals(nick) && usuario.getPassword().equals(password)){
-					return usuario;
-				}
+		Usuario usuario = this.usuarios.findUsuarioByNick(nick);
+		if (usuario != null) {
+			if (usuario.getNick().equals(nick)
+					&& usuario.getPassword().equals(password)) {
+				return usuario;
 			}
-			return null;
+		}
+		return null;
 	}
 	
 	public List<Usuario> obtenerUsuarios(){

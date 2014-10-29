@@ -12,6 +12,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import uy.edu.fing.tsi2.jatrik.core.domain.Jugador;
+import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumPuestoJugador;
 import uy.edu.fing.tsi2.jatrik.core.persistence.IEMJugadores;
 import uy.edu.fing.tsi2.jatrik.core.persistence.impl.local.EJBEMJugadoresLocal;
 import uy.edu.fing.tsi2.jatrik.core.persistence.impl.remote.EJBEMJugadoresRemote;
@@ -55,6 +56,17 @@ public class EJBEMJugadoresBean implements IEMJugadores {
 	public List<Jugador> findJugadoresLibres() {
 
 		Query consulta = entityManager.createNamedQuery("findJugadoresLibres");
+		return ((List<Jugador>) consulta.getResultList());
+
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	public List<Jugador> findJugadoresPuestoLibres(EnumPuestoJugador puesto) {
+
+		Query consulta = entityManager.createNamedQuery("findJugadoresPuestoLibres");
+		consulta.setParameter("puesto", puesto);
+		consulta.setMaxResults(50);
 		return ((List<Jugador>) consulta.getResultList());
 
 	}

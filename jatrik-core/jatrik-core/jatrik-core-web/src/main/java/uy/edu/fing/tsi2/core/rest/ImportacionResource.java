@@ -1,6 +1,8 @@
 package uy.edu.fing.tsi2.core.rest;
 
 
+import java.io.Console;
+
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.POST;
@@ -17,8 +19,16 @@ public class ImportacionResource {
 	
 	@POST
 	public Response ImportarJugadores(){
-		
-		importacion.ImportarJugadores();
+		for (int i = 0; i < 20000; i++) {
+			try {
+				System.out.println(i); 
+				importacion.ImportarJugadores(i);
+				
+			} catch (Exception e) {
+				
+			}
+			
+		}
 		
 		return Response.ok().build();
 	}

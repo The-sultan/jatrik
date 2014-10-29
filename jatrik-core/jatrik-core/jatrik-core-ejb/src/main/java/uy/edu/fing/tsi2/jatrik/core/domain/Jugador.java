@@ -27,9 +27,10 @@ import javax.persistence.TemporalType;
 
 import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumPuestoJugador;
 
-
-@NamedQueries({ @NamedQuery(name = "findJugadoresLibres", query = "SELECT OBJECT(u) FROM Jugador u WHERE u.equipo is null "),
-				@NamedQuery(name = "findJugadoresdelEquipo", query = "SELECT OBJECT(u) FROM Jugador u WHERE u.equipo.id = :idEquipo")
+@NamedQueries({
+		@NamedQuery(name = "findJugadoresLibres", query = "SELECT OBJECT(u) FROM Jugador u WHERE u.equipo is null "),
+		@NamedQuery(name = "findJugadoresPuestoLibres", query = "SELECT OBJECT(u) FROM Jugador u WHERE u.equipo is null and u.puesto = :puesto "),
+		@NamedQuery(name = "findJugadoresdelEquipo", query = "SELECT OBJECT(u) FROM Jugador u WHERE u.equipo.id = :idEquipo")
 
 })
 @Entity
@@ -78,18 +79,17 @@ public class Jugador implements Serializable {
 	private List<Habilidad> habilidades = new LinkedList<Habilidad>();
 
 	@ManyToOne(targetEntity = Ejercicio.class)
-	@JoinColumn(name="EJERCICIO_ID",referencedColumnName="ID")
+	@JoinColumn(name = "EJERCICIO_ID", referencedColumnName = "ID")
 	private Ejercicio entrenando;
-	
+
 	@Column(name = "FECHA_ENTRENAMIENTO")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaEntrena;
-	
+
 	public Jugador() {
 		super();
 	}
 
-		
 	public Long getId() {
 		return id;
 	}
@@ -169,8 +169,6 @@ public class Jugador implements Serializable {
 	public void setHabilidades(List<Habilidad> habilidades) {
 		this.habilidades = habilidades;
 	}
-	
-	
 
 	public Ejercicio getEntrenando() {
 		return entrenando;

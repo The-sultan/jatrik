@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<body>
+	<ui:composition>
+		<div class="cardcontainer" style="background-image: url(resources/gfx/tarjetas/gold.png);">
+			<div class="avatar" style="background-image: url(resources/gfx/jugadores/#{id}..png);">
+			</div>
+			<div class="clubbadge"
+				style="background-image: url(resources/gfx/clubs/#{id}..png);">
+			</div>
+			<div class="nationflag"
+				style="background-image: url(resources/gfx/nacionalidades/#{id}..jpg);">
+			</div>
+
+
+			<span class="rating">#{valoracion} </span>
+			<div class="position">#{puesto}</div>
+
+			<span class="name">#{nombre}</span> <span class="tecnica">#{tecnica} TEC</span>
+			<span class="ataque">#{ataque} ATQ</span> <span class="defensa">#{defensa}
+				DEF</span> <span class="porteria">#{porteria} POR</span> <span class="velocidad">#{velocidad}
+				VEL</span>
+		</div>
+	</ui:composition>
+</body>
+</html>

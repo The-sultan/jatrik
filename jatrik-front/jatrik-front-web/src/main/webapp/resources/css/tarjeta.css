@@ -1,0 +1,104 @@
+.cardcontainer {
+	text-shadow: rgb(53, 53, 53) 0px 0px 0.00999999977648258px;
+	font-family: 'Titillium Web', sans-serif;
+	line-height: 20px;
+	font-size: 22px;
+	background-image: url(../images/gold.png);
+	background-repeat: no-repeat;
+	width: 238px;
+	height: 354px;
+	position: relative;
+	color: rgb(53, 53, 53);
+}
+
+.avatar {
+	background-repeat: no-repeat;
+	background-size: 100%;
+	height: 36%;
+	width: 53%;
+	left: 44%;
+	top: 15%;
+	position: absolute;
+}
+
+.clubbadge{
+
+background-repeat:no-repeat;
+background-size: 100%;
+cursor: auto;
+height: 13.7%;
+left: 17%;
+position: absolute;
+top: 27%;
+width: 18.3%;
+}
+
+.position {
+	position: absolute;
+	left: 35%;
+	top: 17%;
+}
+
+.rating {
+	position: absolute;
+	border-right-color: rgb(53, 53, 53);
+	border-right-style: solid;
+	border-right-width: 1px;
+	top: 17%;
+	left: 13%;
+	font-size: 36px;
+	padding-right: 3%;
+}
+
+.nationflag{
+
+background-repeat:no-repeat;
+background-size: 100%;
+cursor: auto;
+font-size: 22px;
+height: 9.6%;
+left: 17%;
+line-height: 20px;
+max-width: 100%;
+position: absolute;
+top: 42%;
+width: 18.3%;
+}
+
+.name {
+	position: absolute;
+	top: 8%;
+	left: 0%; width : 100%;
+	text-align: center;
+	width: 100%
+}
+
+.ataque {
+	position: absolute;
+	top: 64%;
+	left: 17%;
+}
+
+.velocidad {
+	position: absolute;
+	top: 64%;
+	left: 55%;
+}
+
+.defensa {
+	position: absolute;
+	top: 74%;
+	left: 17%;
+}
+
+.tecnica {
+	position: absolute;
+	top: 74%;
+	left: 55%;
+}
+
+.porteria {
+	position: absolute;
+	top: 84%;
+	left: 35%;
+}
