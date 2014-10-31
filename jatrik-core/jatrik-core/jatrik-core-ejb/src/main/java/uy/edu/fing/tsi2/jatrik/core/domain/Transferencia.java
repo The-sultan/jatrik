@@ -36,7 +36,7 @@ public class Transferencia implements Serializable {
 	private Long id;
 	
 	
-	@OneToOne(targetEntity = Usuario.class)
+	@OneToOne(targetEntity = Jugador.class)
 	@JoinColumn(name="JUGADOR_ID", referencedColumnName="ID")
 	private Jugador jugador;
 	

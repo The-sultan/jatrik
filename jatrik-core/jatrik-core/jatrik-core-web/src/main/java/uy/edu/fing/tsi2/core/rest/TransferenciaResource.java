@@ -13,7 +13,6 @@ import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
@@ -38,7 +37,6 @@ public class TransferenciaResource {
 	@Path("/vender")
 	public Response ponerJugadorEnVenta(@QueryParam("idEquipoVende") Long idEquipoVende, @QueryParam("idJugador") Long idJugador,@QueryParam("precio") Double precio) {
 		
-		System.out.println("El Jugador es :" + idJugador + " El equipo :" + idEquipoVende + " precio :" + precio);
 		boolean respuesta = transferenciaEJB.ponerJugadorEnVenta(idJugador,idEquipoVende, precio);
 		URI uri = null;
 		try {
@@ -69,24 +67,27 @@ public class TransferenciaResource {
 		return Response.created(uri).build();
 	}
 	
-	
-	@GET
-	@Produces("application/json")
-	public List<InfoTransferencia> listadoDeJuagadoresEnVenta(InfoEquipo equipo){
 		
+	@GET
+	public Response listadoDeJuagadoresEnVenta(InfoEquipo equipo){
 		List<InfoTransferencia> resultado = new ArrayList<InfoTransferencia>();
-		List<Transferencia> transferencias = transferenciaEJB.listadoJugadoresEnVenta(equipo.getId());
-		for (Transferencia transferencia : transferencias) {
-			InfoTransferencia infoTrans = new InfoTransferencia();
-			infoTrans.setEquipoIdVendedor(transferencia.getVendedor().getId());
-			infoTrans.setPrecio(transferencia.getPrecio());
-			infoTrans.setId(transferencia.getId());
-			InfoJugador infoJugador = getDtoFromEntity(transferencia.getJugador());
-			infoTrans.setJugador(infoJugador);
-			resultado.add(infoTrans);
+		try {
+			List<Transferencia> transferencias = transferenciaEJB.listadoJugadoresEnVenta(equipo.getId());
+			for (Transferencia transferencia : transferencias) {
+				InfoTransferencia infoTrans = new InfoTransferencia();
+				infoTrans.setEquipoIdVendedor(transferencia.getVendedor().getId());
+				infoTrans.setPrecio(transferencia.getPrecio());
+				infoTrans.setId(transferencia.getId());
+				InfoJugador infoJugador = getDtoFromEntity(transferencia.getJugador());
+				infoTrans.setJugador(infoJugador);
+				resultado.add(infoTrans);
+			}
+			return Response.ok(resultado).build();
+		} catch (Exception ex) {
+			Logger.getLogger(TransferenciaResource.class.getName()).log(Level.SEVERE, null, ex);
+			return Response.serverError().build();
 		}
 		
-		return resultado;
 	}
 	
 	private InfoJugador getDtoFromEntity(Jugador jugador){
@@ -102,9 +103,9 @@ public class TransferenciaResource {
 				}
 				infoJugador.setHabilidades(infoHabilidades);
 			} catch (IllegalAccessException ex) {
-				Logger.getLogger(EquiposResource.class.getName()).log(Level.SEVERE, null, ex);
+				Logger.getLogger(TransferenciaResource.class.getName()).log(Level.SEVERE, null, ex);
 			} catch (InvocationTargetException ex) {
-				Logger.getLogger(EquiposResource.class.getName()).log(Level.SEVERE, null, ex);
+				Logger.getLogger(TransferenciaResource.class.getName()).log(Level.SEVERE, null, ex);
 			}
 		return infoJugador;
 	}

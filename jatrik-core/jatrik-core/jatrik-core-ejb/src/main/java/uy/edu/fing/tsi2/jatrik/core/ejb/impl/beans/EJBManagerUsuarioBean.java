@@ -1,11 +1,9 @@
 package uy.edu.fing.tsi2.jatrik.core.ejb.impl.beans;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -86,13 +84,13 @@ public class EJBManagerUsuarioBean implements IUsuarios {
 
 				Equipo equipo = new Equipo();
 				equipo.setNombre(nombreEquipo);
-					equipo.setEstadio(nombreEstadio);
+				equipo.setEstadio(nombreEstadio);
 				// infoUsuario.getInfoEquipo());
 
 				// Seteo el Usuario al Equipo
 				equipo.setUsuario(usr);
 
-				inicializaEquipo2(equipo);
+				inicializaEquipo(equipo);
 				usr.setEquipo(equipo);
 				usuarios.add(usr);
 				logger.info("Usuario Creado");

@@ -65,6 +65,7 @@ public class EJBEMEventosPartidosBean implements IEMEventosPartidos {
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<EventoPartido> findByPartido(Long partidoId){
 		Query query = entityManager.createNamedQuery("findEventosPartidoByPartido");

@@ -10,7 +10,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import uy.edu.fing.tsi2.jatrik.core.domain.Evento;
-import uy.edu.fing.tsi2.jatrik.core.domain.Usuario;
 import uy.edu.fing.tsi2.jatrik.core.persistence.IEMEventos;
 import uy.edu.fing.tsi2.jatrik.core.persistence.impl.local.EJBEMEventosLocal;
 import uy.edu.fing.tsi2.jatrik.core.persistence.impl.remote.EJBEMEventosRemote;
