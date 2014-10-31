@@ -10,4 +10,6 @@ public interface IUsuarios {
 	Usuario validarUsuario(String nick,String password);
 	
 	List<Usuario> obtenerUsuarios();
+	
+	boolean registrationIdUsuario(Long idUsuario, String registrationId);
 }

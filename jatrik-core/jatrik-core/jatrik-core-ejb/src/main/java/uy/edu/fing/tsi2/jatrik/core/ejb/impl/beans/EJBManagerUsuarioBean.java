@@ -313,4 +313,15 @@ public class EJBManagerUsuarioBean implements IUsuarios {
 	public List<Usuario> obtenerUsuarios(){
 		return usuarios.findAll();
 	}
+	
+	public boolean registrationIdUsuario(Long idUsuario, String registrationId){
+		Usuario u = usuarios.find(idUsuario);
+		if (u != null){
+			u.setRegistrationId(registrationId);
+			usuarios.update(u);
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

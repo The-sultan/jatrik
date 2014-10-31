@@ -47,6 +47,9 @@ public class Usuario implements Serializable {
 	@Column(name = "EMAIL")
 	private String email;
 	
+	@Column(name = "REGISTRATIONID")
+	private String registrationId;
+
 	@OneToOne
 	private Equipo equipo;
 	
@@ -90,8 +93,6 @@ public class Usuario implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	
 	
 	public Equipo getEquipo() {
 		return equipo;
@@ -101,6 +102,14 @@ public class Usuario implements Serializable {
 		this.equipo = equipo;
 	}
 
+	public String getRegistrationId() {
+		return registrationId;
+	}
+
+	public void setRegistrationId(String registrationId) {
+		this.registrationId = registrationId;
+	}	
+	
 	@Override
 	public int hashCode() {
 		int hash = 0;

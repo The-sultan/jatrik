@@ -3,6 +3,7 @@ package uy.edu.fing.tsi2.jatrik.android.main;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.http.HttpEntity;
@@ -25,6 +26,8 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
@@ -34,6 +37,7 @@ public class DetallePartidoActivity extends ActionBarActivity {
 
 	private EventosAdapter adpt;
 	private InfoPartido partido;
+	private boolean finalizado;
 	
 	public InfoPartido getPartido() {
 		return partido;
@@ -42,129 +46,131 @@ public class DetallePartidoActivity extends ActionBarActivity {
 	public void setPartido(InfoPartido partido) {
 		this.partido = partido;
 	}
-
-	private class ServicePartido extends AsyncTask <Void, Void, String> 	 {
-	    private final ProgressDialog dialog = new ProgressDialog(DetallePartidoActivity.this);
-		
-		
-		protected String getASCIIContentFromEntity(HttpEntity entity) throws IllegalStateException, IOException {
-			InputStream in = entity.getContent();
-			StringBuffer out = new StringBuffer();
-			int n = 1;
-			while (n>0) {
-				byte[] b = new byte[4096];
-				n =  in.read(b);
-				if (n>0)
-					out.append(new String(b, 0, n));
-			}
-			return out.toString();
-			
-		}
-
-		@Override
-		protected String doInBackground(Void... params) {
-			Intent myIntent = getIntent();
-			int idPartido = Integer.valueOf(myIntent.getStringExtra("idPartido"));
-			HttpClient httpClient = new DefaultHttpClient();
-			HttpContext localContext = new BasicHttpContext();
-			HttpGet httpGet = new HttpGet(((DatosUsuario)DetallePartidoActivity.this.getApplication()).getUrlServicios() + "partidos/" + idPartido);
-			String text = null;
-			try {
-				HttpResponse response = httpClient.execute(httpGet, localContext);
-				HttpEntity entity = response.getEntity();
-				text = getASCIIContentFromEntity(entity);
-			} catch (Exception e) {
-				return e.getLocalizedMessage();
-			}
-			return text;
-		}
-
-		protected void onPostExecute(String results) {
-		if (results!=null) {
-			Gson gson = new Gson();
-			partido = gson.fromJson(results, InfoPartido.class);
-			dialog.dismiss();
-			
-			if (partido != null){
-				
-				TextView tvLocal = (TextView)findViewById(R.id.equipoLocalDetalle);
-				TextView tvVisitante = (TextView)findViewById(R.id.equipoVisitanteDetalle);
-				TextView tvGolesLocal = (TextView)findViewById(R.id.golesLocalDetalle);
-				TextView tvGolesVisitante = (TextView)findViewById(R.id.golesVisitanteDetalle);	
-				TextView tvEstado = (TextView)findViewById(R.id.estadoPartidoDetalle);	
-				
-				tvLocal.setText(partido.getEquipoLocal());
-				tvVisitante.setText(partido.getEquipoVisitante());
-				tvGolesLocal.setText(Integer.toString(partido.getGolesLocal()));
-				tvGolesVisitante.setText(Integer.toString(partido.getGolesVisitante()));
-				tvEstado.setText(partido.getEstado());
-				
-				int golesUsuario;
-				int golesRival;
-				
-		        if (partido.getEquipoLocal().equals(((DatosUsuario)DetallePartidoActivity.this.getApplication()).getUsuario().getInfoEquipo().getNombre())) {
-		            golesUsuario = partido.getGolesLocal();
-		            golesRival = partido.getGolesVisitante(); 
-		        } else {
-		            golesUsuario = partido.getGolesVisitante();
-		            golesRival = partido.getGolesLocal();    
-		        }			
-				
-				if (partido.getEstado().equals("FINALIZADO")){
-		        	
-		        	tvEstado.setTextColor(Color.parseColor("#8D8D8D"));
-		        	
-			        if (golesUsuario == golesRival){
-			        	tvLocal.setTextColor(Color.parseColor("#00005C"));
-			        	tvVisitante.setTextColor(Color.parseColor("#00005C"));
-			        	tvGolesLocal.setTextColor(Color.parseColor("#00005C"));
-			        	tvGolesVisitante.setTextColor(Color.parseColor("#00005C"));
+		 
+	private Handler puente = new Handler() {
+		  @Override
+		  public void handleMessage(Message msg) {
+				if (partido != null){
+					
+					TextView tvLocal = (TextView)findViewById(R.id.equipoLocalDetalle);
+					TextView tvVisitante = (TextView)findViewById(R.id.equipoVisitanteDetalle);
+					TextView tvGolesLocal = (TextView)findViewById(R.id.golesLocalDetalle);
+					TextView tvGolesVisitante = (TextView)findViewById(R.id.golesVisitanteDetalle);	
+					TextView tvEstado = (TextView)findViewById(R.id.estadoPartidoDetalle);	
+					
+					tvLocal.setText(partido.getEquipoLocal());
+					tvVisitante.setText(partido.getEquipoVisitante());
+					tvGolesLocal.setText(Integer.toString(partido.getGolesLocal()));
+					tvGolesVisitante.setText(Integer.toString(partido.getGolesVisitante()));
+					partido.getEstado().replace("_", " ");
+					tvEstado.setText(partido.getEstado());
+					
+					int golesUsuario;
+					int golesRival;
+					
+			        if (partido.getEquipoLocal().equals(((DatosUsuario)DetallePartidoActivity.this.getApplication()).getUsuario().getInfoEquipo().getNombre())) {
+			            golesUsuario = partido.getGolesLocal();
+			            golesRival = partido.getGolesVisitante(); 
+			        } else {
+			            golesUsuario = partido.getGolesVisitante();
+			            golesRival = partido.getGolesLocal();    
+			        }			
+					
+					if (partido.getEstado().equals("FINALIZADO")){
+			        	
+			        	tvEstado.setTextColor(Color.parseColor("#8D8D8D"));
+			        	
+				        if (golesUsuario == golesRival){
+				        	tvLocal.setTextColor(Color.parseColor("#00005C"));
+				        	tvVisitante.setTextColor(Color.parseColor("#00005C"));
+				        	tvGolesLocal.setTextColor(Color.parseColor("#00005C"));
+				        	tvGolesVisitante.setTextColor(Color.parseColor("#00005C"));
+				        }
+				        else
+				        	if (golesUsuario > golesRival){
+					        	tvLocal.setTextColor(Color.parseColor("#00561D"));
+					        	tvVisitante.setTextColor(Color.parseColor("#00561D"));
+					        	tvGolesLocal.setTextColor(Color.parseColor("#00561D"));
+					        	tvGolesVisitante.setTextColor(Color.parseColor("#00561D"));
+				        	}
+				        	else
+				        	{
+				        		tvLocal.setTextColor(Color.parseColor("#8A0000"));
+					        	tvVisitante.setTextColor(Color.parseColor("#8A0000"));
+					        	tvGolesLocal.setTextColor(Color.parseColor("#8A0000"));
+					        	tvGolesVisitante.setTextColor(Color.parseColor("#8A0000"));
+				        	}
+						}
+			        else {
+		        		tvLocal.setTextColor(Color.parseColor("#CBAC25"));
+			        	tvVisitante.setTextColor(Color.parseColor("#CBAC25"));
+			        	tvGolesLocal.setTextColor(Color.parseColor("#CBAC25"));
+			        	tvGolesVisitante.setTextColor(Color.parseColor("#CBAC25"));
+			        	tvEstado.setTextColor(Color.parseColor("#CBAC25"));
+			        	tvEstado.setTypeface(null, Typeface.BOLD);
+			        	
 			        }
-			        else
-			        	if (golesUsuario > golesRival){
-				        	tvLocal.setTextColor(Color.parseColor("#00561D"));
-				        	tvVisitante.setTextColor(Color.parseColor("#00561D"));
-				        	tvGolesLocal.setTextColor(Color.parseColor("#00561D"));
-				        	tvGolesVisitante.setTextColor(Color.parseColor("#00561D"));
-			        	}
-			        	else
-			        	{
-			        		tvLocal.setTextColor(Color.parseColor("#8A0000"));
-				        	tvVisitante.setTextColor(Color.parseColor("#8A0000"));
-				        	tvGolesLocal.setTextColor(Color.parseColor("#8A0000"));
-				        	tvGolesVisitante.setTextColor(Color.parseColor("#8A0000"));
-			        	}
-					}
-		        else {
-	        		tvLocal.setTextColor(Color.parseColor("#CBAC25"));
-		        	tvVisitante.setTextColor(Color.parseColor("#CBAC25"));
-		        	tvGolesLocal.setTextColor(Color.parseColor("#CBAC25"));
-		        	tvGolesVisitante.setTextColor(Color.parseColor("#CBAC25"));
-		        	tvEstado.setTextColor(Color.parseColor("#CBAC25"));
-		        	tvEstado.setTypeface(null, Typeface.BOLD);
-		        	
-		        }
-				
-			}
-			
-			adpt.seteventoList(partido.getEventos());
-			adpt.notifyDataSetChanged();
-			
-			}
+					
+				}
+				Collections.reverse(partido.getEventos());
+				adpt.seteventoList(partido.getEventos());
+				adpt.notifyDataSetChanged();
+		  }
+		 };
+	
+		 
+	protected String getASCIIContentFromEntity(HttpEntity entity) throws IllegalStateException, IOException {
+		InputStream in = entity.getContent();
+		StringBuffer out = new StringBuffer();
+		int n = 1;
+		while (n>0) {
+			byte[] b = new byte[4096];
+			n =  in.read(b);
+			if (n>0)
+				out.append(new String(b, 0, n));
 		}
-
-	}	
+		return out.toString();
+		
+	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_detalle_partido);
-
-		new ServicePartido().execute();
 		
         adpt  = new EventosAdapter(new ArrayList<InfoEvento>(), this);
         ListView lView = (ListView) findViewById(R.id.EventosView);         
-        lView.setAdapter(adpt);        
+        lView.setAdapter(adpt);   
+        
+		Thread th1 = new Thread(new Runnable() {
+		       @Override
+		       public void run() {
+		    	   boolean finalizado = false;
+		   		   Intent myIntent = getIntent();
+				   int idPartido = Integer.valueOf(myIntent.getStringExtra("idPartido"));
+		    	   while (!finalizado){
+						HttpClient httpClient = new DefaultHttpClient();
+						HttpContext localContext = new BasicHttpContext();
+						HttpGet httpGet = new HttpGet(((DatosUsuario)DetallePartidoActivity.this.getApplication()).getUrlServicios() + "partidos/" + idPartido);
+						String text = null;
+						try {
+							HttpResponse response = httpClient.execute(httpGet, localContext);
+							HttpEntity entity = response.getEntity();
+							text = getASCIIContentFromEntity(entity);
+						} catch (Exception e) {
+							//
+						}	
+						
+						 Gson gson = new Gson();
+						 partido = gson.fromJson(text, InfoPartido.class);
+				         Message msg = new Message();
+				         puente.sendMessage(msg);
+				         finalizado = (partido.getEstado() == "FINALIZADO");
+
+		    	   }
+		       }
+		      });
+			th1.start();        
 	}
 
 	@Override

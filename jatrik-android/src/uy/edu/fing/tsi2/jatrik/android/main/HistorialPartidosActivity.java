@@ -106,10 +106,10 @@ public class HistorialPartidosActivity extends ActionBarActivity {
 			    Intent intent = new Intent(HistorialPartidosActivity.this, DetallePartidoActivity.class);
 			    intent.putExtra("idPartido", idPartido);
 			    startActivity(intent);
-               
-               
             }
         });
+        
+        
 	  }
 	
 	@Override

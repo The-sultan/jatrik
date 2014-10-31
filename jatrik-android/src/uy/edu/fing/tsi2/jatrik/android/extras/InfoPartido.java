@@ -7,7 +7,7 @@ public class InfoPartido {
 	private Long idPartido;
 	
 	private String estado;
-	
+
 	private int golesLocal;
 
 	private int golesVisitante;

@@ -32,7 +32,7 @@ public class PartidosResource {
 	@GET
 	public InfoPartido obtenerPartido(@PathParam("id") Long id){
 		Partido partido = partidoEJB.obtenerPartido(id);
-		InfoPartido infoPartido = new InfoPartido(partido.getId(), partido.getEstado().name(),partido.getLocal().getNombre() , partido.getVisitante().getNombre(), partido.getGolesLocal(), partido.getGolesVisitante());
+		InfoPartido infoPartido = new InfoPartido(partido.getId(), partido.getEstado().name(), partido.getLocal().getNombre() , partido.getVisitante().getNombre(), partido.getGolesLocal(), partido.getGolesVisitante());
 		List<EventoPartido> eventos = partidoEJB.obtenerEventosPartido(id);
 		List<InfoEvento> infoEventos = new ArrayList<>();
 		for(EventoPartido eventoPartido : eventos){

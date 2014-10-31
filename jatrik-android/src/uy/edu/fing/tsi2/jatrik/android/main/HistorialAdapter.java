@@ -1,7 +1,12 @@
 package uy.edu.fing.tsi2.jatrik.android.main;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
+import uy.edu.fing.tsi2.jatrik.android.extras.DateUtils;
 import uy.edu.fing.tsi2.jatrik.android.extras.InfoPartido;
 
 import android.content.Context;
