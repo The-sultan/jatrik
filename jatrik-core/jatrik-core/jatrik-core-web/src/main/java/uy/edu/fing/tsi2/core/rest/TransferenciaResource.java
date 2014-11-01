@@ -13,12 +13,13 @@ import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
 import org.apache.commons.beanutils.BeanUtils;
 
-import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEquipo;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoHabilidad;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoJugador;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoTransferencia;
@@ -69,10 +70,13 @@ public class TransferenciaResource {
 	
 		
 	@GET
-	public Response listadoDeJuagadoresEnVenta(InfoEquipo equipo){
+	@Path("/{idEquipo}")
+	@Produces("application/json")
+	public Response listadoDeJuagadoresEnVenta(@PathParam("idEquipo") Long idEquipo){
 		List<InfoTransferencia> resultado = new ArrayList<InfoTransferencia>();
 		try {
-			List<Transferencia> transferencias = transferenciaEJB.listadoJugadoresEnVenta(equipo.getId());
+			
+			List<Transferencia> transferencias = transferenciaEJB.listadoJugadoresEnVenta(idEquipo);
 			for (Transferencia transferencia : transferencias) {
 				InfoTransferencia infoTrans = new InfoTransferencia();
 				infoTrans.setEquipoIdVendedor(transferencia.getVendedor().getId());
