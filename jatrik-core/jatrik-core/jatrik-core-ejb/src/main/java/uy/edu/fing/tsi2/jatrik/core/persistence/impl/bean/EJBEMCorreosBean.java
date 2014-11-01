@@ -14,6 +14,7 @@ import uy.edu.fing.tsi2.jatrik.core.persistence.IEMCorreos;
 import uy.edu.fing.tsi2.jatrik.core.persistence.impl.local.EJBEMCorreosLocal;
 import uy.edu.fing.tsi2.jatrik.core.persistence.impl.remote.EJBEMCorreosRemote;
 
+
 @Stateless
 @Local(value = EJBEMCorreosLocal.class)
 @Remote(value = EJBEMCorreosRemote.class)

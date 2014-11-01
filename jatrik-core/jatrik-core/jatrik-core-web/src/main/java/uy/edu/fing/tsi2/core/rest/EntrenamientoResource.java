@@ -14,6 +14,7 @@ import javax.ws.rs.core.Response;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEntrenamiento;
 import uy.edu.fing.tsi2.jatrik.core.domain.Equipo;
 import uy.edu.fing.tsi2.jatrik.core.ejb.impl.local.EJBManagerEntrenamientoLocal;
+import uy.edu.fing.tsi2.jatrik.core.ejb.impl.local.EJBManagerUsuarioLocal;
 import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumHabilidad;
 
 @RequestScoped
@@ -21,7 +22,7 @@ public class EntrenamientoResource {
 
 	@EJB
 	private EJBManagerEntrenamientoLocal entrenamientoEJB;
-			
+	
 	@POST
 	public Response entrenarEquipo(InfoEntrenamiento entrenamiento) {
 		EnumHabilidad modo = EnumHabilidad.getById(entrenamiento.getModo());

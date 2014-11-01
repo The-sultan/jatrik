@@ -8,6 +8,16 @@ public class DatosUsuario extends Application{
 	
 	private InfoUsuario Usuario;
 	private HistorialPartidos Partidos;
+	private int ultimaNotificacion; 
+	
+	public int getUltimaNotificacion() {
+		return ultimaNotificacion;
+	}
+
+	public void setUltimaNotificacion(int ultimaNotificacion) {
+		this.ultimaNotificacion = ultimaNotificacion;
+	}
+
 	public HistorialPartidos getPartidos() {
 		return Partidos;
 	}

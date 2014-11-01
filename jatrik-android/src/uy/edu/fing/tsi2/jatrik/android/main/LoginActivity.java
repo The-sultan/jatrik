@@ -9,6 +9,8 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 
@@ -64,6 +66,9 @@ public class LoginActivity extends ActionBarActivity {
 			HttpContext localContext = new BasicHttpContext();
 			HttpGet httpGet1 = new HttpGet(((DatosUsuario)LoginActivity.this.getApplication()).getUrlServicios() + "login/?nick=" + User + "&password=" + Pass);
 			String text = null;
+			HttpParams httpParameters = httpClient.getParams();
+			HttpConnectionParams.setConnectionTimeout(httpParameters, 30000);
+			HttpConnectionParams.setSoTimeout(httpParameters, 30000);
 			try {
 				HttpResponse response = httpClient.execute(httpGet1, localContext);
 				HttpEntity entity = response.getEntity();
@@ -116,6 +121,7 @@ public class LoginActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		((DatosUsuario)LoginActivity.this.getApplication()).setUrlServicios("http://192.168.1.34:8080/jatrik-core-web/rest/");
+		((DatosUsuario)LoginActivity.this.getApplication()).setUltimaNotificacion(1);
 		
 	}
 

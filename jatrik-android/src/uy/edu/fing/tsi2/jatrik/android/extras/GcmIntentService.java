@@ -1,5 +1,7 @@
 package uy.edu.fing.tsi2.jatrik.android.extras;
 
+import uy.edu.fing.tsi2.jatrik.android.main.DatosUsuario;
+import uy.edu.fing.tsi2.jatrik.android.main.LoginActivity;
 import uy.edu.fing.tsi2.jatrik.android.main.MainActivity;
 import uy.edu.fing.tsi2.jatrik.android.main.R;
 import android.app.IntentService;
@@ -14,7 +16,6 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 public class GcmIntentService extends IntentService {
 	   
-	  public static final int NOTIFICATION_ID = 1;
 	  private NotificationManager mNotificationManager;
 	  NotificationCompat.Builder builder;
 	 
@@ -57,12 +58,14 @@ public class GcmIntentService extends IntentService {
 	 
 	    NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
 	        this).setSmallIcon(R.drawable.ic_launcher)
-	        .setContentTitle("Notificacion:" + msg)
+	        .setContentTitle("Jatrik")
 	        .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
 	        .setContentText(msg);
-	 
 	    mBuilder.setContentIntent(contentIntent);
-	    mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
+	    
+	    int idNotif = ((DatosUsuario)GcmIntentService.this.getApplication()).getUltimaNotificacion();
+	    mNotificationManager.notify(idNotif, mBuilder.build());
+	    ((DatosUsuario)GcmIntentService.this.getApplication()).setUltimaNotificacion(idNotif+1);
 	  }
 	 
 	}

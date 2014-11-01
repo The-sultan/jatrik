@@ -1,5 +1,12 @@
 package uy.edu.fing.tsi2.jatrik.core.ejb.impl.beans;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -15,6 +22,10 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 import org.apache.log4j.Logger;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 
 import uy.edu.fing.tsi2.jatrik.core.domain.DatosJugador;
 import uy.edu.fing.tsi2.jatrik.core.domain.Equipo;
@@ -324,4 +335,66 @@ public class EJBManagerUsuarioBean implements IUsuarios {
 			return false;
 		}
 	}
+	
+	// --- Para notificaciones PUSH
+	
+	public void EnviarMensajePush(Long idUsuario, String mensaje){
+	    String idRegistro=recuperarIdRegistro(idUsuario);
+	    if (idRegistro != null){
+		    JsonObject jsonObject = new JsonObject();
+		    JsonObject data = new JsonObject();
+		    data.addProperty("mensaje",mensaje);
+		    JsonArray registration_ids = new JsonArray();
+		    registration_ids.add(new JsonPrimitive(idRegistro));
+		    jsonObject.add("data",data);
+		    jsonObject.add("registration_ids",registration_ids);
+		    try {
+				invocarServicioGCM(jsonObject.toString(),new URL("https://android.googleapis.com/gcm/send"),"AIzaSyCAjEk51D89ZQfln5fwYOE5JnbPsxnc6gs");
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    }
+	}
+	
+    public String recuperarIdRegistro(Long idUsuario) {
+    	Usuario u = usuarios.find(idUsuario);  
+	    return u.getRegistrationId();
+	}
+    
+    public static final String invocarServicioGCM(final String json, final URL url,final String apikey){
+	    try {
+	      HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+	      conn.setRequestMethod("POST");
+	      conn.setRequestProperty("Content-Type", "application/json");
+	      conn.setRequestProperty("Accept-Encoding", "application/json");
+	      //Se pasa el Api key como parametro de la cabecera de la petición http
+	      conn.setRequestProperty("Authorization","key=" +apikey);
+	      if(json!=null){
+	        conn.setDoOutput(true);
+	        OutputStream os = conn.getOutputStream();
+	        os.write(json.getBytes("UTF-8"));
+	        os.flush();
+	      }
+	 
+	      if (conn.getResponseCode() != 200) {
+	        throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+	      }
+	      BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+	      String outputLine;
+	      StringBuffer totalSalida = new StringBuffer();
+	      System.out.println("Output from Server .... \n");
+	      while ((outputLine = br.readLine()) != null) {
+	        totalSalida.append(outputLine/*new String(outputLine.getBytes("ISO-8859-1"), "UTF-8")*/);
+	      }
+	      conn.disconnect();
+	      return totalSalida.toString();
+	    } catch (MalformedURLException e) {
+	      e.printStackTrace();
+	    } catch (IOException e) {
+	      e.printStackTrace();
+	    }
+	    return null;
+	  }
+	 
 }

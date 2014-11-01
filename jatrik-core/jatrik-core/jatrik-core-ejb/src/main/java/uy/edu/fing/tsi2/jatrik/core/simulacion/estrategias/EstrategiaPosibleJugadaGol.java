@@ -1,18 +1,21 @@
 package uy.edu.fing.tsi2.jatrik.core.simulacion.estrategias;
 
 import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+
 import org.apache.log4j.Logger;
+
 import uy.edu.fing.tsi2.jatrik.core.domain.Comentario;
 import uy.edu.fing.tsi2.jatrik.core.domain.Equipo;
 import uy.edu.fing.tsi2.jatrik.core.domain.Evento;
 import uy.edu.fing.tsi2.jatrik.core.domain.Formacion;
 import uy.edu.fing.tsi2.jatrik.core.domain.Jugador;
-
 import uy.edu.fing.tsi2.jatrik.core.domain.Partido;
 import uy.edu.fing.tsi2.jatrik.core.domain.eventos.EventoPartidoGol;
 import uy.edu.fing.tsi2.jatrik.core.domain.eventos.EventoPartidoJugadaDeGol;
+import uy.edu.fing.tsi2.jatrik.core.ejb.impl.local.EJBManagerUsuarioLocal;
 import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumEventos;
 import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumPuestoFormacion;
 import uy.edu.fing.tsi2.jatrik.core.persistence.impl.local.EJBEMComentariosLocal;
@@ -25,6 +28,8 @@ public class EstrategiaPosibleJugadaGol extends EstrategiaSimulacion{
 
 	private Logger log = Logger.getLogger(EstrategiaPosibleJugadaGol.class);
 
+	@EJB
+	EJBManagerUsuarioLocal usuariosManager;
 	
 	@EJB
 	EJBEMEventosLocal eventosEJB;
@@ -76,8 +81,10 @@ public class EstrategiaPosibleJugadaGol extends EstrategiaSimulacion{
 			EventoPartidoGol eventoPartidoGol = new EventoPartidoGol(partido.getMinuto(), partido, eventoGol, delantero, equipo,
 				partido.getGolesLocal(), partido.getGolesVisitante());
 			eventosPartidosEJB.add(eventoPartidoGol);
-
 			partidosEJB.update(partido);
+			usuariosManager.EnviarMensajePush(partido.getLocal().getId(), "Gol de " + equipo.getNombre() + " convertido por " + delantero.getNombre() + ". " + partido.getLocal().getNombre() + " " + partido.getGolesLocal() + " - " + partido.getGolesVisitante() + " " + partido.getVisitante().getNombre());
+			usuariosManager.EnviarMensajePush(partido.getVisitante().getId(), "Gol de " + equipo.getNombre() + " convertido por " + delantero.getNombre() + ". " + partido.getLocal().getNombre() + " " + partido.getGolesLocal() + " - " + partido.getGolesVisitante() + " " + partido.getVisitante().getNombre());
+			
 		}
 		
 		

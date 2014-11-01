@@ -1,6 +1,7 @@
 package uy.edu.fing.tsi2.jatrik.core.ejb;
 
 import java.util.List;
+
 import uy.edu.fing.tsi2.jatrik.core.domain.Usuario;
 
 public interface IUsuarios {
@@ -12,4 +13,6 @@ public interface IUsuarios {
 	List<Usuario> obtenerUsuarios();
 	
 	boolean registrationIdUsuario(Long idUsuario, String registrationId);
+	
+	void EnviarMensajePush(Long idUsuario, String mensaje);
 }

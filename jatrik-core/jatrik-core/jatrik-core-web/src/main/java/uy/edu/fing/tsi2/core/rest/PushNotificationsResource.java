@@ -33,12 +33,8 @@ public class PushNotificationsResource {
 	      RequestRegistrationId requestRegisterId) {
 	    ResponseRegistrationId responseRegistrationId = new ResponseRegistrationId();
 	    try {
-	      usuarioEJB.registrationIdUsuario(requestRegisterId.getIdUsuario(), requestRegisterId.getRegistrationId());	
-//	      BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(
-//	          new File(PATH)));
-//	      bufferedWriter.write(requestRegisterId.getRegistrationId());
-//	      bufferedWriter.flush();
-//	      bufferedWriter.close();
+	      usuarioEJB.registrationIdUsuario(requestRegisterId.getIdUsuario(), requestRegisterId.getRegistrationId());
+	      usuarioEJB.EnviarMensajePush(requestRegisterId.getIdUsuario(), "Holaaaa");
 	      responseRegistrationId.setCodeResponse(ResponseRegistrationId.OK);
 	      responseRegistrationId
 	          .setMessageResponse("Registro efectuado satisfactoriamente");

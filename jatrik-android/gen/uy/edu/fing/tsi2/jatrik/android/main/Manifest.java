@@ -9,6 +9,6 @@ package uy.edu.fing.tsi2.jatrik.android.main;
 
 public final class Manifest {
     public static final class permission {
-        public static final String C2D_MESSAGE="com.goplasoft.democfg.permission.C2D_MESSAGE";
+        public static final String C2D_MESSAGE="uy.edu.fing.tsi2.jatrik.android.main.permission.C2D_MESSAGE";
     }
 }

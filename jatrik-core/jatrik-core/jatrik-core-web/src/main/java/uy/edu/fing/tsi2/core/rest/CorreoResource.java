@@ -11,9 +11,10 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
-import uy.edu.fing.tsi2.jatrik.common.payloads.InfoCorreo;
+
 import uy.edu.fing.tsi2.jatrik.core.domain.Correo;
 import uy.edu.fing.tsi2.jatrik.core.ejb.impl.local.EJBManagerCorreoLocal;
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoCorreo;
 
 @RequestScoped
 public class CorreoResource {
