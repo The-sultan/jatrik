@@ -5,5 +5,6 @@ import java.util.Date;
 import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumHabilidad;
 
 public interface IEntrenamiento {
-	public String entrenarEquipo(Long idEquipo, Date fechaEntrenamiento, EnumHabilidad modoEntrenamiento);
+	public boolean puedeEntrenar(Long idEquipo, Date fechaEntrenamiento);
+	public void entrenarJugador(Long idJugador, EnumHabilidad modoEntrenamiento);
 }

@@ -34,18 +34,6 @@ public class Habilidad implements Serializable {
 	@Column(name="TIPO")
 	private EnumHabilidad tipo;
 
-	@Column(name="ULTIMO_ENTRENAMIENTO")
-	private Date ultimoEntrenamiento;
-	
-	public Date getUltimoEntrenamiento() {
-		return ultimoEntrenamiento;
-	}
-
-	public void setUltimoEntrenamiento(Date ultimoEntrenamiento) {
-		this.ultimoEntrenamiento = ultimoEntrenamiento;
-	}
-
-
 	public Habilidad() {
 		super();
 	}
@@ -56,7 +44,6 @@ public class Habilidad implements Serializable {
 		this.tipo = tipo;
 		this.descripcion = descripcion;
 		Date date = new Date();
-		this.ultimoEntrenamiento = date;
 	}
 
 

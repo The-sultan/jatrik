@@ -1,9 +1,10 @@
 package uy.edu.fing.tsi2.jatrik.core.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
-import javax.persistence.CascadeType;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -71,6 +72,18 @@ public class Equipo implements Serializable {
 	
 	@OneToMany(fetch=FetchType.EAGER, targetEntity = Jugador.class, mappedBy = "equipo")
 	private Set<Jugador> jugadores;
+	
+	@Column(name="ULTIMO_ENTRENAMIENTO")
+	private Date ultimoEntrenamiento;
+	
+	public Date getUltimoEntrenamiento() {
+		return ultimoEntrenamiento;
+	}
+
+	public void setUltimoEntrenamiento(Date ultimoEntrenamiento) {
+		this.ultimoEntrenamiento = ultimoEntrenamiento;
+	}
+	
 	
 	public Equipo() {
 		super();
