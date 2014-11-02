@@ -9,7 +9,7 @@ import uy.edu.fing.tsi2.jatrik.core.domain.Evento;
 import uy.edu.fing.tsi2.jatrik.core.domain.Partido;
 import uy.edu.fing.tsi2.jatrik.core.domain.eventos.EventoPartidoHito;
 import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumEventos;
-import uy.edu.fing.tsi2.jatrik.core.persistence.impl.bean.EJBEMEquiposBean;
+import uy.edu.fing.tsi2.jatrik.core.persistence.impl.local.EJBEMEquiposLocal;
 import uy.edu.fing.tsi2.jatrik.core.persistence.impl.local.EJBEMEventosLocal;
 import uy.edu.fing.tsi2.jatrik.core.persistence.impl.local.EJBEMEventosPartidosLocal;
 
@@ -23,7 +23,7 @@ public class EstrategiaHito extends EstrategiaSimulacion{
 	EJBEMEventosPartidosLocal eventosPartidosEJB;
 	
 	@EJB
-	EJBEMEquiposBean equiposEJB;
+	EJBEMEquiposLocal equiposEJB;
 	
 	public EstrategiaHito(){
 		this.setPeso(0);

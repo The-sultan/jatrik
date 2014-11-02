@@ -76,7 +76,7 @@ public class TransferenciaResource {
 		List<InfoTransferencia> resultado = new ArrayList<InfoTransferencia>();
 		try {
 			
-			List<Transferencia> transferencias = transferenciaEJB.listadoJugadoresEnVenta(idEquipo);
+			List<Transferencia> transferencias = transferenciaEJB.listadoJugadoresEnVenta();
 			for (Transferencia transferencia : transferencias) {
 				InfoTransferencia infoTrans = new InfoTransferencia();
 				infoTrans.setEquipoIdVendedor(transferencia.getVendedor().getId());
