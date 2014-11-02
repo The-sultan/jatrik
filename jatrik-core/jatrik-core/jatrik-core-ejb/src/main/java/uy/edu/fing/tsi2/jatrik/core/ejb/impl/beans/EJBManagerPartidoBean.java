@@ -76,4 +76,9 @@ public class EJBManagerPartidoBean implements IPartidos {
 	public List<EventoPartido> obtenerEventosPartido(Long idPartido){
 		return eventosPartidos.findByPartido(idPartido);
 	}
+	
+	@Override
+	public List<Partido> obtenerPartidosPendientes(){
+		return partidos.findAll(EnumEstadoPartido.PENDIENTE);
+	}
 }

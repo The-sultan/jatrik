@@ -25,5 +25,7 @@ public interface IEMPartidos {
 	
 	void inicializarPartido(Partido partido);
 	
+	List<Partido> findAll(EnumEstadoPartido estado);
+	
 }
 	

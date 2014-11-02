@@ -50,4 +50,5 @@ public interface RestClientEJBLocal {
 	String postTransferenciaCompra(InfoTransferenciaCompra paramInfoTransferenciaCompra)
 	    throws RestClientException;
 
+	List<InfoPartido> getPartidos();
 }

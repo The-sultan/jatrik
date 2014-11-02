@@ -34,4 +34,6 @@ public interface RestRequestBuilderFactoryLocal {
 	
 	Builder makeFormacionProximoPartidoRequestBuilder(Long idEquipo);
 	
+	Builder makeGetPartidosBuilder();
+	
 }

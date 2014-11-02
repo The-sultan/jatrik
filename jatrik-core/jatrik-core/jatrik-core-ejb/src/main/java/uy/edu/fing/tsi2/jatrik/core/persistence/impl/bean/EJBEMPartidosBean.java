@@ -60,6 +60,12 @@ public class EJBEMPartidosBean implements IEMPartidos {
 		return (List<Partido>) consulta.getResultList();
 	}
 	
+	public List<Partido> findAll(EnumEstadoPartido estado) {
+		Query consulta = entityManager.createQuery("select h from " + Partido.class.getName() + " h where estado = :estado");
+		consulta.setParameter("estado", estado);
+		return (List<Partido>) consulta.getResultList();
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Partido> findPartidosDeEquipo(Long idEquipo, EnumEstadoPartido estado) {
 		Query consulta1 = entityManager.createNamedQuery("findPartidosDeEquipo").setParameter("idEquipo", idEquipo).setParameter("estado", estado);

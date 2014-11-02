@@ -249,4 +249,19 @@ public class RestClientEJB implements RestClientEJBLocal {
 		    String[] partUrlSplitted = ventaLocation.split("/");
 		    return partUrlSplitted[(partUrlSplitted.length - 1)];
 		  }
+
+	@Override
+	public List<InfoPartido> getPartidos() {
+		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory
+				.makeGetPartidosBuilder();
+		ClientResponse response = jerseyHttpRequestBuilder.get(ClientResponse.class);
+		if (response.getStatusInfo().getStatusCode() != ClientResponse.Status.OK
+				.getStatusCode()) {
+			throw new RestClientException(
+					"No se pudo obtener el listado de transferencias, status code: "
+							+ response.getStatusInfo().getReasonPhrase());
+		}
+
+		return (List) response.getEntity(ArrayList.class);
+	}
 }

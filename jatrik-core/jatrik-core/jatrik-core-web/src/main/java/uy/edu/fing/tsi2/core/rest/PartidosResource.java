@@ -9,6 +9,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
 
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEvento;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoPartido;
@@ -41,5 +42,17 @@ public class PartidosResource {
 		}
 		infoPartido.setEventos(infoEventos);
 		return infoPartido;
+	}
+	
+	@GET
+	public Response getPartidosPendientes(){
+		List<Partido> partidosPendientes = partidoEJB.obtenerPartidosPendientes();
+		List<InfoPartido> infoPartidos = new ArrayList<>();
+		for(Partido partido : partidosPendientes){
+			infoPartidos.add(new InfoPartido(partido.getId(), partido.getEstado().name(), 
+				partido.getLocal().getNombre() , partido.getVisitante().getNombre(), 
+				partido.getGolesLocal(), partido.getGolesVisitante()));
+		}
+		return Response.ok(infoPartidos).build();
 	}
 }

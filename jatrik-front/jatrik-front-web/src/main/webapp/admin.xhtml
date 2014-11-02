@@ -1,0 +1,34 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+		
+	<h:head>
+	<title>Admin Jatrik</title>
+	</h:head>
+	
+	<body>
+		<h:form>
+		<h:dataTable  value="#{partidoController.partidos}" var="partido"
+							  id="partidos" >
+			<h:column>
+				<f:facet name="header">Local</f:facet>
+					#{partido.equipoLocal}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Visitante</f:facet>
+					#{partido.equipoVisitante}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Simular Partido?</f:facet>
+				<h:commandLink action="#{partidoController.simularPartidoAdmin}">
+					Simular
+					<f:param name='partidoId' value='#{partido.idPartido}'/>
+				</h:commandLink>
+			</h:column>
+		</h:dataTable>
+		</h:form>
+	</body>
+		
+</html>

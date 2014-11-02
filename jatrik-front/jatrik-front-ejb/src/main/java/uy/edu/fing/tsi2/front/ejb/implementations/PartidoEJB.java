@@ -1,5 +1,6 @@
 package uy.edu.fing.tsi2.front.ejb.implementations;
 
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -23,6 +24,11 @@ public class PartidoEJB implements PartidoEJBLocal {
 	@Override
 	public void simularPartido(long idPartido) {
 		jatrikCoreClient.simularPartido(idPartido);
+	}
+
+	@Override
+	public List<InfoPartido> getPartidos() {
+		return jatrikCoreClient.getPartidos();
 	}
 
 }

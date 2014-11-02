@@ -20,4 +20,6 @@ public interface IPartidos {
 	Evento encontrarEvento(Long id);
 	
 	List<EventoPartido> obtenerEventosPartido(Long idPartido);
+	
+	List<Partido> obtenerPartidosPendientes();
 }
