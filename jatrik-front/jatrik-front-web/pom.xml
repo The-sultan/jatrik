@@ -21,6 +21,13 @@
     
     <dependencies>
         <dependency>
+            <groupId>uy.edu.fing.tsi2</groupId>
+            <artifactId>jatrik-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
+			<scope>provided</scope>
+		</dependency>
+        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>7.0</version>

@@ -23,6 +23,7 @@ import uy.edu.fing.tsi2.jatrik.core.ejb.impl.local.EJBManagerEquipoBeanLocal;
 import uy.edu.fing.tsi2.jatrik.core.ejb.impl.remote.EJBManagerEquipoBeanRemote;
 import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumEstadoPartido;
 import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumPuestoFormacion;
+import uy.edu.fing.tsi2.jatrik.core.exceptions.JatrikPersistenceException;
 import uy.edu.fing.tsi2.jatrik.core.persistence.impl.local.EJBEMEquiposLocal;
 import uy.edu.fing.tsi2.jatrik.core.persistence.impl.local.EJBEMPartidosLocal;
 
@@ -51,7 +52,7 @@ public class EJBManagerEquipoBean implements IEquipos {
 	public Formacion getFormacionProximoPartido(Long id){
 		Partido proximoPartido = getProximoPartido(id);
 		if(proximoPartido == null){
-			return null;
+			throw( new JatrikPersistenceException("no hay proximo partido"));
 		}else{
 			return proximoPartido.getLocal().getId().equals(id) ? proximoPartido.getFormacionLocal() 
 				: proximoPartido.getFormacionVisitante();
@@ -71,6 +72,7 @@ public class EJBManagerEquipoBean implements IEquipos {
 		Set<JugadorEnFormacion> jugadoresEnFormacion = generarJugadoresEnTodasLasPosiciones(infoFormacion, formacion);
 		
 		formacion.setJugadores(jugadoresEnFormacion);
+		formacion.setDescriptor(infoFormacion.getDescriptor());
 		equipo.setFormacion(formacion);
 		equiposEJB.updateFormacion(formacion);
 		equiposEJB.update(equipo);
@@ -80,7 +82,7 @@ public class EJBManagerEquipoBean implements IEquipos {
 	public void storeFormacionProximoPartido(Long id, InfoFormacion infoFormacion) {
 		Partido partido = getProximoPartido(id);
 		if(partido == null)
-			throw( new RuntimeException("no hay proximo partido"));
+			throw( new JatrikPersistenceException("no hay proximo partido"));
 		boolean esLocal = id.equals(partido.getLocal().getId());
 		Formacion formacion = esLocal ? partido.getFormacionLocal() : partido.getFormacionVisitante();
 		if(formacion == null){
@@ -90,6 +92,7 @@ public class EJBManagerEquipoBean implements IEquipos {
 		}
 		Set<JugadorEnFormacion> jugadoresEnFormacion = generarJugadoresEnTodasLasPosiciones(infoFormacion, formacion);
 		formacion.setJugadores(jugadoresEnFormacion);
+		formacion.setDescriptor(infoFormacion.getDescriptor());
 		equiposEJB.updateFormacion(formacion);
 		if(esLocal){
 			partido.setFormacionLocal(formacion);

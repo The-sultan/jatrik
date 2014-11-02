@@ -15,6 +15,7 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource.Builder;
 import java.util.ArrayList;
 import java.util.List;
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoFormacion;
 
 /**
  *
@@ -129,6 +130,50 @@ public class RestClientEJB implements RestClientEJBLocal{
 		}else{
 			return response.getEntity(ArrayList.class);
 		}
+	}
+
+	@Override
+	public InfoFormacion getFormacionEstandar(Long equipoId) throws RestClientException {
+		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory.makeFormacionEstandarRequestBuilder(equipoId);
+		ClientResponse response = jerseyHttpRequestBuilder.get(ClientResponse.class);
+		if(response.getStatusInfo().getStatusCode() != ClientResponse.Status.OK.getStatusCode()){
+			throw new RestClientException("Error al obtener formacion estandar "
+					+ response.getStatusInfo().getReasonPhrase());			
+		}else{
+			return response.getEntity(InfoFormacion.class);
+		}
+	}
+
+	@Override
+	public InfoFormacion getFormacionProximoPartido(Long equipoId) throws RestClientException {
+		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory.makeFormacionProximoPartidoRequestBuilder(equipoId);
+		ClientResponse response = jerseyHttpRequestBuilder.get(ClientResponse.class);
+		if(response.getStatusInfo().getStatusCode() != ClientResponse.Status.OK.getStatusCode()){
+			throw new RestClientException("Error al obtener formacion proximo partido: "
+					+ response.getStatusInfo().getReasonPhrase());			
+		}else{
+			return response.getEntity(InfoFormacion.class);
+		}
+	}
+
+	@Override
+	public void storeFormacionEstandar(Long equipoId, InfoFormacion infoFormacion) throws RestClientException {
+		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory.makeFormacionEstandarRequestBuilder(equipoId);
+		ClientResponse response = jerseyHttpRequestBuilder.post(ClientResponse.class, infoFormacion);
+		if(response.getStatusInfo().getStatusCode() != ClientResponse.Status.OK.getStatusCode()){
+			throw new RestClientException("Error al guardar formacion estandar: "
+					+ response.getStatusInfo().getReasonPhrase());			
+		};
+	}
+
+	@Override
+	public void storeFormacionProximoPartido(Long equipoId, InfoFormacion infoFormacion) throws RestClientException {
+		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory.makeFormacionProximoPartidoRequestBuilder(equipoId);
+		ClientResponse response = jerseyHttpRequestBuilder.post(ClientResponse.class, infoFormacion);
+		if(response.getStatusInfo().getStatusCode() != ClientResponse.Status.OK.getStatusCode()){
+			throw new RestClientException("Error al guardar formacion proximo partido:"
+					+ response.getStatusInfo().getReasonPhrase());			
+		};
 	}
 	
 }

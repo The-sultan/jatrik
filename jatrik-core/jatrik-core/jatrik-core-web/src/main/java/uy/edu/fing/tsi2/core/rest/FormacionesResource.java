@@ -22,6 +22,7 @@ import uy.edu.fing.tsi2.jatrik.core.domain.Jugador;
 import uy.edu.fing.tsi2.jatrik.core.domain.JugadorEnFormacion;
 import uy.edu.fing.tsi2.jatrik.core.ejb.impl.local.EJBManagerEquipoBeanLocal;
 import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumPuestoFormacion;
+import uy.edu.fing.tsi2.jatrik.core.exceptions.JatrikPersistenceException;
 
 /**
  * @author Farid
@@ -46,8 +47,14 @@ public class FormacionesResource {
 	@GET
 	@Path("/estandar")
 	public Response getFormacionEstandar(){
+		try{
 		Formacion formacion = equipoEJB.getFormacionEstandar(id);
 		return Response.ok(getDtoFromEntity(formacion)).build();
+		}
+		catch(JatrikPersistenceException ex){
+			return Response.status(Response.Status.PRECONDITION_FAILED).build();
+		}
+		
 	}
 	
 	@POST
@@ -60,8 +67,14 @@ public class FormacionesResource {
 	@GET
 	@Path("/proximoPartido")
 	public Response getFormacionProximoPartido(){
-		Formacion formacion = equipoEJB.getFormacionProximoPartido(id);
-		return Response.ok(getDtoFromEntity(formacion)).build();
+		try{
+			Formacion formacion = equipoEJB.getFormacionProximoPartido(id);
+			return Response.ok(getDtoFromEntity(formacion)).build();	
+		}
+		catch(JatrikPersistenceException ex){
+			return Response.status(Response.Status.PRECONDITION_FAILED).build();
+		}
+		
 	}
 	
 	@POST

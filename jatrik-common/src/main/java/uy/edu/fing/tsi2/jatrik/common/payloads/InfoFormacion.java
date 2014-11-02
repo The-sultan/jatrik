@@ -24,6 +24,8 @@ public class InfoFormacion {
 	private List<InfoJugador> suplentes;
 	private List<InfoJugador> reservas;
 
+	private String descriptor;
+	
 	public InfoJugador getGolero() {
 		return golero;
 	}
@@ -71,5 +73,13 @@ public class InfoFormacion {
 	public void setReservas(List<InfoJugador> reservas) {
 		this.reservas = reservas;
 	}
-	
+
+	public String getDescriptor() {
+		return descriptor;
+	}
+
+	public void setDescriptor(String descriptor) {
+		this.descriptor = descriptor;
+	}
+
 }

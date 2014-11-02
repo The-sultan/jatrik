@@ -3,6 +3,7 @@ package uy.edu.fing.tsi2.front.ejb.interfaces;
 import javax.ejb.Local;
 
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEquipo;
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoFormacion;
 
 /**
  *
@@ -14,5 +15,13 @@ public interface EquipoEJBLocal {
 	public InfoEquipo getEquipo(long id);
 
 	String entrenarEquipo(long id, int modo);
+	
+	public InfoFormacion getFormacionEstandar(long id);
+	
+	public InfoFormacion getFormacionProximoPartido(long id);
+	
+	public void saveFormacionEstandar(long id, InfoFormacion infoFormacion);
+	
+	public void saveFormacionProximoPartido(long id, InfoFormacion infoFormacion);
 
 }

@@ -11,7 +11,6 @@ import javax.enterprise.inject.Model;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.primefaces.util.BeanUtils;
 
                                                                                                                                                                                                           
 
@@ -19,6 +18,7 @@ import org.primefaces.util.BeanUtils;
 
 import uy.edu.fing.tsi2.front.ejb.interfaces.EquipoEJBLocal;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEquipo;
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoFormacion;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoJugador;
 import uy.edu.fing.tsi2.model.SessionBeanJatrik;
 import uy.edu.fing.tsi2.model.Equipo.Equipo;
@@ -48,7 +48,19 @@ public class EquipoController  implements Serializable {
 		//TODO:Obtener el id del loginBean
 		InfoEquipo equipoTemp = equipoEJB.getEquipo(sessionBean.getInfoUsuario().getInfoEquipo().getId());
 		equipoDatos = new Equipo();
+		InfoFormacion formacion = equipoEJB.getFormacionEstandar(sessionBean.getInfoUsuario().getInfoEquipo().getId());
 		List<InfoJugador> titulares = new ArrayList<>();
+		titulares.add(formacion.getGolero());
+		for(InfoJugador jugador : formacion.getDefensas()){
+			titulares.add(jugador);
+		}
+		for(InfoJugador jugador : formacion.getMediocampistas()){
+			titulares.add(jugador);
+		}
+		for(InfoJugador jugador : formacion.getDelanteros()){
+			titulares.add(jugador);
+		}
+	
 		equipoDatos.setTitulares(titulares);
 		
 		

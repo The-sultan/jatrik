@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -32,9 +33,12 @@ public class Formacion implements Serializable{
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="SEQ_FORMACIONES")
 	private Long id;
 
+	@OrderBy("puestoformacion, indice")
 	@OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL, 
 			targetEntity = JugadorEnFormacion.class, mappedBy = "formacion")
 	private Set<JugadorEnFormacion> jugadores;
+	
+	private String descriptor;
 	
 	public Long getId() {
 		return id;
@@ -55,4 +59,13 @@ public class Formacion implements Serializable{
 	public Formacion() {
 	}
 
+	public String getDescriptor() {
+		return descriptor;
+	}
+
+	public void setDescriptor(String descriptor) {
+		this.descriptor = descriptor;
+	}
+
+	
 }

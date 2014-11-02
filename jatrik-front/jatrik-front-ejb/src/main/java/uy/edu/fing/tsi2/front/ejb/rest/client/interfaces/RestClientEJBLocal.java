@@ -6,6 +6,7 @@ import javax.ejb.Local;
 import uy.edu.fing.tsi2.front.ejb.rest.client.exceptions.RestClientException;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEntrenamiento;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEquipo;
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoFormacion;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoPartido;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoUsuario;
 
@@ -26,6 +27,14 @@ public interface RestClientEJBLocal {
 	String postEntrenamiento(InfoEntrenamiento entrenamiento) throws RestClientException;
 	
 	void simularPartido(Long partidoId) throws RestClientException;
+	
+	InfoFormacion getFormacionEstandar(Long equipoId) throws RestClientException;
+	
+	InfoFormacion getFormacionProximoPartido(Long equipoId) throws RestClientException;
+	
+	void storeFormacionEstandar(Long equipoId, InfoFormacion infoFormacion) throws RestClientException;
+	
+	void storeFormacionProximoPartido(Long equipoId, InfoFormacion infoFormacion) throws RestClientException;
 	
 	List<InfoUsuario> getUsuarios();
 

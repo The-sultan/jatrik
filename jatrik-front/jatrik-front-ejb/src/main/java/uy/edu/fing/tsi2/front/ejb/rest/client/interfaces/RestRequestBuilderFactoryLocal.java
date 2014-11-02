@@ -10,18 +10,22 @@ import javax.ejb.Local;
  */
 @Local
 public interface RestRequestBuilderFactoryLocal {
-	public WebResource.Builder makeUsuarioCreateRequestBuilder();
+	WebResource.Builder makeUsuarioCreateRequestBuilder();
 
-	public Builder makeEquipoGetRequestBuilder(long idEquipo);
+	Builder makeEquipoGetRequestBuilder(long idEquipo);
 	
-	public Builder makeUsuarioLoginRequestBuilder(String nick, String pass);
+	Builder makeUsuarioLoginRequestBuilder(String nick, String pass);
 	
-	public Builder makePartidoGetRequestBuilder(long idPartido);
+	Builder makePartidoGetRequestBuilder(long idPartido);
 
-	public WebResource.Builder makeEntrenamientoPostRequestBuilder();
+	Builder makeEntrenamientoPostRequestBuilder();
 	
 	Builder makeSimularPartidoRequestBuilder(Long partidoId);
 	
 	Builder makeUsuariosGetRequest();
-
+	
+	Builder makeFormacionEstandarRequestBuilder(Long idEquipo);
+	
+	Builder makeFormacionProximoPartidoRequestBuilder(Long idEquipo);
+	
 }

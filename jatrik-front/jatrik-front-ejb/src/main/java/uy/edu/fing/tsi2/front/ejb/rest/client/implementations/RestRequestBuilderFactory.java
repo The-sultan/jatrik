@@ -96,5 +96,23 @@ public class RestRequestBuilderFactory implements RestRequestBuilderFactoryLocal
             .type(MediaType.APPLICATION_JSON)
             .accept(MediaType.APPLICATION_JSON);
 	}
-	
+
+	@Override
+	public Builder makeFormacionEstandarRequestBuilder(Long idEquipo) {
+		String url = String.format(JATRIK_CORE_URL + "/equipos/" + idEquipo + "/formaciones/estandar");
+        return crearClienteJersey()
+            .resource(url)
+            .type(MediaType.APPLICATION_JSON)
+            .accept(MediaType.APPLICATION_JSON);
+	}
+
+	@Override
+	public Builder makeFormacionProximoPartidoRequestBuilder(Long idEquipo) {
+		String url = String.format(JATRIK_CORE_URL + "/equipos/" + idEquipo + "/formaciones/estandar");
+        return crearClienteJersey()
+            .resource(url)
+            .type(MediaType.APPLICATION_JSON)
+            .accept(MediaType.APPLICATION_JSON);
+	}
+
 }

@@ -9,6 +9,7 @@ import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEquipo;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoFormacion;
 
 /**
  *
@@ -40,5 +41,25 @@ public class EquipoEJB implements EquipoEJBLocal {
 		} catch (RestClientException e) {
 			throw e;
 		}
+	}
+
+	@Override
+	public InfoFormacion getFormacionEstandar(long id) {
+		return jatrikCoreClient.getFormacionEstandar(id);
+	}
+
+	@Override
+	public InfoFormacion getFormacionProximoPartido(long id) {
+		return jatrikCoreClient.getFormacionProximoPartido(id);
+	}
+
+	@Override
+	public void saveFormacionEstandar(long id, InfoFormacion infoFormacion) {
+		jatrikCoreClient.storeFormacionEstandar(id, infoFormacion);
+	}
+
+	@Override
+	public void saveFormacionProximoPartido(long id, InfoFormacion infoFormacion) {
+		jatrikCoreClient.storeFormacionProximoPartido(id, infoFormacion);
 	}
 }

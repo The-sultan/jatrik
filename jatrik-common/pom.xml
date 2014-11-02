@@ -9,5 +9,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
+		<buildDir>/${env.JBOSS_HOME}/modules/system/layers/base/uy/edu/fing/tsi2/main</buildDir>
     </properties>
+	<build>
+		<directory>${buildDir}</directory>
+	</build>
 </project>

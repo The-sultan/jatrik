@@ -36,12 +36,20 @@
                 <configuration>
                     <version>6</version>
                     <defaultLibBundleDir>lib</defaultLibBundleDir>
+					<archive>
+						<manifestEntries>
+							<Dependencies>uy.edu.fing.tsi2</Dependencies>
+						</manifestEntries>  
+					</archive>
                 </configuration>
             </plugin>
 			<plugin>
                 <groupId>org.jboss.as.plugins</groupId>
                 <artifactId>jboss-as-maven-plugin</artifactId>
                 <version>7.6.Final</version>
+				<configuration>
+					<port>${port}</port>
+				</configuration>
 				<!--<executions>
                     <execution>
                         <phase>install</phase>
