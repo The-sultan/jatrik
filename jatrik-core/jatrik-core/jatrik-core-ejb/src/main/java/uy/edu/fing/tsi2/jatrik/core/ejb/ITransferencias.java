@@ -10,8 +10,7 @@ public interface ITransferencias {
 	boolean ponerJugadorEnVenta(Long jugadorId, Long vendedorId,Double precio);
 	
 	boolean comprarJugador(Long transferenciaId, Long CompradorId);
-	
-	// listado de transferencias de jugadores en venta que no son del equipo idEquipo
-	List<Transferencia> listadoJugadoresEnVenta(Long idEquipo);
+		
+	List<Transferencia> listadoJugadoresEnVenta();
 	
 }

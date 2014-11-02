@@ -1,20 +1,15 @@
 package uy.edu.fing.tsi2.jatrik.common.payloads;
 
 public class InfoTransferencia {
-
+	
 	private Long id;
-	
 	private InfoJugador jugador;
-	
 	private Double precio;
-	
 	private Long equipoIdVendedor;
-	
 	private Long equipoIdComprador;
 
-	
 	public Long getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(Long id) {
@@ -22,7 +17,7 @@ public class InfoTransferencia {
 	}
 
 	public InfoJugador getJugador() {
-		return jugador;
+		return this.jugador;
 	}
 
 	public void setJugador(InfoJugador jugador) {
@@ -30,7 +25,7 @@ public class InfoTransferencia {
 	}
 
 	public Double getPrecio() {
-		return precio;
+		return this.precio;
 	}
 
 	public void setPrecio(Double precio) {
@@ -38,22 +33,18 @@ public class InfoTransferencia {
 	}
 
 	public Long getEquipoIdVendedor() {
-		return equipoIdVendedor;
+		return this.equipoIdVendedor;
 	}
 
 	public void setEquipoIdVendedor(Long equipoIdVendedor) {
 		this.equipoIdVendedor = equipoIdVendedor;
 	}
 
-
 	public Long getEquipoIdComprador() {
-		return equipoIdComprador;
+		return this.equipoIdComprador;
 	}
 
 	public void setEquipoIdComprador(Long equipoIdComprador) {
 		this.equipoIdComprador = equipoIdComprador;
 	}
-
-	
-	
 }

@@ -112,14 +112,8 @@ public class EJBManagerTransferenciaBean implements ITransferencias {
 		return false;
 	}
 	
-	public List<Transferencia> listadoJugadoresEnVenta(Long idEquipo){
+	public List<Transferencia> listadoJugadoresEnVenta(){
 		
-		List<Transferencia> misJugadores = transferencias.findTransferenciasdelEquipo(idEquipo);
-		
-		List<Transferencia> otrosJugadores = transferencias.findTransferenciasLibres();
-			
-		otrosJugadores.removeAll(misJugadores);
-		
-		return otrosJugadores;
+			return transferencias.findTransferenciasLibres();
 	}
 }

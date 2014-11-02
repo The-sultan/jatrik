@@ -1,6 +1,7 @@
 package uy.edu.fing.tsi2.front.ejb.rest.client.interfaces;
 
 import java.util.List;
+
 import javax.ejb.Local;
 
 import uy.edu.fing.tsi2.front.ejb.rest.client.exceptions.RestClientException;
@@ -8,6 +9,9 @@ import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEntrenamiento;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEquipo;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoFormacion;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoPartido;
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoTransferencia;
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoTransferenciaCompra;
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoTransferenciaVenta;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoUsuario;
 
 /**
@@ -37,5 +41,13 @@ public interface RestClientEJBLocal {
 	void storeFormacionProximoPartido(Long equipoId, InfoFormacion infoFormacion) throws RestClientException;
 	
 	List<InfoUsuario> getUsuarios();
+	
+	List<InfoTransferencia> getTransferencias();
+
+	String postTransferenciaVenta(InfoTransferenciaVenta paramInfoTransferenciaVenta)
+	    throws RestClientException;
+
+	String postTransferenciaCompra(InfoTransferenciaCompra paramInfoTransferenciaCompra)
+	    throws RestClientException;
 
 }

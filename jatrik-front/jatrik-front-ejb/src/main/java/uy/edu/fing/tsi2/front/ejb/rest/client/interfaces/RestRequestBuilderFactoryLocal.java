@@ -1,16 +1,16 @@
 package uy.edu.fing.tsi2.front.ejb.rest.client.interfaces;
 
-import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.client.WebResource.Builder;
-
 import javax.ejb.Local;
+
+import com.sun.jersey.api.client.WebResource.Builder;
 
 /**
  * @author Farid
  */
 @Local
 public interface RestRequestBuilderFactoryLocal {
-	WebResource.Builder makeUsuarioCreateRequestBuilder();
+	
+	Builder makeUsuarioCreateRequestBuilder();
 
 	Builder makeEquipoGetRequestBuilder(long idEquipo);
 	
@@ -23,6 +23,12 @@ public interface RestRequestBuilderFactoryLocal {
 	Builder makeSimularPartidoRequestBuilder(Long partidoId);
 	
 	Builder makeUsuariosGetRequest();
+	
+	Builder makeTransferenciasGetRequest();
+
+	Builder makeTransferenciasComprarGetRequest();
+
+	Builder makeTransferenciasVenderGetRequest();
 	
 	Builder makeFormacionEstandarRequestBuilder(Long idEquipo);
 	

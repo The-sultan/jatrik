@@ -105,6 +105,14 @@ public class RestRequestBuilderFactory implements RestRequestBuilderFactoryLocal
             .type(MediaType.APPLICATION_JSON)
             .accept(MediaType.APPLICATION_JSON);
 	}
+	public Builder makeTransferenciasGetRequest()
+	  {
+	    String url = String.format(JATRIK_CORE_URL + "/transferencia");
+	    return crearClienteJersey()
+	            .resource(url)
+	            .type(MediaType.APPLICATION_JSON)
+	            .accept(MediaType.APPLICATION_JSON);
+	  }
 
 	@Override
 	public Builder makeFormacionProximoPartidoRequestBuilder(Long idEquipo) {
@@ -115,4 +123,23 @@ public class RestRequestBuilderFactory implements RestRequestBuilderFactoryLocal
             .accept(MediaType.APPLICATION_JSON);
 	}
 
+	  public Builder makeTransferenciasComprarGetRequest()
+	  {
+	    
+	    String url = String.format(JATRIK_CORE_URL + "/transferencia/comprar");
+	    return crearClienteJersey()
+	            .resource(url)
+	            .type(MediaType.APPLICATION_JSON)
+	            .accept(MediaType.APPLICATION_JSON);
+	  }
+
+	  public Builder makeTransferenciasVenderGetRequest()
+	  {
+		  String url = String.format(JATRIK_CORE_URL + "/transferencia/vender");
+		    return crearClienteJersey()
+		            .resource(url)
+		            .type(MediaType.APPLICATION_JSON)
+		            .accept(MediaType.APPLICATION_JSON);
+	  }
+	
 }
