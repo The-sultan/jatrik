@@ -1,14 +1,15 @@
 package uy.edu.fing.tsi2.jatrik.core.simulacion.estrategias;
 
+import java.util.Random;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
-import org.apache.log4j.Logger;
 import uy.edu.fing.tsi2.jatrik.core.domain.Evento;
 
 import uy.edu.fing.tsi2.jatrik.core.domain.Partido;
 import uy.edu.fing.tsi2.jatrik.core.domain.eventos.EventoPartidoHito;
 import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumEventos;
+import uy.edu.fing.tsi2.jatrik.core.persistence.impl.bean.EJBEMEquiposBean;
 import uy.edu.fing.tsi2.jatrik.core.persistence.impl.local.EJBEMEventosLocal;
 import uy.edu.fing.tsi2.jatrik.core.persistence.impl.local.EJBEMEventosPartidosLocal;
 
@@ -20,6 +21,9 @@ public class EstrategiaHito extends EstrategiaSimulacion{
 	
 	@EJB
 	EJBEMEventosPartidosLocal eventosPartidosEJB;
+	
+	@EJB
+	EJBEMEquiposBean equiposEJB;
 	
 	public EstrategiaHito(){
 		this.setPeso(0);
@@ -39,6 +43,13 @@ public class EstrategiaHito extends EstrategiaSimulacion{
 			tipoEvento = EnumEventos.INICIO_SEGUNDO_TIEMPO;
 		}
 		else if(partido.getMinuto() == 90){
+			Random random = new Random();
+			Integer entradasVendidas = random.nextInt(30000);
+			entradasVendidas += 5000; //el random va de 5000 a 35000
+			Double fondos = partido.getLocal().getFondos();
+			fondos += entradasVendidas * 200;
+			partido.getLocal().setFondos(fondos);
+			equiposEJB.update(partido.getLocal());
 			tipoEvento = EnumEventos.FIN_PARTIDO;
 		}
 		Evento evento = eventosEJB.findByName(tipoEvento.name());
