@@ -161,4 +161,19 @@ public class EJBEMEquiposBean implements IEMEquipos {
 		}
 		return jugadorEnFormacionSeleccionados;
 	}
+
+	@Override
+	public void updateFormacion(Formacion formacion) {
+	entityManager.persist(formacion);
+	}
+	
+	@Override
+	public void deleteFormacion(Formacion formacion){
+		entityManager.remove(formacion);
+	}
+
+	@Override
+	public void storeFormacion(Formacion formacion) {
+		entityManager.persist(formacion);
+	}
 }

@@ -11,6 +11,7 @@ import javax.enterprise.inject.Model;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.primefaces.util.BeanUtils;
 
                                                                                                                                                                                                           
 
@@ -48,14 +49,9 @@ public class EquipoController  implements Serializable {
 		InfoEquipo equipoTemp = equipoEJB.getEquipo(sessionBean.getInfoUsuario().getInfoEquipo().getId());
 		equipoDatos = new Equipo();
 		List<InfoJugador> titulares = new ArrayList<>();
-		titulares.add(equipoTemp.getGolero());
-		titulares.addAll(equipoTemp.getDefensas());
-		titulares.addAll(equipoTemp.getMediocampistas());
-		titulares.addAll(equipoTemp.getDelanteros());
 		equipoDatos.setTitulares(titulares);
-		equipoDatos.setSuplentes(equipoTemp.getSuplentes());
-		equipoDatos.setReserva(equipoTemp.getReservas());
-		equipoDatos.setNombre(equipoTemp.getNombre());
+		
+		
 		
 		//TODO:Traducir 
 		//equipoDatos = new Equipo();

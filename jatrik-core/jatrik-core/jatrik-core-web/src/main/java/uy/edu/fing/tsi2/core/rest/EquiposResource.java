@@ -39,7 +39,10 @@ public class EquiposResource {
 	private EJBManagerEquipoBeanLocal equipoEJB;
 	
 	@Inject
-	HistorialPartidosResource historialPartidosResource;
+	private HistorialPartidosResource historialPartidosResource;
+	
+	@Inject
+	private FormacionesResource formacionesResource;
 	
 	@GET
 	@Path("/{id}")
@@ -47,12 +50,7 @@ public class EquiposResource {
 	public InfoEquipo getEquipo(@PathParam("id") Long idEquipo){
 		Equipo equipo = equipoEJB.find(idEquipo);
 		InfoEquipo infoEquipo = new InfoEquipo();
-		infoEquipo.setDefensas(getDtoFromEntity(equipo.getFormacion().getJugadores(),EnumPuestoFormacion.DEFENSA));
-		infoEquipo.setMediocampistas(getDtoFromEntity(equipo.getFormacion().getJugadores(),EnumPuestoFormacion.MEDIOCAMPISTA));
-		infoEquipo.setDelanteros(getDtoFromEntity(equipo.getFormacion().getJugadores(),EnumPuestoFormacion.DELANTERO));
-		infoEquipo.setSuplentes(getDtoFromEntity(equipo.getFormacion().getJugadores(),EnumPuestoFormacion.SUPLENTE));
-		infoEquipo.setReservas(getDtoFromEntity(equipo.getFormacion().getJugadores(),EnumPuestoFormacion.RESERVA));
-		infoEquipo.setGolero(getDtoFromEntity(equipo.getFormacion().getJugadores(),EnumPuestoFormacion.ARQUERO).get(0));
+
 		infoEquipo.setEstadio(getDtoFromEntity(equipo));
 		infoEquipo.setFondos(equipo.getFondos());
 		infoEquipo.setId(equipo.getId());
@@ -61,37 +59,13 @@ public class EquiposResource {
 		return infoEquipo;
 	}
 	
+	@Path("/{id}/formaciones")
+	public FormacionesResource getFormaciones(@PathParam("id") Long idEquipo){
+		formacionesResource.setId(idEquipo);
+		return formacionesResource;
+	}
 	
-	private List<InfoJugador> getDtoFromEntity(Set<JugadorEnFormacion> jugadores, EnumPuestoFormacion puestoEnFormacion){
-		List<InfoJugador> infoJugadores = new ArrayList<>();
-		for(JugadorEnFormacion jugadorEnFormacion : jugadores){
-			if(jugadorEnFormacion.getPuestoFormacion() == puestoEnFormacion){
-				InfoJugador infoJugador = getDtoFromEntity(jugadorEnFormacion.getJugador());
-				infoJugadores.add(infoJugador);
-			}
-		}
-		return infoJugadores;
-	}
-
-	private InfoJugador getDtoFromEntity(Jugador jugador){
-		InfoJugador infoJugador = new InfoJugador();
-			try {
-				BeanUtils.copyProperties(infoJugador, jugador);
-				List<InfoHabilidad> infoHabilidades = new ArrayList<>();
-				for(Habilidad habilidad : jugador.getHabilidades()){
-					InfoHabilidad infoHabilidad = new InfoHabilidad();
-					BeanUtils.copyProperties(infoHabilidad, habilidad);
-					infoHabilidades.add(infoHabilidad);
-					infoHabilidad.setNombre(habilidad.getTipo().getHabilidad());
-				}
-				infoJugador.setHabilidades(infoHabilidades);
-			} catch (IllegalAccessException ex) {
-				Logger.getLogger(EquiposResource.class.getName()).log(Level.SEVERE, null, ex);
-			} catch (InvocationTargetException ex) {
-				Logger.getLogger(EquiposResource.class.getName()).log(Level.SEVERE, null, ex);
-			}
-		return infoJugador;
-	}
+	
 	private InfoEstadio getDtoFromEntity(Equipo equipo){
 		InfoEstadio infoEstadio = new InfoEstadio();
 		infoEstadio.setAltura(equipo.getAltura());

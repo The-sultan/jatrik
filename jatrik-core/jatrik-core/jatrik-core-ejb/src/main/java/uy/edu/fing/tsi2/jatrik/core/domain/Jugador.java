@@ -85,6 +85,14 @@ public class Jugador implements Serializable {
 	@Column(name = "FECHA_ENTRENAMIENTO")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaEntrena;
+	
+	@Column
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date fechaFinSancion;
+	
+	@Column
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date fechaFinLesion;
 
 	public Jugador() {
 		super();
@@ -186,6 +194,23 @@ public class Jugador implements Serializable {
 		this.fechaEntrena = fechaEntrena;
 	}
 
+	public Date getFechaFinSancion() {
+		return fechaFinSancion;
+	}
+
+	public void setFechaFinSancion(Date fechaFinSancion) {
+		this.fechaFinSancion = fechaFinSancion;
+	}
+
+	public Date getFechaFinLesion() {
+		return fechaFinLesion;
+	}
+
+	public void setFechaFinLesion(Date fechaFinLesion) {
+		this.fechaFinLesion = fechaFinLesion;
+	}
+
+	
 	@Override
 	public int hashCode() {
 		int hash = 0;

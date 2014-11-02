@@ -9,9 +9,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Produces;
 
 import uy.edu.fing.tsi2.jatrik.core.domain.Partido;
-import uy.edu.fing.tsi2.jatrik.core.domain.eventos.EventoPartido;
 import uy.edu.fing.tsi2.jatrik.core.ejb.impl.local.EJBManagerPartidoLocal;
-import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEvento;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoPartido;
 import uy.edu.fing.tsi2.jatrik.common.payloads.HistorialPartidos;
 

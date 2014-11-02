@@ -46,7 +46,8 @@ public class EJBManagerPartidoBean implements IPartidos {
 	public List<Partido> obtenerPartidos(Long idEquipo) {
 		try {
 			logger.info("Voy a buscar los partidos del equipo " + idEquipo);
-			List<Partido> prt = partidos.findPartidosDeEquipo(idEquipo);
+			List<Partido> prt = partidos.findPartidosDeEquipo(idEquipo, EnumEstadoPartido.EN_CURSO);
+			prt.addAll(partidos.findPartidosDeEquipo(idEquipo, EnumEstadoPartido.FINALIZADO));
 			logger.info("Obtuve los partidos");
 			return prt;			
 		} catch (Exception e) {

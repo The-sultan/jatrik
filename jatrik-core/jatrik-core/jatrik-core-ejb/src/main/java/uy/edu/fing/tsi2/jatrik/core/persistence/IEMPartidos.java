@@ -19,7 +19,7 @@ public interface IEMPartidos {
 
 	List<Partido> findAll();
 	
-	List<Partido> findPartidosDeEquipo(Long idEquipo);
+	List<Partido> findPartidosDeEquipo(Long idEquipo, EnumEstadoPartido estado);
 	
 	List<Partido> findPartidosPorFechayEstados(Date fechaDesde, Date fechaHasta,Set<EnumEstadoPartido> estados);
 	

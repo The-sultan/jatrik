@@ -61,13 +61,9 @@ public class EJBEMPartidosBean implements IEMPartidos {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Partido> findPartidosDeEquipo(Long idEquipo) {
-		EnumEstadoPartido Estado1 = EnumEstadoPartido.EN_CURSO;
-		EnumEstadoPartido Estado2 = EnumEstadoPartido.FINALIZADO;
-		Query consulta1 = entityManager.createNamedQuery("findPartidosDeEquipo").setParameter("idEquipo", idEquipo).setParameter("estado", Estado1);
-		Query consulta2 = entityManager.createNamedQuery("findPartidosDeEquipo").setParameter("idEquipo", idEquipo).setParameter("estado", Estado2);
+	public List<Partido> findPartidosDeEquipo(Long idEquipo, EnumEstadoPartido estado) {
+		Query consulta1 = entityManager.createNamedQuery("findPartidosDeEquipo").setParameter("idEquipo", idEquipo).setParameter("estado", estado);
 		List<Partido> partidos = ((List<Partido>) consulta1.getResultList());
-		partidos.addAll(((List<Partido>) consulta2.getResultList()));
 		return partidos;
 
 	}

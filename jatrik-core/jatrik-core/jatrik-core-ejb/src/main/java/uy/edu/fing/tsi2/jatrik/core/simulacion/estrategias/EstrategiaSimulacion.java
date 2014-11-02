@@ -10,7 +10,6 @@ import uy.edu.fing.tsi2.jatrik.core.domain.JugadorEnFormacion;
 import uy.edu.fing.tsi2.jatrik.core.domain.Partido;
 import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumPuestoFormacion;
 
-@Stateless
 public abstract class EstrategiaSimulacion {
 	
 	public abstract void manejarEvento(Partido partido);

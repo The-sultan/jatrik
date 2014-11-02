@@ -26,6 +26,7 @@ import org.apache.log4j.Logger;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoUsuario;
 
 import uy.edu.fing.tsi2.jatrik.core.domain.DatosJugador;
 import uy.edu.fing.tsi2.jatrik.core.domain.Equipo;
@@ -68,20 +69,19 @@ public class EJBManagerUsuarioBean implements IUsuarios {
 	private EJBEMDatosJugadoresLocal datosJugadores;
 
 	@Override
-	public Long crearUsuario(String nombre, String nick, String email, String password,
-	String nombreEquipo, String nombreEstadio) {
+	public Long crearUsuario(InfoUsuario infoUsuario) {
 		try {
 			logger.info("Voy a Validar al usuario");
-			if (usuarios.findUsuarioByNick(nick) == null) {
+			if (usuarios.findUsuarioByNick(infoUsuario.getNick()) == null) {
 
 				// TODO Aca deberiamos controlar si no hay equipos libres o si
 				// no
 				// hay mas jugadores
 				Usuario usr = new Usuario();
-				usr.setNombre(nombre);
-				usr.setEmail(email);
-				usr.setPassword(password);
-				usr.setNick(nick);
+				usr.setNombre(infoUsuario.getNombre());
+				usr.setEmail(infoUsuario.getEmail());
+				usr.setPassword(infoUsuario.getPassword());
+				usr.setNick(infoUsuario.getNick());
 				// BeanUtils.copyProperties(usr, infoUsuario);
 
 				// Equipo equipo = equipos.findEquipoLibre();
@@ -94,8 +94,8 @@ public class EJBManagerUsuarioBean implements IUsuarios {
 				// equipos.update(equipo);
 
 				Equipo equipo = new Equipo();
-				equipo.setNombre(nombreEquipo);
-				equipo.setEstadio(nombreEstadio);
+				equipo.setNombre(infoUsuario.getInfoEquipo().getNombre());
+				equipo.setEstadio(infoUsuario.getInfoEquipo().getEstadio().getNombre());
 				// infoUsuario.getInfoEquipo());
 
 				// Seteo el Usuario al Equipo
