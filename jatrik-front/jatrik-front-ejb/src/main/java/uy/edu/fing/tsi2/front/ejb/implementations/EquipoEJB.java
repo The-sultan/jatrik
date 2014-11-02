@@ -33,8 +33,8 @@ public class EquipoEJB implements EquipoEJBLocal {
 	@Override
 	public String entrenarEquipo(long id, int modo) {
 		InfoEntrenamiento ent = new InfoEntrenamiento();
-		ent.setIdequipo((int)id);
-		ent.setModo(modo);
+		ent.setIdEquipo((int)id);
+		//ent.setModo(modo);
 		try {
 			return jatrikCoreClient.postEntrenamiento(ent);
 		} catch (RestClientException e) {
