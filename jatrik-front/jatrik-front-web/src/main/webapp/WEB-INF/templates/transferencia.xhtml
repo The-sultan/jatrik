@@ -8,45 +8,61 @@
 	<h1>Market</h1>
 	<h:form>
 		<h:panelGroup layout="block" id="updatable" class="resultados">
-			<p:dataTable var="trans" value="#{marketPlaceController.obtenerJugadoresEnVenta()}">
-				<p:column headerText="Id">
+		    <h:dataTable  value="#{marketPlaceController.obtenerJugadoresEnVenta()}" var="trans"
+							  columnClasses="transferenciaMarket" id="table" class="results-table">
+				<h:column>
+					<f:facet name="header">Id</f:facet>
 					<h:outputText value="#{trans.id}" />
-				</p:column>
-				<p:column headerText="Nombre">
+				</h:column>
+				<h:column>
+					<f:facet name="header">Nombre</f:facet>
 					<h:outputText value="#{trans.jugador.nombre}" />
-				</p:column>
-				<p:column headerText="Puesto">
+				</h:column>
+				<h:column>
+					<f:facet name="header">Puesto</f:facet>
 					<h:outputText value="#{trans.jugador.puesto}" />
-				</p:column>
-				<p:column headerText="Precio">
+				</h:column>
+				<h:column>
+					<f:facet name="header">Precio</f:facet>
 					<h:outputText value="#{trans.precio}" />
-				</p:column>
-				<p:column headerText="Edad">
+				</h:column>
+				<h:column>
+					<f:facet name="header">Edad</f:facet>
 					<h:outputText value="#{trans.jugador.edad}" />
-				</p:column>	
-				<p:column headerText="Peso">
+				</h:column>
+				<h:column>
+					<f:facet name="header">Peso</f:facet>
 					<h:outputText value="#{trans.jugador.peso}" />
-				</p:column>	
-				<p:column headerText="Altura">
+				</h:column>
+				<h:column>
+					<f:facet name="header">Altura</f:facet>
 					<h:outputText value="#{trans.jugador.altura}" />
-				</p:column>
-				<p:column headerText="Velocidad">
+				</h:column>
+				<h:column>
+					<f:facet name="header">Velocidad</f:facet>
 					<h:outputText value="#{trans.jugador.habilidades.get(0).valor}" />
-				</p:column>
-				<p:column headerText="Porteria">
+				</h:column>
+				<h:column>
+					<f:facet name="header">Porteria</f:facet>
 					<h:outputText value="#{trans.jugador.habilidades.get(1).valor}" />
-				</p:column>
-				<p:column headerText="Tecnica">
+				</h:column>
+				<h:column>
+					<f:facet name="header">Tecnica</f:facet>
 					<h:outputText value="#{trans.jugador.habilidades.get(2).valor}" />
-				</p:column>		
-				<p:column headerText="Defensa">
+				</h:column>
+				<h:column>
+					<f:facet name="header">Defensa</f:facet>
 					<h:outputText value="#{trans.jugador.habilidades.get(3).valor}" />
-				</p:column>	
-				<p:column headerText="Ataque">
+				</h:column>
+				<h:column>
+					<f:facet name="header">Ataque</f:facet>
 					<h:outputText value="#{trans.jugador.habilidades.get(4).valor}" />
-				</p:column>		
-												
-			</p:dataTable>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Comprar?</f:facet>
+					<h:selectBooleanCheckbox  id="selectBooleanCheckbox" value="${marketPlaceController.prueba}" />
+				</h:column>
+			 </h:dataTable>
 		</h:panelGroup>
 	</h:form>
 </div>

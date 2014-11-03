@@ -20,9 +20,13 @@ public class MarketPlaceController implements Serializable {
 	@Inject
 	SessionBeanJatrik sessionBean;
 
+	
+	private boolean prueba=true;
+	
 	@EJB
 	private TransferenciaEJBLocal transferenciaEJB;
 	
+		
 	public void venderJugador(Long idJugador, Double precio) {
 		transferenciaEJB.ponerEnVentaJugador(this.sessionBean
 				.getInfoUsuario().getInfoEquipo().getId(), idJugador, precio);
@@ -44,6 +48,15 @@ public class MarketPlaceController implements Serializable {
 	public void setSessionBean(SessionBeanJatrik sessionBean) {
 		this.sessionBean = sessionBean;
 	}
+
+	public boolean getPrueba() {
+		return prueba;
+	}
+
+	public void setPrueba(boolean prueba) {
+		this.prueba = prueba;
+	}
+
 
 	
 }

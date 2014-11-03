@@ -7,7 +7,8 @@ public class InfoTransferencia {
 	private Double precio;
 	private Long equipoIdVendedor;
 	private Long equipoIdComprador;
-
+	
+	
 	public Long getId() {
 		return this.id;
 	}
@@ -47,4 +48,6 @@ public class InfoTransferencia {
 	public void setEquipoIdComprador(Long equipoIdComprador) {
 		this.equipoIdComprador = equipoIdComprador;
 	}
+
+	
 }
