@@ -5,20 +5,48 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/default.xhtml">
-		<h1>Market</h1> 
-		<h:form>
-			<h:panelGroup layout="block" id="updatable" class="resultados">
-				<h:dataTable  value="#{marketPlaceController.transferencias}" var="trans"
-							  columnClasses="transfer" id="table" class="results-table">
-					<h:column>
-						<f:facet name="header">id</f:facet>
-							#{trans.id}
-					</h:column>	
-					<h:column>
-						<f:facet name="header">Nombre</f:facet>
-							#{trans.jugador.nombre}
-					</h:column>						
-				</h:dataTable>
-			</h:panelGroup>
-		</h:form>
+	<h1>Market</h1>
+	<h:form>
+		<h:panelGroup layout="block" id="updatable" class="resultados">
+			<p:dataTable var="trans" value="#{marketPlaceController.obtenerJugadoresEnVenta()}">
+				<p:column headerText="Id">
+					<h:outputText value="#{trans.id}" />
+				</p:column>
+				<p:column headerText="Nombre">
+					<h:outputText value="#{trans.jugador.nombre}" />
+				</p:column>
+				<p:column headerText="Puesto">
+					<h:outputText value="#{trans.jugador.puesto}" />
+				</p:column>
+				<p:column headerText="Precio">
+					<h:outputText value="#{trans.precio}" />
+				</p:column>
+				<p:column headerText="Edad">
+					<h:outputText value="#{trans.jugador.edad}" />
+				</p:column>	
+				<p:column headerText="Peso">
+					<h:outputText value="#{trans.jugador.peso}" />
+				</p:column>	
+				<p:column headerText="Altura">
+					<h:outputText value="#{trans.jugador.altura}" />
+				</p:column>
+				<p:column headerText="Velocidad">
+					<h:outputText value="#{trans.jugador.habilidades.get(0).valor}" />
+				</p:column>
+				<p:column headerText="Porteria">
+					<h:outputText value="#{trans.jugador.habilidades.get(1).valor}" />
+				</p:column>
+				<p:column headerText="Tecnica">
+					<h:outputText value="#{trans.jugador.habilidades.get(2).valor}" />
+				</p:column>		
+				<p:column headerText="Defensa">
+					<h:outputText value="#{trans.jugador.habilidades.get(3).valor}" />
+				</p:column>	
+				<p:column headerText="Ataque">
+					<h:outputText value="#{trans.jugador.habilidades.get(4).valor}" />
+				</p:column>		
+												
+			</p:dataTable>
+		</h:panelGroup>
+	</h:form>
 </div>

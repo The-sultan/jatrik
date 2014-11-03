@@ -2,57 +2,48 @@ package uy.edu.fing.tsi2.controller;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.annotation.ManagedBean;
-import javax.annotation.PostConstruct;
+
 import javax.ejb.EJB;
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Model;
 import javax.inject.Inject;
+
 import uy.edu.fing.tsi2.front.ejb.interfaces.TransferenciaEJBLocal;
-import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEquipo;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoTransferencia;
-import uy.edu.fing.tsi2.jatrik.common.payloads.InfoUsuario;
 import uy.edu.fing.tsi2.model.SessionBeanJatrik;
 
-@ManagedBean
+@SuppressWarnings("serial")
+@Model
 @RequestScoped
-public class MarketPlaceController
-  implements Serializable
-{
+public class MarketPlaceController implements Serializable {
 
-  @Inject
-  SessionBeanJatrik sessionBean;
+	@Inject
+	SessionBeanJatrik sessionBean;
 
-  @EJB
-  private TransferenciaEJBLocal transferenciaEJB;
-  private List<InfoTransferencia> transferencias;
+	@EJB
+	private TransferenciaEJBLocal transferenciaEJB;
+	
+	public void venderJugador(Long idJugador, Double precio) {
+		transferenciaEJB.ponerEnVentaJugador(this.sessionBean
+				.getInfoUsuario().getInfoEquipo().getId(), idJugador, precio);
+	}
 
-  @PostConstruct
-  public void init()
-  {
-    this.transferencias = obtenerJugadoresEnVenta();
-  }
+	public void comprarJugador(Long idTransferencia) {
+		transferenciaEJB.comprarJugador(this.sessionBean.getInfoUsuario()
+				.getInfoEquipo().getId(), idTransferencia);
+	}
 
-  public void venderJugador(Long idJugador, Double precio)
-  {
-    this.transferenciaEJB.ponerEnVentaJugador(this.sessionBean.getInfoUsuario().getInfoEquipo().getId(), idJugador, precio);
-  }
+	public List<InfoTransferencia> obtenerJugadoresEnVenta() {
+		return transferenciaEJB.getTransferencias();
+	}
 
-  public void comprarJugador(Long idTransferencia)
-  {
-    this.transferenciaEJB.comprarJugador(this.sessionBean.getInfoUsuario().getInfoEquipo().getId(), idTransferencia);
-  }
+	public SessionBeanJatrik getSessionBean() {
+		return sessionBean;
+	}
 
-  public List<InfoTransferencia> obtenerJugadoresEnVenta()
-  {
-    return this.transferenciaEJB.getTransferencias();
-  }
+	public void setSessionBean(SessionBeanJatrik sessionBean) {
+		this.sessionBean = sessionBean;
+	}
 
-  public List<InfoTransferencia> getTransferencias()
-  {
-    return this.transferencias;
-  }
-
-  public void setTransferencias(List<InfoTransferencia> transferencias) {
-    this.transferencias = transferencias;
-  }
+	
 }
