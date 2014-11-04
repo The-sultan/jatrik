@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
+	<h1>Correo</h1>
+	<f:view>
+		<h:form id="form1">
+			<table>
+				<tr>
+				<td valign="top">
+						<table class="tborde" width="100%" align="center" cellpadding="0"
+							cellspacing="0">
+							<tr align="center">
+								<td width="434" align="center" bgcolor="#336699">
+									<div align="center">
+										<font size="2" face="Verdana, Arial, Helvetica, sans-serif"
+											color="#FFFFFF"><B>Correos del Usuario</B> </font>
+									</div>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td valign="top"><rich:tabPanel>
+							<rich:tab label="Bandeja de Entrada (#{correosBean.cantidadNoLeidos})">
+								<rich:dataTable id="bandejaEntrada" value="#{correosBean.bandejaEntrada}" var="correo">
+									<rich:column id="Asunto">
+										<f:facet name="header">
+											<h:outputText styleClass="headerText" value="Asunto" />
+										</f:facet>
+										<f:subview id="mensaje">
+											<rich:modalPanel id="panel" left="150" top="100"
+												autosized="true" styleClass="panel">
+												<f:facet name="header">
+													<h:panelGroup>
+														<h:outputText value="Mensaje"></h:outputText>
+													</h:panelGroup>
+												</f:facet>
+												<f:facet name="controls">
+													<h:panelGroup>
+														<h:graphicImage value="/images/close.png"
+															style="cursor:pointer" id="hidelink" />
+														<rich:componentControl for="panel" attachTo="hidelink"
+															operation="hide" event="onclick" />
+													</h:panelGroup>
+												</f:facet>
+												<table width="400px" height="300px">
+													<tr>
+														<td height="92" valign="top" bgcolor="#FCFCFC"
+															style="font-size: 14px">Enviado por : <h:outputText
+																value="#{correo.from.usuario}" /><BR> Fecha : 
+														<h:outputText value="#{correo.fecha}" /><BR> Asunto
+																: 
+														<h:outputText value="#{correo.asunto}" /><BR>
+														<BR>
+														<rich:separator lineType="solid"></rich:separator> <BR>
+														<font size="2"
+															face="Verdana, Arial, Helvetica, sans-serif"> <h:outputText
+																	value="#{correo.mensaje}" />
+														</font></td>
+													</tr>
+												</table>
+											</rich:modalPanel>
+											<h:outputLink value="#" id="link">
+												<h:outputText value="#{correo.asunto}" styleClass="noleido"
+													rendered="#{correo.leido == false}" />
+												<h:outputText value="#{correo.asunto}" styleClass="leido"
+													rendered="#{correo.leido == true}" />
+												<rich:componentControl for="panel" attachTo="link"
+													operation="show" event="onclick" />
+												<f:param name="idCorreo" id="idCorreo" value="#{correo.id}" />
+											</h:outputLink>
+										</f:subview>
+
+									</rich:column>
+
+									<rich:column id="From">
+										<f:facet name="header">
+											<h:outputText styleClass="headerText" value="From" />
+										</f:facet>
+										<h:outputText value="#{correo.from.usuario}"
+											styleClass="noleido" rendered="#{correo.leido == false}" />
+										<h:outputText value="#{correo.from.usuario}"
+											styleClass="leido" rendered="#{correo.leido == true}" />
+									</rich:column>
+
+									<rich:column id="Fecha">
+										<f:facet name="header">
+											<h:outputText styleClass="headerText" value="Fecha" />
+										</f:facet>
+										<h:outputText value="#{correo.fecha}" styleClass="noleido"
+											rendered="#{correo.leido == false}" />
+										<h:outputText value="#{correo.fecha}" styleClass="leido"
+											rendered="#{correo.leido == true}" />
+									</rich:column>
+
+									<rich:column id="Marcar">
+										<f:facet name="header">
+											<h:outputText styleClass="headerText" value="Marcar" />
+										</f:facet>
+										<h:commandLink actionListener="#{correosBean.marcarLeido}"
+											id="link">
+											<h:outputText value="leido"
+												rendered="#{correo.leido == false}" />
+											<h:outputText value="no leido"
+												rendered="#{correo.leido == true}" />
+											<f:param name="idCorreo" id="idCorreo" value="#{correo.id}" />
+										</h:commandLink>
+									</rich:column>
+
+
+
+								</rich:dataTable>
+							</rich:tab>
+					<%-- 
+					<rich:tab label="Bandeja de Salida">
+							</rich:tab>
+					--%>
+					<rich:tab label="Enviar Correo">
+								<table>
+									<tr>
+										<td>Para</td>
+										<td><h:selectOneMenu id="para"
+												binding="#{correosBean.usuarioTO}">
+												<f:selectItems value="#{correosBean.usuarios}" />
+											</h:selectOneMenu></td>
+									</tr>
+									<tr>
+										<td>Asunto</td>
+										<td><h:inputText id="asuntoMail"
+												value="#{correosBean.nuevoCorreo.asunto}" /></td>
+									</tr>
+									<tr>
+										<td>Mensaje</td>
+										<td><h:inputTextarea id="mensajeMail" rows="10" cols="30"
+												value="#{correosBean.nuevoCorreo.mensaje}" /></td>
+									</tr>
+									<tr>
+										<td><h:commandButton value="Enviar"
+												actionListener="#{correosBean.send}"></h:commandButton></td>
+										<td></td>
+
+									</tr>
+								</table>
+								<table>
+									<tr>
+										<td><h:outputText value="#{correosBean.correoEnviado}"
+												styleClass="correoEnviado"></h:outputText>
+										<td></td>
+
+									</tr>
+
+								</table>
+
+							</rich:tab>
+
+						</rich:tabPanel></td>
+				</tr>
+			</table>
+
+
+		</h:form>
+
+	</f:view>
+</div>
