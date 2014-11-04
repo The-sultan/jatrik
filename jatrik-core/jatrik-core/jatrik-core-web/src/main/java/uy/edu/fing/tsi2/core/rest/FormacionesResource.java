@@ -6,13 +6,16 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
+
 import org.apache.commons.beanutils.BeanUtils;
+
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoFormacion;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoHabilidad;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoJugador;
@@ -30,10 +33,10 @@ import uy.edu.fing.tsi2.jatrik.core.exceptions.JatrikPersistenceException;
 
 @RequestScoped
 public class FormacionesResource {
-	
+
 	@EJB
 	EJBManagerEquipoBeanLocal equipoEJB;
-	
+
 	private Long id;
 
 	public Long getId() {
@@ -43,88 +46,116 @@ public class FormacionesResource {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	@GET
 	@Path("/estandar")
-	public Response getFormacionEstandar(){
-		try{
-		Formacion formacion = equipoEJB.getFormacionEstandar(id);
-		return Response.ok(getDtoFromEntity(formacion)).build();
-		}
-		catch(JatrikPersistenceException ex){
+	public Response getFormacionEstandar() {
+		try {
+			Formacion formacion = equipoEJB.getFormacionEstandar(id);
+			return Response.ok(getDtoFromEntity(formacion)).build();
+		} catch (JatrikPersistenceException ex) {
 			return Response.status(Response.Status.PRECONDITION_FAILED).build();
 		}
-		
+
 	}
-	
+
+	@GET
+	@Path("/propia")
+	public Response getFormacionPropiaEstandar() {
+		try {
+			List<InfoJugador> resultado = new ArrayList<InfoJugador>();
+			List<Jugador> misJugadores = equipoEJB.obtenerJugadoresEquipo(id);
+			for (Jugador jugador : misJugadores) {
+				InfoJugador infoJugador = getDtoFromEntity(jugador);
+				resultado.add(infoJugador);
+			}
+			return Response.ok(resultado).build();
+		} catch (Exception ex) {
+			Logger.getLogger(FormacionesResource.class.getName()).log(
+					Level.SEVERE, null, ex);
+		}
+		return Response.serverError().build();
+	}
+
 	@POST
 	@Path("/estandar")
-	public Response saveFormacionEstandar(InfoFormacion infoFormacion){
+	public Response saveFormacionEstandar(InfoFormacion infoFormacion) {
 		equipoEJB.storeFormacionEstandar(id, infoFormacion);
 		return Response.ok().build();
 	}
-	
+
 	@GET
 	@Path("/proximoPartido")
-	public Response getFormacionProximoPartido(){
-		try{
+	public Response getFormacionProximoPartido() {
+		try {
 			Formacion formacion = equipoEJB.getFormacionProximoPartido(id);
-			return Response.ok(getDtoFromEntity(formacion)).build();	
-		}
-		catch(JatrikPersistenceException ex){
+			return Response.ok(getDtoFromEntity(formacion)).build();
+		} catch (JatrikPersistenceException ex) {
 			return Response.status(Response.Status.PRECONDITION_FAILED).build();
 		}
-		
+
 	}
-	
+
 	@POST
 	@Path("/proximoPartido")
-	public Response saveFormacionProximoPartido(InfoFormacion infoFormacion){
+	public Response saveFormacionProximoPartido(InfoFormacion infoFormacion) {
 		equipoEJB.storeFormacionProximoPartido(id, infoFormacion);
 		return Response.ok().build();
 	}
-	
-	
-	private List<InfoJugador> getDtoFromEntity(Set<JugadorEnFormacion> jugadores, EnumPuestoFormacion puestoEnFormacion){
+
+	private List<InfoJugador> getDtoFromEntity(
+			Set<JugadorEnFormacion> jugadores,
+			EnumPuestoFormacion puestoEnFormacion) {
 		List<InfoJugador> infoJugadores = new ArrayList<>();
-		for(JugadorEnFormacion jugadorEnFormacion : jugadores){
-			if(jugadorEnFormacion.getPuestoFormacion() == puestoEnFormacion){
-				InfoJugador infoJugador = getDtoFromEntity(jugadorEnFormacion.getJugador());
+		for (JugadorEnFormacion jugadorEnFormacion : jugadores) {
+			if (jugadorEnFormacion.getPuestoFormacion() == puestoEnFormacion) {
+				InfoJugador infoJugador = getDtoFromEntity(jugadorEnFormacion
+						.getJugador());
 				infoJugadores.add(infoJugador);
 			}
 		}
 		return infoJugadores;
 	}
 
-	private InfoJugador getDtoFromEntity(Jugador jugador){
+	private InfoJugador getDtoFromEntity(Jugador jugador) {
 		InfoJugador infoJugador = new InfoJugador();
-			try {
-				BeanUtils.copyProperties(infoJugador, jugador);
-				List<InfoHabilidad> infoHabilidades = new ArrayList<>();
-				for(Habilidad habilidad : jugador.getHabilidades()){
-					InfoHabilidad infoHabilidad = new InfoHabilidad();
-					BeanUtils.copyProperties(infoHabilidad, habilidad);
-					infoHabilidades.add(infoHabilidad);
-					infoHabilidad.setNombre(habilidad.getTipo().getHabilidad());
-				}
-				infoJugador.setHabilidades(infoHabilidades);
-			} catch (IllegalAccessException ex) {
-				Logger.getLogger(EquiposResource.class.getName()).log(Level.SEVERE, null, ex);
-			} catch (InvocationTargetException ex) {
-				Logger.getLogger(EquiposResource.class.getName()).log(Level.SEVERE, null, ex);
+		try {
+			BeanUtils.copyProperties(infoJugador, jugador);
+			List<InfoHabilidad> infoHabilidades = new ArrayList<>();
+			for (Habilidad habilidad : jugador.getHabilidades()) {
+				InfoHabilidad infoHabilidad = new InfoHabilidad();
+				BeanUtils.copyProperties(infoHabilidad, habilidad);
+				infoHabilidades.add(infoHabilidad);
+				infoHabilidad.setNombre(habilidad.getTipo().getHabilidad());
 			}
+			infoJugador.setHabilidades(infoHabilidades);
+		} catch (IllegalAccessException ex) {
+			Logger.getLogger(EquiposResource.class.getName()).log(Level.SEVERE,
+					null, ex);
+		} catch (InvocationTargetException ex) {
+			Logger.getLogger(EquiposResource.class.getName()).log(Level.SEVERE,
+					null, ex);
+		}
 		return infoJugador;
 	}
-	
-	private InfoFormacion getDtoFromEntity(Formacion formacion){
+
+	private InfoFormacion getDtoFromEntity(Formacion formacion) {
 		InfoFormacion infoFormacion = new InfoFormacion();
-		if(formacion != null){
-			infoFormacion.setGolero(getDtoFromEntity(formacion.getJugadores(),EnumPuestoFormacion.ARQUERO).get(0));
-			infoFormacion.setDefensas(getDtoFromEntity(formacion.getJugadores(), EnumPuestoFormacion.DEFENSA));
-			infoFormacion.setMediocampistas(getDtoFromEntity(formacion.getJugadores(), EnumPuestoFormacion.MEDIOCAMPISTA));
-			infoFormacion.setDelanteros(getDtoFromEntity(formacion.getJugadores(), EnumPuestoFormacion.DELANTERO));
-			infoFormacion.setSuplentes(getDtoFromEntity(formacion.getJugadores(), EnumPuestoFormacion.SUPLENTE));
-			infoFormacion.setReservas(getDtoFromEntity(formacion.getJugadores(), EnumPuestoFormacion.RESERVA));
+		if (formacion != null) {
+			infoFormacion.setGolero(getDtoFromEntity(formacion.getJugadores(),
+					EnumPuestoFormacion.ARQUERO).get(0));
+			infoFormacion.setDefensas(getDtoFromEntity(
+					formacion.getJugadores(), EnumPuestoFormacion.DEFENSA));
+			infoFormacion
+					.setMediocampistas(getDtoFromEntity(
+							formacion.getJugadores(),
+							EnumPuestoFormacion.MEDIOCAMPISTA));
+			infoFormacion.setDelanteros(getDtoFromEntity(
+					formacion.getJugadores(), EnumPuestoFormacion.DELANTERO));
+			infoFormacion.setSuplentes(getDtoFromEntity(
+					formacion.getJugadores(), EnumPuestoFormacion.SUPLENTE));
+			infoFormacion.setReservas(getDtoFromEntity(
+					formacion.getJugadores(), EnumPuestoFormacion.RESERVA));
 		}
 		return infoFormacion;
 	}

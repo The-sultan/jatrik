@@ -1,12 +1,5 @@
 package uy.edu.fing.tsi2.core.rest;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -15,18 +8,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
-import org.apache.commons.beanutils.BeanUtils;
-
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEquipo;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEstadio;
-import uy.edu.fing.tsi2.jatrik.common.payloads.InfoHabilidad;
-import uy.edu.fing.tsi2.jatrik.common.payloads.InfoJugador;
 import uy.edu.fing.tsi2.jatrik.core.domain.Equipo;
-import uy.edu.fing.tsi2.jatrik.core.domain.Habilidad;
-import uy.edu.fing.tsi2.jatrik.core.domain.Jugador;
-import uy.edu.fing.tsi2.jatrik.core.domain.JugadorEnFormacion;
 import uy.edu.fing.tsi2.jatrik.core.ejb.impl.local.EJBManagerEquipoBeanLocal;
-import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumPuestoFormacion;
 
 /**
   * @author Farid
@@ -55,7 +40,6 @@ public class EquiposResource {
 		infoEquipo.setFondos(equipo.getFondos());
 		infoEquipo.setId(equipo.getId());
 		infoEquipo.setNombre(equipo.getNombre());
-		
 		return infoEquipo;
 	}
 	

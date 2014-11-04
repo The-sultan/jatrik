@@ -8,6 +8,8 @@ public class InfoTransferencia {
 	private Long equipoIdVendedor;
 	private Long equipoIdComprador;
 	
+	private boolean comprar = false;
+	
 	
 	public Long getId() {
 		return this.id;
@@ -47,6 +49,14 @@ public class InfoTransferencia {
 
 	public void setEquipoIdComprador(Long equipoIdComprador) {
 		this.equipoIdComprador = equipoIdComprador;
+	}
+
+	public boolean getComprar() {
+		return comprar;
+	}
+
+	public void setComprar(boolean comprar) {
+		this.comprar = comprar;
 	}
 
 	

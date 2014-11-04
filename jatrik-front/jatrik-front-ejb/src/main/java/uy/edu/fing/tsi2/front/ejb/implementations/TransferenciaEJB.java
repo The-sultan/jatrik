@@ -19,6 +19,10 @@ public class TransferenciaEJB implements TransferenciaEJBLocal {
 		return this.jatrikCoreClient.getTransferencias();
 	}
 
+	public List<InfoTransferencia> getTransferencias(Long id) {
+		return this.jatrikCoreClient.getTransferencias(id);
+	}
+	
 	public void ponerEnVentaJugador(Long idEquipoVende, Long idJugador,
 			Double precio) {
 		InfoTransferenciaVenta venta = new InfoTransferenciaVenta();

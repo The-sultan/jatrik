@@ -1,8 +1,11 @@
 package uy.edu.fing.tsi2.jatrik.core.ejb;
 
+import java.util.List;
+
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoFormacion;
 import uy.edu.fing.tsi2.jatrik.core.domain.Equipo;
 import uy.edu.fing.tsi2.jatrik.core.domain.Formacion;
+import uy.edu.fing.tsi2.jatrik.core.domain.Jugador;
 
 public interface IEquipos {
 	
@@ -15,5 +18,7 @@ public interface IEquipos {
 	void storeFormacionEstandar(Long id, InfoFormacion infoFormacion);
 	
 	void storeFormacionProximoPartido(Long id, InfoFormacion infoFormacion);
+	
+	List <Jugador> obtenerJugadoresEquipo(Long id);
 	
 }

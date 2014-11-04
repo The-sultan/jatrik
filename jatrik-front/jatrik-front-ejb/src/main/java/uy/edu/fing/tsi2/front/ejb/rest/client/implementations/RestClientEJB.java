@@ -11,6 +11,7 @@ import uy.edu.fing.tsi2.front.ejb.rest.client.interfaces.RestClientEJBLocal;
 import uy.edu.fing.tsi2.front.ejb.rest.client.interfaces.RestRequestBuilderFactoryLocal;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEntrenamiento;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEquipo;
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoJugador;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoPartido;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoTransferencia;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoTransferenciaCompra;
@@ -19,6 +20,7 @@ import uy.edu.fing.tsi2.jatrik.common.payloads.InfoUsuario;
 
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource.Builder;
+
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoFormacion;
 
 /**
@@ -215,6 +217,40 @@ public class RestClientEJB implements RestClientEJBLocal {
 		return (List) response.getEntity(ArrayList.class);
 	}
 
+		
+	@Override
+	public List<InfoTransferencia> getTransferencias(Long idEquipo) {
+		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory
+				.makeTransferenciasGetRequestBuilder(idEquipo);
+		ClientResponse response = (ClientResponse) jerseyHttpRequestBuilder
+				.get(ClientResponse.class);
+		if (response.getStatusInfo().getStatusCode() != ClientResponse.Status.OK
+				.getStatusCode()) {
+			throw new RestClientException(
+					"No se pudo obtener el listado de transferencias (idEquipo), status code: "
+							+ response.getStatusInfo().getReasonPhrase());
+		}
+
+		return (List) response.getEntity(ArrayList.class);
+	}
+	
+	
+	@Override
+	public List<InfoJugador> getJugadoresEquipo(Long idEquipo) {
+		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory
+				.makeJugadoresEquipoGetRequestBuilder(idEquipo);
+		ClientResponse response = (ClientResponse) jerseyHttpRequestBuilder
+				.get(ClientResponse.class);
+		if (response.getStatusInfo().getStatusCode() != ClientResponse.Status.OK
+				.getStatusCode()) {
+			throw new RestClientException(
+					"No se pudo obtener el listado de Jugadores del equipo (idEquipo), status code: "
+							+ response.getStatusInfo().getReasonPhrase());
+		}
+
+		return (List) response.getEntity(ArrayList.class);
+	}
+	
 	@Override
 	public String postTransferenciaVenta(InfoTransferenciaVenta venta)
 			throws RestClientException {

@@ -6,10 +6,12 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoFormacion;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoJugador;
 import uy.edu.fing.tsi2.jatrik.core.domain.Equipo;
@@ -17,7 +19,6 @@ import uy.edu.fing.tsi2.jatrik.core.domain.Formacion;
 import uy.edu.fing.tsi2.jatrik.core.domain.Jugador;
 import uy.edu.fing.tsi2.jatrik.core.domain.JugadorEnFormacion;
 import uy.edu.fing.tsi2.jatrik.core.domain.Partido;
-
 import uy.edu.fing.tsi2.jatrik.core.ejb.IEquipos;
 import uy.edu.fing.tsi2.jatrik.core.ejb.impl.local.EJBManagerEquipoBeanLocal;
 import uy.edu.fing.tsi2.jatrik.core.ejb.impl.remote.EJBManagerEquipoBeanRemote;
@@ -148,5 +149,18 @@ public class EJBManagerEquipoBean implements IEquipos {
 			i++;
 		}
 		return jugadoresEnFormacion;
+	}
+	
+	public List<Jugador> obtenerJugadoresEquipo(Long id){
+		List<Jugador> resultado = new ArrayList<Jugador>();	
+		for (Jugador jugador : equiposEJB.find(id).getJugadores()) {
+			if (!jugador.getEnVenta()){
+				//Si no esta ya en venta lo agrego al resultado
+				resultado.add(jugador);
+			}
+		}
+		
+		return resultado;
+			
 	}
 }

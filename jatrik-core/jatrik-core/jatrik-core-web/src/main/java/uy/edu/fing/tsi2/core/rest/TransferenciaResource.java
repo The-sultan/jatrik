@@ -13,6 +13,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
@@ -84,6 +85,32 @@ public class TransferenciaResource {
 		return Response.serverError().build();
 	}
 
+	@Path("/{id}")
+	@Produces("application/json")
+	@GET
+	public Response obtenerTrasferenciasDeOtros(@PathParam("id") Long id){
+		List<InfoTransferencia> resultado = new ArrayList<InfoTransferencia>();
+		try {
+			List<Transferencia> transferencias = transferenciaEJB.listadoJugadoresEnVenta();
+			for (Transferencia transferencia : transferencias) {
+				if (!transferencia.getVendedor().getId().equals(id)){
+					InfoTransferencia infoTrans = new InfoTransferencia();
+					infoTrans.setEquipoIdVendedor(transferencia.getVendedor().getId());
+					infoTrans.setPrecio(transferencia.getPrecio());
+					infoTrans.setId(transferencia.getId());
+					InfoJugador infoJugador = getDtoFromEntity(transferencia.getJugador());
+					infoTrans.setJugador(infoJugador);
+					resultado.add(infoTrans);
+				}
+			}
+			return Response.ok(resultado).build();
+		} catch (Exception ex) {
+			Logger.getLogger(TransferenciaResource.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return Response.serverError().build();
+	}
+	
+	
 	private InfoJugador getDtoFromEntity(Jugador jugador) {
 		InfoJugador infoJugador = new InfoJugador();
 		try {

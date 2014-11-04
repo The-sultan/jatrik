@@ -6,9 +6,9 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/default.xhtml">
 	<h1>Market</h1>
-	<h:form>
-		<h:panelGroup layout="block" id="updatable" class="resultados">
-		    <h:dataTable  value="#{marketPlaceController.obtenerJugadoresEnVenta()}" var="trans"
+	<h:form title="Compras">
+		<h:panelGroup layout="block" id="updatableCompra" class="resultados">
+		    <h:dataTable  value="#{marketPlaceController.transferencias}" var="trans"
 							  columnClasses="transferenciaMarket" id="table" class="results-table">
 				<h:column>
 					<f:facet name="header">Id</f:facet>
@@ -60,9 +60,71 @@
 				</h:column>
 				<h:column>
 					<f:facet name="header">Comprar?</f:facet>
-					<h:selectBooleanCheckbox  id="selectBooleanCheckbox" value="${marketPlaceController.prueba}" />
+					<h:selectBooleanCheckbox  id="item_#{trans.id}" value="#{trans.comprar}" />
 				</h:column>
 			 </h:dataTable>
+			 <h:commandButton styleClass="btn"  actionListener="#{marketPlaceController.compraDeJugadores()}" value="Comprar"/> 
+		</h:panelGroup>
+	</h:form>
+	<h:form title="Venta">
+		<h:panelGroup layout="block" id="updatableVenta" class="resultados">
+		    <h:dataTable  value="#{marketPlaceController.misJugadores}" var="player"
+							  columnClasses="transferenciaMarket" id="table" class="results-table">
+				<h:column>
+					<f:facet name="header">Id</f:facet>
+					<h:outputText value="#{player.id}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Nombre</f:facet>
+					<h:outputText value="#{player.nombre}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Puesto</f:facet>
+					<h:outputText value="#{player.puesto}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Edad</f:facet>
+					<h:outputText value="#{player.edad}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Peso</f:facet>
+					<h:outputText value="#{player.peso}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Altura</f:facet>
+					<h:outputText value="#{player.altura}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Velocidad</f:facet>
+					<h:outputText value="#{player.habilidades.get(0).valor}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Porteria</f:facet>
+					<h:outputText value="#{player.habilidades.get(1).valor}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Tecnica</f:facet>
+					<h:outputText value="#{trans.jugador.habilidades.get(2).valor}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Defensa</f:facet>
+					<h:outputText value="#{player.habilidades.get(3).valor}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Ataque</f:facet>
+					<h:outputText value="#{player.habilidades.get(4).valor}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Precio</f:facet>
+					<h:inputText value="#{player.precio}"/>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Vender?</f:facet>
+					<h:selectBooleanCheckbox  id="player_#{player.id}" value="#{player.selectVenta}" />
+				</h:column>
+				
+			 </h:dataTable>
+			 <h:commandButton styleClass="btn"  actionListener="#{marketPlaceController.venderJugadores()}" value="Vender"/> 
 		</h:panelGroup>
 	</h:form>
 </div>

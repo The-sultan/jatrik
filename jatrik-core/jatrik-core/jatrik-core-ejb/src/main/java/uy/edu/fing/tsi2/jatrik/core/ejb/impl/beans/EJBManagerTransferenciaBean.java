@@ -116,4 +116,6 @@ public class EJBManagerTransferenciaBean implements ITransferencias {
 		
 			return transferencias.findTransferenciasLibres();
 	}
+	
+
 }

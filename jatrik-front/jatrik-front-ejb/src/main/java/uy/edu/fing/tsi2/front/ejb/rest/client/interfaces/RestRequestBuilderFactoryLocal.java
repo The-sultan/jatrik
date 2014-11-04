@@ -35,5 +35,11 @@ public interface RestRequestBuilderFactoryLocal {
 	Builder makeFormacionProximoPartidoRequestBuilder(Long idEquipo);
 	
 	Builder makeGetPartidosBuilder();
+
+	Builder makeTransferenciasGetRequestBuilder(Long idEquipo);
+
+	Builder makeJugadoresEquipoGetRequestBuilder(Long idEquipo);
+
+	
 	
 }

@@ -1,14 +1,18 @@
 package uy.edu.fing.tsi2.front.ejb.implementations;
 
 
+import java.util.List;
+
 import uy.edu.fing.tsi2.front.ejb.interfaces.EquipoEJBLocal;
 import uy.edu.fing.tsi2.front.ejb.rest.client.exceptions.RestClientException;
 import uy.edu.fing.tsi2.front.ejb.rest.client.interfaces.RestClientEJBLocal;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEntrenamiento;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEquipo;
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoJugador;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoFormacion;
 
 /**
@@ -61,5 +65,10 @@ public class EquipoEJB implements EquipoEJBLocal {
 	@Override
 	public void saveFormacionProximoPartido(long id, InfoFormacion infoFormacion) {
 		jatrikCoreClient.storeFormacionProximoPartido(id, infoFormacion);
+	}
+	
+	@Override
+	public List<InfoJugador> getJugadoresEquipo(Long id){
+		return jatrikCoreClient.getJugadoresEquipo(id);
 	}
 }
