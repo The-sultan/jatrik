@@ -1,7 +1,6 @@
 package uy.edu.fing.tsi2.core.rest;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -13,14 +12,10 @@ import javax.ws.rs.core.Response;
 import org.apache.commons.beanutils.BeanUtils;
 
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEquipo;
-import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEstadio;
-import uy.edu.fing.tsi2.jatrik.common.payloads.InfoHabilidad;
-import uy.edu.fing.tsi2.jatrik.common.payloads.InfoJugador;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoUsuario;
-import uy.edu.fing.tsi2.jatrik.core.domain.Habilidad;
-import uy.edu.fing.tsi2.jatrik.core.domain.Jugador;
-import uy.edu.fing.tsi2.jatrik.core.domain.JugadorEnFormacion;
+import uy.edu.fing.tsi2.jatrik.core.domain.Equipo;
 import uy.edu.fing.tsi2.jatrik.core.domain.Usuario;
+import uy.edu.fing.tsi2.jatrik.core.ejb.impl.local.EJBManagerEquipoBeanLocal;
 import uy.edu.fing.tsi2.jatrik.core.ejb.impl.local.EJBManagerUsuarioLocal;
 
 @RequestScoped
@@ -29,16 +24,22 @@ public class LoginResource {
 	@EJB
 	private EJBManagerUsuarioLocal usuarioEJB;
 	
+	@EJB
+	private EJBManagerEquipoBeanLocal equipoEJB;
+	
 	@GET	
 	@Produces("application/json")
 	public Response validarYObtenerUsuario(@QueryParam("nick") String nick, @QueryParam("password") String password){
 		Usuario usuario = usuarioEJB.validarUsuario(nick, password);
+		Equipo equipo = equipoEJB.find(usuario.getEquipo().getId());
 		InfoUsuario infoUsuario = new InfoUsuario();
 		if(usuario != null){
 			try {
 				BeanUtils.copyProperties(infoUsuario, usuario);
 				InfoEquipo infoEquipo = new InfoEquipo();
 				infoEquipo.setId(usuario.getEquipo().getId());
+				infoEquipo.setFondos(equipo.getFondos());
+				infoEquipo.setNombre(equipo.getNombre());
 				infoUsuario.setInfoEquipo(infoEquipo);
 				return Response.ok(infoUsuario).build();
 			} catch (IllegalAccessException | InvocationTargetException e) {

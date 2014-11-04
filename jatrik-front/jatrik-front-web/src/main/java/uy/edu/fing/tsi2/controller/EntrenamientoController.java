@@ -10,12 +10,8 @@ import javax.enterprise.inject.Model;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.inject.Named;
-
-import org.primefaces.context.RequestContext;
 
 import uy.edu.fing.tsi2.front.ejb.interfaces.EquipoEJBLocal;
-import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEquipo;
 import uy.edu.fing.tsi2.model.SessionBeanJatrik;
 
 @Model

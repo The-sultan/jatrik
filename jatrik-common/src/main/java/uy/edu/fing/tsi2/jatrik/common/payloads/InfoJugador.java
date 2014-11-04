@@ -21,8 +21,6 @@ public class InfoJugador {
 	 *  Se usan en el market
 	 * 
 	 */
-	private Boolean selectVenta = false; 
-	
 	private Double precio = 0.0;
 	
 	/***/
@@ -102,14 +100,6 @@ public class InfoJugador {
 
 	public void setHabilidades(List<InfoHabilidad> habilidades) {
 		this.habilidades = habilidades;
-	}
-
-	public Boolean getSelectVenta() {
-		return selectVenta;
-	}
-
-	public void setSelectVenta(Boolean selectVenta) {
-		this.selectVenta = selectVenta;
 	}
 
 	public Double getPrecio() {

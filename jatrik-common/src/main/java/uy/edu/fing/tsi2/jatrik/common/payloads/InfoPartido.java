@@ -1,5 +1,6 @@
 package uy.edu.fing.tsi2.jatrik.common.payloads;
 
+import java.util.Date;
 import java.util.List;
 
 public class InfoPartido {
@@ -15,6 +16,8 @@ public class InfoPartido {
 	private String equipoLocal;
 
 	private String equipoVisitante;
+	
+	private String fecha;
 
 	
 	
@@ -83,6 +86,14 @@ public class InfoPartido {
 		equipoVisitante = Visitante;
 		golesLocal = golesL;
 		golesVisitante = golesV;
+	}
+
+	public String getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
 	}
 
 	public InfoPartido() {

@@ -294,3 +294,7 @@ input {
 #logoutForm{
 	display: inline-block;
 }
+
+.market-form{
+	width: 885px;
+}

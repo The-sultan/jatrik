@@ -1,6 +1,7 @@
 package uy.edu.fing.tsi2.controller;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import uy.edu.fing.tsi2.front.ejb.interfaces.PartidoEJBLocal;
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoJugador;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoPartido;
 import uy.edu.fing.tsi2.model.SessionBeanJatrik;
 

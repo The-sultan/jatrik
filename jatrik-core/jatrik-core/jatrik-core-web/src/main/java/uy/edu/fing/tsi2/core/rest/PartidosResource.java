@@ -1,5 +1,7 @@
 package uy.edu.fing.tsi2.core.rest;
 
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +36,8 @@ public class PartidosResource {
 	public InfoPartido obtenerPartido(@PathParam("id") Long id){
 		Partido partido = partidoEJB.obtenerPartido(id);
 		InfoPartido infoPartido = new InfoPartido(partido.getId(), partido.getEstado().name(), partido.getLocal().getNombre() , partido.getVisitante().getNombre(), partido.getGolesLocal(), partido.getGolesVisitante());
+		String fecha = new SimpleDateFormat("dd/MM/yyyy").format(partido.getFechaInicio());
+		infoPartido.setFecha(fecha);
 		List<EventoPartido> eventos = partidoEJB.obtenerEventosPartido(id);
 		List<InfoEvento> infoEventos = new ArrayList<>();
 		for(EventoPartido eventoPartido : eventos){
@@ -49,9 +53,12 @@ public class PartidosResource {
 		List<Partido> partidosPendientes = partidoEJB.obtenerPartidosPendientes();
 		List<InfoPartido> infoPartidos = new ArrayList<>();
 		for(Partido partido : partidosPendientes){
-			infoPartidos.add(new InfoPartido(partido.getId(), partido.getEstado().name(), 
+			String fecha = new SimpleDateFormat("dd/MM/yyyy").format(partido.getFechaInicio());
+			InfoPartido infoPartido = new InfoPartido(partido.getId(), partido.getEstado().name(), 
 				partido.getLocal().getNombre() , partido.getVisitante().getNombre(), 
-				partido.getGolesLocal(), partido.getGolesVisitante()));
+				partido.getGolesLocal(), partido.getGolesVisitante());
+			infoPartido.setFecha(fecha);
+			infoPartidos.add(infoPartido);
 		}
 		return Response.ok(infoPartidos).build();
 	}

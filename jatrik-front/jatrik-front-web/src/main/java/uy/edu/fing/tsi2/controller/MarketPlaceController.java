@@ -2,7 +2,9 @@ package uy.edu.fing.tsi2.controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -26,6 +28,10 @@ public class MarketPlaceController implements Serializable {
 	
 	private List<InfoTransferencia> transferencias;
 	
+	Map<InfoJugador, Boolean> selectedPlayersVenta = new HashMap<>();
+	
+	Map<InfoTransferencia, Boolean> selectedPlayersCompra = new HashMap<>();
+	
 	private List<InfoJugador> misJugadores;
 	
 	@EJB
@@ -43,7 +49,14 @@ public class MarketPlaceController implements Serializable {
 	public void obtenerJugadoresEnVenta() {
 		
 		transferencias = transferenciaEJB.getTransferencias(sessionBean.getInfoUsuario().getId());
-		setMisJugadores(equipoEJB.getJugadoresEquipo(sessionBean.getInfoUsuario().getId()));
+		List<InfoJugador> infoJugadores = equipoEJB.getJugadoresEquipo(sessionBean.getInfoUsuario().getId());
+		setMisJugadores(infoJugadores);
+		for(InfoJugador jugador : infoJugadores){
+			selectedPlayersVenta.put(jugador,false);
+		}
+		for(InfoTransferencia infoTransferencia : transferencias){
+			selectedPlayersCompra.put(infoTransferencia, Boolean.FALSE);
+		}
 					
 	}
 
@@ -70,10 +83,10 @@ public class MarketPlaceController implements Serializable {
 	public void compraDeJugadores(){
 		compras = new ArrayList<Long>();
 		Double monto = 0.0;
-		for (InfoTransferencia element : transferencias) {
-			if (element.getComprar()){
-				monto =+ element.getPrecio();
-				compras.add(element.getId());
+		for (InfoTransferencia transferencia : selectedPlayersCompra.keySet()) {
+			if (selectedPlayersCompra.get(transferencia)){
+				monto =+ transferencia.getPrecio();
+				compras.add(transferencia.getId());
 			}			
 		}
 		if (monto<= sessionBean.getInfoUsuario().getInfoEquipo().getFondos()){
@@ -87,9 +100,9 @@ public class MarketPlaceController implements Serializable {
 
 	public void venderJugadores(){
 	
-		for (InfoJugador element : misJugadores) {
-			if (element.getSelectVenta()){
-				venderJugador(element.getId(), element.getPrecio());
+		for (InfoJugador jugador : selectedPlayersVenta.keySet()) {
+			if (selectedPlayersVenta.get(jugador)){
+				venderJugador(jugador.getId(), jugador.getPrecio());
 			}			
 		}
 	
@@ -127,5 +140,20 @@ public class MarketPlaceController implements Serializable {
 		this.misJugadores = misJugadores;
 	}
 
-	
+	public Map<InfoJugador, Boolean> getSelectedPlayersVenta() {
+		return selectedPlayersVenta;
+	}
+
+	public void setSelectedPlayersVenta(Map<InfoJugador, Boolean> selectedPlayersVenta) {
+		this.selectedPlayersVenta = selectedPlayersVenta;
+	}
+
+	public Map<InfoTransferencia, Boolean> getSelectedPlayersCompra() {
+		return selectedPlayersCompra;
+	}
+
+	public void setSelectedPlayersCompra(Map<InfoTransferencia, Boolean> selectedPlayersCompra) {
+		this.selectedPlayersCompra = selectedPlayersCompra;
+	}
+
 }

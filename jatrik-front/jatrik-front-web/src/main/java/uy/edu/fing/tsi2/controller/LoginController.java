@@ -9,10 +9,10 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
-import org.primefaces.context.RequestContext;
 
 import uy.edu.fing.tsi2.front.ejb.interfaces.UsuarioEJBLocal;
 import uy.edu.fing.tsi2.model.SessionBeanJatrik;
+import uy.edu.fing.tsi2.navigation.AjaxNavigator;
 
 
 @Model
@@ -23,6 +23,9 @@ public class LoginController  {
 	
 	@EJB
 	private UsuarioEJBLocal usuarioEJB;
+	
+	@Inject
+	AjaxNavigator ajaxNav;
 
 	@PostConstruct
 	public void initDatos() {
@@ -34,7 +37,6 @@ public class LoginController  {
 	}
 
 	public String loginDelay() {
-		RequestContext context = RequestContext.getCurrentInstance();
 		FacesMessage msg = null;
 		if (sessionBean.getNick() != null && sessionBean.getPassword() != null) {
 			
@@ -74,6 +76,7 @@ public class LoginController  {
 			sessionBean.setLogueado(false);
 			sessionBean.setNick(null);
 			sessionBean.setPassword(null);
+			ajaxNav.controllerNavigate("home");
 			msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Hasta luego ",
 					sessionBean.getNick());
 		}else{

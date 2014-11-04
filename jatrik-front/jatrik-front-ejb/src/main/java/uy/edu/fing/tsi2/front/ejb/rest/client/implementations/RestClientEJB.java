@@ -19,6 +19,7 @@ import uy.edu.fing.tsi2.jatrik.common.payloads.InfoTransferenciaVenta;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoUsuario;
 
 import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource.Builder;
 
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoFormacion;
@@ -153,7 +154,8 @@ public class RestClientEJB implements RestClientEJBLocal {
 					"No se pudo realizar el Entrenamiento, status code: "
 							+ response.getStatusInfo().getReasonPhrase());
 		} else {
-			return response.getEntity(ArrayList.class);
+			GenericType<List<InfoUsuario>> gType = new GenericType<List<InfoUsuario>>() {};
+			return response.getEntity(gType);
 		}
 	}
 
@@ -205,7 +207,7 @@ public class RestClientEJB implements RestClientEJBLocal {
 	public List<InfoTransferencia> getTransferencias() {
 		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory
 				.makeTransferenciasGetRequest();
-		ClientResponse response = (ClientResponse) jerseyHttpRequestBuilder
+		ClientResponse response =  jerseyHttpRequestBuilder
 				.get(ClientResponse.class);
 		if (response.getStatusInfo().getStatusCode() != ClientResponse.Status.OK
 				.getStatusCode()) {
@@ -213,8 +215,8 @@ public class RestClientEJB implements RestClientEJBLocal {
 					"No se pudo obtener el listado de transferencias, status code: "
 							+ response.getStatusInfo().getReasonPhrase());
 		}
-
-		return (List) response.getEntity(ArrayList.class);
+		GenericType<List<InfoTransferencia>> gType = new GenericType<List<InfoTransferencia>>() {};
+		return (List) response.getEntity(gType);
 	}
 
 		
@@ -222,7 +224,7 @@ public class RestClientEJB implements RestClientEJBLocal {
 	public List<InfoTransferencia> getTransferencias(Long idEquipo) {
 		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory
 				.makeTransferenciasGetRequestBuilder(idEquipo);
-		ClientResponse response = (ClientResponse) jerseyHttpRequestBuilder
+		ClientResponse response =  jerseyHttpRequestBuilder
 				.get(ClientResponse.class);
 		if (response.getStatusInfo().getStatusCode() != ClientResponse.Status.OK
 				.getStatusCode()) {
@@ -230,8 +232,8 @@ public class RestClientEJB implements RestClientEJBLocal {
 					"No se pudo obtener el listado de transferencias (idEquipo), status code: "
 							+ response.getStatusInfo().getReasonPhrase());
 		}
-
-		return (List) response.getEntity(ArrayList.class);
+		GenericType<List<InfoTransferencia>> gType = new GenericType<List<InfoTransferencia>>() {};
+		return (List) response.getEntity(gType);
 	}
 	
 	
@@ -239,7 +241,7 @@ public class RestClientEJB implements RestClientEJBLocal {
 	public List<InfoJugador> getJugadoresEquipo(Long idEquipo) {
 		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory
 				.makeJugadoresEquipoGetRequestBuilder(idEquipo);
-		ClientResponse response = (ClientResponse) jerseyHttpRequestBuilder
+		ClientResponse response =  jerseyHttpRequestBuilder
 				.get(ClientResponse.class);
 		if (response.getStatusInfo().getStatusCode() != ClientResponse.Status.OK
 				.getStatusCode()) {
@@ -247,16 +249,16 @@ public class RestClientEJB implements RestClientEJBLocal {
 					"No se pudo obtener el listado de Jugadores del equipo (idEquipo), status code: "
 							+ response.getStatusInfo().getReasonPhrase());
 		}
-
-		return (List) response.getEntity(ArrayList.class);
+		GenericType<List<InfoJugador>> gType = new GenericType<List<InfoJugador>>() {};
+		return response.getEntity(gType);
 	}
 	
 	@Override
 	public String postTransferenciaVenta(InfoTransferenciaVenta venta)
 			throws RestClientException {
 		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory
-				.makeUsuarioCreateRequestBuilder();
-		ClientResponse response = (ClientResponse) jerseyHttpRequestBuilder
+				.makeTransferenciasVenderGetRequest();
+		ClientResponse response =  jerseyHttpRequestBuilder
 				.post(ClientResponse.class, venta);
 		if (response.getStatusInfo().getStatusCode() != ClientResponse.Status.CREATED
 				.getStatusCode()) {
@@ -275,8 +277,8 @@ public class RestClientEJB implements RestClientEJBLocal {
 	public String postTransferenciaCompra(InfoTransferenciaCompra compra)
 		    throws RestClientException
 		  {
-		    Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory.makeUsuarioCreateRequestBuilder();
-		    ClientResponse response = (ClientResponse)jerseyHttpRequestBuilder.post(ClientResponse.class, compra);
+		    Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory.makeTransferenciasComprarGetRequest();
+		    ClientResponse response = jerseyHttpRequestBuilder.post(ClientResponse.class, compra);
 		    if (response.getStatusInfo().getStatusCode() != ClientResponse.Status.CREATED.getStatusCode()) {
 		      throw new RestClientException("Error al crear la Compra, status code: " + response.getStatusInfo().getReasonPhrase());
 		    }
@@ -297,7 +299,7 @@ public class RestClientEJB implements RestClientEJBLocal {
 					"No se pudo obtener el listado de transferencias, status code: "
 							+ response.getStatusInfo().getReasonPhrase());
 		}
-
-		return (List) response.getEntity(ArrayList.class);
+		GenericType<List<InfoPartido>> gType = new GenericType<List<InfoPartido>>() {};
+		return (List) response.getEntity(gType);
 	}
 }
