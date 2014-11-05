@@ -1,17 +1,8 @@
 package uy.edu.fing.tsi2.core.rest;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 
 
 /**
@@ -50,6 +41,9 @@ public class RestServices {
 	
 	@Inject
 	PushNotificationsResource pushResource;	
+	
+	@Inject
+	CorreoResource correoResource;	
 	
 	@Path("/usuarios")
 	public UsuariosResource getUsuariosResource(){
@@ -94,6 +88,11 @@ public class RestServices {
 	@Path("/transferencia")
 	public  TransferenciaResource getTransferenciaResource(){
 		return transferenciaResource;
+	}
+	
+	@Path("/correo")
+	public  CorreoResource getCorreoResource(){
+		return correoResource;
 	}
 	
 	@Path("/registration/id")

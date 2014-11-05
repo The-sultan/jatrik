@@ -2,6 +2,8 @@ package uy.edu.fing.tsi2.front.ejb.rest.client.interfaces;
 
 import javax.ejb.Local;
 
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoCorreo;
+
 import com.sun.jersey.api.client.WebResource.Builder;
 
 /**
@@ -39,6 +41,10 @@ public interface RestRequestBuilderFactoryLocal {
 	Builder makeTransferenciasGetRequestBuilder(Long idEquipo);
 
 	Builder makeJugadoresEquipoGetRequestBuilder(Long idEquipo);
+
+	Builder makeCorreosGetRequestBuilder(Long idUsuario);
+
+	Builder makeCorreoEnviarPostRequestBuilder();
 
 	
 	

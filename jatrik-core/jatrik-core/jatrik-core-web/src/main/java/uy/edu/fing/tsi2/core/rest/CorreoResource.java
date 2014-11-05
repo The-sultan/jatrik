@@ -2,19 +2,25 @@ package uy.edu.fing.tsi2.core.rest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
+import org.apache.commons.beanutils.BeanUtils;
 
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoCorreo;
 import uy.edu.fing.tsi2.jatrik.core.domain.Correo;
 import uy.edu.fing.tsi2.jatrik.core.ejb.impl.local.EJBManagerCorreoLocal;
-import uy.edu.fing.tsi2.jatrik.common.payloads.InfoCorreo;
 
 @RequestScoped
 public class CorreoResource {
@@ -39,4 +45,39 @@ public class CorreoResource {
 		return Response.created(uri).build();
 	}
 		
+	@POST
+	@Path("/update")
+	public Response actualizarCorreo(InfoCorreo correo) {
+		
+		Correo respuesta = correoEJB.leerCorreo(correo.getId());
+		URI uri = null;
+		try {
+			uri = new URI("correo/" + respuesta);
+
+		} catch (URISyntaxException ex) {
+			Logger.getLogger(CorreoResource.class.getName()).log(Level.SEVERE,
+					null, ex);
+			return Response.serverError().build();
+		}
+		return Response.created(uri).build();
+	}
+	
+	@Path("/{id}")
+	@Produces("application/json")
+	@GET
+	public Response obtenerCorreosUsuario(@PathParam("id") Long id){
+		List<InfoCorreo> resultado = new ArrayList<InfoCorreo>();
+		try {
+			List<Correo> emails = correoEJB.obtenerCorreos(id);
+			for (Correo correo : emails) {
+					InfoCorreo infoCorreo = new InfoCorreo();
+					BeanUtils.copyProperties(infoCorreo, correo);
+					resultado.add(infoCorreo);
+			}
+			return Response.ok(resultado).build();
+		} catch (Exception ex) {
+			Logger.getLogger(CorreoResource.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return Response.serverError().build();
+	}
 }

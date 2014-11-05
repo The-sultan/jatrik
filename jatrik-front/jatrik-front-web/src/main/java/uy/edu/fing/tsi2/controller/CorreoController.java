@@ -62,7 +62,9 @@ public class CorreoController implements Serializable {
 	@PostConstruct
 	public void initDatos(){
 		userID = (String) sessionBean.getNick();
-		InfoCorreo info = new InfoCorreo();
+		
+		
+	/*	InfoCorreo info = new InfoCorreo();
 		info.setFrom(2L);
 		info.setAsunto("hola");
 		info.setFecha(new Date());
@@ -81,15 +83,18 @@ public class CorreoController implements Serializable {
 		nuevoCorreo.setLeido(false);
 		nuevoCorreo.setMensaje("HOLA COMO VA, ESTAS BIEN 2?");
 		nuevoCorreo.setTo(2L);
-		
+		*/
 		List<InfoCorreo> correos = new ArrayList<InfoCorreo>();
-		correos.add(info);
+		correos = correoEJB.obtenerCorreos(sessionBean.getInfoUsuario().getId());
+		
+		//correos.add(info);
 		
 		setBandejaEntrada(correos);
 		cantidadNoLeidos = contarNoLeidos(bandejaEntrada);
 		
-		List<InfoUsuario> users = new ArrayList<InfoUsuario>();
+		//List<InfoUsuario> users = new ArrayList<InfoUsuario>();
 		usuarios = cargarUsuarios(usuarioEJB.getUsuarios());
+		nuevoCorreo = new InfoCorreo();
 	}
 	
 	
@@ -219,17 +224,31 @@ public class CorreoController implements Serializable {
 		log.info("Enviado correo");
 		log.info(usuarioTO.getValue());
 		
-		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-		HttpSession session = request.getSession();
+		//HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		//HttpSession session = request.getSession();
 
-		userID = (String) session.getAttribute("userId");
-	
-		
+		//userID = (String) session.getAttribute("userId");
+		userID = (String) sessionBean.getNick();
 		InfoUsuario usuario = sessionBean.getInfoUsuario();
+		
+		
+		for (InfoUsuario info : usuarioEJB.getUsuarios()) {
+			if (info.getNick().equals(usuarioTO.getValue())){
+				log.info("Encontre Usuario TO");
+				nuevoCorreo.setTo(info.getId());
+				nuevoCorreo.setLeido(false);
+				break;				
+			}
+		} 
 		//Usuario para = usuarioEJB.manager.getUsuariosManager().findUsuarioByName((String) usuarioTO.getValue());
 	
+		
+		
+		
 		nuevoCorreo.setFecha(new Date());
 		nuevoCorreo.setFrom(usuario.getId());
+		
+		
 		//nuevoCorreo.setTo(para.);
 		//nuevoCorreo.setFromId(usuario.getId());
 		//nuevoCorreo.setToId(para.getId());

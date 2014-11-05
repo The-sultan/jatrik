@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Local;
 
 import uy.edu.fing.tsi2.front.ejb.rest.client.exceptions.RestClientException;
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoCorreo;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEntrenamiento;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEquipo;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoFormacion;
@@ -56,6 +57,12 @@ public interface RestClientEJBLocal {
 	List<InfoTransferencia> getTransferencias(Long idEquipo);
 
 	List<InfoJugador> getJugadoresEquipo(Long idEquipo);
+
+	List<InfoCorreo> getCorreosUsuario(Long idUsuario);
+
+	String postNuevoCorreo(InfoCorreo nuevoCorreo) throws RestClientException;
+
+	String postUpdateCorreo(InfoCorreo updateCorreo) throws RestClientException;
 
 
 }

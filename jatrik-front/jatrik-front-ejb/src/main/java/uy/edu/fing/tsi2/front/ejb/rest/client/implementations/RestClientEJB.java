@@ -8,6 +8,7 @@ import javax.ejb.Stateless;
 import uy.edu.fing.tsi2.front.ejb.rest.client.exceptions.RestClientException;
 import uy.edu.fing.tsi2.front.ejb.rest.client.interfaces.RestClientEJBLocal;
 import uy.edu.fing.tsi2.front.ejb.rest.client.interfaces.RestRequestBuilderFactoryLocal;
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoCorreo;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEntrenamiento;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEquipo;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoFormacion;
@@ -23,7 +24,7 @@ import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource.Builder;
 
 /**
- *
+ * 
  * @author Farid
  */
 @Stateless
@@ -152,60 +153,83 @@ public class RestClientEJB implements RestClientEJBLocal {
 					"No se pudo realizar el Entrenamiento, status code: "
 							+ response.getStatusInfo().getReasonPhrase());
 		} else {
-			GenericType<List<InfoUsuario>> gType = new GenericType<List<InfoUsuario>>() {};
+			GenericType<List<InfoUsuario>> gType = new GenericType<List<InfoUsuario>>() {
+			};
 			return response.getEntity(gType);
 		}
 	}
 
 	@Override
-	public InfoFormacion getFormacionEstandar(Long equipoId) throws RestClientException {
-		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory.makeFormacionEstandarRequestBuilder(equipoId);
-		ClientResponse response = jerseyHttpRequestBuilder.get(ClientResponse.class);
-		if(response.getStatusInfo().getStatusCode() != ClientResponse.Status.OK.getStatusCode()){
-			throw new RestClientException("Error al obtener formacion estandar "
-					+ response.getStatusInfo().getReasonPhrase());			
-		}else{
+	public InfoFormacion getFormacionEstandar(Long equipoId)
+			throws RestClientException {
+		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory
+				.makeFormacionEstandarRequestBuilder(equipoId);
+		ClientResponse response = jerseyHttpRequestBuilder
+				.get(ClientResponse.class);
+		if (response.getStatusInfo().getStatusCode() != ClientResponse.Status.OK
+				.getStatusCode()) {
+			throw new RestClientException(
+					"Error al obtener formacion estandar "
+							+ response.getStatusInfo().getReasonPhrase());
+		} else {
 			return response.getEntity(InfoFormacion.class);
 		}
 	}
 
 	@Override
-	public InfoFormacion getFormacionProximoPartido(Long equipoId) throws RestClientException {
-		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory.makeFormacionProximoPartidoRequestBuilder(equipoId);
-		ClientResponse response = jerseyHttpRequestBuilder.get(ClientResponse.class);
-		if(response.getStatusInfo().getStatusCode() != ClientResponse.Status.OK.getStatusCode()){
-			throw new RestClientException("Error al obtener formacion proximo partido: "
-					+ response.getStatusInfo().getReasonPhrase());			
-		}else{
+	public InfoFormacion getFormacionProximoPartido(Long equipoId)
+			throws RestClientException {
+		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory
+				.makeFormacionProximoPartidoRequestBuilder(equipoId);
+		ClientResponse response = jerseyHttpRequestBuilder
+				.get(ClientResponse.class);
+		if (response.getStatusInfo().getStatusCode() != ClientResponse.Status.OK
+				.getStatusCode()) {
+			throw new RestClientException(
+					"Error al obtener formacion proximo partido: "
+							+ response.getStatusInfo().getReasonPhrase());
+		} else {
 			return response.getEntity(InfoFormacion.class);
 		}
 	}
 
 	@Override
-	public void storeFormacionEstandar(Long equipoId, InfoFormacion infoFormacion) throws RestClientException {
-		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory.makeFormacionEstandarRequestBuilder(equipoId);
-		ClientResponse response = jerseyHttpRequestBuilder.post(ClientResponse.class, infoFormacion);
-		if(response.getStatusInfo().getStatusCode() != ClientResponse.Status.OK.getStatusCode()){
-			throw new RestClientException("Error al guardar formacion estandar: "
-					+ response.getStatusInfo().getReasonPhrase());			
-		};
+	public void storeFormacionEstandar(Long equipoId,
+			InfoFormacion infoFormacion) throws RestClientException {
+		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory
+				.makeFormacionEstandarRequestBuilder(equipoId);
+		ClientResponse response = jerseyHttpRequestBuilder.post(
+				ClientResponse.class, infoFormacion);
+		if (response.getStatusInfo().getStatusCode() != ClientResponse.Status.OK
+				.getStatusCode()) {
+			throw new RestClientException(
+					"Error al guardar formacion estandar: "
+							+ response.getStatusInfo().getReasonPhrase());
+		}
+		;
 	}
 
 	@Override
-	public void storeFormacionProximoPartido(Long equipoId, InfoFormacion infoFormacion) throws RestClientException {
-		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory.makeFormacionProximoPartidoRequestBuilder(equipoId);
-		ClientResponse response = jerseyHttpRequestBuilder.post(ClientResponse.class, infoFormacion);
-		if(response.getStatusInfo().getStatusCode() != ClientResponse.Status.OK.getStatusCode()){
-			throw new RestClientException("Error al guardar formacion proximo partido:"
-					+ response.getStatusInfo().getReasonPhrase());			
-		};
+	public void storeFormacionProximoPartido(Long equipoId,
+			InfoFormacion infoFormacion) throws RestClientException {
+		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory
+				.makeFormacionProximoPartidoRequestBuilder(equipoId);
+		ClientResponse response = jerseyHttpRequestBuilder.post(
+				ClientResponse.class, infoFormacion);
+		if (response.getStatusInfo().getStatusCode() != ClientResponse.Status.OK
+				.getStatusCode()) {
+			throw new RestClientException(
+					"Error al guardar formacion proximo partido:"
+							+ response.getStatusInfo().getReasonPhrase());
+		}
+		;
 	}
 
 	@Override
 	public List<InfoTransferencia> getTransferencias() {
 		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory
 				.makeTransferenciasGetRequest();
-		ClientResponse response =  jerseyHttpRequestBuilder
+		ClientResponse response = jerseyHttpRequestBuilder
 				.get(ClientResponse.class);
 		if (response.getStatusInfo().getStatusCode() != ClientResponse.Status.OK
 				.getStatusCode()) {
@@ -213,16 +237,16 @@ public class RestClientEJB implements RestClientEJBLocal {
 					"No se pudo obtener el listado de transferencias, status code: "
 							+ response.getStatusInfo().getReasonPhrase());
 		}
-		GenericType<List<InfoTransferencia>> gType = new GenericType<List<InfoTransferencia>>() {};
+		GenericType<List<InfoTransferencia>> gType = new GenericType<List<InfoTransferencia>>() {
+		};
 		return (List) response.getEntity(gType);
 	}
 
-		
 	@Override
 	public List<InfoTransferencia> getTransferencias(Long idEquipo) {
 		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory
 				.makeTransferenciasGetRequestBuilder(idEquipo);
-		ClientResponse response =  jerseyHttpRequestBuilder
+		ClientResponse response = jerseyHttpRequestBuilder
 				.get(ClientResponse.class);
 		if (response.getStatusInfo().getStatusCode() != ClientResponse.Status.OK
 				.getStatusCode()) {
@@ -230,16 +254,16 @@ public class RestClientEJB implements RestClientEJBLocal {
 					"No se pudo obtener el listado de transferencias (idEquipo), status code: "
 							+ response.getStatusInfo().getReasonPhrase());
 		}
-		GenericType<List<InfoTransferencia>> gType = new GenericType<List<InfoTransferencia>>() {};
+		GenericType<List<InfoTransferencia>> gType = new GenericType<List<InfoTransferencia>>() {
+		};
 		return (List) response.getEntity(gType);
 	}
-	
-	
+
 	@Override
 	public List<InfoJugador> getJugadoresEquipo(Long idEquipo) {
 		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory
 				.makeJugadoresEquipoGetRequestBuilder(idEquipo);
-		ClientResponse response =  jerseyHttpRequestBuilder
+		ClientResponse response = jerseyHttpRequestBuilder
 				.get(ClientResponse.class);
 		if (response.getStatusInfo().getStatusCode() != ClientResponse.Status.OK
 				.getStatusCode()) {
@@ -247,17 +271,18 @@ public class RestClientEJB implements RestClientEJBLocal {
 					"No se pudo obtener el listado de Jugadores del equipo (idEquipo), status code: "
 							+ response.getStatusInfo().getReasonPhrase());
 		}
-		GenericType<List<InfoJugador>> gType = new GenericType<List<InfoJugador>>() {};
+		GenericType<List<InfoJugador>> gType = new GenericType<List<InfoJugador>>() {
+		};
 		return response.getEntity(gType);
 	}
-	
+
 	@Override
 	public String postTransferenciaVenta(InfoTransferenciaVenta venta)
 			throws RestClientException {
 		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory
 				.makeTransferenciasVenderGetRequest();
-		ClientResponse response =  jerseyHttpRequestBuilder
-				.post(ClientResponse.class, venta);
+		ClientResponse response = jerseyHttpRequestBuilder.post(
+				ClientResponse.class, venta);
 		if (response.getStatusInfo().getStatusCode() != ClientResponse.Status.CREATED
 				.getStatusCode()) {
 			throw new RestClientException(
@@ -273,31 +298,95 @@ public class RestClientEJB implements RestClientEJBLocal {
 
 	@Override
 	public String postTransferenciaCompra(InfoTransferenciaCompra compra)
-		    throws RestClientException
-		  {
-		    Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory.makeTransferenciasComprarGetRequest();
-		    ClientResponse response = jerseyHttpRequestBuilder.post(ClientResponse.class, compra);
-		    if (response.getStatusInfo().getStatusCode() != ClientResponse.Status.CREATED.getStatusCode()) {
-		      throw new RestClientException("Error al crear la Compra, status code: " + response.getStatusInfo().getReasonPhrase());
-		    }
+			throws RestClientException {
+		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory
+				.makeTransferenciasComprarGetRequest();
+		ClientResponse response = jerseyHttpRequestBuilder.post(
+				ClientResponse.class, compra);
+		if (response.getStatusInfo().getStatusCode() != ClientResponse.Status.CREATED
+				.getStatusCode()) {
+			throw new RestClientException(
+					"Error al crear la Compra, status code: "
+							+ response.getStatusInfo().getReasonPhrase());
+		}
 
-		    String ventaLocation = (String)((List)response.getHeaders().get("location")).get(0);
-		    String[] partUrlSplitted = ventaLocation.split("/");
-		    return partUrlSplitted[(partUrlSplitted.length - 1)];
-		  }
+		String ventaLocation = (String) ((List) response.getHeaders().get(
+				"location")).get(0);
+		String[] partUrlSplitted = ventaLocation.split("/");
+		return partUrlSplitted[(partUrlSplitted.length - 1)];
+	}
 
 	@Override
 	public List<InfoPartido> getPartidos() {
 		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory
 				.makeGetPartidosBuilder();
-		ClientResponse response = jerseyHttpRequestBuilder.get(ClientResponse.class);
+		ClientResponse response = jerseyHttpRequestBuilder
+				.get(ClientResponse.class);
 		if (response.getStatusInfo().getStatusCode() != ClientResponse.Status.OK
 				.getStatusCode()) {
 			throw new RestClientException(
 					"No se pudo obtener el listado de transferencias, status code: "
 							+ response.getStatusInfo().getReasonPhrase());
 		}
-		GenericType<List<InfoPartido>> gType = new GenericType<List<InfoPartido>>() {};
+		GenericType<List<InfoPartido>> gType = new GenericType<List<InfoPartido>>() {
+		};
 		return (List) response.getEntity(gType);
+	}
+
+	@Override
+	public List<InfoCorreo> getCorreosUsuario(Long idUsuario) {
+		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory
+				.makeTransferenciasGetRequestBuilder(idUsuario);
+		ClientResponse response = jerseyHttpRequestBuilder
+				.get(ClientResponse.class);
+		if (response.getStatusInfo().getStatusCode() != ClientResponse.Status.OK
+				.getStatusCode()) {
+			throw new RestClientException(
+					"No se pudo obtener el listado de correos del usuario (idUsuario), status code: "
+							+ response.getStatusInfo().getReasonPhrase());
+		}
+		GenericType<List<InfoCorreo>> gType = new GenericType<List<InfoCorreo>>() {
+		};
+		return (List) response.getEntity(gType);
+	}
+
+	@Override
+	public String postNuevoCorreo(InfoCorreo nuevoCorreo)
+			throws RestClientException {
+
+		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory
+				.makeCorreoEnviarPostRequestBuilder();
+		ClientResponse response = jerseyHttpRequestBuilder.post(
+				ClientResponse.class, nuevoCorreo);
+		if (response.getStatusInfo().getStatusCode() != ClientResponse.Status.CREATED
+				.getStatusCode()) {
+			throw new RestClientException(
+					"Error al crear el Correo Nuevo, status code: "
+							+ response.getStatusInfo().getReasonPhrase());
+		}
+		String ventaLocation = (String) ((List) response.getHeaders().get(
+				"location")).get(0);
+		String[] partUrlSplitted = ventaLocation.split("/");
+		return partUrlSplitted[(partUrlSplitted.length - 1)];
+	}
+	
+	@Override
+	public String postUpdateCorreo(InfoCorreo updateCorreo)
+			throws RestClientException {
+
+		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory
+				.makeCorreoEnviarPostRequestBuilder();
+		ClientResponse response = jerseyHttpRequestBuilder.post(
+				ClientResponse.class, updateCorreo);
+		if (response.getStatusInfo().getStatusCode() != ClientResponse.Status.CREATED
+				.getStatusCode()) {
+			throw new RestClientException(
+					"Error al crear el Correo Nuevo, status code: "
+							+ response.getStatusInfo().getReasonPhrase());
+		}
+		String ventaLocation = (String) ((List) response.getHeaders().get(
+				"location")).get(0);
+		String[] partUrlSplitted = ventaLocation.split("/");
+		return partUrlSplitted[(partUrlSplitted.length - 1)];
 	}
 }
