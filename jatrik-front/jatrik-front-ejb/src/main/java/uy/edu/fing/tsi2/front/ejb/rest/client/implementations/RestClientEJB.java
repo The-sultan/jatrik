@@ -119,9 +119,9 @@ public class RestClientEJB implements RestClientEJBLocal {
 		String Resultado;
 		if (response.getStatusInfo().getStatusCode() != ClientResponse.Status.OK
 				.getStatusCode()) {
-			Resultado = "Ya has entrenado esta habilidad el día de hoy";
+			Resultado = "Ya has entrenado tu qeuipo el día de hoy";
 		} else {
-			Resultado = "Has entrenado la habilidad correctamente";
+			Resultado = "Has entrenado tu equipo correctamente";
 		}
 		return Resultado;
 

@@ -34,7 +34,7 @@ public class PushNotificationsResource {
 	    ResponseRegistrationId responseRegistrationId = new ResponseRegistrationId();
 	    try {
 	      usuarioEJB.registrationIdUsuario(requestRegisterId.getIdUsuario(), requestRegisterId.getRegistrationId());
-	      usuarioEJB.EnviarMensajePush(requestRegisterId.getIdUsuario(), "Holaaaa");
+	      usuarioEJB.EnviarMensajePush(requestRegisterId.getIdUsuario(), "Bienvenido a Jatrik!");
 	      responseRegistrationId.setCodeResponse(ResponseRegistrationId.OK);
 	      responseRegistrationId
 	          .setMessageResponse("Registro efectuado satisfactoriamente");

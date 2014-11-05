@@ -7,22 +7,156 @@
 	template="/WEB-INF/templates/default.xhtml">
 		<h1>Entrena tu equipo</h1>
 
+		<div id="listaJugadores" align="center">
 
-		<h:form id="ent">
-<!-- 		<p:contentFlow id="panelEntrenamientos" value="#{entrenamientoController.images}" var="image"> -->
-<!-- 			<p:graphicImage value="#{image}" styleClass="content"  > -->
-<!-- 				Defensa -->
-<!-- 			</p:graphicImage> -->
-<!-- 			<div class="caption">Ataque</div> -->
-<!-- 		</p:contentFlow> -->
-			<p>
-				<h:panelGrid columns="5">
-					<p:commandButton value="Entrenar Velocidad" ajax="false" actionListener="#{entrenamientoController.entrenar(1)}"></p:commandButton>
-					<p:commandButton value="Entrenar Tecnica" ajax="false" actionListener="#{entrenamientoController.entrenar(2)}"></p:commandButton>
-					<p:commandButton value="Entrenar Ataque" ajax="false" actionListener="#{entrenamientoController.entrenar(3)}"></p:commandButton>
-					<p:commandButton value="Entrenar Defensa" ajax="false" actionListener="#{entrenamientoController.entrenar(4)}"></p:commandButton>
-					<p:commandButton value="Entrenar Porteria" ajax="false" actionListener="#{entrenamientoController.entrenar(5)}"></p:commandButton>
+				<div id="unoEnt">
+				    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+				        <p:outputLabel for="jugador1" value="#{equipoDatos.titulares.get(0).nombre}" />
+				        <p:selectOneRadio id="jugador1" style="margin-left:150px" value="1">
+				            <f:selectItem itemLabel="Velocidad" itemValue="1" />
+				            <f:selectItem itemLabel="Tecnica" itemValue="2" />
+				            <f:selectItem itemLabel="Ataque" itemValue="3" />
+				            <f:selectItem itemLabel="Defensa" itemValue="4" />
+				            <f:selectItem itemLabel="Porteria" itemValue="5" />					            
+				        </p:selectOneRadio>
+ 					</h:panelGrid>
+				</div>		
+				
+				<div id="dosEnt">
+				    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="3">
+				        <p:outputLabel for="jugador2" value="#{equipoDatos.titulares.get(1).nombre}" />
+				        <p:selectOneRadio id="jugador2" style="margin-left:150px" value="1">
+				            <f:selectItem itemLabel="Velocidad" itemValue="1" />
+				            <f:selectItem itemLabel="Tecnica" itemValue="2" />
+				            <f:selectItem itemLabel="Ataque" itemValue="3" />
+				            <f:selectItem itemLabel="Defensa" itemValue="4" />
+				            <f:selectItem itemLabel="Porteria" itemValue="5" />					            
+				        </p:selectOneRadio>
+ 					</h:panelGrid>
+				</div>
+				
+				<div id="tresEnt">
+				    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="3">
+				        <p:outputLabel for="jugador3" value="#{equipoDatos.titulares.get(2).nombre}" />
+				        <p:selectOneRadio id="jugador3" style="margin-left:150px" value="1">
+				            <f:selectItem itemLabel="Velocidad" itemValue="1" />
+				            <f:selectItem itemLabel="Tecnica" itemValue="2" />
+				            <f:selectItem itemLabel="Ataque" itemValue="3" />
+				            <f:selectItem itemLabel="Defensa" itemValue="4" />
+				            <f:selectItem itemLabel="Porteria" itemValue="5" />					            
+				        </p:selectOneRadio>
+ 					</h:panelGrid>
+				</div>
+				
+				<div id="cuatroEnt">
+				    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="3">
+				        <p:outputLabel for="jugador4" value="#{equipoDatos.titulares.get(3).nombre}" />
+				        <p:selectOneRadio id="jugador4" style="margin-left:150px" value="1">
+				            <f:selectItem itemLabel="Velocidad" itemValue="1" />
+				            <f:selectItem itemLabel="Tecnica" itemValue="2" />
+				            <f:selectItem itemLabel="Ataque" itemValue="3" />
+				            <f:selectItem itemLabel="Defensa" itemValue="4" />
+				            <f:selectItem itemLabel="Porteria" itemValue="5" />					            
+				        </p:selectOneRadio>
+ 					</h:panelGrid>
+				</div>
+				
+				<div id="cincoEnt">
+				    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="3">
+				        <p:outputLabel for="jugador5" value="#{equipoDatos.titulares.get(4).nombre}" />
+				        <p:selectOneRadio id="jugador5" style="margin-left:150px" value="1">
+				            <f:selectItem itemLabel="Velocidad" itemValue="1" />
+				            <f:selectItem itemLabel="Tecnica" itemValue="2" />
+				            <f:selectItem itemLabel="Ataque" itemValue="3" />
+				            <f:selectItem itemLabel="Defensa" itemValue="4" />
+				            <f:selectItem itemLabel="Porteria" itemValue="5" />					            
+				        </p:selectOneRadio>
+ 					</h:panelGrid>
+				</div>
+				
+				<div id="seisEnt">
+				    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="3">
+				        <p:outputLabel for="jugador6" value="#{equipoDatos.titulares.get(5).nombre}" />
+				        <p:selectOneRadio id="jugador6" style="margin-left:150px" value="1">
+				            <f:selectItem itemLabel="Velocidad" itemValue="1" />
+				            <f:selectItem itemLabel="Tecnica" itemValue="2" />
+				            <f:selectItem itemLabel="Ataque" itemValue="3" />
+				            <f:selectItem itemLabel="Defensa" itemValue="4" />
+				            <f:selectItem itemLabel="Porteria" itemValue="5" />					            
+				        </p:selectOneRadio>
+ 					</h:panelGrid>
+				</div>
+				
+				<div id="sieteEnt">
+				    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="3">
+				        <p:outputLabel for="jugador7" value="#{equipoDatos.titulares.get(6).nombre}" />
+				        <p:selectOneRadio id="jugador7" style="margin-left:150px" value="1">
+				            <f:selectItem itemLabel="Velocidad" itemValue="1" />
+				            <f:selectItem itemLabel="Tecnica" itemValue="2" />
+				            <f:selectItem itemLabel="Ataque" itemValue="3" />
+				            <f:selectItem itemLabel="Defensa" itemValue="4" />
+				            <f:selectItem itemLabel="Porteria" itemValue="5" />					            
+				        </p:selectOneRadio>
+ 					</h:panelGrid>
+				</div>
+				
+				<div id="ochoEnt">
+				    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="3">
+				        <p:outputLabel for="jugador8" value="#{equipoDatos.titulares.get(7).nombre}" />
+				        <p:selectOneRadio id="jugador8" style="margin-left:150px" value="1">
+				            <f:selectItem itemLabel="Velocidad" itemValue="1" />
+				            <f:selectItem itemLabel="Tecnica" itemValue="2" />
+				            <f:selectItem itemLabel="Ataque" itemValue="3" />
+				            <f:selectItem itemLabel="Defensa" itemValue="4" />
+				            <f:selectItem itemLabel="Porteria" itemValue="5" />					            
+				        </p:selectOneRadio>
+ 					</h:panelGrid>
+				</div>
+				
+				<div id="nueveEnt">
+				    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="3">
+				        <p:outputLabel for="jugador9" value="#{equipoDatos.titulares.get(8).nombre}" />
+				        <p:selectOneRadio id="jugador9" style="margin-left:150px" value="1">
+				            <f:selectItem itemLabel="Velocidad" itemValue="1" />
+				            <f:selectItem itemLabel="Tecnica" itemValue="2" />
+				            <f:selectItem itemLabel="Ataque" itemValue="3" />
+				            <f:selectItem itemLabel="Defensa" itemValue="4" />
+				            <f:selectItem itemLabel="Porteria" itemValue="5" />					            
+				        </p:selectOneRadio>
+ 					</h:panelGrid>
+				</div>
+				
+				<div id="diezEnt">
+				    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="3">
+				        <p:outputLabel for="jugador10" value="#{equipoDatos.titulares.get(9).nombre}" />
+				        <p:selectOneRadio id="jugador10" style="margin-left:150px" value="1">
+				            <f:selectItem itemLabel="Velocidad" itemValue="1" />
+				            <f:selectItem itemLabel="Tecnica" itemValue="2" />
+				            <f:selectItem itemLabel="Ataque" itemValue="3" />
+				            <f:selectItem itemLabel="Defensa" itemValue="4" />
+				            <f:selectItem itemLabel="Porteria" itemValue="5" />					            
+				        </p:selectOneRadio>
+ 					</h:panelGrid>
+				</div>
+				
+				<div id="onceEnt">
+				    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="3">
+				        <p:outputLabel for="jugador11" value="#{equipoDatos.titulares.get(10).nombre}" />
+				        <p:selectOneRadio id="jugador11" style="margin-left:150px" value="1">
+				            <f:selectItem itemLabel="Velocidad" itemValue="1" />
+				            <f:selectItem itemLabel="Tecnica" itemValue="2" />
+				            <f:selectItem itemLabel="Ataque" itemValue="3" />
+				            <f:selectItem itemLabel="Defensa" itemValue="4" />
+				            <f:selectItem itemLabel="Porteria" itemValue="5" />					            
+				        </p:selectOneRadio>
+ 					</h:panelGrid>
+				</div>
+
+
+		</div>
+		<h:form> 
+				<h:panelGrid columns="1">
+				<p:commandButton value="Entrenar" ajax="false" actionListener="#{entrenamientoController.entrenar}"></p:commandButton>
 				</h:panelGrid>
-			</p>
-		</h:form>
+		</h:form> 
 </div>

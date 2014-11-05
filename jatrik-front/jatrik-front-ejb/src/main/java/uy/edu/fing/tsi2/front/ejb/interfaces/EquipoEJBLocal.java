@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEntrenamientoJugador;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEquipo;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoFormacion;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoJugador;
@@ -17,7 +18,7 @@ public interface EquipoEJBLocal {
 
 	public InfoEquipo getEquipo(long id);
 
-	String entrenarEquipo(long id, int modo);
+	String entrenarEquipo(long id, List<InfoEntrenamientoJugador> jugadores);
 	
 	public InfoFormacion getFormacionEstandar(long id);
 	

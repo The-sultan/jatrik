@@ -7,6 +7,7 @@ import uy.edu.fing.tsi2.front.ejb.interfaces.EquipoEJBLocal;
 import uy.edu.fing.tsi2.front.ejb.rest.client.exceptions.RestClientException;
 import uy.edu.fing.tsi2.front.ejb.rest.client.interfaces.RestClientEJBLocal;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEntrenamiento;
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEntrenamientoJugador;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEquipo;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoJugador;
 
@@ -36,10 +37,10 @@ public class EquipoEJB implements EquipoEJBLocal {
 	}
 	
 	@Override
-	public String entrenarEquipo(long id, int modo) {
+	public String entrenarEquipo(long id, List<InfoEntrenamientoJugador> jugadores) {
 		InfoEntrenamiento ent = new InfoEntrenamiento();
 		ent.setIdEquipo((int)id);
-		//ent.setModo(modo);
+		ent.setJugadores(jugadores);
 		try {
 			return jatrikCoreClient.postEntrenamiento(ent);
 		} catch (RestClientException e) {
