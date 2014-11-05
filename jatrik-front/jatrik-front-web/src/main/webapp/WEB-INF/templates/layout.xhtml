@@ -25,6 +25,9 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<h:outputStylesheet name="css/screen.css" />
 	<h:outputStylesheet name="css/Formaciones/4-3-3.css" />
+	<h:outputStylesheet name="css/tarjeta.css" />
+	<h:outputStylesheet name="css/menu.css" />
+	
 </h:head>
 <h:body>
 	<p:growl id="mensajes" showDetail="true" life="2000" />
@@ -32,16 +35,14 @@
 	</ui:insert>
 	<div id="container">
 		
-		<h:panelGroup id="content">
+		<h:panelGroup id="content" styleClass="content">
 			<ui:insert name="content">
                     [Template content will be inserted here]
          </ui:insert>
 		</h:panelGroup>
 		<div id="aside">
-			<ui:insert name="nav">
+
 			
-			</ui:insert>
-			<ui:insert name="login"></ui:insert>
 			<ui:insert name="chat"></ui:insert>
 		</div>
 	</div>

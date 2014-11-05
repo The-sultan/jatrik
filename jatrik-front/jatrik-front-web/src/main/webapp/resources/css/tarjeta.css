@@ -2,13 +2,21 @@
 	text-shadow: rgb(53, 53, 53) 0px 0px 0.00999999977648258px;
 	font-family: 'Titillium Web', sans-serif;
 	line-height: 20px;
-	font-size: 22px;
+	font-size: 10px;
 	background-image: url(../images/gold.png);
 	background-repeat: no-repeat;
-	width: 238px;
-	height: 354px;
+	background-size: 100%;
+	width: 119px;
+	height: 177px;
 	position: relative;
 	color: rgb(53, 53, 53);
+	
+	-moz-user-select: none; 
+        -khtml-user-select: none; 
+        -webkit-user-select: none; 
+        -o-user-select: none; 
+	
+
 }
 
 .avatar {
@@ -19,6 +27,8 @@
 	left: 44%;
 	top: 15%;
 	position: absolute;
+	
+
 }
 
 .clubbadge{
@@ -31,23 +41,42 @@ left: 17%;
 position: absolute;
 top: 27%;
 width: 18.3%;
+
+-moz-user-select: none; 
+        -khtml-user-select: none; 
+        -webkit-user-select: none; 
+        -o-user-select: none; 
 }
 
 .position {
 	position: absolute;
-	left: 35%;
-	top: 17%;
+	left: 34%;
+	top: 14%;
+	border-left-color: rgb(53, 53, 53);
+	border-left-style: solid;
+	border-left-width: 1px;
+	padding-left: 3%;
+	height: 10%;
+	
+	-moz-user-select: none; 
+        -khtml-user-select: none; 
+        -webkit-user-select: none; 
+        -o-user-select: none; 
 }
 
 .rating {
 	position: absolute;
-	border-right-color: rgb(53, 53, 53);
-	border-right-style: solid;
-	border-right-width: 1px;
-	top: 17%;
+	
+	top: 14%;
 	left: 13%;
-	font-size: 36px;
-	padding-right: 3%;
+	font-size: 200%;
+	
+	height: 6%;
+
+-moz-user-select: none; 
+        -khtml-user-select: none; 
+        -webkit-user-select: none; 
+        -o-user-select: none; 
 }
 
 .nationflag{
@@ -63,42 +92,78 @@ max-width: 100%;
 position: absolute;
 top: 42%;
 width: 18.3%;
+
+-moz-user-select: none; 
+        -khtml-user-select: none; 
+        -webkit-user-select: none; 
+        -o-user-select: none; 
 }
 
 .name {
 	position: absolute;
-	top: 8%;
-	left: 0%; width : 100%;
+	top: 5%;
+	left: 0%; 
+	width : 100%;
 	text-align: center;
-	width: 100%
+	width: 100%;
+	
+		-moz-user-select: none; 
+        -khtml-user-select: none; 
+        -webkit-user-select: none; 
+        -o-user-select: none; 
 }
 
 .ataque {
 	position: absolute;
-	top: 64%;
+	top: 60%;
 	left: 17%;
+	
+	-moz-user-select: none; 
+        -khtml-user-select: none; 
+        -webkit-user-select: none; 
+        -o-user-select: none; 
 }
 
 .velocidad {
 	position: absolute;
-	top: 64%;
+	top: 60%;
 	left: 55%;
+	
+	-moz-user-select: none; 
+        -khtml-user-select: none; 
+        -webkit-user-select: none; 
+        -o-user-select: none; 
 }
 
 .defensa {
 	position: absolute;
-	top: 74%;
+	top: 70%;
 	left: 17%;
+	
+	-moz-user-select: none; 
+        -khtml-user-select: none; 
+        -webkit-user-select: none; 
+        -o-user-select: none; 
 }
 
 .tecnica {
 	position: absolute;
-	top: 74%;
+	top: 70%;
 	left: 55%;
+	
+	-moz-user-select: none; 
+        -khtml-user-select: none; 
+        -webkit-user-select: none; 
+        -o-user-select: none; 
 }
 
 .porteria {
 	position: absolute;
-	top: 84%;
+	top: 80%;
 	left: 35%;
+	
+	-moz-user-select: none; 
+        -khtml-user-select: none; 
+        -webkit-user-select: none; 
+        -o-user-select: none; 
 }

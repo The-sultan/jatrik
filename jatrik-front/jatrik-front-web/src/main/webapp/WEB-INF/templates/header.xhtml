@@ -5,13 +5,77 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/default.xhtml" id="header">
 	<div class="dualbrand">
-		
-		<h:form id="logoutForm" rendered="#{loginController.sessionBean.logueado}">
-			<p:commandButton id="logout" styleClass="register" value="Logout" ajax="false"
-				action="#{loginController.logout}"
-				style="margin-right:20px;" update=":mensajes">
-			</p:commandButton>
+
+
+		<h:form>
+			<div class="contenedor" id="unoNav">
+				<img class="icon" src="resources/gfx/registro.png" />
+				<h:commandLink action="#{ajaxNav.navigate}" styleClass="texto">
+					<p class="texto">registro</p>
+					<f:param name='page' value='registro' />
+					<f:ajax render=":content" />
+				</h:commandLink>
+
+			</div>
+
+			<div class="contenedor" id="dosNav">
+				<img class="icon" src="resources/gfx/equipoNav.jpg" />
+				<h:commandLink action="#{ajaxNav.navigate}" styleClass="texto">
+					<p class="texto">equipo</p>
+					<f:param name='page' value='equipo' />
+					<f:ajax render=":content" />
+				</h:commandLink>
+			</div>
+
+			<div class="contenedor" id="tresNav">
+				<img class="icon" src="resources/gfx/partidoNav.jpeg" />
+				<h:commandLink action="#{ajaxNav.navigate}" styleClass="texto">
+					<p class="texto">partido</p>
+					<f:param name='page' value='partido' />
+					<f:ajax render=":content" />
+				</h:commandLink>
+			</div>
+
+			<div class="contenedor" id="cuatroNav">
+				<img class="icon" src="resources/gfx/entrenamientoNav.jpg" />
+				<h:commandLink action="#{ajaxNav.navigate}" styleClass="texto">
+					<p class="texto">entrenamiento</p>
+					<f:param name='page' value='entrenamiento' />
+					<f:ajax render=":content" />
+				</h:commandLink>
+			</div>
+
+			<div class="contenedor" id="cincoNav">
+				<img class="icon" src="resources/gfx/market.jpg" />
+				<h:commandLink action="#{ajaxNav.navigate}" styleClass="texto">
+					<p class="texto">marketplace</p>
+					<f:param name='page' value='transferencia' />
+					<f:ajax render=":content" />
+				</h:commandLink>
+			</div>
+
+
+
+			<div class="contenedor" id="seisNav">
+				<img class="icon" src="pictures/icon6.png" />
+				<ui:insert name="login">
+				<ui:include src="/WEB-INF/templates/login.xhtml"/>
+				</ui:insert>
+
+				<h:form id="logoutForm"
+					rendered="#{loginController.sessionBean.logueado}">
+					<h:commandLink id="logout" styleClass="texto"
+						action="#{loginController.logout}" update="content">
+
+						<p class="texto">logout</p>
+					</h:commandLink>
+				</h:form>
+
+			</div>
 		</h:form>
-		<img src="http://www.hattrick.org/Img/Startpage/hattrick.png" />
+
+
+
+
 	</div>
 </div>

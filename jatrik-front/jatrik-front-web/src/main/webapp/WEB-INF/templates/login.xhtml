@@ -4,30 +4,34 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/default.xhtml">
-	<h:form id="loginForm" rendered="#{!loginController.sessionBean.logueado}">
-
-		<h:panelGrid columns="3" columnClasses="titleCell">
-			<h:outputLabel for="nick" value="Nick:" />
-			<p:inputText id="nick" value="#{loginController.sessionBean.nick}" />
-			<h:message for="nick" errorClass="invalid" />
-
-			<h:outputLabel for="pwd1" value="Password:" />
-			<p:password id="pwd1" value="#{loginController.sessionBean.password}" label="Password"
-				required="true" />
-			<h:message for="pwd1" errorClass="invalid" />
+	<h:form id="loginForm"
+		rendered="#{!loginController.sessionBean.logueado}">
 
 
-		</h:panelGrid>
+		<p:inputText id="nick" value="#{loginController.sessionBean.nick}"
+			style="margin-left: 10%;margin-right: 10%;width: 80%;padding: 0px;text-align: center; " />
+
+
+
+		<p:password id="pwd1" value="#{loginController.sessionBean.password}"
+			style="margin-left: 10%;margin-right: 10%;width: 80%;padding: 0px;text-align: center; "
+			required="true" />
+
+
+
+
 
 
 		<p>
 			<h:panelGrid columns="2">
-				<p:commandButton id="login"
-					action="#{loginController.loginDelay}" value="Login"
-					styleClass="register" update=":mensajes" ajax="false"/>
-				<!--<h:messages styleClass="messages" errorClass="invalid"
-					infoClass="valid" warnClass="warning" globalOnly="true" />-->
+				<p:commandButton id="login" action="#{loginController.loginDelay}"
+					value="Login" styleClass="register" update=":mensajes" ajax="false" style="visibility: hidden;" />
+				<h:messages styleClass="messages" errorClass="invalid"
+					infoClass="valid" warnClass="warning" globalOnly="true" />
 			</h:panelGrid>
+	
+			
 		</p>
 	</h:form>
+
 </div>

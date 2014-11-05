@@ -3,9 +3,9 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
-<h1>Bienvenido #{loginController.sessionBean.nick} a Jatrik!</h1>
-<div>
-	<p>El simulador de futbol de nivel mundial</p>
+
+<div id="bienvenida">
+	<h1>Bienvenido #{loginController.sessionBean.nick} a Jatrik!</h1>
 	<h:panelGroup layout="block" rendered="#{!loginController.sessionBean.logueado}">
 		<h3>Registrate y conviertete en manager</h3>
 	</h:panelGroup>

@@ -1,0 +1,3 @@
+"C:\Program Files\PostgreSQL\9.3\bin\pg_restore.exe" --host localhost --port 5432 --username "postgres" --dbname "jatrikDB" --no-password  --data-only --verbose "C:\Users\Dario\Desktop\TSI2\Respaldo BD\Jugadores.backup"
+"C:\Program Files\PostgreSQL\9.3\bin\pg_restore.exe" --host localhost --port 5432 --username "postgres" --dbname "jatrikDB" --no-password  --data-only --verbose "C:\Users\Dario\Desktop\TSI2\Respaldo BD\Habilidades.backup"
+"C:\Program Files\PostgreSQL\9.3\bin\pg_restore.exe" --host localhost --port 5432 --username "postgres" --dbname "jatrikDB" --no-password  --data-only --verbose "C:\Users\Dario\Desktop\TSI2\Respaldo BD\Jugadores-Habilidades.backup"

@@ -45,9 +45,16 @@ body {
   height: 100%;
 }
 #content {
-  float: left;
+
   width: 500px;
-  margin: 50px;
+
+  top: 200px;
+
+  
+  top: 200px;
+
+margin-left: auto;
+margin-right: auto;
 }
 #aside {
   font-size: 0.9em;
@@ -67,18 +74,23 @@ body {
   padding-left: 30px;
 }
 .dualbrand {
-  float: right;
+
   padding-right: 10px;
 }
 
 #header{
-	height:50px;
+	height:130px;
     width:100%;
     top:0px;
     left:0px;
-    background: #CCCCCC;
-    position:absolute;
+
+-webkit-transition: height .4s;
 }
+
+#header:hover{
+	height:150px;
+}
+
 #footer {
   height: 50px;
   text-align: center;
@@ -137,8 +149,9 @@ input {
   margin-bottom: 8px;
 }
 .register {
-  float: left;
-  margin-left: 85px;
+	margin: 0px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 /*  -----  table style  -------  */
@@ -256,10 +269,37 @@ input {
 }
 
 .cancha{
-	background-image: url("../../resources/gfx/cancha.png");
-	height: 594px;
-	width: 372px;
+	background-image: url("../../resources/gfx/ESTADIO.jpg");
+	background-position:center;
+
 	position: relative;
+}
+
+.formRegistro{
+	background-image: url("../../resources/gfx/firma.jpg");
+
+	background-repeat:no-repeat;
+	background-size: contain;
+	position: relative;
+	height: 1200px;
+}
+
+#bienvenida{
+	background-image: url("../../resources/gfx/bienvenida.jpg");
+
+	background-repeat:no-repeat;
+	background-size: contain;
+	position: relative;
+	height: 1200px;
+	
+	text-align: center;
+	text-decoration:blink;
+	font-size: 36px;
+	
+}
+
+#bienvenida * {
+	color: white;
 }
 
 .delanteros{
@@ -297,4 +337,19 @@ input {
 
 .market-form{
 	width: 885px;
+}
+.grillaSuplentes{
+	width: 1200px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+.titular {
+
+	display: inline-block;
+}
+
+#cancha > div > div > div{
+	padding: 0px 20% 0px 20% !important;
 }

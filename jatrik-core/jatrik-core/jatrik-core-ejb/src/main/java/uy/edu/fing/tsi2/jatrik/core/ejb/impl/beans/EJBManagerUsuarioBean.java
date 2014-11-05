@@ -101,7 +101,7 @@ public class EJBManagerUsuarioBean implements IUsuarios {
 				// Seteo el Usuario al Equipo
 				equipo.setUsuario(usr);
 
-				inicializaEquipo(equipo);
+				inicializaEquipo2(equipo);
 				usr.setEquipo(equipo);
 				usuarios.add(usr);
 				logger.info("Usuario Creado");

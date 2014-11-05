@@ -1,129 +1,275 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <div xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
-	template="/WEB-INF/templates/default.xhtml">
-	
-	
-	
+	xmlns:p="http://primefaces.org/ui">
+
+
+	<h:form id="formCancha">
 		<h1>#{equipoDatos.nombre}</h1>
 
-		<h2>Formacion</h2>
-        4-3-3
-        
-		<h2>Lista de jugadores titulares</h2>
+
+		
+
+
 		<div id="cancha" class="cancha" align="center">
 
-				<div id="uno" class="_4-3-3">
-					<p:panelGrid  columns="1" styleClass="jugadorFormacion">
-						<f:facet name="header">
-							<img class="foto" src="resources/gfx/Jugador no image.png" />
-						</f:facet>
-						<h:outputText value="#{equipoDatos.titulares.get(0).nombre}" />
-					</p:panelGrid>
-				</div>
-				
-				<div id="dos" class="_4-3-3">
-					<p:panelGrid  columns="1" styleClass="jugadorFormacion">
-						<f:facet name="header">
-							<img class="foto" src="resources/gfx/Jugador no image.png" />
-						</f:facet>
-						<h:outputText value="#{equipoDatos.titulares.get(1).nombre}" />
-					</p:panelGrid>
-				</div>
-				
-				<div id="tres" class="_4-3-3">
-					<p:panelGrid  columns="1" styleClass="jugadorFormacion">
-						<f:facet name="header">
-							<img class="foto" src="resources/gfx/Jugador no image.png" />
-						</f:facet>
-						<h:outputText value="#{equipoDatos.titulares.get(2).nombre}" />
-					</p:panelGrid>
-				</div>
-				<br />
-				<div id="cuatro" class="_4-3-3">
-					<p:panelGrid  columns="1" styleClass="jugadorFormacion">
-						<f:facet name="header">
-							<img class="foto" src="resources/gfx/Jugador no image.png" />
-						</f:facet>
-						<h:outputText value="#{equipoDatos.titulares.get(3).nombre}" />
-					</p:panelGrid>
-				</div>
-				
 
-				<div id="cinco" class="_4-3-3">
-					<p:panelGrid  columns="1" styleClass="jugadorFormacion">
-						<f:facet name="header">
-							<img class="foto" src="resources/gfx/Jugador no image.png" />
-						</f:facet>
-						<h:outputText value="#{equipoDatos.titulares.get(4).nombre}" />
-					</p:panelGrid>
-				</div>
-				
-				<div id="seis" class="_4-3-3">
-					<p:panelGrid  columns="1" styleClass="jugadorFormacion">
-						<f:facet name="header">
-							<img class="foto" src="resources/gfx/Jugador no image.png" />
-						</f:facet>
-						<h:outputText value="#{equipoDatos.titulares.get(5).nombre}" />
-					</p:panelGrid>
-				</div>
-				
-				<div id="siete" class="_4-3-3">
-					<p:panelGrid  columns="1" styleClass="jugadorFormacion">
-						<f:facet name="header">
-							<img class="foto" src="resources/gfx/Jugador no image.png" />
-						</f:facet>
-						<h:outputText value="#{equipoDatos.titulares.get(6).nombre}" />
-					</p:panelGrid>
-				</div>
-				
-				<div id="ocho" class="_4-3-3">
-					<p:panelGrid  columns="1" styleClass="jugadorFormacion">
-						<f:facet name="header">
-							<img class="foto" src="resources/gfx/Jugador no image.png" />
-						</f:facet>
-						<h:outputText value="#{equipoDatos.titulares.get(7).nombre}" />
-					</p:panelGrid>
-				</div>
+			<div id="uno" class="_4-3-3">
 
-				<div id="nueve" class="_4-3-3">
-					<p:panelGrid  columns="1" styleClass="jugadorFormacion">
-						<f:facet name="header">
-							<img class="foto" src="resources/gfx/Jugador no image.png" />
-						</f:facet>
-						<h:outputText value="#{equipoDatos.titulares.get(8).nombre}" />
-					</p:panelGrid>
-				</div>
-				
-				<div id="diez" class="_4-3-3">
-					<p:panelGrid  columns="1" styleClass="jugadorFormacion">
-						<f:facet name="header">
-							<img class="foto" src="resources/gfx/Jugador no image.png" />
-						</f:facet>
-						<h:outputText value="#{equipoDatos.titulares.get(9).nombre}" />
-					</p:panelGrid>
-				</div>
-				
-				<div id="once" class="_4-3-3">
-					<p:panelGrid  columns="1" styleClass="jugadorFormacion">
-						<f:facet name="header">
-							<img class="foto" src="resources/gfx/Jugador no image.png" />
-						</f:facet>
-						<h:outputText value="#{equipoDatos.titulares.get(10).nombre}" />
-					</p:panelGrid>
-				</div>
+				<p:panel id="rpnl1" styleClass="panelTarjeta"
+					style="background-color: rgba(255, 255, 255,0);border-color:rgba(0,0,0,0);background-image:none;">
+					<ui:insert name="jugador">
+						<ui:include src="/tarjeta.xhtml">
+							<ui:param name="id" value="#{equipoDatos.titulares.get(0).id}" />
+							<ui:param name="nombre"
+								value="#{equipoController.formacion.golero.nombre}" />
+							<ui:param name="puesto"
+								value="#{equipoController.formacion.golero.puesto.subSequence(0,3)}" />
+							<ui:param name="valoracion" value="50" />
+							<ui:param name="ataque"
+								value="#{equipoController.formacion.golero.habilidades.get(0).valor}" />
+							<ui:param name="defensa"
+								value="#{equipoController.formacion.golero.habilidades.get(1).valor}" />
+							<ui:param name="velocidad"
+								value="#{equipoController.formacion.golero.habilidades.get(2).valor}" />
+							<ui:param name="tecnica"
+								value="#{equipoController.formacion.golero.habilidades.get(3).valor}" />
+							<ui:param name="porteria"
+								value="#{equipoController.formacion.golero.habilidades.get(4).valor}" />
+						</ui:include>
+					</ui:insert>
+				</p:panel>
 
 
+				<p:draggable for="rpnl1" revert="true" />
+
+			</div>
+			<br />
+
+			<ui:repeat var="titular"
+				value="#{equipoController.formacion.defensas}">
+				<div id="dos" class="titular">
+					<p:panel id="rpnl"
+						style="background-color: rgba(255, 255, 255,0);border-color:rgba(0,0,0,0);background-image:none;">
+						<ui:insert name="jugador">
+							<ui:include src="/tarjeta.xhtml">
+								<ui:param name="id" value="#{titular.id}" />
+								<ui:param name="nombre" value="#{titular.nombre}" />
+								<ui:param name="puesto"
+									value="#{titular.puesto.subSequence(0,3)}" />
+								<ui:param name="valoracion" value="50" />
+								<ui:param name="ataque"
+									value="#{titular.habilidades.get(0).valor}" />
+								<ui:param name="defensa"
+									value="#{titular.habilidades.get(1).valor}" />
+								<ui:param name="velocidad"
+									value="#{titular.habilidades.get(2).valor}" />
+								<ui:param name="tecnica"
+									value="#{titular.habilidades.get(3).valor}" />
+								<ui:param name="porteria"
+									value="#{titular.habilidades.get(4).valor}" />
+							</ui:include>
+						</ui:insert>
+					</p:panel>
+				</div>
+				<p:draggable for="rpnl" revert="true" />
+			</ui:repeat>
+
+
+			<br />
+			<ui:repeat var="titular"
+				value="#{equipoController.formacion.mediocampistas}">
+				<div id="dos" class="titular">
+					<p:panel id="rpnl"
+						style="background-color: rgba(255, 255, 255,0);border-color:rgba(0,0,0,0);background-image:none;">
+						<ui:insert name="jugador">
+							<ui:include src="/tarjeta.xhtml">
+								<ui:param name="id" value="#{titular.id}" />
+								<ui:param name="nombre" value="#{titular.nombre}" />
+								<ui:param name="puesto"
+									value="#{titular.puesto.subSequence(0,3)}" />
+								<ui:param name="valoracion" value="50" />
+								<ui:param name="ataque"
+									value="#{titular.habilidades.get(0).valor}" />
+								<ui:param name="defensa"
+									value="#{titular.habilidades.get(1).valor}" />
+								<ui:param name="velocidad"
+									value="#{titular.habilidades.get(2).valor}" />
+								<ui:param name="tecnica"
+									value="#{titular.habilidades.get(3).valor}" />
+								<ui:param name="porteria"
+									value="#{titular.habilidades.get(4).valor}" />
+							</ui:include>
+						</ui:insert>
+					</p:panel>
+				</div>
+				<p:draggable for="rpnl" revert="true" />
+			</ui:repeat>
+			<br />
+			<ui:repeat var="titular"
+				value="#{equipoController.formacion.delanteros}">
+				<div id="dos" class="titular">
+					<p:panel id="rpnl"
+						style="background-color: rgba(255, 255, 255,0);border-color:rgba(0,0,0,0);background-image:none;">
+						<ui:insert name="jugador">
+							<ui:include src="/tarjeta.xhtml">
+								<ui:param name="id" value="#{titular.id}" />
+								<ui:param name="nombre" value="#{titular.nombre}" />
+								<ui:param name="puesto"
+									value="#{titular.puesto.subSequence(0,3)}" />
+								<ui:param name="valoracion" value="50" />
+								<ui:param name="ataque"
+									value="#{titular.habilidades.get(0).valor}" />
+								<ui:param name="defensa"
+									value="#{titular.habilidades.get(1).valor}" />
+								<ui:param name="velocidad"
+									value="#{titular.habilidades.get(2).valor}" />
+								<ui:param name="tecnica"
+									value="#{titular.habilidades.get(3).valor}" />
+								<ui:param name="porteria"
+									value="#{titular.habilidades.get(4).valor}" />
+							</ui:include>
+						</ui:insert>
+					</p:panel>
+				</div>
+				<p:draggable for="rpnl" revert="true" />
+			</ui:repeat>
 		</div>
-		<h2>Lista de jugadores suplentes</h2>
+
+
+
+		<p:dataGrid id="grilaSuplentes" var="sup"
+			value="#{equipoDatos.suplentes}" columns="7"
+			styleClass="grillaSuplentes">
+			<f:facet name="header">
+            Suplentes
+        </f:facet>
+
+			<ui:insert name="jugador">
+				<ui:include src="/tarjeta.xhtml">
+					<ui:param name="id" value="#{sup.id}" />
+					<ui:param name="nombre" value="#{sup.nombre}" />
+					<ui:param name="puesto" value="#{sup.puesto.subSequence(0,3)}" />
+					<ui:param name="valoracion" value="50" />
+					<ui:param name="ataque" value="#{sup.habilidades.get(0).valor}" />
+					<ui:param name="defensa" value="#{sup.habilidades.get(1).valor}" />
+					<ui:param name="velocidad" value="#{sup.habilidades.get(2).valor}" />
+					<ui:param name="tecnica" value="#{sup.habilidades.get(3).valor}" />
+					<ui:param name="porteria" value="#{sup.habilidades.get(4).valor}" />
+				</ui:include>
+			</ui:insert>
+
+
+
+
+
+
+		</p:dataGrid>
+
+		<p:dataGrid id="grilaReserva" var="res" value="#{equipoDatos.reserva}"
+			columns="7" styleClass="grillaSuplentes">
+			<f:facet name="header">
+            Reserva
+        </f:facet>
+
+			<ui:insert name="jugador">
+				<ui:include src="/tarjeta.xhtml">
+					<ui:param name="id" value="#{res.id}" />
+					<ui:param name="nombre" value="#{res.nombre}" />
+					<ui:param name="puesto" value="#{res.puesto.subSequence(0,3)}" />
+					<ui:param name="valoracion" value="50" />
+					<ui:param name="ataque" value="#{res.habilidades.get(0).valor}" />
+					<ui:param name="defensa" value="#{res.habilidades.get(1).valor}" />
+					<ui:param name="velocidad" value="#{res.habilidades.get(2).valor}" />
+					<ui:param name="tecnica" value="#{res.habilidades.get(3).valor}" />
+					<ui:param name="porteria" value="#{res.habilidades.get(4).valor}" />
+				</ui:include>
+			</ui:insert>
+
+
+
+
+
+
+		</p:dataGrid>
 
 
 		<h2>Estadio</h2>
 		<ui:insert name="content">
                     Contenido del estadio insertar aqui
          </ui:insert>
+
+
+
+
+		<p:remoteCommand name="myRemote"
+			action="#{equipoController.onJugadorCambio}" update="formCancha"
+			ajax="false" />
+
+		<script>
+
+	var idTransf1 = 0;
+	var idTransf2 = 0;
+	
+	function handledblclick() {
+		  this.style.opacity = '0.4'; 
+		  if(idTransf1==0){
+				idTransf1 = this.id;
+				  }
+			  else{
+				idTransf2 = this.id;
+				  };
+
+			  if(idTransf1 > 0 &amp;&amp; idTransf2 > 0){
+			
+				myRemote([{name:'id1',value:idTransf1},{name:'id2',value:idTransf2}]);
+
+				setHandlers();
+
+				document.getElementById(idTransf1).style.opacity = '1'; 
+				document.getElementById(idTransf2).style.opacity = '1'; 
+				
+				idTransf1 = 0;
+				idTransf2 = 0;
+				  };
+		}
+
+	function handleclick(e) {
+		  this.style.opacity = '0.4'; 
+		}
+
+	
+	function handlemouseover(e) {
+		  this.style.opacity = '0.4';  
+
+		}
+	function handlemouseout(e) {
+		  this.style.opacity = '1'; 
+
+		}
+
+	function setHandlers(){
+		var cols = document.querySelectorAll('.cardcontainer');
+		[].forEach.call(cols, function(col) {
+			col.removeEventListener('dblclick', handledblclick, false);
+			  col.addEventListener('dblclick', handledblclick, false);
+			  //col.addEventListener('click', handleclick, false);
+			  //col.addEventListener('mouseover', handlemouseover);
+			  //col.addEventListener('mouseout', handlemouseout);
+			});
+
+		}
+
+
+		setHandlers();
+</script>
+	</h:form>
+
+
+
+
 
 </div>

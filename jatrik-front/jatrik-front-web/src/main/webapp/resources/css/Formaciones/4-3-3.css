@@ -1,66 +1,61 @@
 @CHARSET "ISO-8859-1";
 
 #uno._4-3-3 {
-	position: absolute;
-    top: 75%;
-    left: 31%;
-}
-#dos._4-3-3 {
-	position: absolute;
-	top: 53%;
-	left: 0%;
-}
-#tres._4-3-3 {
-	position: absolute;
-	top: 55%;
-	left: 20%;
+	display: inline-block;
 
 }
+
+#dos._4-3-3 {
+	display: inline-block;
+
+}
+
+#tres._4-3-3 {
+	display: inline-block;
+
+}
+
 #cuatro._4-3-3 {
-	position: absolute;
-	top: 55%;
-	right: 35%;
+	display: inline-block;
+
 }
 
 #cinco._4-3-3 {
-	position: absolute;
-	top: 53%;
-	right: 15%;
+	display: inline-block;
+
 }
-
-
 
 #seis._4-3-3 {
-	position: absolute;
-	top: 28%;
-	left: 5%;
-}
-#siete._4-3-3 {
-	position: absolute;
-	top: 30%;
-	left: 31%;
-}
-#ocho._4-3-3 {
-	position: absolute;
-	top: 28%;
-	right: 20%;
+	display: inline-block;
+
 }
 
+#siete._4-3-3 {
+	display: inline-block;
+
+}
+
+#ocho._4-3-3 {
+	display: inline-block;
+
+}
 
 #nueve._4-3-3 {
-	position: absolute;
-	top: 3%;
-	left: 5%;
+
+	display: inline-block;
+
 }
+
 #diez._4-3-3 {
-	position: absolute;
-	top: 5%;
-	left: 31%;
+
+	display: inline-block;
 }
+
 #once._4-3-3 {
-	position: absolute;
-	top: 3%;
-	right: 20%;
+
+	display: inline-block;
 }
 
-
+#cancha > div > div > div{
+	padding: 0px 20% 0px 20% !important;
+}
