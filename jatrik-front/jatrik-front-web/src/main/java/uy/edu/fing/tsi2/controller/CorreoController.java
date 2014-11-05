@@ -2,15 +2,16 @@ package uy.edu.fing.tsi2.controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Model;
+import javax.faces.component.UIParameter;
 import javax.faces.component.html.HtmlSelectOneMenu;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -58,27 +59,61 @@ public class CorreoController implements Serializable {
 	private HtmlSelectOneMenu usuarioTO;	
 	private String correoEnviado;
 	
+	@PostConstruct
+	public void initDatos(){
+		userID = (String) sessionBean.getNick();
+		InfoCorreo info = new InfoCorreo();
+		info.setFrom(2L);
+		info.setAsunto("hola");
+		info.setFecha(new Date());
+		info.setFrom(1L);
+		info.setId(1L);
+		info.setLeido(false);
+		info.setMensaje("HOLA COMO VA, ESTAS BIEN?");
+		info.setTo(2L);
+		
+		InfoCorreo nuevoCorreo = new InfoCorreo();
+		nuevoCorreo.setFrom(3L);
+		nuevoCorreo.setAsunto("hola2");
+		nuevoCorreo.setFecha(new Date());
+		nuevoCorreo.setFrom(1L);
+		nuevoCorreo.setId(2L);
+		nuevoCorreo.setLeido(false);
+		nuevoCorreo.setMensaje("HOLA COMO VA, ESTAS BIEN 2?");
+		nuevoCorreo.setTo(2L);
+		
+		List<InfoCorreo> correos = new ArrayList<InfoCorreo>();
+		correos.add(info);
+		
+		setBandejaEntrada(correos);
+		cantidadNoLeidos = contarNoLeidos(bandejaEntrada);
+		
+		List<InfoUsuario> users = new ArrayList<InfoUsuario>();
+		usuarios = cargarUsuarios(usuarioEJB.getUsuarios());
+	}
+	
+	
 	public CorreoController() {
 		
-		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-		HttpSession session = request.getSession();
-
-		userID = (String) sessionBean.getNick();
-		
-		InfoUsuario usuario = sessionBean.getInfoUsuario();
-
-		List<InfoCorreo> correos =correoEJB.obtenerCorreos(usuario);
-
-		Collections.sort(correos, new ComparadorCorreos());
-		setBandejaEntrada(correos);
-
-		cantidadNoLeidos = contarNoLeidos(bandejaEntrada);
-
-		log.info("Correos en la bandeja de entrada : " + bandejaEntrada.size());
-		
-		usuarios = cargarUsuarios(usuarioEJB.getUsuarios());
-		
-		nuevoCorreo =  new InfoCorreo();
+//		//HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+//		//HttpSession session = request.getSession();
+//
+//		userID = (String) sessionBean.getNick();
+//		
+//		InfoUsuario usuario = sessionBean.getInfoUsuario();
+//
+//		List<InfoCorreo> correos =correoEJB.obtenerCorreos(usuario);
+//
+//		Collections.sort(correos, new ComparadorCorreos());
+//		setBandejaEntrada(correos);
+//
+//		cantidadNoLeidos = contarNoLeidos(bandejaEntrada);
+//
+//		log.info("Correos en la bandeja de entrada : " + bandejaEntrada.size());
+//		
+//		usuarios = cargarUsuarios(usuarioEJB.getUsuarios());
+//		
+//		nuevoCorreo =  new InfoCorreo();
 	}
 	
 	private int contarNoLeidos(List<InfoCorreo> bandejaEntrada2) {
@@ -151,18 +186,34 @@ public class CorreoController implements Serializable {
 
 	private List<SelectItem> cargarUsuarios(List<InfoUsuario> listaInfoUsuarios) {
 		List<SelectItem> lista = new ArrayList<SelectItem>();
-		Iterator<InfoUsuario> it = listaInfoUsuarios.iterator();
-		
-		SelectItem item = null;
-		
+		Iterator<InfoUsuario> it = listaInfoUsuarios.iterator();		
+		SelectItem item = null;		
 		while(it.hasNext()){
 			InfoUsuario u = it.next();
-			item = new SelectItem(u.getNick(),u.getNick());
+			item = new SelectItem(u.getId(),u.getNick());
 			lista.add(item);
 		}
  		return lista;
 	}
 	
+	public void marcarLeido(ActionEvent e) {
+		String correoString = ((UIParameter) e.getComponent().findComponent("idCorreo")).getValue().toString();
+		long correoLong = Long.parseLong(correoString);
+		
+		Iterator<InfoCorreo> it = getBandejaEntrada().iterator();
+		while (it.hasNext()) {
+			InfoCorreo c = it.next();
+			if (c.getId().longValue() == correoLong) {
+				if (c.isLeido()){
+					c.setLeido(false);	
+				}else {
+					c.setLeido(true);
+				}
+				correoEJB.updateCorreo(c);
+			}
+		}
+		log.info("Marcando como leido " + correoString + " !!");
+	}
 	public void send(ActionEvent e) {
 		
 		log.info("Enviado correo");
@@ -175,7 +226,7 @@ public class CorreoController implements Serializable {
 	
 		
 		InfoUsuario usuario = sessionBean.getInfoUsuario();
-		//Usuario para = usuarioEJB.						manager.getUsuariosManager().findUsuarioByName((String) usuarioTO.getValue());
+		//Usuario para = usuarioEJB.manager.getUsuariosManager().findUsuarioByName((String) usuarioTO.getValue());
 	
 		nuevoCorreo.setFecha(new Date());
 		nuevoCorreo.setFrom(usuario.getId());
@@ -198,8 +249,4 @@ public class CorreoController implements Serializable {
 		}
 
 	}
-	
-	
-	
-	
 }

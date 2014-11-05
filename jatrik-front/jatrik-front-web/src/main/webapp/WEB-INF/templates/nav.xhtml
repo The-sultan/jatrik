@@ -47,6 +47,14 @@
 				</h:commandLink>
 			</li>
 		</h:panelGroup>
+		<h:panelGroup rendered="${loginController.sessionBean.logueado}">
+			<li><h:commandLink  action="#{ajaxNav.navigate}">
+					Correo
+					<f:param name='page' value='correo'/>
+					<f:ajax render=":content"/>
+				</h:commandLink>
+			</li>
+		</h:panelGroup>
 	</ul>
 	</h:form>
 </div>

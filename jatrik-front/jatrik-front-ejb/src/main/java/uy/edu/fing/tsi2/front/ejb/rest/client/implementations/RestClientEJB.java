@@ -1,6 +1,5 @@
 package uy.edu.fing.tsi2.front.ejb.rest.client.implementations;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -11,6 +10,7 @@ import uy.edu.fing.tsi2.front.ejb.rest.client.interfaces.RestClientEJBLocal;
 import uy.edu.fing.tsi2.front.ejb.rest.client.interfaces.RestRequestBuilderFactoryLocal;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEntrenamiento;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEquipo;
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoFormacion;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoJugador;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoPartido;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoTransferencia;
@@ -21,8 +21,6 @@ import uy.edu.fing.tsi2.jatrik.common.payloads.InfoUsuario;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource.Builder;
-
-import uy.edu.fing.tsi2.jatrik.common.payloads.InfoFormacion;
 
 /**
  *

@@ -27,6 +27,9 @@ public class CorreoEJB implements CorreoEJBLocal {
 		// TODO Auto-generated method stub
 		
 	}
-
 	
+	@Override
+	public void updateCorreo(InfoCorreo c){
+		// TODO Auto-generated method stub
+	}
 }

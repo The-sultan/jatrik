@@ -8,9 +8,10 @@
 	<h1>Correo</h1>
 	<f:view>
 		<h:form id="form1">
+		<p:growl id="msgs" showDetail="true" />
 			<table>
 				<tr>
-				<td valign="top">
+					<td valign="top">
 						<table class="tborde" width="100%" align="center" cellpadding="0"
 							cellspacing="0">
 							<tr align="center">
@@ -25,145 +26,125 @@
 					</td>
 				</tr>
 				<tr>
-					<td valign="top"><rich:tabPanel>
-							<rich:tab label="Bandeja de Entrada (#{correosBean.cantidadNoLeidos})">
-								<rich:dataTable id="bandejaEntrada" value="#{correosBean.bandejaEntrada}" var="correo">
-									<rich:column id="Asunto">
+					<td valign="top">
+						<p:tabView>
+							<p:tab 	title="Bandeja de Entrada (#{correoController.cantidadNoLeidos})">
+								<p:dataTable id="bandejaEntrada" value="#{correoController.bandejaEntrada}" var="correo">
+									<p:column id="Asunto">
 										<f:facet name="header">
-											<h:outputText styleClass="headerText" value="Asunto" />
+											<h:outputText value="Asunto" />
 										</f:facet>
 										<f:subview id="mensaje">
-											<rich:modalPanel id="panel" left="150" top="100"
-												autosized="true" styleClass="panel">
+											<p:accordionPanel id="panel" left="150" top="100" autosized="true">
 												<f:facet name="header">
 													<h:panelGroup>
-														<h:outputText value="Mensaje"></h:outputText>
+														<h:outputText value="Mensaje"/>
 													</h:panelGroup>
 												</f:facet>
 												<f:facet name="controls">
 													<h:panelGroup>
-														<h:graphicImage value="/images/close.png"
-															style="cursor:pointer" id="hidelink" />
-														<rich:componentControl for="panel" attachTo="hidelink"
-															operation="hide" event="onclick" />
+														<!-- <h:graphicImage value="/images/close.png" style="c" "cursor:pointer" id="hidelink" />
+														 <p:componentControl for="panel" attachTo="hidelink"
+															operation="hide" event="onclick" />  -->
 													</h:panelGroup>
 												</f:facet>
 												<table width="400px" height="300px">
 													<tr>
-														<td height="92" valign="top" bgcolor="#FCFCFC"
-															style="font-size: 14px">Enviado por : <h:outputText
-																value="#{correo.from.usuario}" /><BR> Fecha : 
-														<h:outputText value="#{correo.fecha}" /><BR> Asunto
-																: 
-														<h:outputText value="#{correo.asunto}" /><BR>
-														<BR>
-														<rich:separator lineType="solid"></rich:separator> <BR>
-														<font size="2"
-															face="Verdana, Arial, Helvetica, sans-serif"> <h:outputText
-																	value="#{correo.mensaje}" />
-														</font></td>
+														<td height="92" valign="top" bgcolor="#FCFCFC" style="font-size: 14px">
+															<BR>Enviado por : </BR> 
+															<h:outputText value="#{correo.from}" />
+															<BR> Fecha : </BR>
+															<h:outputText value="#{correo.fecha}" />
+															<BR> Asunto	: </BR>
+															<h:outputText value="#{correo.asunto}" />
+															<p:separator lineType="solid"/>
+															<font size="2" face="Verdana, Arial, Helvetica, sans-serif"> 
+																<h:outputText value="#{correo.mensaje}" />
+															</font>
+														</td>
 													</tr>
 												</table>
-											</rich:modalPanel>
+											</p:accordionPanel>
 											<h:outputLink value="#" id="link">
-												<h:outputText value="#{correo.asunto}" styleClass="noleido"
-													rendered="#{correo.leido == false}" />
-												<h:outputText value="#{correo.asunto}" styleClass="leido"
-													rendered="#{correo.leido == true}" />
-												<rich:componentControl for="panel" attachTo="link"
-													operation="show" event="onclick" />
+												<h:outputText value="#{correo.asunto}" 	rendered="#{correo.leido == false}" />
+												<h:outputText value="#{correo.asunto}" 	rendered="#{correo.leido == true}" />
+												<!--  <p:componentControl for="panel" attachTo="link"
+													operation="show" event="onclick" />-->
 												<f:param name="idCorreo" id="idCorreo" value="#{correo.id}" />
 											</h:outputLink>
 										</f:subview>
 
-									</rich:column>
-
-									<rich:column id="From">
+									</p:column>
+									<p:column id="From">
 										<f:facet name="header">
 											<h:outputText styleClass="headerText" value="From" />
 										</f:facet>
-										<h:outputText value="#{correo.from.usuario}"
-											styleClass="noleido" rendered="#{correo.leido == false}" />
-										<h:outputText value="#{correo.from.usuario}"
-											styleClass="leido" rendered="#{correo.leido == true}" />
-									</rich:column>
-
-									<rich:column id="Fecha">
+										<h:outputText value="#{correo.from}" rendered="#{correo.leido == false}" />
+										<h:outputText value="#{correo.from}" rendered="#{correo.leido == true}" />
+									</p:column>
+									<p:column id="Fecha">
 										<f:facet name="header">
 											<h:outputText styleClass="headerText" value="Fecha" />
 										</f:facet>
-										<h:outputText value="#{correo.fecha}" styleClass="noleido"
-											rendered="#{correo.leido == false}" />
-										<h:outputText value="#{correo.fecha}" styleClass="leido"
-											rendered="#{correo.leido == true}" />
-									</rich:column>
-
-									<rich:column id="Marcar">
+										<h:outputText value="#{correo.fecha}" rendered="#{correo.leido == false}" />
+										<h:outputText value="#{correo.fecha}" rendered="#{correo.leido == true}" />
+									</p:column>
+									<p:column id="Marcar">
 										<f:facet name="header">
-											<h:outputText styleClass="headerText" value="Marcar" />
+											<h:outputText value="Marcar" />
 										</f:facet>
-										<h:commandLink actionListener="#{correosBean.marcarLeido}"
-											id="link">
-											<h:outputText value="leido"
-												rendered="#{correo.leido == false}" />
-											<h:outputText value="no leido"
-												rendered="#{correo.leido == true}" />
+										<h:commandLink actionListener="#{correoController.marcarLeido}" id="link">
+											<h:outputText value="leido" rendered="#{correo.leido == false}" />
+											<h:outputText value="no leido" rendered="#{correo.leido == true}" />
 											<f:param name="idCorreo" id="idCorreo" value="#{correo.id}" />
 										</h:commandLink>
-									</rich:column>
-
-
-
-								</rich:dataTable>
-							</rich:tab>
-					<%-- 
-					<rich:tab label="Bandeja de Salida">
-							</rich:tab>
-					--%>
-					<rich:tab label="Enviar Correo">
+									</p:column>
+								</p:dataTable>
+							</p:tab>
+							<p:tab title="Bandeja de Salida">
+							</p:tab>
+							<p:tab title="Enviar Correo">
 								<table>
 									<tr>
 										<td>Para</td>
-										<td><h:selectOneMenu id="para"
-												binding="#{correosBean.usuarioTO}">
-												<f:selectItems value="#{correosBean.usuarios}" />
-											</h:selectOneMenu></td>
+										<td>
+											<h:selectOneMenu id="para" 	binding="#{correoController.usuarioTO}">
+												<f:selectItems value="#{correoController.usuarios}" />
+											</h:selectOneMenu>
+										</td>
 									</tr>
 									<tr>
 										<td>Asunto</td>
-										<td><h:inputText id="asuntoMail"
-												value="#{correosBean.nuevoCorreo.asunto}" /></td>
+										<td>
+											<h:inputText id="asuntoMail" value="#{correoController.nuevoCorreo.asunto}" />
+										</td>
 									</tr>
 									<tr>
 										<td>Mensaje</td>
-										<td><h:inputTextarea id="mensajeMail" rows="10" cols="30"
-												value="#{correosBean.nuevoCorreo.mensaje}" /></td>
+										<td>
+											<h:inputTextarea id="mensajeMail" rows="10" cols="30" value="#{correoController.nuevoCorreo.mensaje}" />
+										</td>
 									</tr>
 									<tr>
-										<td><h:commandButton value="Enviar"
-												actionListener="#{correosBean.send}"></h:commandButton></td>
+										<td>
+											<h:commandButton value="Enviar" actionListener="#{correoController.send}"/>
+										</td>
 										<td></td>
-
 									</tr>
 								</table>
 								<table>
 									<tr>
-										<td><h:outputText value="#{correosBean.correoEnviado}"
-												styleClass="correoEnviado"></h:outputText>
+										<td>
+											<h:outputText value="#{correoController.correoEnviado}"/>
+										</td>
 										<td></td>
-
 									</tr>
-
 								</table>
-
-							</rich:tab>
-
-						</rich:tabPanel></td>
+							</p:tab>							
+						</p:tabView>
+					</td>
 				</tr>
-			</table>
-
-
+			</table>	
 		</h:form>
-
 	</f:view>
 </div>

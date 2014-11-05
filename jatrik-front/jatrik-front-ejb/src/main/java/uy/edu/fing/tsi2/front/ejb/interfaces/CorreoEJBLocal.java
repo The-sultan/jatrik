@@ -11,4 +11,6 @@ public interface CorreoEJBLocal {
 
 	void addCorreo(InfoCorreo nuevoCorreo);
 
+	void updateCorreo(InfoCorreo c);
+
 }
