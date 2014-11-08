@@ -33,7 +33,7 @@ public class EntrenamientoController {
 	
 	@Named
 	@Produces
-	Equipo equipoDatos;
+	Equipo equipoDatosEntrenamiento;
 	
 	@PostConstruct
 	public void initDatos() {
@@ -41,7 +41,7 @@ public class EntrenamientoController {
 		//cargar el equipo
 		
 		//TODO:Obtener el id del loginBean
-		equipoDatos = new Equipo();
+		equipoDatosEntrenamiento = new Equipo();
 		InfoFormacion formacion = equipoEJB.getFormacionEstandar(sessionBean.getInfoUsuario().getInfoEquipo().getId());
 		List<InfoJugador> titulares = new ArrayList<>();
 		titulares.add(formacion.getGolero());
@@ -55,7 +55,7 @@ public class EntrenamientoController {
 			titulares.add(jugador);
 		}
 	
-		equipoDatos.setTitulares(titulares);
+		equipoDatosEntrenamiento.setTitulares(titulares);
 	}
 	
     public String entrenar() {
