@@ -46,7 +46,7 @@ public class EstrategiaFalta extends EstrategiaSimulacion{
 		this.setPeso(20);
 	}
 	
-	private Logger log = Logger.getLogger(EstrategiaIdle.class);
+	private Logger log = Logger.getLogger(EstrategiaFalta.class);
 
 	@Override
 	public void manejarEvento(Partido partido) {
@@ -56,7 +56,17 @@ public class EstrategiaFalta extends EstrategiaSimulacion{
 		Equipo equipo = equipoLocal ? partido.getLocal() : partido.getVisitante();
 		Formacion formacion = equipoLocal ? partido.getFormacionLocal() : partido.getFormacionVisitante();
 		Jugador delantero = getJugadorEnPosicion(partido, formacion.getJugadores(), EnumPuestoFormacion.DELANTERO);
-		int nivel = this.getNextInt(3) + 1;
+		int nivel = this.getNextInt(15) + 1;
+		if(nivel <= 12){
+			nivel = 1;
+		}
+		else if(nivel > 12 && nivel <15){
+			nivel = 2;
+		}
+		else if(nivel == 15){
+			nivel = 3;
+		}
+		
 		
 		List<Comentario> comentarios = comentariosEJB.findComentariosByEventoAndNivel(eventoFalta, Long.valueOf(nivel));
 		int comentarioSorteo = this.getNextInt(comentarios.size());
@@ -81,7 +91,7 @@ public class EstrategiaFalta extends EstrategiaSimulacion{
 					EventoPartidoTarjetaAmarillaDoble eventoPartidoTarjeta = new EventoPartidoTarjetaAmarillaDoble(partido.getMinuto(), partido, eventoTarjeta, defensaOMediocampista, elOtroEquipo);
 					eventosPartidosEJB.add(eventoPartidoTarjeta);
 					expulsado = true;
-					partido.getJugadoresExpulsados().add(defensaOMediocampista);
+					//partido.getJugadoresExpulsados().add(defensaOMediocampista);
 				}
 
 			}

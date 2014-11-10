@@ -8,8 +8,6 @@ import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
 
 import org.apache.log4j.Logger;
 
@@ -59,8 +57,8 @@ public class EJBManagerSimuladorBean implements ISimulacion {
 	}
 
 	
-	private void simularEvento(Partido partido) {
-		
+	private void simularEvento(Long idPartido) {
+		Partido partido = partidosEJB.find(idPartido);
 		partido.setMinuto(partido.getMinuto()+1);
 		if (partido.getMinuto() <= DURACION_PARTIDO) {
 			//TODO DEbo sortear el evento 
@@ -74,7 +72,6 @@ public class EJBManagerSimuladorBean implements ISimulacion {
 			// TODO Se elimina el cronometro del partido y se finaliza el  mismo Actualizar
 			partido.setEstado(EnumEstadoPartido.FINALIZADO);
 		}
-	
 	}
 	
 	@Override
@@ -88,7 +85,7 @@ public class EJBManagerSimuladorBean implements ISimulacion {
 			for(int i=0; i<=90;i++){
 				try {
 					Thread.sleep(1000);
-					simularEvento(partido);
+					simularEvento(partido.getId());
 				} catch (InterruptedException ex) {
 					java.util.logging.Logger.getLogger(EJBManagerSimuladorBean.class.getName()).log(Level.SEVERE, null, ex);
 				}

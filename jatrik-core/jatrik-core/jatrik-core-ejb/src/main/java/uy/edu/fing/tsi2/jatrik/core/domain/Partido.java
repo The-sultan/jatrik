@@ -79,11 +79,11 @@ public class Partido implements Serializable {
 	@JoinColumn(name="FORMACION_LOCAL_ID", referencedColumnName="ID")
 	private Formacion formacionLocal;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable(name = "JUGADORES_PARTIDO_AMARILLA", joinColumns = { @JoinColumn(name = "PARTIDO_ID") }, inverseJoinColumns = { @JoinColumn(name = "JUGADOR_ID") })
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "JUGADORES_PARTIDO_AMARILLA", joinColumns = { @JoinColumn(name = "PARTIDO_ID")}, inverseJoinColumns = { @JoinColumn(name = "JUGADOR_ID") })
 	private Set<Jugador> jugadoresConTarjetaAmarilla;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "JUGADORES_PARTIDO_ROJA", joinColumns = { @JoinColumn(name = "PARTIDO_ID") }, inverseJoinColumns = { @JoinColumn(name = "JUGADOR_ID") })
 	private Set<Jugador> jugadoresExpulsados;
 	

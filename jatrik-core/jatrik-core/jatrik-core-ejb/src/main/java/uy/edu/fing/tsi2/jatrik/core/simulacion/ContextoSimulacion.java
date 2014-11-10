@@ -60,7 +60,6 @@ public class ContextoSimulacion {
 		return total;
 	}
 	
-	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void ejecutarEstrategia(int random, Partido partido){
 		EstrategiaSimulacion estrategia = null;
 		if(partido.getMinuto() == 1 

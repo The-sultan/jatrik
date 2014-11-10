@@ -43,6 +43,7 @@ public class EJBEMPartidosBean implements IEMPartidos {
 	
 	public Partido update(Partido partido) {
 		entityManager.merge(partido);
+		entityManager.flush();
 		return partido;
 	}
 	

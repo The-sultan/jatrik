@@ -35,6 +35,9 @@ public abstract class EstrategiaSimulacion {
 	}
 	
 	protected Jugador getJugadorEnPosicion(Partido partido, Set<JugadorEnFormacion> jugadores, EnumPuestoFormacion... puestos){
+		Set<Jugador> jugadoresFueraDeCancha = partido.getJugadoresExpulsados();
+		jugadoresFueraDeCancha.addAll(partido.getJugadoresLesionados());
+		jugadores.removeAll(jugadoresFueraDeCancha);
 		List<Jugador> jugadoresSeleccionados = new ArrayList<>();
 		for(JugadorEnFormacion jugador : jugadores){
 			if(!partido.getJugadoresExpulsados().contains(jugador.getJugador())){
