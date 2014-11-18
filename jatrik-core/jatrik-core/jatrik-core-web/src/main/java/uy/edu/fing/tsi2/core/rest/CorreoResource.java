@@ -35,7 +35,7 @@ public class CorreoResource {
 		Correo respuesta = correoEJB.addCorreo(correo.getTo(), correo.getFrom(),correo.getAsunto(),correo.getMensaje());
 		URI uri = null;
 		try {
-			uri = new URI("correo/" + respuesta);
+			uri = new URI("correo/" + respuesta.getId());
 
 		} catch (URISyntaxException ex) {
 			Logger.getLogger(CorreoResource.class.getName()).log(Level.SEVERE,
@@ -52,7 +52,7 @@ public class CorreoResource {
 		Correo respuesta = correoEJB.leerCorreo(correo.getId());
 		URI uri = null;
 		try {
-			uri = new URI("correo/" + respuesta);
+			uri = new URI("correo/" + respuesta.getId());
 
 		} catch (URISyntaxException ex) {
 			Logger.getLogger(CorreoResource.class.getName()).log(Level.SEVERE,
@@ -71,7 +71,15 @@ public class CorreoResource {
 			List<Correo> emails = correoEJB.obtenerCorreos(id);
 			for (Correo correo : emails) {
 					InfoCorreo infoCorreo = new InfoCorreo();
-					BeanUtils.copyProperties(infoCorreo, correo);
+					infoCorreo.setId(correo.getId());
+					infoCorreo.setAsunto(correo.getAsunto());
+					infoCorreo.setFecha(correo.getFecha());
+					infoCorreo.setLeido(correo.getLeido());
+					infoCorreo.setMensaje(correo.getMensaje());
+					infoCorreo.setTo(correo.getTo().getId());
+					infoCorreo.setFrom(correo.getFrom().getId());
+					
+					//BeanUtils.copyProperties(infoCorreo, correo);
 					resultado.add(infoCorreo);
 			}
 			return Response.ok(resultado).build();

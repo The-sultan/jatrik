@@ -95,7 +95,7 @@ public class Correo implements Serializable {
 		this.mensaje = mensaje;
 	}
 
-	public boolean isLeido() {
+	public boolean getLeido() {
 		return leido;
 	}
 

@@ -11,16 +11,16 @@ import javax.ejb.Stateless;
 import uy.edu.fing.tsi2.jatrik.core.domain.Correo;
 import uy.edu.fing.tsi2.jatrik.core.domain.Usuario;
 import uy.edu.fing.tsi2.jatrik.core.ejb.ICorreos;
-import uy.edu.fing.tsi2.jatrik.core.ejb.impl.local.EJBManagerEntrenamientoLocal;
-import uy.edu.fing.tsi2.jatrik.core.ejb.impl.remote.EJBManagerEntrenamientoRemote;
+import uy.edu.fing.tsi2.jatrik.core.ejb.impl.local.EJBManagerCorreoLocal;
+import uy.edu.fing.tsi2.jatrik.core.ejb.impl.remote.EJBManagerCorreoRemote;
 import uy.edu.fing.tsi2.jatrik.core.persistence.impl.local.EJBEMCorreosLocal;
 import uy.edu.fing.tsi2.jatrik.core.persistence.impl.local.EJBEMUsuariosLocal;
 
 
 
 @Stateless
-@Local(EJBManagerEntrenamientoLocal.class)
-@Remote(EJBManagerEntrenamientoRemote.class)
+@Local(EJBManagerCorreoLocal.class)
+@Remote(EJBManagerCorreoRemote.class)
 public class EJBManagerCorreoBean implements ICorreos {
 
 	@EJB
