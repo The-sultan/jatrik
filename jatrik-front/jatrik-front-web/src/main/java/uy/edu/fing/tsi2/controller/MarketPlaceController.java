@@ -42,8 +42,12 @@ public class MarketPlaceController implements Serializable {
 	
 	private List<Long> compras;
 	
+	private InfoJugador jugadorSeleccionadoVenta;
+	
 		
 	private Long idEquipo;
+	
+	private boolean error = false;
 	
 	@PostConstruct
 	public void obtenerJugadoresEnVenta() {
@@ -154,6 +158,23 @@ public class MarketPlaceController implements Serializable {
 
 	public void setSelectedPlayersCompra(Map<InfoTransferencia, Boolean> selectedPlayersCompra) {
 		this.selectedPlayersCompra = selectedPlayersCompra;
+	}
+
+	public boolean isError() {
+		return error;
+	}
+
+	public void setError(boolean error) {
+		this.error = error;
+	}
+
+	public InfoJugador getJugadorSeleccionadoVenta() {
+		//TODO: Implementar bien
+		return misJugadores.get(1);
+	}
+
+	public void setJugadorSeleccionadoVenta(InfoJugador jugadorSeleccionadoVenta) {
+		this.jugadorSeleccionadoVenta = jugadorSeleccionadoVenta;
 	}
 
 }

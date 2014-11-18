@@ -59,6 +59,8 @@ public class MiembroController {
 	AjaxNavigator ajaxNav;
 	
 	private List<SelectItem> paises;
+	
+	private boolean error;
     
     
     @PostConstruct
@@ -75,7 +77,7 @@ public class MiembroController {
         paises.add(g1);
         paises.add(g2);
         
-        
+        error = false;
     }
 
     public void register() throws Exception {
@@ -86,11 +88,13 @@ public class MiembroController {
 			sessionBean.setLogueado(true);
 			ajaxNav.controllerNavigate("home");
             //return "registroExitoso";
+			error = false;
             
         } catch (Exception e) {
             /*String errorMessage = */getRootErrorMessage(e);
             //FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, "Registration unsuccessful");
             //facesContext.addMessage(null, m);
+            error = true;
         }
     }
 
@@ -120,6 +124,14 @@ public class MiembroController {
 
 	public void setPaises(List<SelectItem> paises) {
 		this.paises = paises;
+	}
+
+	public boolean isError() {
+		return error;
+	}
+
+	public void setError(boolean error) {
+		this.error = error;
 	}
     
 

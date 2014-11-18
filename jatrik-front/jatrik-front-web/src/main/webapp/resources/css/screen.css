@@ -15,139 +15,149 @@
  * limitations under the License.
  */
 /* Core styles for the page */
-html, body{
+html, body {
 	height: 100%;
 	overflow-x: hidden;
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  background-color: #F1F1F1;
-  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-  font-size: 0.8em;
-  color:#363636;
+	margin: 0;
+	padding: 0;
+	background-color: #F1F1F1;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-size: 0.8em;
+	color: #363636;
 }
 
 #container {
-  margin: 0 auto;
-  //padding: 0 20px 10px 20px;
-  //border-top: 5px solid #000000;
-  //border-left: 5px solid #8c8f91;
-  //border-right: 5px solid #8c8f91;
-  //border-bottom: 25px solid #8c8f91;
-  //width: 1200px; /* subtract 40px from banner width for padding */
-  background: #FFFFFF;
-  background-image: url(#{request.contextPath}/resources/gfx/headerbkg.png);
-  background-repeat: repeat-x;
-  //padding-top: 30px;
-  box-shadow: 3px 3px 15px #d5d5d5;
-  height: 100%;
+	margin: 0 auto; //
+	padding: 0 20px 10px 20px; //
+	border-top: 5px solid #000000; //
+	border-left: 5px solid #8c8f91; //
+	border-right: 5px solid #8c8f91; //
+	border-bottom: 25px solid #8c8f91; //
+	width: 1200px; /* subtract 40px from banner width for padding */
+	background: #FFFFFF;
+	background-image:
+		url(#{request.contextPath}/resources/gfx/headerbkg.png);
+	background-repeat: repeat-x; //
+	padding-top: 30px;
+	box-shadow: 3px 3px 15px #d5d5d5;
+	height: 100%;
 }
+
 #content {
-
-  width: 500px;
-
-  top: 200px;
-
-  
-  top: 200px;
-
-margin-left: auto;
-margin-right: auto;
+	width: 500px;
+	top: 200px;
+	top: 200px;
+	margin-left: auto;
+	margin-right: auto;
 }
+
 #aside {
-  font-size: 0.9em;
-  width: 245px;
-  
-  float: right;
-  clear: right;
-  margin: 70px 20px;
-  border: 1px solid #D5D5D5;
-  background: #F1F1F1;
-  background-image: url(#{request.contextPath}/resources/gfx/asidebkg.png);
-  background-repeat: repeat-x;
-  padding: 20px;
+	font-size: 0.9em;
+	width: 245px;
+	float: right;
+	clear: right;
+	margin: 70px 20px;
+	border: 1px solid #D5D5D5;
+	background: #F1F1F1;
+	background-image: url(#{request.contextPath}/resources/gfx/asidebkg.png);
+	background-repeat: repeat-x;
+	padding: 20px;
 }
 
 #aside ul {
-  padding-left: 30px;
+	padding-left: 30px;
 }
+
 .dualbrand {
-
-  padding-right: 10px;
+	padding-right: 10px;
 }
 
-#header{
-	height:130px;
-    width:100%;
-    top:0px;
-    left:0px;
-
--webkit-transition: height .4s;
+#header {
+	height: 130px;
+	width: 100%;
+	top: 0px;
+	left: 0px;
+	-webkit-transition: height .4s;
 }
 
-#header:hover{
-	height:150px;
+#header:hover {
+	height: 150px;
 }
 
 #footer {
-  height: 50px;
-  text-align: center;
-  color: #666666;
-  font-size: 0.85em;
-  background: #CCCCCC;
-  position:absolute;
-  bottom : 0px;
-  left: 0px;
-  width: 100%;
+	height: 50px;
+	text-align: center;
+	color: #666666;
+	font-size: 0.85em;
+	background: #CCCCCC;
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	width: 100%;
 }
+
 code {
-  font-size: 1.1em;
+	font-size: 1.1em;
 }
+
 a {
-  color: #4a5d75;
-  text-decoration: none;
+	color: #4a5d75;
+	text-decoration: none;
 }
+
 a:hover {
-  color: #369;
-  text-decoration: underline;
+	color: #369;
+	text-decoration: underline;
 }
+
 h1 {
-  color:#243446;
-  font-size: 2.25em;
+	color: #243446;
+	font-size: 2.25em;
 }
+
 h2 {
-  font-size: 1em;
+	font-size: 1em;
 }
+
 h3 {
-  color:#243446;
+	color: #243446;
 }
+
 h4 {
+	
 }
+
 h5 {
+	
 }
+
 h6 {
+	
 }
 /* Member registration styles */
 span.invalid {
-  padding-left: 3px;
-  color: red;
+	padding-left: 3px;
+	color: red;
 }
 
 label {
-  float: left;
-  width: 90%;
-  margin-left: 20px;
-  margin-right: 0.5em;
-  padding-top: 0.2em;
-  text-align: left;
-  font-weight: bold;
-  color:#363636;
+	float: left;
+	width: 90%;
+	margin-left: 20px;
+	margin-right: 0.5em;
+	padding-top: 0.2em;
+	text-align: left;
+	font-weight: bold;
+	color: #363636;
 }
+
 input {
-  margin-bottom: 8px;
+	margin-bottom: 8px;
 }
+
 .register {
 	margin: 0px;
 	margin-left: auto;
@@ -156,71 +166,69 @@ input {
 
 /*  -----  table style  -------  */
 
-
 /*  = Simple Table style (black header, grey/white stripes  */
-
 .simpletablestyle {
-  background-color:#E6E7E8;
-  clear:both;
-  width: 550px;
+	background-color: #E6E7E8;
+	clear: both;
+	width: 550px;
 }
 
 .simpletablestyle img {
-  border:0px;
+	border: 0px;
 }
 
 .simpletablestyle td {
-  height:2em;
-  padding-left: 6px;
-  font-size:11px;
-  padding:5px 5px;
+	height: 2em;
+	padding-left: 6px;
+	font-size: 11px;
+	padding: 5px 5px;
 }
 
 .simpletablestyle th {
-	background: url(#{request.contextPath}/resources/gfx/bkg-blkheader.png) black repeat-x top left;
-  font-size:12px;
-  font-weight:normal;
-  padding:0 10px 0 5px;
-  border-bottom:#999999 dotted 1px;
+	background: url(#{request.contextPath}/resources/gfx/bkg-blkheader.png)
+		black repeat-x top left;
+	font-size: 12px;
+	font-weight: normal;
+	padding: 0 10px 0 5px;
+	border-bottom: #999999 dotted 1px;
 }
 
 .simpletablestyle thead {
-  background: url(#{request.contextPath}/resources/gfx/bkg-blkheader.png) black repeat-x top left;
-  height:31px;
-  font-size:10px;
-  font-weight:bold;
-  color:#FFFFFF;
-  text-align:left;
+	background: url(#{request.contextPath}/resources/gfx/bkg-blkheader.png)
+		black repeat-x top left;
+	height: 31px;
+	font-size: 10px;
+	font-weight: bold;
+	color: #FFFFFF;
+	text-align: left;
 }
 
 .simpletablestyle .header a {
-  color:#94aebd;
+	color: #94aebd;
 }
 
 .simpletablestype tfoot {
 	height: 20px;
-  font-size: 10px;
-  font-weight: bold;
-  background-color: #EAECEE;
-  text-align: center;
+	font-size: 10px;
+	font-weight: bold;
+	background-color: #EAECEE;
+	text-align: center;
 }
 
 .simpletablestyle tr.header td {
-  padding: 0px 10px 0px 5px;
+	padding: 0px 10px 0px 5px;
 }
-
 
 .simpletablestyle .subheader {
-  background-color: #e6e7e8;
-  font-size:10px;
-  font-weight:bold;
-  color:#000000;
-  text-align:left;
+	background-color: #e6e7e8;
+	font-size: 10px;
+	font-weight: bold;
+	color: #000000;
+	text-align: left;
 }
 
-
 /*SOBREESCRITURA DE ESTILOS DE PRIMEFACES*/
-.ui-inputfield{
+.ui-inputfield {
 	-webkit-box-shadow: inset 0 0px 0px #8f8f8f;
 	box-shadow: inset 0 0px 0px #8f8f8f;
 	width: 90%;
@@ -232,124 +240,150 @@ input {
 	text-align: center;
 }
 
-.ui-selectonemenu-label{
+.ui-selectonemenu-label {
 	padding: 4px;
 	text-align: center;
-} 
+}
 
 /* Using new CSS3 selectors for styling*/
 .simpletablestyle tr:nth-child(odd) {
-  background: #f4f3f3;
+	background: #f4f3f3;
 }
+
 .simpletablestyle tr:nth-child(even) {
-  background: #ffffff;
+	background: #ffffff;
 }
 
 .simpletablestyle td a:hover {
-  color:#3883ce;
-  text-decoration:none; 
+	color: #3883ce;
+	text-decoration: none;
 }
 
-
 /*Clases grupo 5*/
-
-
-
-.jugadorFormacion{
+.jugadorFormacion {
 	width: 10%;
 	height: 10%;
-	
 	font-size: 0.7em;
 }
 
-.jugadorFormacion .foto{
-	
+.jugadorFormacion .foto {
 	width: 50px;
 	height: 50px;
 }
 
-.cancha{
+.cancha {
 	background-image: url("../../resources/gfx/ESTADIO.jpg");
-	background-position:center;
-
+	background-position: center;
 	position: relative;
 }
 
-.formRegistro{
+.formRegistro {
 	background-image: url("../../resources/gfx/firma.jpg");
-
-	background-repeat:no-repeat;
+	background-repeat: no-repeat;
 	background-size: contain;
 	position: relative;
 	height: 1200px;
 }
 
-#bienvenida{
-	background-image: url("../../resources/gfx/bienvenida.jpg");
+.formEntrenamiento {
+	background-image: url("../../resources/gfx/entrenamiento.jpg");
+	background-repeat: no-repeat;
+	background-size: contain;
+	height: 1200px;
+	position: relative;
+}
 
-	background-repeat:no-repeat;
+
+.formError {
+	background-image: url("../../resources/gfx/error.jpg");
+	background-repeat: no-repeat;
+	background-size: contain;
+	height: 1200px;
+	position: relative;
+}
+
+#bienvenida {
+	background-image: url("../../resources/gfx/bienvenida.jpg");
+	background-repeat: no-repeat;
 	background-size: contain;
 	position: relative;
 	height: 1200px;
-	
 	text-align: center;
-	text-decoration:blink;
+	text-decoration: blink;
 	font-size: 36px;
-	
 }
 
 #bienvenida * {
 	color: white;
 }
 
-.delanteros{
-	
+.delanteros {
 	position: relative;
 	top: 10%;
 }
 
-.mediocampistas{
+.mediocampistas {
 	position: relative;
 	top: 20%;
 }
 
-.defensas{
+.defensas {
 	position: relative;
 	top: 30%;
 }
 
-.golero{
+.golero {
 	position: relative;
 	top: 40%;
 }
-.resultados{
+
+.resultados {
 	max-height: 700px;
 	overflow: auto;
-	clear : left;
-}
-.results-table{
-	clear : left;
+	clear: left;
 }
 
-#logoutForm{
+.results-table {
+	clear: left;
+}
+
+#logoutForm {
 	display: inline-block;
 }
 
-.market-form{
+.market-form {
 	width: 885px;
 }
-.grillaSuplentes{
+
+.grillaSuplentes {
 	width: 1200px;
 	margin-left: auto;
 	margin-right: auto;
 }
 
-
 .titular {
-
 	display: inline-block;
 }
 
-#cancha > div > div > div{
+#cancha>div>div>div {
 	padding: 0px 20% 0px 20% !important;
+}
+
+.divEntenar {
+	height: 20%;
+	width: 20%;
+	float: left;
+	background-color: rgba(255,255,255,.3);
+	
+}
+
+.divEntenar:hover{
+	background-color: rgba(255,255,255,.5);
+}
+
+
+.divSeleccionadoEntenar{
+	height: 20%;
+	width: 80%;
+	float: left;
 }

@@ -6,17 +6,29 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
+	<h:form rendered="#{equipoController.error}">
+		<ui:include src="/WEB-INF/templates/error.xhtml" />
+	</h:form>
 
-	<h:form id="formCancha">
+
+
+	<h:form id="formCancha" rendered="#{!equipoController.error}">
 		<h1>#{equipoDatos.nombre}</h1>
 
 
-		
+
 
 
 		<div id="cancha" class="cancha" align="center">
 
-
+			<p:selectOneMenu id="formacion" value="#{equipoController.idFormacion}"
+				style="width:20%;">
+				
+				
+				<f:selectItems value="#{equipoController.formaciones}"  />
+				<p:ajax event="change" listener="#{equipoController.onFormacionChange}" update="formCancha" />
+			</p:selectOneMenu>
+<br/>
 			<div id="uno" class="_4-3-3">
 
 				<p:panel id="rpnl1" styleClass="panelTarjeta"
