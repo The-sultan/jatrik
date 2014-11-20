@@ -9,16 +9,13 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Model;
 import javax.faces.component.UIParameter;
 import javax.faces.component.html.HtmlSelectOneMenu;
-import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
@@ -31,7 +28,7 @@ import uy.edu.fing.tsi2.model.SessionBeanJatrik;
 
 @SuppressWarnings("serial")
 @Model
-@RequestScoped
+@ViewScoped
 public class CorreoController implements Serializable {
 
 	
@@ -85,8 +82,9 @@ public class CorreoController implements Serializable {
 		nuevoCorreo.setTo(2L);
 		*/
 		List<InfoCorreo> correos = new ArrayList<InfoCorreo>();
-		correos = correoEJB.obtenerCorreos(sessionBean.getInfoUsuario().getId());
-		
+		//correos = correoEJB.obtenerCorreos(sessionBean.getInfoUsuario().getId());
+		// para ver que pasa
+		correos = correoEJB.obtenerCorreos(2l);
 		//correos.add(info);
 		
 		setBandejaEntrada(correos);
@@ -99,26 +97,6 @@ public class CorreoController implements Serializable {
 	
 	
 	public CorreoController() {
-		
-//		//HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-//		//HttpSession session = request.getSession();
-//
-//		userID = (String) sessionBean.getNick();
-//		
-//		InfoUsuario usuario = sessionBean.getInfoUsuario();
-//
-//		List<InfoCorreo> correos =correoEJB.obtenerCorreos(usuario);
-//
-//		Collections.sort(correos, new ComparadorCorreos());
-//		setBandejaEntrada(correos);
-//
-//		cantidadNoLeidos = contarNoLeidos(bandejaEntrada);
-//
-//		log.info("Correos en la bandeja de entrada : " + bandejaEntrada.size());
-//		
-//		usuarios = cargarUsuarios(usuarioEJB.getUsuarios());
-//		
-//		nuevoCorreo =  new InfoCorreo();
 	}
 	
 	private int contarNoLeidos(List<InfoCorreo> bandejaEntrada2) {

@@ -46,6 +46,8 @@ public interface RestRequestBuilderFactoryLocal {
 
 	Builder makeCorreoEnviarPostRequestBuilder();
 
+	Builder makeCorreoUpdatePostRequestBuilder();
+
 	
 	
 }

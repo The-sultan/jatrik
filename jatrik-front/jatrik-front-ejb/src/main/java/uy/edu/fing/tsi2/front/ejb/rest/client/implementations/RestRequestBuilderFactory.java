@@ -177,4 +177,11 @@ public class RestRequestBuilderFactory implements
 				.accept(MediaType.APPLICATION_JSON);
 	}
 
+	@Override
+	public Builder makeCorreoUpdatePostRequestBuilder() {
+		String url = String.format(JATRIK_CORE_URL + "/correo/update");
+		return crearClienteJersey().resource(url)
+				.type(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON);
+	}
 }
