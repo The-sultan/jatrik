@@ -22,6 +22,8 @@ public interface RestRequestBuilderFactoryLocal {
 
 	Builder makeEntrenamientoPostRequestBuilder();
 	
+	Builder makeEntrenamientoGetRequestBuilder(Long idEquipo);
+	
 	Builder makeSimularPartidoRequestBuilder(Long partidoId);
 	
 	Builder makeUsuariosGetRequest();

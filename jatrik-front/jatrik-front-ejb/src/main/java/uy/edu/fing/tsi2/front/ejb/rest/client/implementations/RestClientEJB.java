@@ -110,23 +110,39 @@ public class RestClientEJB implements RestClientEJBLocal {
 	}
 
 	@Override
-	public String postEntrenamiento(InfoEntrenamiento entrenamiento)
+	public Boolean postEntrenamiento(InfoEntrenamiento entrenamiento)
 			throws RestClientException {
 		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory
 				.makeEntrenamientoPostRequestBuilder();
 		ClientResponse response = jerseyHttpRequestBuilder.post(
 				ClientResponse.class, entrenamiento);
-		String Resultado;
+		Boolean Resultado;
 		if (response.getStatusInfo().getStatusCode() != ClientResponse.Status.OK
 				.getStatusCode()) {
-			Resultado = "Ya has entrenado tu qeuipo el día de hoy";
+			Resultado = false;
 		} else {
-			Resultado = "Has entrenado tu equipo correctamente";
+			Resultado = true;
 		}
 		return Resultado;
 
 	}
 
+	public Boolean getPuedeEntrenarEquipo(long equipoId)
+			throws RestClientException {
+		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory
+				.makeEntrenamientoGetRequestBuilder(equipoId);
+		ClientResponse response = jerseyHttpRequestBuilder
+				.get(ClientResponse.class);
+		if (response.getStatusInfo().getStatusCode() != ClientResponse.Status.OK
+				.getStatusCode()) {
+			throw new RestClientException(
+					"Error al obtener entrenamiento del equipo "
+							+ response.getStatusInfo().getReasonPhrase());
+		} else {
+			return response.getEntity(Boolean.class);
+		}
+	}	
+	
 	@Override
 	public void simularPartido(Long partidoId) throws RestClientException {
 		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory

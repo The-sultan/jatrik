@@ -37,7 +37,7 @@ public class EquipoEJB implements EquipoEJBLocal {
 	}
 	
 	@Override
-	public String entrenarEquipo(long id, List<InfoEntrenamientoJugador> jugadores) {
+	public Boolean entrenarEquipo(long id, List<InfoEntrenamientoJugador> jugadores) {
 		InfoEntrenamiento ent = new InfoEntrenamiento();
 		ent.setIdEquipo((int)id);
 		ent.setJugadores(jugadores);
@@ -48,6 +48,15 @@ public class EquipoEJB implements EquipoEJBLocal {
 		}
 	}
 
+	@Override
+	public Boolean puedeEntrenarEquipo(long idEquipo) {
+		try {
+			return jatrikCoreClient.getPuedeEntrenarEquipo(idEquipo);
+		} catch (RestClientException e) {
+			throw e;
+		}
+	}
+	
 	@Override
 	public InfoFormacion getFormacionEstandar(long id) {
 		return jatrikCoreClient.getFormacionEstandar(id);

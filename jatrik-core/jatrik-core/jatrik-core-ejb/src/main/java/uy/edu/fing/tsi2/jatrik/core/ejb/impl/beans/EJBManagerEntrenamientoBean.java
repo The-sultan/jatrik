@@ -55,13 +55,18 @@ public class EJBManagerEntrenamientoBean implements IEntrenamiento{
 	public boolean puedeEntrenar(Long idEquipo, Date fechaEntrenamiento) {
 		boolean yaEntrene = false;
 		Equipo e = equiposEJB.find(idEquipo);
-		Date fecha1 = DateUtils.getDateWithoutTime(fechaEntrenamiento);
-		Date fecha2 = DateUtils.getDateWithoutTime(e.getUltimoEntrenamiento());
-		if (fecha1.compareTo(fecha2) <= 0){
-			yaEntrene = true;
-			e.setUltimoEntrenamiento(fechaEntrenamiento);
+		if (e.getUltimoEntrenamiento()==null){
+			return true;
 		}
-		return yaEntrene;
+		else{
+			Date fecha1 = DateUtils.getDateWithoutTime(fechaEntrenamiento);
+			Date fecha2 = DateUtils.getDateWithoutTime(e.getUltimoEntrenamiento());
+			if (fecha1.compareTo(fecha2) <= 0){
+				yaEntrene = true;
+				e.setUltimoEntrenamiento(fechaEntrenamiento);
+			}
+			return !yaEntrene;
+		}
 	}
 	
 }

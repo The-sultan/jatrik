@@ -18,7 +18,9 @@ public interface EquipoEJBLocal {
 
 	public InfoEquipo getEquipo(long id);
 
-	String entrenarEquipo(long id, List<InfoEntrenamientoJugador> jugadores);
+	public Boolean entrenarEquipo(long id, List<InfoEntrenamientoJugador> jugadores);
+	
+	public Boolean puedeEntrenarEquipo(long idEquipo);
 	
 	public InfoFormacion getFormacionEstandar(long id);
 	

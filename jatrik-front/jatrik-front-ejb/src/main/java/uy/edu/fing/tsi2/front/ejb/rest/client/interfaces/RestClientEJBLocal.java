@@ -29,8 +29,10 @@ public interface RestClientEJBLocal {
 	public InfoEquipo getEquipo(long idEquipo) throws RestClientException;
 	
 	public InfoPartido getInfoPartido(long idPartido)  throws RestClientException;
+	
+	public Boolean getPuedeEntrenarEquipo(long idEquipo)  throws RestClientException;
 
-	String postEntrenamiento(InfoEntrenamiento entrenamiento) throws RestClientException;
+	public Boolean postEntrenamiento(InfoEntrenamiento entrenamiento) throws RestClientException;
 	
 	void simularPartido(Long partidoId) throws RestClientException;
 	
