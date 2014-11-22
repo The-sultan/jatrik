@@ -78,8 +78,9 @@ public class CorreoResource {
 					infoCorreo.setMensaje(correo.getMensaje());
 					infoCorreo.setTo(correo.getTo().getId());
 					infoCorreo.setFrom(correo.getFrom().getId());
+                                        infoCorreo.setNickFrom(correo.getFrom().getNick());
+                                        infoCorreo.setNickTo(correo.getTo().getNick());
 					
-					//BeanUtils.copyProperties(infoCorreo, correo);
 					resultado.add(infoCorreo);
 			}
 			return Response.ok(resultado).build();

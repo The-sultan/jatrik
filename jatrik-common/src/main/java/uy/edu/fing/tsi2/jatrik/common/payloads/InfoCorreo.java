@@ -4,76 +4,94 @@ import java.util.Date;
 
 public class InfoCorreo {
 
-	private Long id;
+    private Long id;
 
-	private Long to;
+    private Long to;
 
-	private Long from;
+    private Long from;
 
-	private String asunto;
+    private String nickTo;
 
-	private String mensaje;
+    private String nickFrom;
 
-	private boolean leido;
+    private String asunto;
 
-	private Date fecha;
+    private String mensaje;
 
+    private boolean leido;
 
+    private Date fecha;
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public Long getTo() {
-		return to;
-	}
+    public Long getTo() {
+        return to;
+    }
 
-	public void setTo(Long to) {
-		this.to = to;
-	}
+    public void setTo(Long to) {
+        this.to = to;
+    }
 
-	public Long getFrom() {
-		return from;
-	}
+    public Long getFrom() {
+        return from;
+    }
 
-	public void setFrom(Long from) {
-		this.from = from;
-	}
+    public void setFrom(Long from) {
+        this.from = from;
+    }
 
-	public String getAsunto() {
-		return asunto;
-	}
+    public String getAsunto() {
+        return asunto;
+    }
 
-	public void setAsunto(String asunto) {
-		this.asunto = asunto;
-	}
+    public void setAsunto(String asunto) {
+        this.asunto = asunto;
+    }
 
-	public String getMensaje() {
-		return mensaje;
-	}
+    public String getMensaje() {
+        return mensaje;
+    }
 
-	public void setMensaje(String mensaje) {
-		this.mensaje = mensaje;
-	}
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
 
-	public boolean isLeido() {
-		return leido;
-	}
+    public boolean isLeido() {
+        return leido;
+    }
 
-	public void setLeido(boolean leido) {
-		this.leido = leido;
-	}
+    public void setLeido(boolean leido) {
+        this.leido = leido;
+    }
 
-	public Date getFecha() {
-		return fecha;
-	}
+    public Date getFecha() {
+        return fecha;
+    }
 
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
-	}
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public String getNickTo() {
+        return nickTo;
+    }
+
+    public void setNickTo(String nickTo) {
+        this.nickTo = nickTo;
+    }
+
+    public String getNickFrom() {
+        return nickFrom;
+    }
+
+    public void setNickFrom(String nickFrom) {
+        this.nickFrom = nickFrom;
+    }
 
 }
