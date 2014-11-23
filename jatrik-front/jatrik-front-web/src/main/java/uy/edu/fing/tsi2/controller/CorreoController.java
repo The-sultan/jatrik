@@ -5,24 +5,21 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.inject.Model;
-import javax.faces.component.UIParameter;
 
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.component.UIParameter;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 import javax.faces.view.ViewScoped;
-
 import javax.inject.Inject;
-
 import org.apache.log4j.Logger;
-
 import uy.edu.fing.tsi2.front.ejb.interfaces.CorreoEJBLocal;
 import uy.edu.fing.tsi2.front.ejb.interfaces.EquipoEJBLocal;
 import uy.edu.fing.tsi2.front.ejb.interfaces.UsuarioEJBLocal;
@@ -123,13 +120,6 @@ public class CorreoController implements Serializable {
         this.usuarios = usuarios;
     }
 
-    /*	public HtmlSelectOneMenu getUsuarioTO() {
-     return usuarioTO;
-     }
-     public void setUsuarioTO(HtmlSelectOneMenu usuarioTO) {
-     this.usuarioTO = usuarioTO;
-     }
-     */
     public String getUsuarioTO() {
         return usuarioTO;
     }
@@ -158,23 +148,27 @@ public class CorreoController implements Serializable {
         return lista;
     }
 
-    public void marcarLeido(ActionEvent e) {
-        String correoString = ((UIParameter) e.getComponent().findComponent("idCorreo")).getValue().toString();
-        long correoLong = Long.parseLong(correoString);
-
+    public void marcarLeido() {
+       
+        FacesContext fc = FacesContext.getCurrentInstance();
+        Map<String, String> params = (Map<String, String>) fc.getExternalContext().getRequestParameterMap();;
+        String idCorreo = params.get("idCorreo");
+        Long correoLong = Long.parseLong(idCorreo);
+        
         Iterator<InfoCorreo> it = getBandejaEntrada().iterator();
         while (it.hasNext()) {
             InfoCorreo c = it.next();
-            if (c.getId().longValue() == correoLong) {
+            if (c.getId().equals(correoLong)) {
                 if (c.isLeido()) {
                     c.setLeido(false);
                 } else {
                     c.setLeido(true);
                 }
                 correoEJB.updateCorreo(c);
+                break;
             }
         }
-        log.info("Marcando como leido " + correoString + " !!");
+        log.info("Marcando como leido " + idCorreo + " !!");
     }
 
     public void send() {

@@ -27,22 +27,7 @@
                                 </f:facet>
                                 <p:accordionPanel activeIndex="-1">
                                     <p:tab title="#{correo.asunto}" >
-                                        <p:panelGrid columns="2"  >
-
-                                            <h:outputLabel value="Enviado por :" />
-                                            <h:outputText value="#{correo.nickFrom}" />
-
-                                            <h:outputLabel value="Fecha :"/>	
-                                            <h:outputText value="#{correo.fecha}" />
-
-                                            <h:outputLabel value="Asunto :"/>	
-                                            <h:outputText value="#{correo.asunto}" />
-
-                                            <h:outputLabel value="Mensaje :"/>	
-                                            <h:outputText value="#{correo.mensaje}" />
-
-                                        </p:panelGrid>
-
+                                        <h:outputText value="#{correo.mensaje}" />
                                     </p:tab>
                                 </p:accordionPanel>
                             </p:column>
@@ -62,7 +47,7 @@
                                 <f:facet name="header">
                                     <h:outputText value="Marcar" />
                                 </f:facet>
-                                <p:commandLink actionListener="#{correoController.marcarLeido}" id="link">
+                                <p:commandLink action="#{correoController.marcarLeido}" id="link">
                                         <h:outputText value="leido" rendered="#{correo.leido == false}" />
                                         <h:outputText value="no leido" rendered="#{correo.leido == true}" />
                                         <f:param name="idCorreo" id="idCorreo" value="#{correo.id}" />
