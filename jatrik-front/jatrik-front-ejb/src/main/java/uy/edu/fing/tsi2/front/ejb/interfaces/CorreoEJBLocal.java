@@ -12,5 +12,7 @@ public interface CorreoEJBLocal {
 	void updateCorreo(InfoCorreo c);
 
 	List<InfoCorreo> obtenerCorreos(Long idUsuario);
+        
+        List<InfoCorreo> obtenerCorreosEnviados(Long idUsuario);
 
 }

@@ -8,16 +8,13 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Model;
 
 
-import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.component.UIParameter;
+
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
-import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import org.apache.log4j.Logger;
 import uy.edu.fing.tsi2.front.ejb.interfaces.CorreoEJBLocal;
@@ -29,7 +26,7 @@ import uy.edu.fing.tsi2.model.SessionBeanJatrik;
 
 @SuppressWarnings("serial")
 @Model
-@ViewScoped
+@RequestScoped
 public class CorreoController implements Serializable {
 
     private Logger log = Logger.getLogger(this.getClass());
@@ -47,11 +44,11 @@ public class CorreoController implements Serializable {
     private CorreoEJBLocal correoEJB;
 
     private List<InfoCorreo> bandejaEntrada;
+    private List<InfoCorreo> bandejaSalida;
     private String userID;
     private int cantidadNoLeidos = 0;
     private InfoCorreo nuevoCorreo;
     private List<SelectItem> usuarios;
-    //private HtmlSelectOneMenu usuarioTO;	
     private String usuarioTO;
     private String correoEnviado;
 
@@ -59,11 +56,14 @@ public class CorreoController implements Serializable {
     public void initDatos() {
         userID = (String) sessionBean.getNick();
 
-        List<InfoCorreo> correos = new ArrayList<InfoCorreo>();
-        correos = correoEJB.obtenerCorreos(sessionBean.getInfoUsuario().getId());
-
-        setBandejaEntrada(correos);
+        List<InfoCorreo> correosEntrada = new ArrayList<InfoCorreo>();
+        correosEntrada = correoEJB.obtenerCorreos(sessionBean.getInfoUsuario().getId());
+        setBandejaEntrada(correosEntrada);
         cantidadNoLeidos = contarNoLeidos(bandejaEntrada);
+        
+        List<InfoCorreo> correosSalida = new ArrayList<InfoCorreo>();
+        correosSalida = correoEJB.obtenerCorreosEnviados(sessionBean.getInfoUsuario().getId());
+        setBandejaSalida(correosSalida);
 
         usuarios = cargarUsuarios(usuarioEJB.getUsuarios());
         nuevoCorreo = new InfoCorreo();
@@ -136,6 +136,15 @@ public class CorreoController implements Serializable {
         this.correoEnviado = correoEnviado;
     }
 
+    public List<InfoCorreo> getBandejaSalida() {
+        return bandejaSalida;
+    }
+
+    public void setBandejaSalida(List<InfoCorreo> bandejaSalida) {
+        this.bandejaSalida = bandejaSalida;
+    }
+
+    
     private List<SelectItem> cargarUsuarios(List<InfoUsuario> listaInfoUsuarios) {
         List<SelectItem> lista = new ArrayList<SelectItem>();
         Iterator<InfoUsuario> it = listaInfoUsuarios.iterator();

@@ -19,6 +19,11 @@ public class CorreoEJB implements CorreoEJBLocal {
 	public List<InfoCorreo> obtenerCorreos(Long idUsuario) {
 		return jatrikCoreClient.getCorreosUsuario(idUsuario);
 	}
+        
+        @Override
+	public List<InfoCorreo> obtenerCorreosEnviados(Long idUsuario) {
+		return jatrikCoreClient.getCorreosEnviadosUsuario(idUsuario);
+	}
 
 	@Override
 	public void addCorreo(InfoCorreo nuevoCorreo) {

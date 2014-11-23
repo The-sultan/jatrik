@@ -6,97 +6,126 @@
      xmlns:p="http://primefaces.org/ui"
      template="/WEB-INF/templates/default.xhtml">
     <h1>Correo</h1>
-    <h:panelGroup id="mailbox">
-        <div id="tabs" class="mailbox-form">
-            <ul>
-                <li><a href="#entradaTab">Bandeja de Entrada (<h:outputText
-                            value="#{correoController.cantidadNoLeidos}" />)
-                    </a></li>
-                <li><a href="#salidaTab">Bandeja de Salida</a></li>
-                <li><a href="#enviarTab">Enviar Correo</a></li>
+        <h:panelGroup id="mailbox">
+            <div id="tabs" class="mailbox-form">
+                <ul>
+                    <li>
+                        <a href="#entradaTab">Bandeja de Entrada (<h:outputText
+                                value="#{correoController.cantidadNoLeidos}" />)
+                        </a>
+                    </li>
+                    <li><a href="#salidaTab">Bandeja de Salida</a></li>
+                    <li><a href="#enviarTab">Enviar Correo</a></li>
 
-            </ul>
-            <div id="entradaTab">
-                <h:form id="entradaForm">
-                    <h:panelGroup layout="block" id="entradaPanel" class="resultados">
-                        <p:dataTable id="bandejaEntrada"
-                                     value="#{correoController.bandejaEntrada}" var="correo">
-                            <p:column id="Asunto">
-                                <f:facet name="header">
-                                    <h:outputText value="Asunto" />
-                                </f:facet>
-                                <p:accordionPanel activeIndex="-1">
-                                    <p:tab title="#{correo.asunto}" >
-                                        <h:outputText value="#{correo.mensaje}" />
-                                    </p:tab>
-                                </p:accordionPanel>
-                            </p:column>
-                            <p:column id="From">
-                                <f:facet name="header">
-                                    <h:outputText styleClass="headerText" value="From" />
-                                </f:facet>
-                                <h:outputText value="#{correo.nickFrom}" />
-                            </p:column>
-                            <p:column id="Fecha">
-                                <f:facet name="header">
-                                    <h:outputText styleClass="headerText" value="Fecha" />
-                                </f:facet>
-                                <h:outputText value="#{correo.fecha}" />
-                            </p:column>
-                            <p:column id="Marcar">
-                                <f:facet name="header">
-                                    <h:outputText value="Marcar" />
-                                </f:facet>
-                                <p:commandLink action="#{correoController.marcarLeido}" id="link">
-                                        <h:outputText value="leido" rendered="#{correo.leido == false}" />
-                                        <h:outputText value="no leido" rendered="#{correo.leido == true}" />
-                                        <f:param name="idCorreo" id="idCorreo" value="#{correo.id}" />
-                                </p:commandLink>
-                            </p:column>
-                        </p:dataTable>
-                    </h:panelGroup>
-                </h:form>
+                </ul>
+                <div id="entradaTab">
+                    <h:form id="entradaForm">
+                        <h:panelGroup layout="block" id="entradaPanel" class="resultados">
+                            <p:dataTable id="bandejaEntrada"
+                                         value="#{correoController.bandejaEntrada}" var="correo">
+                                <p:column id="Asunto">
+                                    <f:facet name="header">
+                                        <h:outputText value="Asunto" />
+                                    </f:facet>
+                                    <p:accordionPanel activeIndex="-1">
+                                        <p:tab title="#{correo.asunto}" >
+                                            <h:outputText value="#{correo.mensaje}" />
+                                        </p:tab>
+                                    </p:accordionPanel>
+                                </p:column>
+                                <p:column id="From">
+                                    <f:facet name="header">
+                                        <h:outputText styleClass="headerText" value="From" />
+                                    </f:facet>
+                                    <h:outputText value="#{correo.nickFrom}" />
+                                </p:column>
+                                <p:column id="Fecha">
+                                    <f:facet name="header">
+                                        <h:outputText styleClass="headerText" value="Fecha" />
+                                    </f:facet>
+                                    <h:outputText value="#{correo.fecha}" />
+                                </p:column>
+                                <p:column id="Marcar">
+                                    <f:facet name="header">
+                                        <h:outputText value="Marcar" />
+                                    </f:facet>
+                                    <p:commandLink action="#{correoController.marcarLeido}" id="link" update="entradaForm">
+                                            <h:outputText value="leido" rendered="#{correo.leido == false}" />
+                                            <h:outputText value="no leido" rendered="#{correo.leido == true}" />
+                                            <f:param name="idCorreo" id="idCorreo" value="#{correo.id}" />
+                                    </p:commandLink>
+                                </p:column>
+                            </p:dataTable>
+                        </h:panelGroup>
+                    </h:form>
+                </div>
+                <div id="salidaTab">
+                    <h:form id="salidaForm">
+                        <h:panelGroup layout="block" id="salidaPanel" class="resultados">
+                            <p:dataTable id="bandejaSalida"
+                                         value="#{correoController.bandejaSalida}" var="correo">
+                                <p:column id="Asunto">
+                                    <f:facet name="header">
+                                        <h:outputText value="Asunto" />
+                                    </f:facet>
+                                    <p:accordionPanel activeIndex="-1">
+                                        <p:tab title="#{correo.asunto}" >
+                                            <h:outputText value="#{correo.mensaje}" />
+                                        </p:tab>
+                                    </p:accordionPanel>
+                                </p:column>
+                                <p:column id="To">
+                                    <f:facet name="header">
+                                        <h:outputText styleClass="headerText" value="To" />
+                                    </f:facet>
+                                    <h:outputText value="#{correo.nickTo}" />
+                                </p:column>
+                                <p:column id="Fecha">
+                                    <f:facet name="header">
+                                        <h:outputText styleClass="headerText" value="Fecha" />
+                                    </f:facet>
+                                    <h:outputText value="#{correo.fecha}" />
+                                </p:column>
+                            </p:dataTable>
+                        </h:panelGroup>
+                    </h:form>
+                </div>
+                <div id="enviarTab">
+                    <h:form id="enviarForm">
+                        <table>
+                            <tr>
+                                <td>Para</td>
+                                <td>
+                                    <h:selectOneMenu id="para" value="#{correoController.usuarioTO}">
+                                        <f:selectItems value="#{correoController.usuarios}" />
+                                    </h:selectOneMenu>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Asunto</td>
+                                <td>
+                                    <h:inputText id="asuntoMail" value="#{correoController.nuevoCorreo.asunto}" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Mensaje</td>
+                                <td>
+                                    <h:inputTextarea id="mensajeMail" rows="10" cols="30" value="#{correoController.nuevoCorreo.mensaje}" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p:commandButton value="Enviar" action="#{correoController.send}" update="enviarForm" />
+                                </td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </h:form>
+                </div>
+                <script type="text/javascript">
+                    $("#tabs").tabs();
+                </script>
             </div>
-            <div id="salidaTab"></div>
-            <div id="enviarTab">
-                <h:form id="enviarForm">
-                    <table>
-                        <tr>
-                            <td>Para</td>
-                            <td>
-                                <h:selectOneMenu id="para" value="#{correoController.usuarioTO}">
-                                    <f:selectItems value="#{correoController.usuarios}" />
-                                </h:selectOneMenu>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Asunto</td>
-                            <td>
-                                <h:inputText id="asuntoMail" value="#{correoController.nuevoCorreo.asunto}" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Mensaje</td>
-                            <td>
-                                <h:inputTextarea id="mensajeMail" rows="10" cols="30" value="#{correoController.nuevoCorreo.mensaje}" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p:commandButton value="Enviar" action="#{correoController.send}">
-                                    <f:ajax render=":enviarForm"></f:ajax>
-                                </p:commandButton>
-                            </td>
-                            <td></td>
-                        </tr>
-                    </table>
-                </h:form>
-            </div>
-            <script type="text/javascript">
-                $("#tabs").tabs();
-            </script>
-        </div>
-    </h:panelGroup>
-
-</div>
+        </h:panelGroup>
+   </div>
 

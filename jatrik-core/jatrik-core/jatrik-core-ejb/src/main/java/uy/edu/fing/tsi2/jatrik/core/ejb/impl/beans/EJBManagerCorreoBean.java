@@ -58,5 +58,8 @@ public class EJBManagerCorreoBean implements ICorreos {
 	public List<Correo> obtenerCorreos(Long usuarioId) {
 		return correos.findCorreosUsuario(usuarioId);
 	}
-
+        
+        public List<Correo> obtenerCorreosEnviados(Long usuarioId) {
+		return correos.findCorreosUsuarioEnviados(usuarioId);
+	}
 }

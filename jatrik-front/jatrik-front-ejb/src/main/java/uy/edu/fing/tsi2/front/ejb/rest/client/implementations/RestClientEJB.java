@@ -366,6 +366,24 @@ public class RestClientEJB implements RestClientEJBLocal {
 		return (List) response.getEntity(gType);
 	}
 
+        @Override
+        
+	public List<InfoCorreo> getCorreosEnviadosUsuario(Long idUsuario) {
+		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory
+				.makeCorreosEnviadosGetRequestBuilder(idUsuario);
+		ClientResponse response = jerseyHttpRequestBuilder
+				.get(ClientResponse.class);
+		if (response.getStatusInfo().getStatusCode() != ClientResponse.Status.OK
+				.getStatusCode()) {
+			throw new RestClientException(
+					"No se pudo obtener el listado de correos enviados del usuario (idUsuario), status code: "
+							+ response.getStatusInfo().getReasonPhrase());
+		}
+		GenericType<List<InfoCorreo>> gType = new GenericType<List<InfoCorreo>>() {};
+		
+		return (List) response.getEntity(gType);
+	}
+        
 	@Override
 	public String postNuevoCorreo(InfoCorreo nuevoCorreo)
 			throws RestClientException {

@@ -11,5 +11,6 @@ public interface ICorreos {
 	Correo findCorreo(Long id);
 	Correo leerCorreo(Long id);
 	List<Correo> obtenerCorreos(Long usuarioId);
+        List<Correo> obtenerCorreosEnviados(Long usuarioId);
 	
 }

@@ -66,5 +66,7 @@ public interface RestClientEJBLocal {
 
 	String postUpdateCorreo(InfoCorreo updateCorreo) throws RestClientException;
 
+        List<InfoCorreo> getCorreosEnviadosUsuario(Long idUsuario);
+
 
 }

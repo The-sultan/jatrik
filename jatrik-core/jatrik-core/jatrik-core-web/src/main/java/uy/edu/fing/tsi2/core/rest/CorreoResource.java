@@ -62,7 +62,35 @@ public class CorreoResource {
 		return Response.created(uri).build();
 	}
 	
-	@Path("/{id}")
+	@Path("/enviados/{id}")
+	@Produces("application/json")
+	@GET
+	public Response obtenerCorreosEnviadosUsuario(@PathParam("id") Long id){
+		List<InfoCorreo> resultado = new ArrayList<InfoCorreo>();
+		try {
+			List<Correo> emails = correoEJB.obtenerCorreosEnviados(id);
+			for (Correo correo : emails) {
+					InfoCorreo infoCorreo = new InfoCorreo();
+					infoCorreo.setId(correo.getId());
+					infoCorreo.setAsunto(correo.getAsunto());
+					infoCorreo.setFecha(correo.getFecha());
+					infoCorreo.setLeido(correo.getLeido());
+					infoCorreo.setMensaje(correo.getMensaje());
+					infoCorreo.setTo(correo.getTo().getId());
+					infoCorreo.setFrom(correo.getFrom().getId());
+                                        infoCorreo.setNickFrom(correo.getFrom().getNick());
+                                        infoCorreo.setNickTo(correo.getTo().getNick());
+					
+					resultado.add(infoCorreo);
+			}
+			return Response.ok(resultado).build();
+		} catch (Exception ex) {
+			Logger.getLogger(CorreoResource.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return Response.serverError().build();
+	}
+        
+        @Path("/{id}")
 	@Produces("application/json")
 	@GET
 	public Response obtenerCorreosUsuario(@PathParam("id") Long id){

@@ -20,4 +20,6 @@ public interface IEMCorreos {
 	Correo add(Correo Correo);
 	
 	List<Correo> findCorreosUsuario(Long idUsuario);
+        
+        List<Correo> findCorreosUsuarioEnviados(Long idUsuario);
 }

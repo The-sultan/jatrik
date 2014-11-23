@@ -56,4 +56,12 @@ public class EJBEMCorreosBean implements IEMCorreos {
 		return (List<Correo>)consulta.getResultList();
 
 	}
+        
+        @SuppressWarnings("unchecked")
+	public List<Correo> findCorreosUsuarioEnviados(Long idUsuario) {
+		Query consulta = entityManager.createNamedQuery("findCorreosUsuarioEnviados");
+		consulta.setParameter("id", idUsuario);
+		return (List<Correo>)consulta.getResultList();
+
+	}
 }

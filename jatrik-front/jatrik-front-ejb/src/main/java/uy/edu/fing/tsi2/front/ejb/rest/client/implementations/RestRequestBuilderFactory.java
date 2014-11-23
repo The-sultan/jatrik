@@ -177,6 +177,14 @@ public class RestRequestBuilderFactory implements
 				.accept(MediaType.APPLICATION_JSON);
 	}
 
+        @Override
+	public Builder makeCorreosEnviadosGetRequestBuilder(Long idUsuario) {
+		String url = String.format(JATRIK_CORE_URL + "/correo/enviados/" + idUsuario);
+		return crearClienteJersey().resource(url)
+				.type(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON);
+	}
+        
 	@Override
 	public Builder makeCorreoEnviarPostRequestBuilder() {
 		String url = String.format(JATRIK_CORE_URL + "/correo/send");

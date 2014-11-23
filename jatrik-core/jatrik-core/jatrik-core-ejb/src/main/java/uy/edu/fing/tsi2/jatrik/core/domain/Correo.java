@@ -16,7 +16,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @NamedQueries({
-	@NamedQuery(name="findCorreosUsuario",query="SELECT OBJECT(u) FROM Correo u WHERE u.to.id = :id ")
+	@NamedQuery(name="findCorreosUsuario",query="SELECT OBJECT(u) FROM Correo u WHERE u.to.id = :id "),
+        @NamedQuery(name="findCorreosUsuarioEnviados",query="SELECT OBJECT(u) FROM Correo u WHERE u.from.id = :id ")
 	
 })
 @Entity

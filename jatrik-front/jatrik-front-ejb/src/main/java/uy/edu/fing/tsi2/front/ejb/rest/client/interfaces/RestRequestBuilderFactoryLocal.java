@@ -45,6 +45,8 @@ public interface RestRequestBuilderFactoryLocal {
 	Builder makeJugadoresEquipoGetRequestBuilder(Long idEquipo);
 
 	Builder makeCorreosGetRequestBuilder(Long idUsuario);
+        
+        Builder makeCorreosEnviadosGetRequestBuilder(Long idUsuario);
 
 	Builder makeCorreoEnviarPostRequestBuilder();
 
