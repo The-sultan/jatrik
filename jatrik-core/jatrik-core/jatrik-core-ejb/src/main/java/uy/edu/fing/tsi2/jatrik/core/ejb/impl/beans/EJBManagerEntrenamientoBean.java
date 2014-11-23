@@ -68,5 +68,11 @@ public class EJBManagerEntrenamientoBean implements IEntrenamiento{
 			return !yaEntrene;
 		}
 	}
+
+	@Override
+	public void setFechaEntrenamiento(Long idEquipo, Date fecha) {
+		Equipo e = equiposEJB.find(idEquipo);
+		e.setUltimoEntrenamiento(fecha);
+	}	
 	
 }

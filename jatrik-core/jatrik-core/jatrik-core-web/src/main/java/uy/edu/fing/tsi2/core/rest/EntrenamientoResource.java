@@ -23,11 +23,13 @@ public class EntrenamientoResource {
 	
 	@POST
 	public Response entrenarEquipo(InfoEntrenamiento entrenamiento) {
-		if (entrenamientoEJB.puedeEntrenar(Long.valueOf(entrenamiento.getIdEquipo()), new Date())){
+		Date fecha = new Date();
+		if (entrenamientoEJB.puedeEntrenar(Long.valueOf(entrenamiento.getIdEquipo()), fecha)){
 			for (InfoEntrenamientoJugador jugador : entrenamiento.getJugadores()){
 				EnumHabilidad modo = EnumHabilidad.getById(jugador.getModo());
 				entrenamientoEJB.entrenarJugador(Long.valueOf(jugador.getIdjugador()), modo);	
 			}
+			entrenamientoEJB.setFechaEntrenamiento(Long.valueOf(entrenamiento.getIdEquipo()), fecha);
 			return Response.ok().build();
 		}
 		else
