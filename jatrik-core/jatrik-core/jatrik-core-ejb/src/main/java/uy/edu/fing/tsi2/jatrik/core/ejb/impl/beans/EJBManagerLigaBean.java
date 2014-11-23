@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javax.annotation.PostConstruct;
 
 import javax.ejb.EJB;
 import javax.ejb.Local;
@@ -12,6 +13,8 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 import org.apache.log4j.Logger;
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEquipo;
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEstadio;
 
 import uy.edu.fing.tsi2.jatrik.core.domain.Equipo;
 import uy.edu.fing.tsi2.jatrik.core.domain.Liga;
@@ -19,6 +22,7 @@ import uy.edu.fing.tsi2.jatrik.core.domain.Partido;
 import uy.edu.fing.tsi2.jatrik.core.domain.RelLigaEquipo;
 import uy.edu.fing.tsi2.jatrik.core.domain.RelLigaPartido;
 import uy.edu.fing.tsi2.jatrik.core.ejb.ILigas;
+import uy.edu.fing.tsi2.jatrik.core.ejb.impl.local.EJBManagerEquipoBeanLocal;
 import uy.edu.fing.tsi2.jatrik.core.ejb.impl.local.EJBManagerLigaBeanLocal;
 import uy.edu.fing.tsi2.jatrik.core.ejb.impl.remote.EJBManagerLigaBeanRemote;
 import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumEstadoPartido;
@@ -43,7 +47,49 @@ public class EJBManagerLigaBean implements ILigas {
 	EJBEMEquiposLocal equiposEJB;
 	
 	@EJB
+	EJBManagerEquipoBeanLocal equipoEJBManager;
+	
+	@EJB
 	EJBEMPartidosLocal partidosEJB;
+	
+	List<String> nombreEquipos;
+	
+	public static final int CANT_EQUIPOS_LIGA = 16;
+	
+	public void initLigas(){
+		List<Liga> ligas = ligasEJB.findAll();
+		if(!ligas.isEmpty()){
+			return;
+		}
+		List<String> nombreEquipos = new ArrayList<>();
+		nombreEquipos.add("Cerro");
+		nombreEquipos.add("Wanderers");
+		nombreEquipos.add("Danubio");
+		nombreEquipos.add("River");
+		nombreEquipos.add("Defensor");
+		nombreEquipos.add("Peñarol");
+		nombreEquipos.add("Naciomal");
+		nombreEquipos.add("Rampla");
+		nombreEquipos.add("El Tanque Sisley");
+		nombreEquipos.add("Racing");
+		nombreEquipos.add("Fenix");
+		nombreEquipos.add("Atenas");
+		nombreEquipos.add("Sud America");
+		nombreEquipos.add("Tacuarembo");
+		nombreEquipos.add("Rampla Juniors");
+		nombreEquipos.add("Juventud");
+		
+		for(String nombreEquipo : nombreEquipos){
+			InfoEquipo infoEquipo = new InfoEquipo();
+			infoEquipo.setNombre(nombreEquipo);
+			InfoEstadio infoEstadio = new InfoEstadio();
+			infoEstadio.setNombre("Estadio1");
+			infoEquipo.setEstadio(infoEstadio);
+			equipoEJBManager.crearEquipo(infoEquipo, null);
+		}
+		creandoMiLiga("Campeonato Uruguayo de Futbol");
+			
+	}
 	
 	public Long creandoMiLiga(String nombre){
 		logger.info("###### VAMOS A CREAR LA LIGA ######");

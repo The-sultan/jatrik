@@ -3,14 +3,17 @@ package uy.edu.fing.tsi2.jatrik.core.ejb.impl.beans;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEquipo;
 
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoFormacion;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoJugador;
@@ -19,13 +22,17 @@ import uy.edu.fing.tsi2.jatrik.core.domain.Formacion;
 import uy.edu.fing.tsi2.jatrik.core.domain.Jugador;
 import uy.edu.fing.tsi2.jatrik.core.domain.JugadorEnFormacion;
 import uy.edu.fing.tsi2.jatrik.core.domain.Partido;
+import uy.edu.fing.tsi2.jatrik.core.domain.Usuario;
 import uy.edu.fing.tsi2.jatrik.core.ejb.IEquipos;
 import uy.edu.fing.tsi2.jatrik.core.ejb.impl.local.EJBManagerEquipoBeanLocal;
 import uy.edu.fing.tsi2.jatrik.core.ejb.impl.remote.EJBManagerEquipoBeanRemote;
 import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumEstadoPartido;
 import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumPuestoFormacion;
+import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumPuestoJugador;
 import uy.edu.fing.tsi2.jatrik.core.exceptions.JatrikPersistenceException;
+import uy.edu.fing.tsi2.jatrik.core.persistence.impl.local.EJBEMDatosJugadoresLocal;
 import uy.edu.fing.tsi2.jatrik.core.persistence.impl.local.EJBEMEquiposLocal;
+import uy.edu.fing.tsi2.jatrik.core.persistence.impl.local.EJBEMJugadoresLocal;
 import uy.edu.fing.tsi2.jatrik.core.persistence.impl.local.EJBEMPartidosLocal;
 
 @Stateless
@@ -39,6 +46,12 @@ public class EJBManagerEquipoBean implements IEquipos {
 	@EJB
 	EJBEMPartidosLocal partidosEJB;
 	
+	@EJB
+	private EJBEMEquiposLocal equipos;
+
+	@EJB
+	private EJBEMJugadoresLocal jugadores;
+
 	public Equipo find(Long id){
 		return equiposEJB.find(id);
 	}
@@ -162,5 +175,125 @@ public class EJBManagerEquipoBean implements IEquipos {
 		
 		return resultado;
 			
+	}
+
+	@Override
+	public Equipo crearEquipo(InfoEquipo infoEquipo, Usuario usuario) {
+		Equipo equipo = new Equipo();
+		equipo.setNombre(infoEquipo.getNombre());
+		equipo.setEstadio(infoEquipo.getEstadio().getNombre());
+		// infoUsuario.getInfoEquipo());
+
+		// Seteo el Usuario al Equipo
+		if(usuario != null){
+			equipo.setUsuario(usuario);
+		}
+		inicializarEquipo(equipo);
+		return equipo;
+	}
+	
+	private void inicializarEquipo(Equipo equipo){
+		Random r = new Random((new Date()).getTime());
+		int random;
+		List<Jugador> players = new ArrayList<Jugador>();
+		Jugador player;
+		int camisetaTitular = 1;
+		int camisetaSuplente = 12;
+
+		// 2 GOLEROS
+		List<Jugador> golerosLibres = jugadores
+				.findJugadoresPuestoLibres(EnumPuestoJugador.ARQUERO);
+
+		random = r.nextInt(golerosLibres.size());
+		player = golerosLibres.get(random);
+		golerosLibres.remove(random);
+		player.setNro_Camiseta(camisetaTitular);
+		camisetaTitular++;
+		players.add(player);
+
+		random = r.nextInt(golerosLibres.size());
+		player = golerosLibres.get(random);
+		golerosLibres.remove(random);
+		player.setNro_Camiseta(camisetaSuplente);
+		camisetaSuplente++;
+		players.add(player);
+
+		// DEFENSAS
+		List<Jugador> defensasLibres = jugadores
+				.findJugadoresPuestoLibres(EnumPuestoJugador.DEFENSA);
+		// 4 DEFENSAS TITULARES
+		for (int i = 1; i <= 4; i++) {
+			random = r.nextInt(defensasLibres.size());
+			player = defensasLibres.get(random);
+			defensasLibres.remove(random);
+			player.setNro_Camiseta(camisetaTitular);
+			camisetaTitular++;
+			players.add(player);
+		}
+		// 2 DEFENSAS TITULARES
+		for (int i = 1; i <= 2; i++) {
+			random = r.nextInt(defensasLibres.size());
+			player = defensasLibres.get(random);
+			defensasLibres.remove(random);
+			player.setNro_Camiseta(camisetaSuplente);
+			camisetaSuplente++;
+			players.add(player);
+		}
+
+		// MEDIOCAMPISTAS
+		List<Jugador> mediocampistasLibres = jugadores
+				.findJugadoresPuestoLibres(EnumPuestoJugador.MEDIOCAMPISTA);
+		// 3 MEDIOCAMPISTAS TITULARES
+		for (int i = 1; i <= 3; i++) {
+			random = r.nextInt(mediocampistasLibres.size());
+			player = mediocampistasLibres.get(random);
+			mediocampistasLibres.remove(random);
+			player.setNro_Camiseta(camisetaTitular);
+			camisetaTitular++;
+			players.add(player);
+		}
+		// 3 MEDIOCAMPISTAS TITULARES
+		for (int i = 1; i <= 3; i++) {
+			random = r.nextInt(mediocampistasLibres.size());
+			player = mediocampistasLibres.get(random);
+			mediocampistasLibres.remove(random);
+			player.setNro_Camiseta(camisetaSuplente);
+			camisetaSuplente++;
+			players.add(player);
+		}
+
+		// DELANTEROS
+		List<Jugador> delanterosLibres = jugadores
+				.findJugadoresPuestoLibres(EnumPuestoJugador.DELANTERO);
+		// 3 DELANTEROS TITULARES
+		for (int i = 1; i <= 3; i++) {
+			random = r.nextInt(delanterosLibres.size());
+			player = delanterosLibres.get(random);
+			delanterosLibres.remove(random);
+			player.setNro_Camiseta(camisetaTitular);
+			camisetaTitular++;
+			players.add(player);
+		}
+		// 2 DELANTEROS TITULARES
+		for (int i = 1; i <= 2; i++) {
+			random = r.nextInt(delanterosLibres.size());
+			player = delanterosLibres.get(random);
+			delanterosLibres.remove(random);
+			player.setNro_Camiseta(camisetaSuplente);
+			camisetaSuplente++;
+			players.add(player);
+		}
+
+		// Le asigno el equipo al jugador
+		for (Jugador jugador : players) {
+			jugador.setEquipo(equipo);
+			jugadores.update(jugador);
+		}
+
+		//Le asigno los jugadores al equipo
+		equipo.setJugadores(new HashSet<Jugador>(players));
+		// Guardo en Base
+		equipos.add(equipo);
+
 	}
 }

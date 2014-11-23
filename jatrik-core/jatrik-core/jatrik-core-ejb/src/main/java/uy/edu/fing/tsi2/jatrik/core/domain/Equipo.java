@@ -62,7 +62,7 @@ public class Equipo implements Serializable {
 	private String estadio;
 	
 	@OneToOne(targetEntity = Usuario.class)
-	@JoinColumn(name="USUARIO_ID", referencedColumnName="ID")
+	@JoinColumn(name="USUARIO_ID", referencedColumnName="ID", nullable = true)
 	private Usuario usuario;
 	
 	@OneToOne(targetEntity = Formacion.class, cascade = CascadeType.ALL, 
