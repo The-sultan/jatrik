@@ -44,6 +44,8 @@ public class MarketPlaceController implements Serializable {
 	
 	private InfoJugador jugadorSeleccionadoVenta;
 	
+	private List<InfoJugador> jugadoresNoEnVenta;
+	
 		
 	private Long idEquipo;
 	
@@ -61,6 +63,9 @@ public class MarketPlaceController implements Serializable {
 		for(InfoTransferencia infoTransferencia : transferencias){
 			selectedPlayersCompra.put(infoTransferencia, Boolean.FALSE);
 		}
+		
+		jugadoresNoEnVenta.addAll(infoJugadores);
+		jugadoresNoEnVenta.removeAll(transferencias);
 					
 	}
 
@@ -175,6 +180,14 @@ public class MarketPlaceController implements Serializable {
 
 	public void setJugadorSeleccionadoVenta(InfoJugador jugadorSeleccionadoVenta) {
 		this.jugadorSeleccionadoVenta = jugadorSeleccionadoVenta;
+	}
+
+	public List<InfoJugador> getJugadoresNoEnVenta() {
+		return jugadoresNoEnVenta;
+	}
+
+	public void setJugadoresNoEnVenta(List<InfoJugador> jugadoresNoEnVenta) {
+		this.jugadoresNoEnVenta = jugadoresNoEnVenta;
 	}
 
 }

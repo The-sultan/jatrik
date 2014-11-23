@@ -302,6 +302,14 @@ input {
 	position: relative;
 }
 
+.formEquipoEntreno {
+	background-image: url("../../resources/gfx/equipoEntreno.jpg");
+	background-repeat: no-repeat;
+	background-size: contain;
+	height: 1200px;
+	position: relative;
+}
+
 #bienvenida {
 	background-image: url("../../resources/gfx/bienvenida.jpg");
 	background-repeat: no-repeat;

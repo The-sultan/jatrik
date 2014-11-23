@@ -5,138 +5,262 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
+ 
 
-<h:form rendered="#{entrenamientoController.error}"> 
-<ui:include src="/WEB-INF/templates/error.xhtml" />
-</h:form>
+	<h:form id="formEntr">
+	<p:growl id="growl" showDetail="true" sticky="false" life="3000" /> 
+		<h:panelGroup layout="block" id="pnlEroor"
+			rendered="#{entrenamientoController.error}">
 
-<h:form id="formEntr" rendered="#{!entrenamientoController.error}">
-	<div id="entrenamiento" class="formEntrenamiento" align="center">
+			<ui:include src="/WEB-INF/templates/error.xhtml" />
+		</h:panelGroup>
+		<h:panelGroup layout="block" id="pnlEquipoEntreno"
+			rendered="#{entrenamientoController.equipoEntreno}">
+			<ui:include src="/WEB-INF/templates/equipoEntreno.xhtml" />
+		</h:panelGroup>
 
-		<div id="jugadoresEntrenar">
-			<ui:repeat var="jugador"
-				value="#{equipoDatosEntrenamiento.titulares}">
-				<div id="jug" class="titular" style="width: 7%">
-					<p:panel id="rpnl"
-						style="background-color: rgba(255, 255, 255,0);border-color:rgba(0,0,0,0);background-image:none;">
-						<ui:insert name="jugador">
-							<ui:include src="/tarjeta.xhtml">
-								<ui:param name="id" value="#{jugador.id}" />
-								<ui:param name="nombre" value="#{jugador.nombre}" />
-								<ui:param name="puesto"
-									value="#{jugador.puesto.subSequence(0,3)}" />
-								<ui:param name="valoracion" value="50" />
-								<ui:param name="ataque"
-									value="#{jugador.habilidades.get(0).valor}" />
-								<ui:param name="defensa"
-									value="#{jugador.habilidades.get(1).valor}" />
-								<ui:param name="velocidad"
-									value="#{jugador.habilidades.get(2).valor}" />
-								<ui:param name="tecnica"
-									value="#{jugador.habilidades.get(3).valor}" />
-								<ui:param name="porteria"
-									value="#{jugadorhabilidades.get(4).valor}" />
-							</ui:include>
-						</ui:insert>
-					</p:panel>
+		<h:panelGroup id="pnlEntr" layout="block"
+			rendered="#{!entrenamientoController.error and !entrenamientoController.equipoEntreno}">
+			<div id="entrenamiento" class="formEntrenamiento" align="center">
+				<div id="jugadoresEntrenar">
+					<ui:repeat var="jugador"
+						value="#{entrenamientoController.jugadoresEntrenar}">
+						<div id="jug" class="titular" style="width: 7%">
+							<p:panel id="rpnl"
+								style="background-color: rgba(255, 255, 255,0);border-color:rgba(0,0,0,0);background-image:none;">
+								<ui:insert name="jugador">
+									<ui:include src="/tarjeta.xhtml">
+										<ui:param name="id" value="#{jugador.id}" />
+										<ui:param name="nombre" value="#{jugador.nombre}" />
+										<ui:param name="puesto"
+											value="#{jugador.puesto.subSequence(0,3)}" />
+										<ui:param name="valoracion" value="50" />
+										<ui:param name="ataque"
+											value="#{jugador.habilidades.get(0).valor}" />
+										<ui:param name="defensa"
+											value="#{jugador.habilidades.get(1).valor}" />
+										<ui:param name="velocidad"
+											value="#{jugador.habilidades.get(2).valor}" />
+										<ui:param name="tecnica"
+											value="#{jugador.habilidades.get(3).valor}" />
+										<ui:param name="porteria"
+											value="#{jugadorhabilidades.get(4).valor}" />
+									</ui:include>
+								</ui:insert>
+							</p:panel>
+						</div>
+						<p:draggable for="rpnl" revert="true" />
+					</ui:repeat>
+
 				</div>
-				<p:draggable for="rpnl" revert="true" />
-			</ui:repeat>
 
-		</div>
+				<div id="entrenarPorteria" class="divEntenar">
 
-		<div id="entrenarPorteria" class="divEntenar">
+					<div id="innerPorteria"
+						style="border-style: solid; border-width: 5px; width: 98%; height: 97%">
+						<H1>Porteria</H1>
 
-			<div id="innerPorteria"
-				style="border-style: solid; border-width: 5px; width: 98%; height: 97%">
-				<H1>Porteria</H1>
+
+						<table>
+							<ui:repeat var="jugador"
+								value="#{entrenamientoController.entrenarPorteria}">
+								<tr>
+									<td><div
+											style="background-image: url(resources/gfx/jugadores/#{jugador.id}..png); height: 20px; width: 20px; background-size: contain; background-repeat: no-repeat; vertical-align: middle;">
+
+										</div></td>
+									<td>
+										<h2>#{jugador.nombre}</h2>
+									</td>
+								</tr>
+							</ui:repeat>
+						</table>
+
+					</div>
+
+
+
+				</div>
+				<div id="entrenarDefensa" class="divEntenar">
+					<div id="innerDefensa"
+						style="border-style: solid; border-width: 5px; width: 98%; height: 97%">
+						<H1>Defensa</H1>
+						<table>
+							<ui:repeat var="jugador"
+								value="#{entrenamientoController.entrenarDefensa}">
+								<tr>
+									<td><div
+											style="background-image: url(resources/gfx/jugadores/#{jugador.id}..png); height: 20px; width: 20px; background-size: contain; background-repeat: no-repeat; vertical-align: middle;">
+
+										</div></td>
+									<td>
+										<h2>#{jugador.nombre}</h2>
+									</td>
+								</tr>
+							</ui:repeat>
+						</table>
+					</div>
+				</div>
+				<div id="entrenarTecnica" class="divEntenar">
+					<div id="innerTecnica"
+						style="border-style: solid; border-width: 5px; width: 98%; height: 97%">
+						<H1>Tecnica</H1>
+						<table>
+							<ui:repeat var="jugador"
+								value="#{entrenamientoController.entrenarTecnica}">
+								<tr>
+									<td><div
+											style="background-image: url(resources/gfx/jugadores/#{jugador.id}..png); height: 20px; width: 20px; background-size: contain; background-repeat: no-repeat; vertical-align: middle;">
+
+										</div></td>
+									<td>
+										<h2>#{jugador.nombre}</h2>
+									</td>
+								</tr>
+							</ui:repeat>
+						</table>
+					</div>
+				</div>
+				<div id="entrenarVelocidad" class="divEntenar">
+					<div id="innerVelocidad"
+						style="border-style: solid; border-width: 5px; width: 98%; height: 97%">
+						<H1>Velocidad</H1>
+						<table>
+							<ui:repeat var="jugador"
+								value="#{entrenamientoController.entrenarVelocidad}">
+								<tr>
+									<td><div
+											style="background-image: url(resources/gfx/jugadores/#{jugador.id}..png); height: 20px; width: 20px; background-size: contain; background-repeat: no-repeat; vertical-align: middle;">
+
+										</div></td>
+									<td>
+										<h2>#{jugador.nombre}</h2>
+									</td>
+								</tr>
+							</ui:repeat>
+						</table>
+					</div>
+				</div>
+				<div id="entrenarAtque" class="divEntenar">
+					<div id="innerAtaque"
+						style="border-style: solid; border-width: 5px; width: 98%; height: 97%">
+						<H1>Ataque</H1>
+						<table>
+							<ui:repeat var="jugador"
+								value="#{entrenamientoController.entrenarAtaque}">
+								<tr>
+									<td><div
+											style="background-image: url(resources/gfx/jugadores/#{jugador.id}..png); height: 20px; width: 20px; background-size: contain; background-repeat: no-repeat; vertical-align: middle;">
+
+										</div></td>
+									<td>
+										<h2>#{jugador.nombre}</h2>
+									</td>
+								</tr>
+							</ui:repeat>
+						</table>
+					</div>
+				</div>
+
+				<div id="entrenar" class="divEntenar"
+					style="margin-left: 40%; margin-top: 5%;"
+					onclick="handleClickEntrenar()">
+					<div id="innerEntrenar"
+						style="border-style: solid; border-width: 5px; width: 98%; height: 97%; background-image: url(resources/gfx/comenzar.png); background-size: cover;">
+
+					</div>
+				</div>
+
+
 			</div>
 
+		</h:panelGroup>
 
+		<script>
+			var entrenamientoSeleccionado = '';
+			var jugadoresSeleccionados = '';
+			var listIds = [];
 
-		</div>
-		<div id="entrenarDefensa" class="divEntenar">
-			<div id="innerDefensa"
-				style="border-style: solid; border-width: 5px; width: 98%; height: 97%">
-				<H1>Defensa</H1>
-			</div>
-		</div>
-		<div id="entrenarTecnica" class="divEntenar">
-			<div id="innerTecnica"
-				style="border-style: solid; border-width: 5px; width: 98%; height: 97%">
-				<H1>Tecnica</H1>
-			</div>
-		</div>
-		<div id="entrenarVelocidad" class="divEntenar">
-			<div id="innerVelocidad"
-				style="border-style: solid; border-width: 5px; width: 98%; height: 97%">
-				<H1>Velocidad</H1>
-			</div>
-		</div>
-		<div id="entrenarAtque" class="divEntenar">
-			<div id="innerAtaque"
-				style="border-style: solid; border-width: 5px; width: 98%; height: 97%">
-				<H1>Ataque</H1>
-			</div>
-		</div>
-	</div>
+			function handlemouseoverDiv(e) {
+				entrenamientoSeleccionado = this.id;
 
-
-
-	<script>
-		var entrenamientoSeleccionado = '';
-		var jugadoresSeleccionados = '';
-		function handlemouseoverDiv(e) {
-			entrenamientoSeleccionado = this.id;
-
-		}
-		function handlemouseoutDiv(e) {
-			entrenamientoSeleccionado = '';
-		}
-
-		function handleClicktDiv(e) {
-			alert(jugadoresSeleccionados);
-			//Llamar al backend
-			if (jugadoresSeleccionados != '') {
-				agregarAEntrenamiento([{name:'ids',value:jugadoresSeleccionados},{name:'tipoEntrenamiento',value:entrenamientoSeleccionado}]);
 			}
-		}
-
-		function handledblclick() {
-			this.style.opacity = '0.4';
-			if (jugadoresSeleccionados == '') {
-				jugadoresSeleccionados = this.id;
-			} else {
-				jugadoresSeleccionados = jugadoresSeleccionados + "|" + this.id;
+			function handlemouseoutDiv(e) {
+				entrenamientoSeleccionado = '';
 			}
 
-		}
+			function handleClicktDiv(e) {
+				jugadoresSeleccionados = '';
+				//Llamar al backend
+				var jugs = document.querySelectorAll('.cardcontainer');
+				[].forEach.call(jugs, function(jug) {
+					if (jug.selected != null) {
+						if (jug.selected) {
+							jugadoresSeleccionados = jugadoresSeleccionados
+									+ jug.id + '#';
+						}
 
-		function setHandlers() {
-			var cols = document.querySelectorAll('.cardcontainer');
-			[].forEach.call(cols, function(col) {
+					}
 
-				col.removeEventListener('dblclick', handledblclick, false);
-				col.addEventListener('dblclick', handledblclick, false);
-			});
+				});
+				if (jugadoresSeleccionados != '') {
+					agregarAEntrenamiento([ {
+						name : 'ids',
+						value : jugadoresSeleccionados
+					}, {
+						name : 'tipoEntrenamiento',
+						value : entrenamientoSeleccionado
+					} ]);
+				}
+			}
 
-			var divs = document.querySelectorAll('.divEntenar');
-			[].forEach.call(divs, function(div) {
-				div.addEventListener('mouseover', handlemouseoverDiv, false);
-				div.addEventListener('mouseout', handlemouseoutDiv, false);
-				div.addEventListener('click', handleClicktDiv, false);
-			});
-		}
+			function handleclick() {
+				if (this.selected == null) {
+					this.selected = true;
 
-		setHandlers();
-	</script>
+					this.style.backgroundImage = "url(resources/gfx/tarjetas/goldSelected.png)";
+				} else {
+					this.selected = null;
+					this.style.backgroundImage = "url(resources/gfx/tarjetas/gold.png)";
+				}
+
+			}
+
+			function handleClickEntrenar() {
+				comenzarEntrenamiento([]);
+			}
+
+			function setHandlers() {
+				var cols = document.querySelectorAll('.cardcontainer');
+				[].forEach.call(cols, function(col) {
+
+					col.removeEventListener('lclick', handleclick, false);
+					col.addEventListener('click', handleclick, false);
+				});
+
+				var divs = document.querySelectorAll('.divEntenar');
+				[].forEach.call(divs, function(div) {
+					div
+							.addEventListener('mouseover', handlemouseoverDiv,
+									false);
+					div.addEventListener('mouseout', handlemouseoutDiv, false);
+					div.addEventListener('click', handleClicktDiv, false);
+				});
+			}
+
+			setHandlers();
+		</script>
 
 
 
 
-	<p:remoteCommand name="agregarAEntrenamiento"
-			action="#{entrenamientoController.agregarAEntrenamiento}" update=""
-			ajax="false" />
-</h:form>
+		<p:remoteCommand name="agregarAEntrenamiento"
+			action="#{entrenamientoController.agregarAEntrenamiento}"
+			update="formEntr" ajax="false" />
+
+		<p:remoteCommand name="comenzarEntrenamiento"
+			action="#{entrenamientoController.comenzarEntrenamiento}"
+			update="formEntr growl" ajax="true"/>
+	</h:form>
 
 </div>

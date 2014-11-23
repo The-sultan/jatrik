@@ -2,13 +2,13 @@ package uy.edu.fing.tsi2.jatrik.common.payloads;
 
 public class InfoEntrenamientoJugador {
 
-	private int idjugador;
+	private long idjugador;
 	private int modo;
 	
-	public int getIdjugador() {
+	public long getIdjugador() {
 		return idjugador;
 	}
-	public void setIdjugador(int idjugador) {
+	public void setIdjugador(long idjugador) {
 		this.idjugador = idjugador;
 	}
 	public int getModo() {

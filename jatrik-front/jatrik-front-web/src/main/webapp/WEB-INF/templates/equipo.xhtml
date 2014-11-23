@@ -20,22 +20,26 @@
 
 
 		<div id="cancha" class="cancha" align="center">
+			<br />
+			<h:selectOneMenu id="formacion"
+				value="#{equipoController.idFormacion}"
+				style="width:20%; text-align:center;">
 
-			<p:selectOneMenu id="formacion" value="#{equipoController.idFormacion}"
-				style="width:20%;">
-				
-				
-				<f:selectItems value="#{equipoController.formaciones}"  />
-				<p:ajax event="change" listener="#{equipoController.onFormacionChange}" update="formCancha" />
-			</p:selectOneMenu>
-<br/>
+				<f:selectItem itemLabel="Formacion" itemValue="" />
+				<f:selectItems value="#{equipoController.formaciones}" />
+				<p:ajax event="change"
+					listener="#{equipoController.onFormacionChange}"
+					update="formCancha" />
+			</h:selectOneMenu>
+			<br />
 			<div id="uno" class="_4-3-3">
 
 				<p:panel id="rpnl1" styleClass="panelTarjeta"
 					style="background-color: rgba(255, 255, 255,0);border-color:rgba(0,0,0,0);background-image:none;">
 					<ui:insert name="jugador">
 						<ui:include src="/tarjeta.xhtml">
-							<ui:param name="id" value="#{equipoDatos.titulares.get(0).id}" />
+							<ui:param name="id"
+								value="#{equipoController.equipoDatos.titulares.get(0).id}" />
 							<ui:param name="nombre"
 								value="#{equipoController.formacion.golero.nombre}" />
 							<ui:param name="puesto"
@@ -154,7 +158,7 @@
 
 
 		<p:dataGrid id="grilaSuplentes" var="sup"
-			value="#{equipoDatos.suplentes}" columns="7"
+			value="#{equipoController.formacion.suplentes}" columns="7"
 			styleClass="grillaSuplentes">
 			<f:facet name="header">
             Suplentes
@@ -181,8 +185,9 @@
 
 		</p:dataGrid>
 
-		<p:dataGrid id="grilaReserva" var="res" value="#{equipoDatos.reserva}"
-			columns="7" styleClass="grillaSuplentes">
+		<p:dataGrid id="grilaReserva" var="res"
+			value="#{equipoController.formacion.reservas}" columns="7"
+			styleClass="grillaSuplentes">
 			<f:facet name="header">
             Reserva
         </f:facet>

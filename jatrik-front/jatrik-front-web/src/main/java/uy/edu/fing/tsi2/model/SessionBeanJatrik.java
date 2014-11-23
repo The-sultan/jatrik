@@ -4,6 +4,8 @@ package uy.edu.fing.tsi2.model;
 import java.io.Serializable;
 
 
+
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 
@@ -56,6 +58,9 @@ public class SessionBeanJatrik implements Serializable {
 		this.infoUsuario = infoUsuario;
 	}
 
-	
+	@PostConstruct
+	public void name() {
+		
+	}
 
 }

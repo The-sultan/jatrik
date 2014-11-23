@@ -7,13 +7,12 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Model;
-import javax.enterprise.inject.Produces;
+import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 import javax.faces.model.SelectItemGroup;
-import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -26,8 +25,9 @@ import uy.edu.fing.tsi2.model.Equipo.Equipo;
 import uy.edu.fing.tsi2.navigation.AjaxNavigator;
 
 @SuppressWarnings("serial")
+@ManagedBean
 @Model
-@ViewScoped
+@SessionScoped
 public class EquipoController implements Serializable {
 
 	@Inject
@@ -40,7 +40,6 @@ public class EquipoController implements Serializable {
 	EquipoEJBLocal equipoEJB;
 
 	@Named
-	@Produces
 	Equipo equipoDatos;
 
 	private List<SelectItem> formaciones;
@@ -54,22 +53,30 @@ public class EquipoController implements Serializable {
 
 	@PostConstruct
 	public void initDatos() {
-
 		try {
 
 			// cargar posibles formaciones
 			SelectItemGroup g1 = new SelectItemGroup("Defensivas");
 			g1.setSelectItems(new SelectItem[] {
 					new SelectItem("5-3-2", "5-3-2"),
+					new SelectItem("5-2-3", "5-2-3"),
 					new SelectItem("5-4-1", "5-4-1") });
 
 			SelectItemGroup g2 = new SelectItemGroup("Medias");
 			g2.setSelectItems(new SelectItem[] { new SelectItem("4-3-3",
-					"4-3-3") });
-
+					"4-3-3"),new SelectItem("4-4-2",
+							"4-4-2"),new SelectItem("4-5-1",
+									"4-5-1") });
+			SelectItemGroup g3 = new SelectItemGroup("Ofensivas");
+			g3.setSelectItems(new SelectItem[] {
+					new SelectItem("3-3-4", "3-3-4"),
+					new SelectItem("2-5-3", "2-5-3"),
+					new SelectItem("2-4-4", "2-4-4") });
+			
 			formaciones = new ArrayList<SelectItem>();
 			formaciones.add(g1);
 			formaciones.add(g2);
+			formaciones.add(g3);
 
 			// cargar el equipo
 
@@ -245,8 +252,8 @@ public class EquipoController implements Serializable {
 	}
 
 	public void onFormacionChange() {
-		System.out.println(idFormacion);
-		System.out.flush();
+		if(!idFormacion.contains("-"))
+			return;
 		cambiarFormacion(idFormacion);
 		guardarEquipo(idFormacion);
 	}
@@ -312,6 +319,14 @@ public class EquipoController implements Serializable {
 
 	public void setEquipoTemp(InfoEquipo equipoTemp) {
 		this.equipoTemp = equipoTemp;
+	}
+
+	public Equipo getEquipoDatos() {
+		return equipoDatos;
+	}
+
+	public void setEquipoDatos(Equipo equipoDatos) {
+		this.equipoDatos = equipoDatos;
 	}
 
 }
