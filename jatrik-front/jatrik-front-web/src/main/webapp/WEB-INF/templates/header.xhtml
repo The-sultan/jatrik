@@ -7,7 +7,7 @@
 	<div class="dualbrand">
 
 
-		<h:form>
+		<h:form id="formHeader">
 			<div class="contenedor" id="unoNav">
 				<img class="icon" src="resources/gfx/registro.png"
 					onclick="navegar('registro')" />
@@ -85,8 +85,8 @@
 				<h:form id="logoutForm"
 					rendered="#{loginController.sessionBean.logueado}">
 					<h:commandLink id="logout" styleClass="texto"
-						action="#{loginController.logout}" update="content">
-
+						action="#{loginController.logout}">
+                                                <f:ajax render=":content :formHeader" /> 
 						<p class="texto">logout</p>
 					</h:commandLink>
 				</h:form>
@@ -95,7 +95,7 @@
 
 
 			<p:remoteCommand name="navegarRemote" action="#{ajaxNav.navigate}"
-				update=":content" ajax="false" />
+				update=":content"/>
 		</h:form>
 
 
