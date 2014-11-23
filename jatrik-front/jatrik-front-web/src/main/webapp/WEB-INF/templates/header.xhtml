@@ -8,8 +8,9 @@
 
 
 		<h:form>
-			<div class="contenedor" id="unoNav" >
-				<img class="icon" src="resources/gfx/registro.png" onclick="navegar('registro')" />
+			<div class="contenedor" id="unoNav">
+				<img class="icon" src="resources/gfx/registro.png"
+					onclick="navegar('registro')" />
 				<h:commandLink action="#{ajaxNav.navigate}" styleClass="texto">
 					<p class="texto">registro</p>
 					<f:param name='page' value='registro' />
@@ -19,7 +20,8 @@
 			</div>
 
 			<div class="contenedor" id="dosNav">
-				<img class="icon" src="resources/gfx/equipoNav.png" onclick="navegar('equipo')"/>
+				<img class="icon" src="resources/gfx/equipoNav.png"
+					onclick="navegar('equipo')" />
 				<h:commandLink action="#{ajaxNav.navigate}" styleClass="texto">
 					<p class="texto">equipo</p>
 					<f:param name='page' value='equipo' />
@@ -28,16 +30,18 @@
 			</div>
 
 			<div class="contenedor" id="tresNav">
-				<img class="icon" src="resources/gfx/partidoNav.png" onclick="navegar('partido')"/>
+				<img class="icon" src="resources/gfx/partidoNav.png"
+					onclick="navegar('liga')" />
 				<h:commandLink action="#{ajaxNav.navigate}" styleClass="texto">
-					<p class="texto">partido</p>
-					<f:param name='page' value='partido' />
+					<p class="texto">liga</p>
+					<f:param name='page' value='liga' />
 					<f:ajax render=":content" />
 				</h:commandLink>
 			</div>
 
 			<div class="contenedor" id="cuatroNav">
-				<img class="icon" src="resources/gfx/entrenamientoNav.png" onclick="navegar('entrenamiento')"/>
+				<img class="icon" src="resources/gfx/entrenamientoNav.png"
+					onclick="navegar('entrenamiento')" />
 				<h:commandLink action="#{ajaxNav.navigate}" styleClass="texto">
 					<p class="texto">entrenamiento</p>
 					<f:param name='page' value='entrenamiento' />
@@ -46,7 +50,8 @@
 			</div>
 
 			<div class="contenedor" id="cincoNav">
-				<img class="icon" src="resources/gfx/market.png" onclick="navegar('transferencia')"/>
+				<img class="icon" src="resources/gfx/market.png"
+					onclick="navegar('transferencia')" />
 				<h:commandLink action="#{ajaxNav.navigate}" styleClass="texto">
 					<p class="texto">marketplace</p>
 					<f:param name='page' value='transferencia' />
@@ -54,12 +59,27 @@
 				</h:commandLink>
 			</div>
 
-
-
 			<div class="contenedor" id="seisNav">
-				<img class="icon" src="pictures/icon6.png" />
+				<img class="icon" src="resources/gfx/correo.png"
+					onclick="navegar('correo')" />
+				<h:commandLink action="#{ajaxNav.navigate}" styleClass="texto">
+					<p class="texto">correo</p>
+					<f:param name='page' value='correo' />
+					<f:ajax render=":content" />
+				</h:commandLink>
+			</div>
+
+
+			<div class="contenedor" id="sieteNav">
+
+				<h:panelGroup layout="block" rendered="#{loginController.sessionBean.logueado}">
+					<img class="icon" src="resources/gfx/unlock.png" />
+				</h:panelGroup>
+				<h:panelGroup layout="block" rendered="#{!loginController.sessionBean.logueado}">
+					<img class="icon" src="resources/gfx/lock.png" />
+				</h:panelGroup>
 				<ui:insert name="login">
-				<ui:include src="/WEB-INF/templates/login.xhtml"/>
+					<ui:include src="/WEB-INF/templates/login.xhtml" />
 				</ui:insert>
 
 				<h:form id="logoutForm"
@@ -72,25 +92,25 @@
 				</h:form>
 
 			</div>
-			
-			
-			<p:remoteCommand name="navegarRemote"
-			action="#{ajaxNav.navigate}" update=":content"
-			ajax="false" />
-			
+
+
+			<p:remoteCommand name="navegarRemote" action="#{ajaxNav.navigate}"
+				update=":content" ajax="false" />
 		</h:form>
 
-		
+
 
 
 	</div>
-	
+
 	<script>
-	function navegar(pagina){
-		navegarRemote([{name:'page',value:pagina}]);
-	}
-	
+		function navegar(pagina) {
+			navegarRemote([ {
+				name : 'page',
+				value : pagina
+			} ]);
+		}
 	</script>
-	
-	
+
+
 </div>

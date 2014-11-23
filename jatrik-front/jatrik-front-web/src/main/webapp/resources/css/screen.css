@@ -302,6 +302,15 @@ input {
 	position: relative;
 }
 
+
+.formError {
+	background-image: url("../../resources/gfx/liga.jpg");
+	background-repeat: no-repeat;
+	background-size: contain;
+	height: 1200px;
+	position: relative;
+}
+
 .formEquipoEntreno {
 	background-image: url("../../resources/gfx/equipoEntreno.jpg");
 	background-repeat: no-repeat;

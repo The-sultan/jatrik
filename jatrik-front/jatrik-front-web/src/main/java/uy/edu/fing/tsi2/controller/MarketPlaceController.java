@@ -64,6 +64,7 @@ public class MarketPlaceController implements Serializable {
 			selectedPlayersCompra.put(infoTransferencia, Boolean.FALSE);
 		}
 		
+		jugadoresNoEnVenta = new ArrayList<InfoJugador>();
 		jugadoresNoEnVenta.addAll(infoJugadores);
 		jugadoresNoEnVenta.removeAll(transferencias);
 					

@@ -36,7 +36,7 @@ header{
 }
 
 div.contenedor{
-	width: 16.666%;
+	width: 14.28654%;
 	height: 130px;
 	float:left;
 	-webkit-transition: height .4s;
@@ -64,6 +64,10 @@ div#cincoNav{
 
 div#seisNav{
 	background-color: rgb(21,40,54);
+}
+
+div#sieteNav{
+	background-color: rgb(0,0,0);
 }
 
 img.icon{
