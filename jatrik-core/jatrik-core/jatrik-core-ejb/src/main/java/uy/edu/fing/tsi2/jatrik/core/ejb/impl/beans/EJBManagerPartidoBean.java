@@ -81,4 +81,9 @@ public class EJBManagerPartidoBean implements IPartidos {
 	public List<Partido> obtenerPartidosPendientes(){
 		return partidos.findAll(EnumEstadoPartido.PENDIENTE);
 	}
+	
+	@Override
+	public List<Partido> obtenerPartidosJugados(){
+		return partidos.findAll(EnumEstadoPartido.FINALIZADO);
+	}
 }

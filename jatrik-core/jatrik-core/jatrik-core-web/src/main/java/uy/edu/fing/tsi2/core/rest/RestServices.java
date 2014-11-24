@@ -37,13 +37,16 @@ public class RestServices {
 	private ImportacionResource importacionResource;
 
 	@Inject
-	TransferenciaResource transferenciaResource;
+	private TransferenciaResource transferenciaResource;
 	
 	@Inject
-	PushNotificationsResource pushResource;	
+	private PushNotificationsResource pushResource;	
 	
 	@Inject
-	CorreoResource correoResource;	
+	private CorreoResource correoResource;	
+	
+	@Inject
+	private RssResource rssResource;
 	
 	@Path("/usuarios")
 	public UsuariosResource getUsuariosResource(){
@@ -98,5 +101,10 @@ public class RestServices {
 	@Path("/registration/id")
 	public  PushNotificationsResource getPushNotificationsResource(){
 		return pushResource;
+	}
+	
+	@Path("/rss")
+	public RssResource getRssResource(){
+		return rssResource;
 	}
 }

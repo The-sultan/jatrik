@@ -22,4 +22,6 @@ public interface IPartidos {
 	List<EventoPartido> obtenerEventosPartido(Long idPartido);
 	
 	List<Partido> obtenerPartidosPendientes();
+	
+	List<Partido> obtenerPartidosJugados();
 }
