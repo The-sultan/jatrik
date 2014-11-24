@@ -39,7 +39,11 @@ public class EJBManagerLigaBean implements ILigas {
 
 	private static final long TIEMPO_ENTRE_PARTIDOS = 2 * 60 * 1000; // 2 minutos = 2 * 60 * 1000
 	private static final long UN_MINUTO = 1 * 60 * 1000; // 2 minutos = 2 * 60 * 1000
-	
+	private static final double fondos= 5000;
+        private static final double latitudEstadio=-34.8580556;
+        private static final double longitudEstadio=-56.1708333;
+        private static final int alturaEstadio=2000;
+        
 	@EJB
 	EJBEMLigasLocal ligasEJB;
 	
@@ -84,7 +88,11 @@ public class EJBManagerLigaBean implements ILigas {
 			infoEquipo.setNombre(nombreEquipo);
 			InfoEstadio infoEstadio = new InfoEstadio();
 			infoEstadio.setNombre("Estadio1");
-			infoEquipo.setEstadio(infoEstadio);
+			infoEstadio.setAltura(alturaEstadio);
+                        infoEstadio.setLatitud(latitudEstadio);
+                        infoEstadio.setLongitud(longitudEstadio);
+                        infoEquipo.setEstadio(infoEstadio);
+                        infoEquipo.setFondos(fondos);                       
 			equipoEJBManager.crearEquipo(infoEquipo, null);
 		}
 		creandoMiLiga("Campeonato Uruguayo de Futbol");
