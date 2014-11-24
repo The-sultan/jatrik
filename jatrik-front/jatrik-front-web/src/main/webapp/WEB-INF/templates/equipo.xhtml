@@ -4,7 +4,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:m="http://code.google.com/p/gmaps4jsf/">
 
 	<h:form rendered="#{equipoController.error}">
 		<ui:include src="/WEB-INF/templates/error.xhtml" />
@@ -214,13 +215,14 @@
 		</p:dataGrid>
 
 
-		<h2>Estadio</h2>
-		<ui:insert name="content">
-                    Contenido del estadio insertar aqui
-         </ui:insert>
-
-
-
+		<h2>Estadio: "{equipoDatos.nombreEstadio}</h2>
+<!-- 		<ui:insert name="content"> -->
+			<h:form>
+				<m:map width="400px" height="400px" latitude="#{equipoDatos.latitudEstadio}" longitude="#{equipoDatos.longitudEstadio}" partiallyTriggered="true">
+					<m:marker id="marker1" latitude="#{equipoDatos.latitudEstadio}" longitude="#{equipoDatos.longitudEstadio}" draggable="false"/>
+	   			</m:map>          
+	   		</h:form>         
+<!--          </ui:insert> -->
 
 		<p:remoteCommand name="myRemote"
 			action="#{equipoController.onJugadorCambio}" update="formCancha"

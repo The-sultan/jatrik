@@ -84,6 +84,7 @@ public class EquipoController implements Serializable {
 			setEquipoTemp(equipoEJB.getEquipo(sessionBean.getInfoUsuario()
 					.getInfoEquipo().getId()));
 			equipoDatos = new Equipo();
+			
 			formacion = equipoEJB.getFormacionEstandar(sessionBean
 					.getInfoUsuario().getInfoEquipo().getId());
 			List<InfoJugador> titulares = new ArrayList<>();
@@ -98,6 +99,9 @@ public class EquipoController implements Serializable {
 				titulares.add(jugador);
 			}
 
+			equipoDatos.setNombreEstadio(sessionBean.getInfoUsuario().getInfoEquipo().getEstadio().getNombre());
+			equipoDatos.setLatitudEstadio(String.valueOf(sessionBean.getInfoUsuario().getInfoEquipo().getEstadio().getLatitud()));
+			equipoDatos.setLongitudEstadio(String.valueOf(sessionBean.getInfoUsuario().getInfoEquipo().getEstadio().getLongitud()));
 			equipoDatos.setTitulares(titulares);
 			equipoDatos.setSuplentes(formacion.getSuplentes());
 			equipoDatos.setReserva(formacion.getReservas());

@@ -88,9 +88,14 @@ public class EJBManagerUsuarioBean implements IUsuarios {
                                 Equipo equipo = equipos.findEquipoLibre();
 				equipo.setNombre(infoUsuario.getInfoEquipo().getNombre());
 				equipo.setEstadio(infoUsuario.getInfoEquipo().getEstadio().getNombre());
+<<<<<<< origin/master
+				
+=======
 				equipo.setLatitud(infoUsuario.getInfoEquipo().getEstadio().getLatitud());
 				equipo.setLongitud(infoUsuario.getInfoEquipo().getEstadio().getLongitud());
 				equipo.setAltura(infoUsuario.getInfoEquipo().getEstadio().getAltura());
+				// infoUsuario.getInfoEquipo());
+>>>>>>> local
 
 				// Seteo el Usuario al Equipo
 				equipo.setUsuario(usr);

@@ -2,6 +2,7 @@ package uy.edu.fing.tsi2.front.ejb.implementations;
 
 
 import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -22,7 +23,7 @@ public class UsuarioEJB implements UsuarioEJBLocal {
 	@EJB
 	private RestClientEJBLocal jatrikCoreClient;
 	
-    public Long crearUsuario(String nombre,String mail,String nick,String password, String nombreEquipo, String nombreEstadio, int idPais){
+    public Long crearUsuario(String nombre,String mail,String nick,String password, String nombreEquipo, String nombreEstadio, int idPais, String latitudEstadio, String longitudEstadio){
         try{ 
              InfoUsuario usr = new InfoUsuario();
              usr.setNombre(nombre);
@@ -36,8 +37,8 @@ public class UsuarioEJB implements UsuarioEJBLocal {
              infoEstadio.setNombre(nombreEstadio);
              //hardcoded properties------//
              infoEstadio.setAltura(1000);
-             infoEstadio.setLatitud(-54);
-             infoEstadio.setLongitud(60);
+             infoEstadio.setLatitud(Double.parseDouble(latitudEstadio));
+             infoEstadio.setLongitud(Double.parseDouble(longitudEstadio));
              //--------------------------//
  			
              infoEquipo.setEstadio(infoEstadio);

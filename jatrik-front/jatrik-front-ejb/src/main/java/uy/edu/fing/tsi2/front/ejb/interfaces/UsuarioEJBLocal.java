@@ -13,7 +13,7 @@ import uy.edu.fing.tsi2.jatrik.common.payloads.InfoUsuario;
 @Local
 public interface UsuarioEJBLocal {
 	
-	 public Long crearUsuario(String nombre,String mail,String nick,String password, String nombreEquipo, String nombreEstadio, int idPais);
+	 public Long crearUsuario(String nombre,String mail,String nick,String password, String nombreEquipo, String nombreEstadio, int idPais, String latitudEstadio, String longitudEstadio);
 	 
 	 public InfoUsuario login(String nick,String pass);
 	 

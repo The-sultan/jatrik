@@ -21,7 +21,29 @@ public class Equipo {
 	private List<InfoJugador> suplentes;
 	private List<InfoJugador> reserva;
 	
+	private String nombreEstadio;
+	private String latitudEstadio;
+	private String longitudEstadio;
 	
+	
+	public String getNombreEstadio() {
+		return nombreEstadio;
+	}
+	public void setNombreEstadio(String nombreEstadio) {
+		this.nombreEstadio = nombreEstadio;
+	}
+	public String getLatitudEstadio() {
+		return latitudEstadio;
+	}
+	public void setLatitudEstadio(String latitudEstadio) {
+		this.latitudEstadio = latitudEstadio;
+	}
+	public String getLongitudEstadio() {
+		return longitudEstadio;
+	}
+	public void setLongitudEstadio(String longitudEstadio) {
+		this.longitudEstadio = longitudEstadio;
+	}
 	public String getNombre() {
 		return nombre;
 	}

@@ -28,6 +28,8 @@ import javax.faces.model.SelectItemGroup;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.googlecode.gmaps4jsf.component.marker.Marker;
+
 import uy.edu.fing.tsi2.front.ejb.interfaces.UsuarioEJBLocal;
 import uy.edu.fing.tsi2.model.Miembro;
 import uy.edu.fing.tsi2.model.SessionBeanJatrik;
@@ -76,6 +78,9 @@ public class MiembroController {
         paises = new ArrayList<SelectItem>();
         paises.add(g1);
         paises.add(g2);
+
+        newMember.getPosicionEstadio().setLatitude("-34.9250179");
+        newMember.getPosicionEstadio().setLongitude("-56.1635247");
         
         error = false;
     }
@@ -83,7 +88,7 @@ public class MiembroController {
     public void register() throws Exception {
         try {
         	
-            AdminUsuarios.crearUsuario(newMember.getNombre(), newMember.getEmail(), newMember.getNick(), newMember.getPassword(),newMember.getNombreEquipo(), newMember.getNombreEstadio(), newMember.getPais());
+            AdminUsuarios.crearUsuario(newMember.getNombre(), newMember.getEmail(), newMember.getNick(), newMember.getPassword(),newMember.getNombreEquipo(), newMember.getNombreEstadio(), newMember.getPais(), newMember.getPosicionEstadio().getLatitude(), newMember.getPosicionEstadio().getLongitude());
 			sessionBean.setInfoUsuario(usuarioEJB.login(newMember.getNick(), newMember.getPassword()));
 			sessionBean.setLogueado(true);
 			ajaxNav.controllerNavigate("home");

@@ -7,6 +7,9 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.googlecode.gmaps4jsf.component.common.Position;
+import com.googlecode.gmaps4jsf.component.marker.Marker;
+
 
 @SuppressWarnings("serial")
 @XmlRootElement
@@ -36,7 +39,6 @@ public class Miembro implements Serializable {
 	@NotNull(message="Debe seleccionar un pais")
 	private Integer pais;
 
-	
 	@Size( min = 1, max = 25, message="Debe ingresar un nombre para su equipo")
 	@Pattern(regexp = "[^0-9]*", message = "No debe contener numeros")
 	private String nombreEquipo;
@@ -44,6 +46,16 @@ public class Miembro implements Serializable {
 	@Size( min = 1, max = 25, message="Debe ingresar un nombre para su estadio")
 	@Pattern(regexp = "[^0-9]*", message = "No debe contener numeros")
 	private String nombreEstadio;
+	
+	private Position posicionEstadio;
+
+	public Position getPosicionEstadio() {
+		return posicionEstadio;
+	}
+
+	public void setPosicionEstadio(Position posicionEstadio) {
+		this.posicionEstadio = posicionEstadio;
+	}
 
 	public String getNombreEquipo() {
 		return nombreEquipo;
@@ -118,4 +130,9 @@ public class Miembro implements Serializable {
 	public void setNombreEstadio(String nombreEstadio) {
 		this.nombreEstadio = nombreEstadio;
 	}
+	
+	public Miembro(){
+		this.posicionEstadio = new Position();
+	}
+	
 }

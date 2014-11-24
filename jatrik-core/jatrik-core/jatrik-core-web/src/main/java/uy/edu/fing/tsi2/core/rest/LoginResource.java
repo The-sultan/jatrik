@@ -12,6 +12,7 @@ import javax.ws.rs.core.Response;
 import org.apache.commons.beanutils.BeanUtils;
 
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEquipo;
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEstadio;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoUsuario;
 import uy.edu.fing.tsi2.jatrik.core.domain.Equipo;
 import uy.edu.fing.tsi2.jatrik.core.domain.Usuario;
@@ -40,6 +41,14 @@ public class LoginResource {
 				infoEquipo.setId(usuario.getEquipo().getId());
 				infoEquipo.setFondos(equipo.getFondos());
 				infoEquipo.setNombre(equipo.getNombre());
+				
+				InfoEstadio infoEstadio = new InfoEstadio();
+				infoEstadio.setNombre(equipo.getEstadio());
+				infoEstadio.setLatitud(equipo.getLatitud());
+				infoEstadio.setLongitud(equipo.getLongitud());
+				infoEstadio.setAltura(equipo.getAltura());
+				infoEquipo.setEstadio(infoEstadio);
+				
 				infoUsuario.setInfoEquipo(infoEquipo);
 				return Response.ok(infoUsuario).build();
 			} catch (IllegalAccessException | InvocationTargetException e) {

@@ -4,20 +4,19 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:m="http://code.google.com/p/gmaps4jsf/"
 	template="/WEB-INF/templates/default.xhtml">
 
-
 <h:form rendered="#{miembroController.error}"> 
-<ui:include src="/WEB-INF/templates/error.xhtml" />
-</h:form>
 
+<ui:include src="/WEB-INF/templates/error.xhtml" />
+    
+</h:form>
 
 	<div id="formRegistro" class="formRegistro" align="center">
 	<h:form id="reg" style="width: 31%;margin-left: auto;margin-right: auto;" rendered="#{!miembroController.error}">
 		<br/>
 		
-			
-
 			<h:panelGrid columns="3" columnClasses="titleCell">
 				<h:outputLabel for="nombre" value="Nombre:" />
 				<p:inputText id="nombre" value="#{newMember.nombre}" />
@@ -63,9 +62,11 @@
 				<h:message for="nombreEstadio" errorClass="invalid" />
 
 			</h:panelGrid>
-
-
-
+		
+			<m:map width="400px" height="400px" latitude="-34.9250179" longitude="-56.1635247" partiallyTriggered="true">
+				<m:marker id="marker1" value="#{newMember.posicionEstadio}" draggable="true"/>
+   			</m:map>
+			
 			<p:commandButton id="register" action="#{miembroController.register}"
 				value="Register" styleClass="register" ajax="false"
 				style="	margin: 0px;
