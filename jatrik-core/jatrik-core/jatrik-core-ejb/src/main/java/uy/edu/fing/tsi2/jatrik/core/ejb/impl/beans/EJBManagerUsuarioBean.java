@@ -73,8 +73,8 @@ public class EJBManagerUsuarioBean implements IUsuarios {
 		try {
 			logger.info("Voy a Validar al usuario");
 			if (usuarios.findUsuarioByNick(infoUsuario.getNick()) == null) {
-
-				// TODO Aca deberiamos controlar si no hay equipos libres o si
+                                
+                                // TODO Aca deberiamos controlar si no hay equipos libres o si
 				// no
 				// hay mas jugadores
 				Usuario usr = new Usuario();
@@ -82,21 +82,13 @@ public class EJBManagerUsuarioBean implements IUsuarios {
 				usr.setEmail(infoUsuario.getEmail());
 				usr.setPassword(infoUsuario.getPassword());
 				usr.setNick(infoUsuario.getNick());
-				// BeanUtils.copyProperties(usr, infoUsuario);
-
-				// Equipo equipo = equipos.findEquipoLibre();
-				// equipo.setLatitud(latitud);
-				// equipo.setLongitud(longitud);
-				// equipo.setAltura(altura);
-				// equipo.setNombre(nombreEquipo);
-				// equipo.setEstadio(nombreEstadio);
-				// equipo.setUsuario(usr);
-				// equipos.update(equipo);
-
-				Equipo equipo = new Equipo();
+				
+				//Equipo equipo = new Equipo();
+                                //Deberiamos controlar cuando no hay bots libres
+                                Equipo equipo = equipos.findEquipoLibre();
 				equipo.setNombre(infoUsuario.getInfoEquipo().getNombre());
 				equipo.setEstadio(infoUsuario.getInfoEquipo().getEstadio().getNombre());
-				// infoUsuario.getInfoEquipo());
+				
 
 				// Seteo el Usuario al Equipo
 				equipo.setUsuario(usr);
