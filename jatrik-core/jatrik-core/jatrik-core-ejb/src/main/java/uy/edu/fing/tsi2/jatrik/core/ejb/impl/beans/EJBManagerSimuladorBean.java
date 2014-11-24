@@ -78,8 +78,10 @@ public class EJBManagerSimuladorBean implements ISimulacion {
 	@Asynchronous
 	public void simularPartido(Long idPartido){
 		Partido partido = partidosEJB.find(idPartido);
-		usuariosManager.EnviarMensajePush(partido.getLocal().getId(), "El partido " + partido.getLocal().getNombre() + " vs " + partido.getVisitante().getNombre() + " está comenzando!");
-		usuariosManager.EnviarMensajePush(partido.getVisitante().getId(), "El partido " + partido.getLocal().getNombre() + " vs " + partido.getVisitante().getNombre() + " está comenzando!");
+		Long idUsuarioLocal = partido.getLocal().getUsuario() == null ? null :partido.getLocal().getUsuario().getId();
+		Long idUsuarioVisitante = partido.getVisitante().getUsuario() == null ? null :partido.getVisitante().getUsuario().getId();
+		usuariosManager.EnviarMensajePush(idUsuarioLocal, "El partido " + partido.getLocal().getNombre() + " vs " + partido.getVisitante().getNombre() + " está comenzando!");
+		usuariosManager.EnviarMensajePush(idUsuarioVisitante, "El partido " + partido.getLocal().getNombre() + " vs " + partido.getVisitante().getNombre() + " está comenzando!");
 		if(partido.getEstado() == EnumEstadoPartido.PENDIENTE){
 			partidosEJB.inicializarPartido(partido);
 			for(int i=0; i<=90;i++){
@@ -91,8 +93,8 @@ public class EJBManagerSimuladorBean implements ISimulacion {
 				}
 			}
 		}
-		usuariosManager.EnviarMensajePush(partido.getLocal().getId(), "Ha finalizado el partido: " + partido.getLocal().getNombre() + " " + partido.getGolesLocal() + " - " + partido.getGolesVisitante() + " " + partido.getVisitante().getNombre());
-		usuariosManager.EnviarMensajePush(partido.getVisitante().getId(), "Ha finalizado el partido: " + partido.getLocal().getNombre() + " " + partido.getGolesLocal() + " - " + partido.getGolesVisitante() + " " + partido.getVisitante().getNombre());
+		usuariosManager.EnviarMensajePush(idUsuarioLocal, "Ha finalizado el partido: " + partido.getLocal().getNombre() + " " + partido.getGolesLocal() + " - " + partido.getGolesVisitante() + " " + partido.getVisitante().getNombre());
+		usuariosManager.EnviarMensajePush(idUsuarioVisitante, "Ha finalizado el partido: " + partido.getLocal().getNombre() + " " + partido.getGolesLocal() + " - " + partido.getGolesVisitante() + " " + partido.getVisitante().getNombre());
 		
 	}
 	

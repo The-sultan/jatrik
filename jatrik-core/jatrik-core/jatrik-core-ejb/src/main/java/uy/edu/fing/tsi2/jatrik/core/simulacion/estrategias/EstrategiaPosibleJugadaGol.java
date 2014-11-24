@@ -82,8 +82,10 @@ public class EstrategiaPosibleJugadaGol extends EstrategiaSimulacion{
 				partido.getGolesLocal(), partido.getGolesVisitante());
 			eventosPartidosEJB.add(eventoPartidoGol);
 			partidosEJB.update(partido);
-			usuariosManager.EnviarMensajePush(partido.getLocal().getId(), "Gol de " + equipo.getNombre() + " convertido por " + delantero.getNombre() + ". " + partido.getLocal().getNombre() + " " + partido.getGolesLocal() + " - " + partido.getGolesVisitante() + " " + partido.getVisitante().getNombre());
-			usuariosManager.EnviarMensajePush(partido.getVisitante().getId(), "Gol de " + equipo.getNombre() + " convertido por " + delantero.getNombre() + ". " + partido.getLocal().getNombre() + " " + partido.getGolesLocal() + " - " + partido.getGolesVisitante() + " " + partido.getVisitante().getNombre());
+			Long idUsuarioLocal = partido.getLocal().getUsuario() == null ? null :partido.getLocal().getUsuario().getId();
+			Long idUsuarioVisitante = partido.getVisitante().getUsuario() == null ? null :partido.getVisitante().getUsuario().getId();
+			usuariosManager.EnviarMensajePush(idUsuarioLocal, "Gol de " + equipo.getNombre() + " convertido por " + delantero.getNombre() + ". " + partido.getLocal().getNombre() + " " + partido.getGolesLocal() + " - " + partido.getGolesVisitante() + " " + partido.getVisitante().getNombre());
+			usuariosManager.EnviarMensajePush(idUsuarioVisitante, "Gol de " + equipo.getNombre() + " convertido por " + delantero.getNombre() + ". " + partido.getLocal().getNombre() + " " + partido.getGolesLocal() + " - " + partido.getGolesVisitante() + " " + partido.getVisitante().getNombre());
 			
 		}
 		

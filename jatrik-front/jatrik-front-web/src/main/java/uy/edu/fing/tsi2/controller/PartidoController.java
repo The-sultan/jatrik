@@ -39,15 +39,15 @@ public class PartidoController implements Serializable {
 	@PostConstruct
 	public void initDatos() {
 		//Obtener la info del partido
-		this.partidoDatos = partidoEJB.getInfoPartido(1);
+		//this.partidoDatos = partidoEJB.getInfoPartido();
 	}
 	
 	public void update() throws Exception {
-		this.partidoDatos = partidoEJB.getInfoPartido(1);
+		//this.partidoDatos = partidoEJB.getInfoPartido(1);
 	}
 	
 	public void simularPartido(){
-		partidoEJB.simularPartido(1);
+		//partidoEJB.simularPartido(1);
 	}
 	
 	public boolean getStopPolling(){

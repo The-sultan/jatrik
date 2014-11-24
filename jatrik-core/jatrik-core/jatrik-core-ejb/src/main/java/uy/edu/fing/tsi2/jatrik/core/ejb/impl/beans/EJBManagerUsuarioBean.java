@@ -143,6 +143,8 @@ public class EJBManagerUsuarioBean implements IUsuarios {
 	// --- Para notificaciones PUSH
 	
 	public void EnviarMensajePush(Long idUsuario, String mensaje){
+		if(idUsuario == null)
+			return;
 	    String idRegistro=recuperarIdRegistro(idUsuario);
 	    if (idRegistro != null){
 		    JsonObject jsonObject = new JsonObject();
