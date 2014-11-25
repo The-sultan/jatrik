@@ -35,187 +35,310 @@ import uy.edu.fing.tsi2.jatrik.core.persistence.impl.local.EJBEMPartidosLocal;
 @Remote(EJBManagerLigaBeanRemote.class)
 public class EJBManagerLigaBean implements ILigas {
 
-	private Logger logger = Logger.getLogger(EJBManagerLigaBean.class);
+    private Logger logger = Logger.getLogger(EJBManagerLigaBean.class);
 
-	private static final long TIEMPO_ENTRE_PARTIDOS = 2 * 60 * 1000; // 2 minutos = 2 * 60 * 1000
-	private static final long UN_MINUTO = 1 * 60 * 1000; // 2 minutos = 2 * 60 * 1000
-	private static final double fondos= 5000;
-        private static final double latitudEstadio=-34.8580556;
-        private static final double longitudEstadio=-56.1708333;
-        private static final int alturaEstadio=2000;
-        
-	@EJB
-	EJBEMLigasLocal ligasEJB;
-	
-	@EJB
-	EJBEMEquiposLocal equiposEJB;
-	
-	@EJB
-	EJBManagerEquipoBeanLocal equipoEJBManager;
-	
-	@EJB
-	EJBEMPartidosLocal partidosEJB;
-	
-	List<String> nombreEquipos;
-	
-	public static final int CANT_EQUIPOS_LIGA = 16;
-	
-	public void initLigas(){
-		List<Liga> ligas = ligasEJB.findAll();
-		if(!ligas.isEmpty()){
-			return;
-		}
-		List<String> nombreEquipos = new ArrayList<>();
-		nombreEquipos.add("Cerro");
-		nombreEquipos.add("Wanderers");
-		nombreEquipos.add("Danubio");
-		nombreEquipos.add("River");
-		nombreEquipos.add("Defensor");
-		nombreEquipos.add("Peñarol");
-		nombreEquipos.add("Naciomal");
-		nombreEquipos.add("Rampla");
-		nombreEquipos.add("El Tanque Sisley");
-		nombreEquipos.add("Racing");
-		nombreEquipos.add("Fenix");
-		nombreEquipos.add("Atenas");
-		nombreEquipos.add("Sud America");
-		nombreEquipos.add("Tacuarembo");
-		nombreEquipos.add("Rampla Juniors");
-		nombreEquipos.add("Juventud");
-		
-		for(String nombreEquipo : nombreEquipos){
-			InfoEquipo infoEquipo = new InfoEquipo();
-			infoEquipo.setNombre(nombreEquipo);
-			InfoEstadio infoEstadio = new InfoEstadio();
-			infoEstadio.setNombre("Estadio1");
-			infoEstadio.setAltura(alturaEstadio);
-                        infoEstadio.setLatitud(latitudEstadio);
-                        infoEstadio.setLongitud(longitudEstadio);
-                        infoEquipo.setEstadio(infoEstadio);
-                        infoEquipo.setFondos(fondos);                       
-			equipoEJBManager.crearEquipo(infoEquipo, null);
-		}
-		creandoMiLiga("Campeonato Uruguayo de Futbol");
-			
-	}
-	
-	public Long creandoMiLiga(String nombre){
-		logger.info("###### VAMOS A CREAR LA LIGA ######");
-		Liga miLiga = new Liga();
-		miLiga.setDescripcion(nombre);
-		
-		ligasEJB.add(miLiga);		
-		
-		List<Equipo> teams = equiposEJB.findAll();
-		
-		for (Equipo equipo : teams) {
-			inscribirEquipoEnLiga(equipo, miLiga);
-		}
-		
-		crearFixture(miLiga);
-		logger.info("###### FIN VAMOS A CREAR LA LIGA ######");
-		return miLiga.getId();
-		
-	}
-	
-	public void inscribirEquipoEnLiga(Equipo equipo, Liga liga) {
-		Set<RelLigaEquipo> tablaPosiciones = liga.getRelLigaEquipo();
-		tablaPosiciones.add(new RelLigaEquipo(liga, equipo));
-		ligasEJB.update(liga);
-	}
-	
-	
-	public void crearLiga(String descripcion) {
-		Liga liga = new Liga(descripcion, null, null);
-		ligasEJB.add(liga);
-	}
-	
-	
-	
-	public void crearFixture(Liga liga) {
-		
-		logger.info("#### CREANDO FIXTURE ####");
-		
-			
-		List<Equipo> equipos = new ArrayList<Equipo>();
+    private static final long TIEMPO_ENTRE_PARTIDOS = 2 * 60 * 1000; // 2 minutos = 2 * 60 * 1000
+    private static final long UN_MINUTO = 1 * 60 * 1000; // 2 minutos = 2 * 60 * 1000
+    private static final double fondos = 5000;
+    private static final double latitudEstadio = -34.8580556;
+    private static final double longitudEstadio = -56.1708333;
+    private static final int alturaEstadio = 2000;
 
-		Set<RelLigaEquipo> tabla = liga.getRelLigaEquipo();
-		
-		for (RelLigaEquipo relLigaEquipo : tabla) {
-			Equipo equipo = relLigaEquipo.getEquipo();
-			equipos.add(equipo);
-		}
+    @EJB
+    EJBEMLigasLocal ligasEJB;
 
-		int cantEquipos = equipos.size();
-		if (cantEquipos > 1) {
-			List<Partido> partidosDeIda = new ArrayList<Partido>();
-			List<Partido> partidosDeVuelta = new ArrayList<Partido>();
+    @EJB
+    EJBEMEquiposLocal equiposEJB;
 
-			int i = 0;
-			long primerFechaIda = (new Date()).getTime() + UN_MINUTO;// +
-																		// TIEMPO_ENTRE_PARTIDOS;
-			long primerFechaVuelta = primerFechaIda
-					+ (TIEMPO_ENTRE_PARTIDOS * factorial(cantEquipos - 1))
-					+ UN_MINUTO;
-			Date fechaInicio = new Date(primerFechaIda);
-			Date fechaFin = null;
+    @EJB
+    EJBManagerEquipoBeanLocal equipoEJBManager;
 
-			for (int j = 0; j < cantEquipos; j++) {
-				Equipo equipo1 = equipos.get(j);
-				for (int k = j + 1; k < cantEquipos; k++, i++) {
-					Equipo equipo2 = equipos.get(k);
+    @EJB
+    EJBEMPartidosLocal partidosEJB;
 
-					Partido partidoIda = new Partido(new Date(primerFechaIda
-							+ (TIEMPO_ENTRE_PARTIDOS * i)),
-							EnumEstadoPartido.PENDIENTE, equipo1, equipo2, 0, 0);
-					partidosDeIda.add(partidoIda);
-					Partido partidoVuelta = new Partido(new Date(
-							primerFechaVuelta + (TIEMPO_ENTRE_PARTIDOS * i)),
-							EnumEstadoPartido.PENDIENTE, equipo2, equipo1, 0, 0);
-					partidosDeVuelta.add(partidoVuelta);
+    List<String> nombreEquipos;
 
-					// Me guardo la fecha del último partido para setearla en la
-					//liga .
-					fechaFin = new Date(primerFechaVuelta
-							+ (TIEMPO_ENTRE_PARTIDOS * i));
-				}
-			}
+    public static final int CANT_EQUIPOS_LIGA = 16;
 
-			Set<RelLigaPartido> fixture = new HashSet<RelLigaPartido>();
+    public void initLigas() {
+        List<Liga> ligas = ligasEJB.findAll();
+        if (!ligas.isEmpty()) {
+            return;
+        }
+        List<String> nombreEquipos = new ArrayList<>();
+        nombreEquipos.add("Cerro");
+        nombreEquipos.add("Wanderers");
+        nombreEquipos.add("Danubio");
+        nombreEquipos.add("River");
+        nombreEquipos.add("Defensor");
+        nombreEquipos.add("Peñarol");
+        nombreEquipos.add("Naciomal");
+        nombreEquipos.add("Rampla");
+        nombreEquipos.add("El Tanque Sisley");
+        nombreEquipos.add("Racing");
+        nombreEquipos.add("Fenix");
+        nombreEquipos.add("Atenas");
+        nombreEquipos.add("Sud America");
+        nombreEquipos.add("Tacuarembo");
+        nombreEquipos.add("Rampla Juniors");
+        nombreEquipos.add("Juventud");
 
-			for (Partido partido : partidosDeIda) {
-				logger.info("Partido    ida: " + partido.getLocal().getNombre()
-						+ "-" + partido.getVisitante().getNombre() + " fecha: "
-						+ partido.getFechaInicio());
-				partidosEJB.add(partido);
-				fixture.add(new RelLigaPartido(liga, partido));
+        for (String nombreEquipo : nombreEquipos) {
+            InfoEquipo infoEquipo = new InfoEquipo();
+            infoEquipo.setNombre(nombreEquipo);
+            InfoEstadio infoEstadio = new InfoEstadio();
+            infoEstadio.setNombre("Estadio1");
+            infoEstadio.setAltura(alturaEstadio);
+            infoEstadio.setLatitud(latitudEstadio);
+            infoEstadio.setLongitud(longitudEstadio);
+            infoEquipo.setEstadio(infoEstadio);
+            infoEquipo.setFondos(fondos);
+            equipoEJBManager.crearEquipo(infoEquipo, null);
+        }
+        creandoMiLiga("Campeonato Uruguayo de Futbol");
 
-			}
-			for (Partido partido : partidosDeVuelta) {
-				logger.info("Partido vuelta: " + partido.getLocal().getNombre()
-						+ "-" + partido.getVisitante().getNombre() + " fecha: "
-						+ partido.getFechaInicio());
-				partidosEJB.add(partido);
-				fixture.add(new RelLigaPartido(liga, partido));
-			}
+    }
 
-			liga.setRelLigaPartido(fixture);  
-			liga.setFechaInicio(fechaInicio);
-			liga.setFechaFin(fechaFin);
+    public Long creandoMiLiga(String nombre) {
+        logger.info("###### VAMOS A CREAR LA LIGA ######");
+        Liga miLiga = new Liga();
+        miLiga.setDescripcion(nombre);
 
-			ligasEJB.add(liga);
+        ligasEJB.add(miLiga);
 
-		}
-		
-		logger.info("#### FIN CREAR FIXTURE ####");
-		
-	}
+        List<Equipo> teams = equiposEJB.findAll();
 
-	private int factorial(int n) {
-		if (n <= 1) {
-			return n;
-		} else {
-			return (n * factorial(n - 1));
-		}
-	}
+        for (Equipo equipo : teams) {
+            inscribirEquipoEnLiga(equipo, miLiga);
+        }
+
+        crearFixtureConEtapas(miLiga);
+        logger.info("###### FIN VAMOS A CREAR LA LIGA ######");
+        return miLiga.getId();
+
+    }
+
+    public void inscribirEquipoEnLiga(Equipo equipo, Liga liga) {
+        Set<RelLigaEquipo> tablaPosiciones = liga.getRelLigaEquipo();
+        tablaPosiciones.add(new RelLigaEquipo(liga, equipo));
+        ligasEJB.update(liga);
+    }
+
+    public void crearLiga(String descripcion) {
+        Liga liga = new Liga(descripcion, null, null);
+        ligasEJB.add(liga);
+    }
+
+    public void crearFixtureConEtapas(Liga liga) {
+
+        logger.info("#### CREANDO FIXTURE CON ETAPAS####");
+
+        List<Equipo> equipos = new ArrayList<Equipo>();
+
+        Set<RelLigaEquipo> tabla = liga.getRelLigaEquipo();
+
+        for (RelLigaEquipo relLigaEquipo : tabla) {
+            Equipo equipo = relLigaEquipo.getEquipo();
+            equipos.add(equipo);
+        }
+
+        int cantEquipos = equipos.size();
+
+        if (cantEquipos > 1) {
+            List<Partido> partidosDeIda = new ArrayList<Partido>();
+            List<Partido> partidosDeVuelta = new ArrayList<Partido>();
+
+            long primerFechaIda = (new Date()).getTime() + UN_MINUTO;// +
+            // TIEMPO_ENTRE_PARTIDOS;
+            long primerFechaVuelta = primerFechaIda
+                    + (TIEMPO_ENTRE_PARTIDOS * factorial(cantEquipos - 1))
+                    + UN_MINUTO;
+            Date fechaInicio = new Date(primerFechaIda);
+            Date fechaFin = null;
+
+            // Ordena para mezclar
+            List<Equipo> parte1 = new ArrayList<Equipo>();
+            List<Equipo> parte2 = new ArrayList<Equipo>();
+            for (int j = 0; j < cantEquipos / 2; j++) {
+                parte1.add(j, equipos.get(j));
+                parte2.add(j, equipos.get(cantEquipos - j - 1));
+
+            }
+
+            int etapas = cantEquipos - 1;
+            for (int i = 1; i <= etapas; i++) {
+
+                for (int j = 0; j < cantEquipos / 2; j++) {
+
+                    Partido partidoIda = new Partido(new Date(primerFechaIda
+                            + (TIEMPO_ENTRE_PARTIDOS * i)),
+                            EnumEstadoPartido.PENDIENTE, parte1.get(j), parte2.get(j), 0, 0);
+
+                    partidoIda.setEtapa(i);
+                    partidosDeIda.add(partidoIda);
+
+                    Partido partidoVuelta = new Partido(new Date(
+                            primerFechaVuelta + (TIEMPO_ENTRE_PARTIDOS * i)),
+                            EnumEstadoPartido.PENDIENTE, parte2.get(j), parte1.get(j), 0, 0);
+
+                    partidoVuelta.setEtapa(i + etapas);
+                    partidosDeVuelta.add(partidoVuelta);
+
+                    // Me guardo la fecha del último partido para setearla en la
+                    //liga .
+                    fechaFin = new Date(primerFechaVuelta
+                            + (TIEMPO_ENTRE_PARTIDOS * i));
+
+                }
+                Equipo aux2 = parte2.get(0);
+                Equipo aux1 = parte1.get(parte1.size() - 1);
+                parte1.remove(aux1);
+                parte2.remove(aux2);
+                parte1.add(1, aux2);
+                parte2.add(parte2.size(), aux1);
+
+            }
+
+//            for (int j = 0; j < cantEquipos; j++) {
+//                Equipo equipo1 = equipos.get(j);
+//                for (int k = j + 1; k < cantEquipos; k++, i++) {
+//                    Equipo equipo2 = equipos.get(k);
+//
+//                    Partido partidoIda = new Partido(new Date(primerFechaIda
+//                            + (TIEMPO_ENTRE_PARTIDOS * i)),
+//                            EnumEstadoPartido.PENDIENTE, equipo1, equipo2, 0, 0);
+//                    partidoIda.setEtapa(etapaAux);
+//                    partidosDeIda.add(partidoIda);
+//                    Partido partidoVuelta = new Partido(new Date(
+//                            primerFechaVuelta + (TIEMPO_ENTRE_PARTIDOS * i)),
+//                            EnumEstadoPartido.PENDIENTE, equipo2, equipo1, 0, 0);
+//                    partidoVuelta.setEtapa(etapaAux + cantEquipos / 2);
+//                    partidosDeVuelta.add(partidoVuelta);
+//
+//                    // Me guardo la fecha del último partido para setearla en la
+//                    //liga .
+//                    fechaFin = new Date(primerFechaVuelta
+//                            + (TIEMPO_ENTRE_PARTIDOS * i));
+//                    etapaAux++;
+//                }
+//                etapaAux = etapa++;
+//            }
+            Set<RelLigaPartido> fixture = new HashSet<RelLigaPartido>();
+
+            for (Partido partido : partidosDeIda) {
+                logger.info("Partido    ida: " + partido.getLocal().getNombre()
+                        + "-" + partido.getVisitante().getNombre() + " fecha: "
+                        + partido.getFechaInicio());
+                partidosEJB.add(partido);
+                fixture.add(new RelLigaPartido(liga, partido));
+
+            }
+            for (Partido partido : partidosDeVuelta) {
+                logger.info("Partido vuelta: " + partido.getLocal().getNombre()
+                        + "-" + partido.getVisitante().getNombre() + " fecha: "
+                        + partido.getFechaInicio());
+                partidosEJB.add(partido);
+                fixture.add(new RelLigaPartido(liga, partido));
+            }
+
+            liga.setRelLigaPartido(fixture);
+            liga.setFechaInicio(fechaInicio);
+            liga.setFechaFin(fechaFin);
+
+            ligasEJB.add(liga);
+
+        }
+
+        logger.info("#### FIN CREAR FIXTURE ####");
+
+    }
+
+//    public void crearFixture(Liga liga) {
+//
+//        logger.info("#### CREANDO FIXTURE ####");
+//
+//        List<Equipo> equipos = new ArrayList<Equipo>();
+//
+//        Set<RelLigaEquipo> tabla = liga.getRelLigaEquipo();
+//
+//        for (RelLigaEquipo relLigaEquipo : tabla) {
+//            Equipo equipo = relLigaEquipo.getEquipo();
+//            equipos.add(equipo);
+//        }
+//
+//        int cantEquipos = equipos.size();
+//        if (cantEquipos > 1) {
+//            List<Partido> partidosDeIda = new ArrayList<Partido>();
+//            List<Partido> partidosDeVuelta = new ArrayList<Partido>();
+//
+//            int i = 0;
+//            long primerFechaIda = (new Date()).getTime() + UN_MINUTO;// +
+//            // TIEMPO_ENTRE_PARTIDOS;
+//            long primerFechaVuelta = primerFechaIda
+//                    + (TIEMPO_ENTRE_PARTIDOS * factorial(cantEquipos - 1))
+//                    + UN_MINUTO;
+//            Date fechaInicio = new Date(primerFechaIda);
+//            Date fechaFin = null;
+//
+//            for (int j = 0; j < cantEquipos; j++) {
+//                Equipo equipo1 = equipos.get(j);
+//                for (int k = j + 1; k < cantEquipos; k++, i++) {
+//                    Equipo equipo2 = equipos.get(k);
+//
+//                    Partido partidoIda = new Partido(new Date(primerFechaIda
+//                            + (TIEMPO_ENTRE_PARTIDOS * i)),
+//                            EnumEstadoPartido.PENDIENTE, equipo1, equipo2, 0, 0);
+//                    partidoIda.setEtapa(etapaAux);
+//                    partidosDeIda.add(partidoIda);
+//                    Partido partidoVuelta = new Partido(new Date(
+//                            primerFechaVuelta + (TIEMPO_ENTRE_PARTIDOS * i)),
+//                            EnumEstadoPartido.PENDIENTE, equipo2, equipo1, 0, 0);
+//                    partidoVuelta.setEtapa(etapaAux + cantEquipos / 2);
+//                    partidosDeVuelta.add(partidoVuelta);
+//
+//                    // Me guardo la fecha del último partido para setearla en la
+//                    //liga .
+//                    fechaFin = new Date(primerFechaVuelta
+//                            + (TIEMPO_ENTRE_PARTIDOS * i));
+//                    etapaAux++;
+//                }
+//                etapaAux = etapa++;
+//            }
+//
+//            Set<RelLigaPartido> fixture = new HashSet<RelLigaPartido>();
+//
+//            for (Partido partido : partidosDeIda) {
+//                logger.info("Partido    ida: " + partido.getLocal().getNombre()
+//                        + "-" + partido.getVisitante().getNombre() + " fecha: "
+//                        + partido.getFechaInicio());
+//                partidosEJB.add(partido);
+//                fixture.add(new RelLigaPartido(liga, partido));
+//
+//            }
+//            for (Partido partido : partidosDeVuelta) {
+//                logger.info("Partido vuelta: " + partido.getLocal().getNombre()
+//                        + "-" + partido.getVisitante().getNombre() + " fecha: "
+//                        + partido.getFechaInicio());
+//                partidosEJB.add(partido);
+//                fixture.add(new RelLigaPartido(liga, partido));
+//            }
+//
+//            liga.setRelLigaPartido(fixture);
+//            liga.setFechaInicio(fechaInicio);
+//            liga.setFechaFin(fechaFin);
+//
+//            ligasEJB.add(liga);
+//
+//        }
+//
+//        logger.info("#### FIN CREAR FIXTURE ####");
+//
+//    }
+    private int factorial(int n) {
+        if (n <= 1) {
+            return n;
+        } else {
+            return (n * factorial(n - 1));
+        }
+    }
 }

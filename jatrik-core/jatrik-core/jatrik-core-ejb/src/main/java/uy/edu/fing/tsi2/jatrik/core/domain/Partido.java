@@ -102,6 +102,10 @@ public class Partido implements Serializable {
 	@Column
 	private int minuto;
 	
+        @Column
+        private Integer etapa;
+        
+        
 	public Partido() {
 		super();
 	}
@@ -277,6 +281,18 @@ public class Partido implements Serializable {
 	public void setJugadoresCambiados(Set<Jugador> jugadoresCambiados) {
 		this.jugadoresCambiados = jugadoresCambiados;
 	}
+
+    public Integer getEtapa() {
+        return etapa;
+    }
+
+    public void setEtapa(Integer etapa) {
+        this.etapa = etapa;
+    }
+
+       
+
+        
 	
 	
 	
