@@ -71,6 +71,8 @@ public class EJBManagerSimuladorBean implements ISimulacion {
 		}else{
 			// TODO Se elimina el cronometro del partido y se finaliza el  mismo Actualizar
 			partido.setEstado(EnumEstadoPartido.FINALIZADO);
+                        //Actualiza Tabla de posiciones y Fixture
+                        
 		}
 	}
 	

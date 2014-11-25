@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import javax.annotation.PostConstruct;
 
 import javax.ejb.EJB;
 import javax.ejb.Local;
@@ -57,7 +56,7 @@ public class EJBManagerLigaBean implements ILigas {
     EJBEMPartidosLocal partidosEJB;
 
     List<String> nombreEquipos;
-
+    // OJO que la cantidad de equipos en la liga tiene que ser PaR
     public static final int CANT_EQUIPOS_LIGA = 16;
 
     public void initLigas() {
@@ -340,5 +339,9 @@ public class EJBManagerLigaBean implements ILigas {
         } else {
             return (n * factorial(n - 1));
         }
+    }
+    
+    public Liga find(Long id){
+            return ligasEJB.find(id);
     }
 }
