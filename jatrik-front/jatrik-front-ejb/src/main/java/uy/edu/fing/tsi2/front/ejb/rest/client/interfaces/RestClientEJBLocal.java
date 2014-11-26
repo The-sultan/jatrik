@@ -10,6 +10,7 @@ import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEntrenamiento;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEquipo;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoFormacion;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoJugador;
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoLiga;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoPartido;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoTransferencia;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoTransferenciaCompra;
@@ -67,6 +68,7 @@ public interface RestClientEJBLocal {
 	String postUpdateCorreo(InfoCorreo updateCorreo) throws RestClientException;
 
         List<InfoCorreo> getCorreosEnviadosUsuario(Long idUsuario);
-
+        
+        List<InfoLiga> getInformacionLiga(Long idLiga);
 
 }

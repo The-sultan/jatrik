@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 
 import uy.edu.fing.tsi2.jatrik.core.domain.Partido;
 import uy.edu.fing.tsi2.jatrik.core.ejb.ISimulacion;
+import uy.edu.fing.tsi2.jatrik.core.ejb.impl.local.EJBManagerLigaBeanLocal;
 import uy.edu.fing.tsi2.jatrik.core.ejb.impl.local.EJBManagerPartidoLocal;
 import uy.edu.fing.tsi2.jatrik.core.ejb.impl.local.EJBManagerSimuladorBeanLocal;
 import uy.edu.fing.tsi2.jatrik.core.ejb.impl.local.EJBManagerUsuarioLocal;
@@ -49,6 +50,9 @@ public class EJBManagerSimuladorBean implements ISimulacion {
 	@EJB
 	EJBEMPartidosLocal partidosEJB;
 	
+        @EJB
+        EJBManagerLigaBeanLocal ligasManager;
+        
 	@EJB
 	ContextoSimulacion contextoSimulacion;
 	
@@ -72,7 +76,8 @@ public class EJBManagerSimuladorBean implements ISimulacion {
 			// TODO Se elimina el cronometro del partido y se finaliza el  mismo Actualizar
 			partido.setEstado(EnumEstadoPartido.FINALIZADO);
                         //Actualiza Tabla de posiciones y Fixture
-                        
+                        ligasManager.actualizarTablaPosiciones(partido);
+                       
 		}
 	}
 	

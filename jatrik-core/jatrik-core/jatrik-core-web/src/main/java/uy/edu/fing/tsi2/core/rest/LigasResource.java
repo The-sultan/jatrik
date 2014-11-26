@@ -96,6 +96,8 @@ public class LigasResource {
                 pos.setGolesAFavor(tabla.getGolesAFavor());
                 pos.setGolesEnContra(tabla.getGolesEnContra());
                 pos.setPartidosJugados(tabla.getPartidosJugados());
+                pos.setPartidosGanados(tabla.getPartidosGanados());
+                pos.setPartidosPerdidos(tabla.getPartidosPerdidos());
                 posiciones.add(pos);
             }
             resultado.setPartidos(partidos);

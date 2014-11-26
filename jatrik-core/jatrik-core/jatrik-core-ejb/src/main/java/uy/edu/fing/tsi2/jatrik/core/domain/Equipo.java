@@ -2,6 +2,7 @@ package uy.edu.fing.tsi2.jatrik.core.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -70,10 +71,7 @@ public class Equipo implements Serializable {
 
     @Column(name = "ULTIMO_ENTRENAMIENTO")
     private Date ultimoEntrenamiento;
-
-    @OneToOne(targetEntity = Liga.class)
-    private Liga liga;
-
+  
     public Date getUltimoEntrenamiento() {
         return ultimoEntrenamiento;
     }
@@ -174,14 +172,7 @@ public class Equipo implements Serializable {
         this.formacionActual = formacionActual;
     }
 
-    public Liga getLiga() {
-        return liga;
-    }
-
-    public void setLiga(Liga liga) {
-        this.liga = liga;
-    }
-
+  
     @Override
     public int hashCode() {
         int hash = 0;

@@ -1,8 +1,10 @@
 package uy.edu.fing.tsi2.jatrik.core.persistence;
 
 import java.util.List;
+import uy.edu.fing.tsi2.jatrik.core.domain.Equipo;
 
 import uy.edu.fing.tsi2.jatrik.core.domain.Liga;
+import uy.edu.fing.tsi2.jatrik.core.domain.Partido;
 
 
 
@@ -19,5 +21,8 @@ public interface IEMLigas {
 
 	Liga add(Liga liga);
 	
+        Liga findLigaByEquipo(Equipo equipo);
+        
+        Liga findLigaByPartido(Partido partido);
 		
 }

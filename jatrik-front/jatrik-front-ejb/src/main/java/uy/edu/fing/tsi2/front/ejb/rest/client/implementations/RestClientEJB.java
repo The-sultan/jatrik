@@ -22,6 +22,7 @@ import uy.edu.fing.tsi2.jatrik.common.payloads.InfoUsuario;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource.Builder;
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoLiga;
 
 /**
  * 
@@ -423,4 +424,23 @@ public class RestClientEJB implements RestClientEJBLocal {
 		String[] partUrlSplitted = ventaLocation.split("/");
 		return partUrlSplitted[(partUrlSplitted.length - 1)];
 	}
+        
+        
+        @Override        
+	public List<InfoLiga> getInformacionLiga(Long idLiga) {
+		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory
+				.makeGetInfoLiga(idLiga);
+		ClientResponse response = jerseyHttpRequestBuilder
+				.get(ClientResponse.class);
+		if (response.getStatusInfo().getStatusCode() != ClientResponse.Status.OK
+				.getStatusCode()) {
+			throw new RestClientException(
+					"No se pudo obtener el listado de infoLiga (idLiga), status code: "
+							+ response.getStatusInfo().getReasonPhrase());
+		}
+		GenericType<List<InfoLiga>> gType = new GenericType<List<InfoLiga>>() {};
+		
+		return (List) response.getEntity(gType);
+	}
+        
 }

@@ -12,6 +12,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
@@ -19,6 +21,21 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "LIGAS")
+@NamedQueries({
+	@NamedQuery(name = "buscarLigaPorEquipo",
+			query = "select t " +
+					"from Liga t, RelLigaEquipo rte " +
+					"where t.id = rte.id.ligaId " +
+					"  and rte.id.equipoId = :argEquipoId" +
+					" order by t.id desc "
+	),
+	@NamedQuery(name = "buscarLigaPorPartido",
+			query = "select t " +
+					"from Liga t, RelLigaPartido rtp " +
+					"where t.id = rtp.id.ligaId " +
+					"  and rtp.id.partidoId = :argPartidoId "
+	)
+})
 public class Liga implements Serializable {
 
 	/**

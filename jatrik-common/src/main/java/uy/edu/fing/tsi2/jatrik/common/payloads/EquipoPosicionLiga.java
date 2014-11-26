@@ -8,6 +8,10 @@ public class EquipoPosicionLiga {
     
     int partidosJugados;
     
+    int partidosGanados;
+    
+    int partidosPerdidos;
+    
     int golesAFavor;
     
     int golesEnContra;
@@ -60,6 +64,22 @@ public class EquipoPosicionLiga {
 
     public void setPtos(int ptos) {
         this.ptos = ptos;
+    }
+
+    public int getPartidosGanados() {
+        return partidosGanados;
+    }
+
+    public void setPartidosGanados(int partidosGanados) {
+        this.partidosGanados = partidosGanados;
+    }
+
+    public int getPartidosPerdidos() {
+        return partidosPerdidos;
+    }
+
+    public void setPartidosPerdidos(int partidosPerdidos) {
+        this.partidosPerdidos = partidosPerdidos;
     }
     
     

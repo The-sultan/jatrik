@@ -64,6 +64,7 @@ public class EJBManagerLigaBean implements ILigas {
         if (!ligas.isEmpty()) {
             return;
         }
+
         List<String> nombreEquipos = new ArrayList<>();
         nombreEquipos.add("Cerro");
         nombreEquipos.add("Wanderers");
@@ -152,6 +153,7 @@ public class EJBManagerLigaBean implements ILigas {
             long primerFechaVuelta = primerFechaIda
                     + (TIEMPO_ENTRE_PARTIDOS * factorial(cantEquipos - 1))
                     + UN_MINUTO;
+            
             Date fechaInicio = new Date(primerFechaIda);
             Date fechaFin = null;
 
@@ -198,30 +200,6 @@ public class EJBManagerLigaBean implements ILigas {
 
             }
 
-//            for (int j = 0; j < cantEquipos; j++) {
-//                Equipo equipo1 = equipos.get(j);
-//                for (int k = j + 1; k < cantEquipos; k++, i++) {
-//                    Equipo equipo2 = equipos.get(k);
-//
-//                    Partido partidoIda = new Partido(new Date(primerFechaIda
-//                            + (TIEMPO_ENTRE_PARTIDOS * i)),
-//                            EnumEstadoPartido.PENDIENTE, equipo1, equipo2, 0, 0);
-//                    partidoIda.setEtapa(etapaAux);
-//                    partidosDeIda.add(partidoIda);
-//                    Partido partidoVuelta = new Partido(new Date(
-//                            primerFechaVuelta + (TIEMPO_ENTRE_PARTIDOS * i)),
-//                            EnumEstadoPartido.PENDIENTE, equipo2, equipo1, 0, 0);
-//                    partidoVuelta.setEtapa(etapaAux + cantEquipos / 2);
-//                    partidosDeVuelta.add(partidoVuelta);
-//
-//                    // Me guardo la fecha del último partido para setearla en la
-//                    //liga .
-//                    fechaFin = new Date(primerFechaVuelta
-//                            + (TIEMPO_ENTRE_PARTIDOS * i));
-//                    etapaAux++;
-//                }
-//                etapaAux = etapa++;
-//            }
             Set<RelLigaPartido> fixture = new HashSet<RelLigaPartido>();
 
             for (Partido partido : partidosDeIda) {
@@ -333,6 +311,62 @@ public class EJBManagerLigaBean implements ILigas {
 //        logger.info("#### FIN CREAR FIXTURE ####");
 //
 //    }
+    
+    public void actualizarTablaPosiciones(Partido partido) {
+        Liga liga = ligasEJB.findLigaByPartido(partido);
+        Set<RelLigaEquipo> tabla = liga.getRelLigaEquipo();
+
+        Equipo equipoGanador = null;
+        Equipo equipoPerdedor = null;
+        int golesGanador = 0;
+        int golesPerdedor = 0;
+        if (partido.getGolesLocal() > partido.getGolesVisitante()) {
+            equipoGanador = partido.getLocal();
+            equipoPerdedor = partido.getVisitante();
+            golesGanador = partido.getGolesLocal();
+            golesPerdedor = partido.getGolesVisitante();
+        } else if (partido.getGolesLocal() < partido.getGolesVisitante()) {
+            equipoGanador = partido.getVisitante();
+            equipoPerdedor = partido.getLocal();
+            golesGanador = partido.getGolesVisitante();
+            golesPerdedor = partido.getGolesLocal();
+        }
+
+        for (RelLigaEquipo relLigaEquipo : tabla) {
+
+            Equipo equipo = relLigaEquipo.getEquipo();
+
+            if (equipo.equals(partido.getLocal()) || equipo.equals(partido.getVisitante())) {
+
+                relLigaEquipo.setPartidosJugados(relLigaEquipo.getPartidosJugados() + 1);
+
+                if (equipoGanador == null && equipoPerdedor == null) {
+                         // Empate, sumo un pto a cada equipo.
+                        // Actualizo GF y GC para cada equipo. Tomo uno de los dos equipos
+                        // para conocer la cantidad de goles.
+                        relLigaEquipo.setPtos(relLigaEquipo.getPtos() + 1);
+                        relLigaEquipo.setGolesAFavor(relLigaEquipo.getGolesAFavor() + partido.getGolesLocal());
+                        relLigaEquipo.setGolesEnContra(relLigaEquipo.getGolesEnContra() + partido.getGolesLocal());
+                        relLigaEquipo.setDiferencia(relLigaEquipo.getGolesAFavor() - relLigaEquipo.getGolesEnContra());
+                } else {
+                    if (equipo.equals(equipoGanador)) {
+                        relLigaEquipo.setPtos(relLigaEquipo.getPtos() + 3);
+                        relLigaEquipo.setGolesAFavor(relLigaEquipo.getGolesAFavor() + golesGanador);
+                        relLigaEquipo.setGolesEnContra(relLigaEquipo.getGolesEnContra() + golesPerdedor);
+                        relLigaEquipo.setDiferencia(relLigaEquipo.getGolesAFavor() - relLigaEquipo.getGolesEnContra());
+                    } else {
+                        relLigaEquipo.setGolesAFavor(relLigaEquipo.getGolesAFavor() + golesPerdedor);
+                        relLigaEquipo.setGolesEnContra(relLigaEquipo.getGolesEnContra() + golesGanador);
+                        relLigaEquipo.setDiferencia(relLigaEquipo.getGolesAFavor() - relLigaEquipo.getGolesEnContra());
+                    }
+                }
+
+            }
+        }
+
+        ligasEJB.update(liga);
+    }
+
     private int factorial(int n) {
         if (n <= 1) {
             return n;
@@ -340,8 +374,16 @@ public class EJBManagerLigaBean implements ILigas {
             return (n * factorial(n - 1));
         }
     }
+
+    public Liga find(Long id) {
+        return ligasEJB.find(id);
+    }
     
-    public Liga find(Long id){
-            return ligasEJB.find(id);
+    public Liga obtenerLigaEquipo(Equipo equipo) {
+	return ligasEJB.findLigaByEquipo(equipo);
+    }
+    
+    public Liga obtenerLigaPartido(Partido partido){
+        return ligasEJB.findLigaByPartido(partido);
     }
 }
