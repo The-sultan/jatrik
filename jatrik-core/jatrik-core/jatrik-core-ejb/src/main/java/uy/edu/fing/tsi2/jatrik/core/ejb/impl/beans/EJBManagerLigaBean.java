@@ -339,7 +339,8 @@ public class EJBManagerLigaBean implements ILigas {
             if (equipo.equals(partido.getLocal()) || equipo.equals(partido.getVisitante())) {
 
                 relLigaEquipo.setPartidosJugados(relLigaEquipo.getPartidosJugados() + 1);
-
+              
+                relLigaEquipo.setPartidosGanados(golesGanador);
                 if (equipoGanador == null && equipoPerdedor == null) {
                          // Empate, sumo un pto a cada equipo.
                         // Actualizo GF y GC para cada equipo. Tomo uno de los dos equipos
@@ -350,11 +351,13 @@ public class EJBManagerLigaBean implements ILigas {
                         relLigaEquipo.setDiferencia(relLigaEquipo.getGolesAFavor() - relLigaEquipo.getGolesEnContra());
                 } else {
                     if (equipo.equals(equipoGanador)) {
+                        relLigaEquipo.setPartidosGanados(relLigaEquipo.getPartidosGanados() + 1);
                         relLigaEquipo.setPtos(relLigaEquipo.getPtos() + 3);
                         relLigaEquipo.setGolesAFavor(relLigaEquipo.getGolesAFavor() + golesGanador);
                         relLigaEquipo.setGolesEnContra(relLigaEquipo.getGolesEnContra() + golesPerdedor);
                         relLigaEquipo.setDiferencia(relLigaEquipo.getGolesAFavor() - relLigaEquipo.getGolesEnContra());
                     } else {
+                        relLigaEquipo.setPartidosPerdidos(relLigaEquipo.getPartidosPerdidos() + 1);
                         relLigaEquipo.setGolesAFavor(relLigaEquipo.getGolesAFavor() + golesPerdedor);
                         relLigaEquipo.setGolesEnContra(relLigaEquipo.getGolesEnContra() + golesGanador);
                         relLigaEquipo.setDiferencia(relLigaEquipo.getGolesAFavor() - relLigaEquipo.getGolesEnContra());
