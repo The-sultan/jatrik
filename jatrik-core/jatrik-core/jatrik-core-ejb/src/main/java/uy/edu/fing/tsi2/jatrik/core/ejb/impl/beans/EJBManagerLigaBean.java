@@ -57,7 +57,7 @@ public class EJBManagerLigaBean implements ILigas {
 
     List<String> nombreEquipos;
     // OJO que la cantidad de equipos en la liga tiene que ser PaR
-    public static final int CANT_EQUIPOS_LIGA = 16;
+    public static final int CANT_EQUIPOS_LIGA = 4;
 
     public void initLigas() {
         List<Liga> ligas = ligasEJB.findAll();
@@ -203,7 +203,7 @@ public class EJBManagerLigaBean implements ILigas {
             Set<RelLigaPartido> fixture = new HashSet<RelLigaPartido>();
 
             for (Partido partido : partidosDeIda) {
-                logger.info("Partido    ida: " + partido.getLocal().getNombre()
+                logger.info("Partido ida: " + partido.getLocal().getNombre()
                         + "-" + partido.getVisitante().getNombre() + " fecha: "
                         + partido.getFechaInicio());
                 partidosEJB.add(partido);
@@ -342,6 +342,7 @@ public class EJBManagerLigaBean implements ILigas {
                          // Empate, sumo un pto a cada equipo.
                         // Actualizo GF y GC para cada equipo. Tomo uno de los dos equipos
                         // para conocer la cantidad de goles.
+                        relLigaEquipo.setPartidosEmpatados(relLigaEquipo.getPartidosEmpatados() + 1);
                         relLigaEquipo.setPtos(relLigaEquipo.getPtos() + 1);
                         relLigaEquipo.setGolesAFavor(relLigaEquipo.getGolesAFavor() + partido.getGolesLocal());
                         relLigaEquipo.setGolesEnContra(relLigaEquipo.getGolesEnContra() + partido.getGolesLocal());

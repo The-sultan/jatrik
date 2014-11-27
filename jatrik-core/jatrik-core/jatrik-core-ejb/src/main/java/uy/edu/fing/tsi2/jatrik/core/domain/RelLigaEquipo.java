@@ -49,6 +49,9 @@ public class RelLigaEquipo implements Serializable {
 
     @Column(name = "PARTIDOS_PERDIDOS")
     private int partidosPerdidos;
+    
+    @Column(name = "PARTIDOS_EMPATADOS")
+    private int partidosEmpatados;
 
     public RelLigaEquipo() {
         super();
@@ -64,6 +67,7 @@ public class RelLigaEquipo implements Serializable {
         this.partidosJugados = 0;
         this.partidosGanados = 0;
         this.partidosPerdidos = 0;
+        this.partidosEmpatados = 0;
         this.id.setLigaId(liga.getId());
         this.id.setEquipoId(equipo.getId());
     }
@@ -148,6 +152,16 @@ public class RelLigaEquipo implements Serializable {
         this.partidosPerdidos = partidosPerdidos;
     }
 
+    public int getPartidosEmpatados() {
+        return partidosEmpatados;
+    }
+
+    public void setPartidosEmpatados(int partidosEmpatados) {
+        this.partidosEmpatados = partidosEmpatados;
+    }
+
+    
+    
     @Override
     public int hashCode() {
         int hash = 0;

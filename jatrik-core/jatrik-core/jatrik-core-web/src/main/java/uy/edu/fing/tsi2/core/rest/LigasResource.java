@@ -107,6 +107,7 @@ public class LigasResource {
                 pos.setPartidosJugados(tabla.getPartidosJugados());
                 pos.setPartidosGanados(tabla.getPartidosGanados());
                 pos.setPartidosPerdidos(tabla.getPartidosPerdidos());
+                pos.setPartidosEmpatados(tabla.getPartidosEmpatados());
                 posiciones.add(pos);
             }
             resultado.setPartidos(partidos);

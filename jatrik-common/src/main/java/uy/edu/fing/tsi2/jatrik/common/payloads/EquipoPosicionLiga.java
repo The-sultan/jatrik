@@ -12,6 +12,8 @@ public class EquipoPosicionLiga {
     
     int partidosPerdidos;
     
+    int partidosEmpatados;
+    
     int golesAFavor;
     
     int golesEnContra;
@@ -80,6 +82,14 @@ public class EquipoPosicionLiga {
 
     public void setPartidosPerdidos(int partidosPerdidos) {
         this.partidosPerdidos = partidosPerdidos;
+    }
+
+    public int getPartidosEmpatados() {
+        return partidosEmpatados;
+    }
+
+    public void setPartidosEmpatados(int partidosEmpatados) {
+        this.partidosEmpatados = partidosEmpatados;
     }
     
     
