@@ -58,7 +58,7 @@ public class MarketPlaceController implements Serializable {
 				.getInfoUsuario().getId());
 
 		jugadoresNoEnVenta = equipoEJB.getJugadoresEquipo(sessionBean
-				.getInfoUsuario().getId());
+				.getInfoUsuario().getInfoEquipo().getId());
 
 		jugadoresEnVenta = new ArrayList<InfoJugador>();
 		for (InfoTransferencia infoTransferencia : transferencias) {
