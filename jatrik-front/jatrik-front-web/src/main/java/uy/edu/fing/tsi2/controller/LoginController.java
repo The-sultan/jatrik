@@ -77,6 +77,7 @@ public class LoginController  {
 			sessionBean.setNick(null);
 			sessionBean.setPassword(null);
 			ajaxNav.controllerNavigate("home");
+			FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 			msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Hasta luego ",
 					sessionBean.getNick());
 		}else{

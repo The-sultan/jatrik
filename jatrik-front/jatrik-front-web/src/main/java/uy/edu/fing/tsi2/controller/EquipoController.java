@@ -246,6 +246,10 @@ public class EquipoController implements Serializable {
 		}
 
 	}
+	
+	public void dummy(){
+		
+	}
 
 	public String getIdFormacion() {
 		return idFormacion;

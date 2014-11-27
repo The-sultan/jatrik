@@ -7,7 +7,7 @@
 
  
 
-	<h:form id="formEntr">
+	<h:form id="formEntr" >
 	<p:growl id="growl" showDetail="true" sticky="false" life="3000" /> 
 		<h:panelGroup layout="block" id="pnlEroor"
 			rendered="#{entrenamientoController.error}">
@@ -176,7 +176,25 @@
 
 		</h:panelGroup>
 
-		<script>
+		
+
+
+
+
+		<p:remoteCommand name="agregarAEntrenamiento"
+			action="#{entrenamientoController.agregarAEntrenamiento}"
+			update="formEntr" ajax="false" />
+
+		<p:remoteCommand name="comenzarEntrenamiento"
+			action="#{entrenamientoController.comenzarEntrenamiento}"
+			update="formEntr growl" ajax="true"/>
+			
+			
+			<p:remoteCommand name="dummy"
+			action="#{entrenamientoController.dummy}"
+			ajax="false" />
+			
+			<script>
 			var entrenamientoSeleccionado = '';
 			var jugadoresSeleccionados = '';
 			var listIds = [];
@@ -204,6 +222,7 @@
 
 				});
 				if (jugadoresSeleccionados != '') {
+					this.style.cursor = "wait";
 					agregarAEntrenamiento([ {
 						name : 'ids',
 						value : jugadoresSeleccionados
@@ -249,18 +268,12 @@
 			}
 
 			setHandlers();
+
+			dummy([]);
+			
+			
 		</script>
-
-
-
-
-		<p:remoteCommand name="agregarAEntrenamiento"
-			action="#{entrenamientoController.agregarAEntrenamiento}"
-			update="formEntr" ajax="false" />
-
-		<p:remoteCommand name="comenzarEntrenamiento"
-			action="#{entrenamientoController.comenzarEntrenamiento}"
-			update="formEntr growl" ajax="true"/>
+			
 	</h:form>
 
 </div>

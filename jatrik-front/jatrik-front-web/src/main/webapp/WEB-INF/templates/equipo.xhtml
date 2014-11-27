@@ -215,14 +215,7 @@
 		</p:dataGrid>
 
 
-		<h2>Estadio: "{equipoDatos.nombreEstadio}</h2>
-<!-- 		<ui:insert name="content"> -->
-			<h:form>
-				<m:map width="400px" height="400px" latitude="#{equipoDatos.latitudEstadio}" longitude="#{equipoDatos.longitudEstadio}" partiallyTriggered="true">
-					<m:marker id="marker1" latitude="#{equipoDatos.latitudEstadio}" longitude="#{equipoDatos.longitudEstadio}" draggable="false"/>
-	   			</m:map>          
-	   		</h:form>         
-<!--          </ui:insert> -->
+
 
 		<p:remoteCommand name="myRemote"
 			action="#{equipoController.onJugadorCambio}" update="formCancha"
@@ -285,7 +278,9 @@
 
 		setHandlers();
 </script>
+		
 	</h:form>
+	
 
 
 

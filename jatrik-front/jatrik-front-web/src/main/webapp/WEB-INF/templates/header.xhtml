@@ -5,7 +5,14 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/default.xhtml" id="header">
 	<div class="dualbrand">
-
+<script type="text/javascript">
+		function navegar(pagina) {
+			navegarRemote([ {
+				name : 'page',
+				value : pagina
+			} ]);
+		}
+	</script>
 
 		<h:form id="formHeader">
 			<div class="contenedor" id="unoNav">
@@ -95,7 +102,7 @@
 
 
 			<p:remoteCommand name="navegarRemote" action="#{ajaxNav.navigate}"
-				update=":content"/>
+				update=":content" />
 		</h:form>
 
 
@@ -103,14 +110,7 @@
 
 	</div>
 
-	<script>
-		function navegar(pagina) {
-			navegarRemote([ {
-				name : 'page',
-				value : pagina
-			} ]);
-		}
-	</script>
+	
 
 
 </div>

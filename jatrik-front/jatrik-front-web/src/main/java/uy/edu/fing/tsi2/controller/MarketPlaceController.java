@@ -9,7 +9,11 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Model;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 
 import uy.edu.fing.tsi2.front.ejb.interfaces.EquipoEJBLocal;
@@ -20,59 +24,58 @@ import uy.edu.fing.tsi2.model.SessionBeanJatrik;
 
 @SuppressWarnings("serial")
 @Model
-@RequestScoped
+@SessionScoped
 public class MarketPlaceController implements Serializable {
 
 	@Inject
 	SessionBeanJatrik sessionBean;
-	
+
 	private List<InfoTransferencia> transferencias;
-	
-	Map<InfoJugador, Boolean> selectedPlayersVenta = new HashMap<>();
-	
-	Map<InfoTransferencia, Boolean> selectedPlayersCompra = new HashMap<>();
-	
-	private List<InfoJugador> misJugadores;
-	
+
 	@EJB
 	private TransferenciaEJBLocal transferenciaEJB;
-	
+
 	@EJB
 	private EquipoEJBLocal equipoEJB;
-	
-	private List<Long> compras;
-	
+
 	private InfoJugador jugadorSeleccionadoVenta;
-	
+	private double valorVenta;
+
+	private InfoTransferencia transferenciaSeleccionadaCompra;
+
+	private List<InfoJugador> jugadoresEnVenta;
+
 	private List<InfoJugador> jugadoresNoEnVenta;
-	
-		
+
 	private Long idEquipo;
-	
+
 	private boolean error = false;
-	
+
 	@PostConstruct
 	public void obtenerJugadoresEnVenta() {
-		
-		transferencias = transferenciaEJB.getTransferencias(sessionBean.getInfoUsuario().getId());
-		List<InfoJugador> infoJugadores = equipoEJB.getJugadoresEquipo(sessionBean.getInfoUsuario().getId());
-		setMisJugadores(infoJugadores);
-		for(InfoJugador jugador : infoJugadores){
-			selectedPlayersVenta.put(jugador,false);
-		}
-		for(InfoTransferencia infoTransferencia : transferencias){
-			selectedPlayersCompra.put(infoTransferencia, Boolean.FALSE);
-		}
-		
-		jugadoresNoEnVenta = new ArrayList<InfoJugador>();
-		jugadoresNoEnVenta.addAll(infoJugadores);
-		jugadoresNoEnVenta.removeAll(transferencias);
-					
-	}
 
-	public void venderJugador(Long idJugador, Double precio) {
-		transferenciaEJB.ponerEnVentaJugador(this.sessionBean
-				.getInfoUsuario().getInfoEquipo().getId(), idJugador, precio);
+		transferencias = transferenciaEJB.getTransferencias(sessionBean
+				.getInfoUsuario().getId());
+
+		jugadoresNoEnVenta = equipoEJB.getJugadoresEquipo(sessionBean
+				.getInfoUsuario().getId());
+
+		jugadoresEnVenta = new ArrayList<InfoJugador>();
+		for (InfoTransferencia infoTransferencia : transferencias) {
+			jugadoresEnVenta.add(infoTransferencia.getJugador());
+		}
+
+		// Esto no funciona porque son listas que contienen diferentes tipos
+		// Por ahora sigo con la lista de jugadores completa para vender
+		// jugadoresNoEnVenta.removeAll(transferencias);
+
+		jugadorSeleccionadoVenta = jugadoresNoEnVenta.get(0);
+		
+		if(jugadoresEnVenta.size() > 0){
+			transferenciaSeleccionadaCompra = transferencias.get(0);
+			
+		}
+
 	}
 
 	private void comprarJugador(Long idTransferencia) {
@@ -80,7 +83,6 @@ public class MarketPlaceController implements Serializable {
 				.getInfoEquipo().getId(), idTransferencia);
 	}
 
-	
 	public SessionBeanJatrik getSessionBean() {
 		return sessionBean;
 	}
@@ -89,35 +91,75 @@ public class MarketPlaceController implements Serializable {
 		this.sessionBean = sessionBean;
 	}
 
-	
-	public void compraDeJugadores(){
-		compras = new ArrayList<Long>();
-		Double monto = 0.0;
-		for (InfoTransferencia transferencia : selectedPlayersCompra.keySet()) {
-			if (selectedPlayersCompra.get(transferencia)){
-				monto =+ transferencia.getPrecio();
-				compras.add(transferencia.getId());
-			}			
-		}
-		if (monto<= sessionBean.getInfoUsuario().getInfoEquipo().getFondos()){
-			for (Long elem : compras) {
-				comprarJugador(elem);
+	public void seleccionarJugadorVenta() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		Map<String, String> params = context.getExternalContext()
+				.getRequestParameterMap();
+		int id = Integer.parseInt(params.get("id"));
+
+		for (InfoJugador infoJugador : jugadoresNoEnVenta) {
+			if (infoJugador.getId() == id) {
+				jugadorSeleccionadoVenta = infoJugador;
+				break;
 			}
-		}else{
-			//TODO VER COMO TIRO ERROR
 		}
+
+		for (InfoTransferencia transferencia : transferencias) {
+			if (transferencia.getJugador().getId() == id) {
+				transferenciaSeleccionadaCompra = transferencia;
+				break;
+			}
+		}
+
 	}
 
-	public void venderJugadores(){
-	
-		for (InfoJugador jugador : selectedPlayersVenta.keySet()) {
-			if (selectedPlayersVenta.get(jugador)){
-				venderJugador(jugador.getId(), jugador.getPrecio());
-			}			
+	public void compraDeJugador() {
+		try {
+			if(transferenciaSeleccionadaCompra.getPrecio() > sessionBean.getInfoUsuario().getInfoEquipo().getFondos()){
+				FacesContext context = FacesContext.getCurrentInstance();
+				context.addMessage(null, new FacesMessage("Atencion",
+						"El equipo no tiene fondos suficientes para comrpar el jugador"));
+				return;
+			}
+			
+			comprarJugador(transferenciaSeleccionadaCompra.getId());
+			
+			FacesContext context = FacesContext.getCurrentInstance();
+			context.addMessage(null, new FacesMessage("Felicitaciones",
+					"Se ha concretado la compra"));
+			obtenerJugadoresEnVenta();
+		} catch (Exception e) {
+			FacesContext context = FacesContext.getCurrentInstance();
+			context.addMessage(null, new FacesMessage("Error",
+					"Ocurrio un error al realizar la compra"));
 		}
-	
+		
 	}
-	
+
+	public void venderJugador() {
+		try {
+			if (valorVenta <= 0) {
+				FacesContext context = FacesContext.getCurrentInstance();
+				context.addMessage(null, new FacesMessage("Error",
+						"Debe seleccionar un valor mayor a cero"));
+				return;
+			}
+
+			transferenciaEJB.ponerEnVentaJugador(this.sessionBean
+					.getInfoUsuario().getInfoEquipo().getId(),
+					jugadorSeleccionadoVenta.getId(), valorVenta);
+			obtenerJugadoresEnVenta();
+			FacesContext context = FacesContext.getCurrentInstance();
+			context.addMessage(null, new FacesMessage("Venta realizada",
+					"Se realizo correctamente la venta"));
+		} catch (Exception e) {
+			FacesContext context = FacesContext.getCurrentInstance();
+			context.addMessage(null, new FacesMessage("Error",
+					"Ocurrio un error al realizar la venta"));
+		}
+
+	}
+
 	public List<InfoTransferencia> getTransferencias() {
 		return transferencias;
 	}
@@ -126,44 +168,12 @@ public class MarketPlaceController implements Serializable {
 		this.transferencias = transferencias;
 	}
 
-	public List<Long> getCompras() {
-		return compras;
-	}
-
-	public void setCompras(List<Long> compras) {
-		this.compras = compras;
-	}
-
 	public Long getIdEquipo() {
 		return idEquipo;
 	}
 
 	public void setIdEquipo(Long idEquipo) {
 		this.idEquipo = idEquipo;
-	}
-
-	public List<InfoJugador> getMisJugadores() {
-		return misJugadores;
-	}
-
-	public void setMisJugadores(List<InfoJugador> misJugadores) {
-		this.misJugadores = misJugadores;
-	}
-
-	public Map<InfoJugador, Boolean> getSelectedPlayersVenta() {
-		return selectedPlayersVenta;
-	}
-
-	public void setSelectedPlayersVenta(Map<InfoJugador, Boolean> selectedPlayersVenta) {
-		this.selectedPlayersVenta = selectedPlayersVenta;
-	}
-
-	public Map<InfoTransferencia, Boolean> getSelectedPlayersCompra() {
-		return selectedPlayersCompra;
-	}
-
-	public void setSelectedPlayersCompra(Map<InfoTransferencia, Boolean> selectedPlayersCompra) {
-		this.selectedPlayersCompra = selectedPlayersCompra;
 	}
 
 	public boolean isError() {
@@ -175,8 +185,7 @@ public class MarketPlaceController implements Serializable {
 	}
 
 	public InfoJugador getJugadorSeleccionadoVenta() {
-		//TODO: Implementar bien
-		return misJugadores.get(1);
+		return jugadorSeleccionadoVenta;
 	}
 
 	public void setJugadorSeleccionadoVenta(InfoJugador jugadorSeleccionadoVenta) {
@@ -189,6 +198,31 @@ public class MarketPlaceController implements Serializable {
 
 	public void setJugadoresNoEnVenta(List<InfoJugador> jugadoresNoEnVenta) {
 		this.jugadoresNoEnVenta = jugadoresNoEnVenta;
+	}
+
+	public List<InfoJugador> getJugadoresEnVenta() {
+		return jugadoresEnVenta;
+	}
+
+	public void setJugadoresEnVenta(List<InfoJugador> jugadoresEnVenta) {
+		this.jugadoresEnVenta = jugadoresEnVenta;
+	}
+
+	public double getValorVenta() {
+		return valorVenta;
+	}
+
+	public void setValorVenta(double valorVenta) {
+		this.valorVenta = valorVenta;
+	}
+
+	public InfoTransferencia getTransferenciaSeleccionadaCompra() {
+		return transferenciaSeleccionadaCompra;
+	}
+
+	public void setTransferenciaSeleccionadaCompra(
+			InfoTransferencia transferenciaSeleccionadaCompra) {
+		this.transferenciaSeleccionadaCompra = transferenciaSeleccionadaCompra;
 	}
 
 }

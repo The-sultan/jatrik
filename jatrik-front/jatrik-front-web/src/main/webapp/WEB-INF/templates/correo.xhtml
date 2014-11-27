@@ -5,9 +5,10 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/default.xhtml">
-	<h1>Correo</h1>
+	<div class="formMrkt" style="text-align: center;">
+	<h1 style="color: white;">Correo</h1><br/>
 	<h:panelGroup id="mailbox">
-		<div id="tabs" class="mailbox-form">
+		<div id="tabs" class="mailbox-form" onload="function(){$('#tabs').tabs();}">
 			<h:form id="entradaForm">
 				<ul>
 					<li><a href="#entradaTab">Bandeja de Entrada (<h:outputText
@@ -138,6 +139,6 @@
 		}, 60000);
 	</script>
 
-
+</div>
 </div>
 

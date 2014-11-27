@@ -8,10 +8,11 @@
 
 
 	<h:form id="formMrkt" rendered="#{!marketPlaceController.error}">
-
-		<div id="marketplaceVentas" class="formMrktplace" align="center"
+	<p:growl id="growl" showDetail="true" sticky="false" life="3000" /> 
+	<div class="formMrkt">
+		<div id="marketplaceVentas"  align="center"
 			style="width: 65%; float: left;">
-			<h1>Venta de jugadores</h1>
+			<h1 style="color: white;">Venta de jugadores</h1>
 			<div id="jugadoresVender">
 				<ui:repeat var="jugador"
 					value="#{marketPlaceController.jugadoresNoEnVenta}">
@@ -46,11 +47,11 @@
 
 		</div>
 		<div
-			style="background-color: blue; width: 30%; height: 450px; float: right;">
+			style="width: 30%; height: 450px; float: right;">
 
 
 			<div id="jug" class="titular jugadorVenta"
-				style="width: 7%; margin-left: 30%;margin-top: 10%;">
+				style="width: 7%; margin-left: 30%; margin-top: 30%;">
 				<p:panel id="rpnlVent"
 					style="background-color: rgba(255, 255, 255,0);border-color:rgba(0,0,0,0);background-image:none;">
 					<ui:insert name="jugador">
@@ -77,7 +78,11 @@
 
 				</p:panel>
 				<div style="width: 550%; text-align: center;">
-					<p:inputText style="text-align: center; "></p:inputText>
+					<p:inputText style="text-align: center; " value="#{marketPlaceController.valorVenta}"></p:inputText>
+					<p:commandButton value="Vender"  actionListener="#{marketPlaceController.venderJugador}"
+						icon="ui-icon-star" update="formMrkt">
+						<f:param name="productId" value="10" />
+					</p:commandButton>
 				</div>
 			</div>
 
@@ -87,10 +92,10 @@
 
 		<div id="marketplaceCompras" class="formMrktplace" align="center"
 			style="width: 65%; float: left;">
-			<h1>Compra de jugadores</h1>
+			<h1 style="color: white;">Compra de jugadores</h1>
 			<div id="jugadoresComprar">
 				<ui:repeat var="jugador"
-					value="#{marketPlaceController.misJugadores}">
+					value="#{marketPlaceController.jugadoresEnVenta}">
 					<div id="jug" class="titular titularHover" style="width: 8%">
 						<p:panel id="rpnlComp"
 							style="background-color: rgba(255, 255, 255,0); border-color:rgba(0,0,0,0);background-image:none;">
@@ -122,197 +127,84 @@
 
 		</div>
 		<div
-			style="background-color: green; width: 30%; height: 500px; float: right;">
+			style=" width: 30%; height: 500px; float: right;">
 
 
 			<div id="jug" class="titular jugadorVenta"
-				style="width: 7%; margin-left: 30%;margin-top: 10%;">
+				style="width: 7%; margin-left: 30%; margin-top: 30%;">
 				<p:panel id="rpnlCompJug"
 					style="background-color: rgba(255, 255, 255,0);border-color:rgba(0,0,0,0);background-image:none;">
 					<ui:insert name="jugador">
 						<ui:include src="/tarjeta.xhtml">
 							<ui:param name="id"
-								value="#{marketPlaceController.jugadorSeleccionadoVenta.id}" />
+								value="#{marketPlaceController.transferenciaSeleccionadaCompra.jugador.id}" />
 							<ui:param name="nombre"
-								value="#{marketPlaceController.jugadorSeleccionadoVenta.nombre}" />
+								value="#{marketPlaceController.transferenciaSeleccionadaCompra.jugador.nombre}" />
 							<ui:param name="puesto"
-								value="#{marketPlaceController.jugadorSeleccionadoVenta.puesto.subSequence(0,3)}" />
+								value="#{marketPlaceController.transferenciaSeleccionadaCompra.jugador.puesto.subSequence(0,3)}" />
 							<ui:param name="valoracion" value="50" />
 							<ui:param name="ataque"
-								value="#{marketPlaceController.jugadorSeleccionadoVenta.habilidades.get(0).valor}" />
+								value="#{marketPlaceController.transferenciaSeleccionadaCompra.jugador.habilidades.get(0).valor}" />
 							<ui:param name="defensa"
-								value="#{marketPlaceController.jugadorSeleccionadoVenta.habilidades.get(1).valor}" />
+								value="#{marketPlaceController.transferenciaSeleccionadaCompra.jugador.habilidades.get(1).valor}" />
 							<ui:param name="velocidad"
-								value="#{marketPlaceController.jugadorSeleccionadoVenta.habilidades.get(2).valor}" />
+								value="#{marketPlaceController.transferenciaSeleccionadaCompra.jugador.habilidades.get(2).valor}" />
 							<ui:param name="tecnica"
-								value="#{marketPlaceController.jugadorSeleccionadoVenta.habilidades.get(3).valor}" />
+								value="#{marketPlaceController.transferenciaSeleccionadaCompra.jugador.habilidades.get(3).valor}" />
 							<ui:param name="porteria"
-								value="#{marketPlaceController.jugadorSeleccionadoVenta.habilidades.get(4).valor}" />
+								value="#{marketPlaceController.transferenciaSeleccionadaCompra.jugador.habilidades.get(4).valor}" />
 						</ui:include>
 					</ui:insert>
 
 				</p:panel>
 				<div style="width: 550%; text-align: center;">
-					<p:inputText style="text-align: center; "></p:inputText>
+					<p:inputText style="text-align: center; " value="#{marketPlaceController.transferenciaSeleccionadaCompra.precio}"></p:inputText>
+					<p:commandButton value="Comprar"  actionListener="#{marketPlaceController.compraDeJugador}"
+						icon="ui-icon-star" update="formMrkt">
+						<f:param name="productId" value="10" />
+					</p:commandButton>
+				
+
+
 				</div>
+
 			</div>
 
 
-		</div>
 
+
+		</div>
+</div>
+
+		<p:remoteCommand name="seleccionarJugadorVentaRemote"
+			action="#{marketPlaceController.seleccionarJugadorVenta}"
+			update="formMrkt" ajax="false" />
+
+		<script>
+			function handleDblClick() {
+				this.style.cursor = "wait";
+				seleccionarJugadorVentaRemote([ {
+					name : 'id',
+					value : this.id
+				} ]);
+			}
+
+			function setHandlers() {
+				var cols = document.querySelectorAll('.cardcontainer');
+				[].forEach.call(cols, function(col) {
+
+					col.removeEventListener('dblclick', handleDblClick, false);
+					col.addEventListener('dblclick', handleDblClick, false);
+				});
+			}
+
+			setHandlers();
+		</script>
 
 	</h:form>
 
 
 
-	<h:panelGroup id="compraventa" rendered="false">
-		<div id="tabs" class="market-form">
-			<ul>
-				<li><a href="#compraTab">Compras</a></li>
-				<li><a href="#ventaTab">Ventas</a></li>
-			</ul>
-			<div id="compraTab">
-				<h:form id="marketForm">
-					<h:panelGroup layout="block" id="updatableCompra"
-						class="resultados">
-						<h:dataTable value="#{marketPlaceController.transferencias}"
-							var="trans" columnClasses="transferenciaMarket" id="tableCompras"
-							class="results-table">
-							<h:column>
-								<f:facet name="header">Id</f:facet>
-								<h:outputText value="#{trans.id}" />
-							</h:column>
-							<h:column>
-								<f:facet name="header">Nombre</f:facet>
-								<h:outputText value="#{trans.jugador.nombre}" />
-							</h:column>
-							<h:column>
-								<f:facet name="header">Puesto</f:facet>
-								<h:outputText value="#{trans.jugador.puesto}" />
-							</h:column>
-							<h:column>
-								<f:facet name="header">Precio</f:facet>
-								<h:outputText value="#{trans.precio}" />
-							</h:column>
-							<h:column>
-								<f:facet name="header">Edad</f:facet>
-								<h:outputText value="#{trans.jugador.edad}" />
-							</h:column>
-							<h:column>
-								<f:facet name="header">Peso</f:facet>
-								<h:outputText value="#{trans.jugador.peso}" />
-							</h:column>
-							<h:column>
-								<f:facet name="header">Altura</f:facet>
-								<h:outputText value="#{trans.jugador.altura}" />
-							</h:column>
-							<h:column>
-								<f:facet name="header">Velocidad</f:facet>
-								<h:outputText value="#{trans.jugador.habilidades.get(0).valor}" />
-							</h:column>
-							<h:column>
-								<f:facet name="header">Porteria</f:facet>
-								<h:outputText value="#{trans.jugador.habilidades.get(1).valor}" />
-							</h:column>
-							<h:column>
-								<f:facet name="header">Tecnica</f:facet>
-								<h:outputText value="#{trans.jugador.habilidades.get(2).valor}" />
-							</h:column>
-							<h:column>
-								<f:facet name="header">Defensa</f:facet>
-								<h:outputText value="#{trans.jugador.habilidades.get(3).valor}" />
-							</h:column>
-							<h:column>
-								<f:facet name="header">Ataque</f:facet>
-								<h:outputText value="#{trans.jugador.habilidades.get(4).valor}" />
-							</h:column>
-							<h:column>
-								<f:facet name="header">Comprar?</f:facet>
-								<h:selectBooleanCheckbox id="item_#{trans.id}"
-									value="#{marketPlaceController.selectedPlayersCompra[trans]}" />
-							</h:column>
-						</h:dataTable>
-						<p:commandButton styleClass="btn"
-							action="#{marketPlaceController.compraDeJugadores}"
-							value="Comprar">
-							<f:ajax render=":compraventa"></f:ajax>
-						</p:commandButton>
 
-					</h:panelGroup>
-				</h:form>
-			</div>
-			<div id="ventaTab">
-				<h:form>
-					<h:panelGroup layout="block" id="updatableVenta" class="resultados">
-						<h:dataTable value="#{marketPlaceController.misJugadores}"
-							var="player" columnClasses="transferenciaMarket" id="tableVentas"
-							class="results-table">
-							<h:column>
-								<f:facet name="header">Id</f:facet>
-								<h:outputText value="#{player.id}" />
-							</h:column>
-							<h:column>
-								<f:facet name="header">Nombre</f:facet>
-								<h:outputText value="#{player.nombre}" />
-							</h:column>
-							<h:column>
-								<f:facet name="header">Puesto</f:facet>
-								<h:outputText value="#{player.puesto}" />
-							</h:column>
-							<h:column>
-								<f:facet name="header">Edad</f:facet>
-								<h:outputText value="#{player.edad}" />
-							</h:column>
-							<h:column>
-								<f:facet name="header">Peso</f:facet>
-								<h:outputText value="#{player.peso}" />
-							</h:column>
-							<h:column>
-								<f:facet name="header">Altura</f:facet>
-								<h:outputText value="#{player.altura}" />
-							</h:column>
-							<h:column>
-								<f:facet name="header">Velocidad</f:facet>
-								<h:outputText value="#{player.habilidades.get(0).valor}" />
-							</h:column>
-							<h:column>
-								<f:facet name="header">Porteria</f:facet>
-								<h:outputText value="#{player.habilidades.get(1).valor}" />
-							</h:column>
-							<h:column>
-								<f:facet name="header">Tecnica</f:facet>
-								<h:outputText value="#{trans.jugador.habilidades.get(2).valor}" />
-							</h:column>
-							<h:column>
-								<f:facet name="header">Defensa</f:facet>
-								<h:outputText value="#{player.habilidades.get(3).valor}" />
-							</h:column>
-							<h:column>
-								<f:facet name="header">Ataque</f:facet>
-								<h:outputText value="#{player.habilidades.get(4).valor}" />
-							</h:column>
-							<h:column>
-								<f:facet name="header">Precio</f:facet>
-								<h:inputText value="#{player.precio}" />
-							</h:column>
-							<h:column>
-								<f:facet name="header">Vender?</f:facet>
-								<h:selectBooleanCheckbox id="player_#{player.id}"
-									value="#{marketPlaceController.selectedPlayersVenta[player]}" />
-							</h:column>
-
-						</h:dataTable>
-						<p:commandButton styleClass="btn"
-							action="#{marketPlaceController.venderJugadores}" value="Vender">
-							<f:ajax render=":compraventa"></f:ajax>
-						</p:commandButton>
-					</h:panelGroup>
-				</h:form>
-			</div>
-			<script type="text/javascript">
-				$("#tabs").tabs();
-			</script>
-		</div>
-	</h:panelGroup>
 
 </div>

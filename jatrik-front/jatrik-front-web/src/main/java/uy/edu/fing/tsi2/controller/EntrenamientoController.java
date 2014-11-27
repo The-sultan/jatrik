@@ -185,6 +185,10 @@ public class EntrenamientoController implements Serializable {
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.addMessage(null, new FacesMessage("Entrenamiento realizado",  "El equipo acaba de realizar el entrenamiento diario") );
 	}
+	
+	public void dummy(){
+		
+	}
 
 	public boolean isError() {
 		return error;

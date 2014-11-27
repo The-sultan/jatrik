@@ -16,8 +16,7 @@
  */
 /* Core styles for the page */
 html, body {
-	height: 100%;
-	overflow-x: hidden;
+
 }
 
 body {
@@ -287,6 +286,14 @@ input {
 
 .formEntrenamiento {
 	background-image: url("../../resources/gfx/entrenamiento.jpg");
+	background-repeat: no-repeat;
+	background-size: contain;
+	height: 1200px;
+	position: relative;
+}
+
+.formMrkt {
+	background-image: url("../../resources/gfx/fondoVerde.jpg");
 	background-repeat: no-repeat;
 	background-size: contain;
 	height: 1200px;

@@ -122,6 +122,10 @@ public class MiembroController {
         return errorMessage;
     }
     
+    public void dummy(){
+    	
+    }
+    
     
 	public List<SelectItem> getPaises() {
 		return paises;
