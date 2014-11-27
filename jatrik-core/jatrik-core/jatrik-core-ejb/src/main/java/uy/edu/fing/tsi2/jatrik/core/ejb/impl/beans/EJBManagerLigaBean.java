@@ -70,7 +70,7 @@ public class EJBManagerLigaBean implements ILigas {
         nombreEquipos.add("Wanderers");
         nombreEquipos.add("Danubio");
         nombreEquipos.add("River");
-        nombreEquipos.add("Defensor");
+        /*nombreEquipos.add("Defensor");
         nombreEquipos.add("Peñarol");
         nombreEquipos.add("Naciomal");
         nombreEquipos.add("Rampla");
@@ -81,7 +81,7 @@ public class EJBManagerLigaBean implements ILigas {
         nombreEquipos.add("Sud America");
         nombreEquipos.add("Tacuarembo");
         nombreEquipos.add("Rampla Juniors");
-        nombreEquipos.add("Juventud");
+        nombreEquipos.add("Juventud");*/
 
         for (String nombreEquipo : nombreEquipos) {
             InfoEquipo infoEquipo = new InfoEquipo();
@@ -151,7 +151,7 @@ public class EJBManagerLigaBean implements ILigas {
             long primerFechaIda = (new Date()).getTime() + UN_MINUTO;// +
             // TIEMPO_ENTRE_PARTIDOS;
             long primerFechaVuelta = primerFechaIda
-                    + (TIEMPO_ENTRE_PARTIDOS * factorial(cantEquipos - 1))
+                    + (TIEMPO_ENTRE_PARTIDOS * cantEquipos/2 * cantEquipos-1)/*factorial(cantEquipos - 1))*/
                     + UN_MINUTO;
             
             Date fechaInicio = new Date(primerFechaIda);
@@ -335,12 +335,9 @@ public class EJBManagerLigaBean implements ILigas {
         for (RelLigaEquipo relLigaEquipo : tabla) {
 
             Equipo equipo = relLigaEquipo.getEquipo();
-
+            
             if (equipo.equals(partido.getLocal()) || equipo.equals(partido.getVisitante())) {
-
                 relLigaEquipo.setPartidosJugados(relLigaEquipo.getPartidosJugados() + 1);
-              
-                relLigaEquipo.setPartidosGanados(golesGanador);
                 if (equipoGanador == null && equipoPerdedor == null) {
                          // Empate, sumo un pto a cada equipo.
                         // Actualizo GF y GC para cada equipo. Tomo uno de los dos equipos

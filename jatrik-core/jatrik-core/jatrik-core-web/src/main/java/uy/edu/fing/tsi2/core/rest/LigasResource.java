@@ -28,6 +28,7 @@ import uy.edu.fing.tsi2.jatrik.core.domain.RelLigaPartido;
 
 import uy.edu.fing.tsi2.jatrik.core.ejb.impl.local.EJBManagerEquipoBeanLocal;
 import uy.edu.fing.tsi2.jatrik.core.ejb.impl.local.EJBManagerLigaBeanLocal;
+import uy.edu.fing.tsi2.jatrik.core.utils.DateUtils;
 
 @RequestScoped
 public class LigasResource {
@@ -75,7 +76,15 @@ public class LigasResource {
             for (RelLigaPartido relLigaPartido : fixture) {
                 Integer etapa = relLigaPartido.getPartido().getEtapa();
                 Partido partido = relLigaPartido.getPartido();
-                InfoPartido infoPartido = new InfoPartido(partido.getId(), partido.getEstado().name(), partido.getLocal().getNombre(), partido.getVisitante().getNombre(), partido.getGolesLocal(), partido.getGolesVisitante());
+                InfoPartido infoPartido = new InfoPartido(partido.getId(), 
+                                                          partido.getEstado().name(), 
+                                                          partido.getLocal().getNombre(),
+                                                          partido.getVisitante().getNombre(), 
+                                                          partido.getGolesLocal(), 
+                                                          partido.getGolesVisitante());
+                
+                infoPartido.setFecha(DateUtils.getFecha(partido.getFechaInicio()));
+                
                 if (partidos.containsKey(etapa)) {
                     List<InfoPartido> listInfoPartido = partidos.get(etapa);
                     listInfoPartido.add(infoPartido);

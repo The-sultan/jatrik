@@ -9,7 +9,7 @@ import java.util.Locale;
 
 public class DateUtils {
 
-	public static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    public static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     public static SimpleDateFormat sdfDateHour = new SimpleDateFormat("dd/MM/yyyy HH:mm");
     public static SimpleDateFormat sdfHour = new SimpleDateFormat("hh:mm");
     public static SimpleDateFormat sdfHour24 = new SimpleDateFormat("HH:mm");

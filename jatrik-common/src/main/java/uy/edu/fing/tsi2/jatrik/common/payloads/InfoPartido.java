@@ -5,98 +5,96 @@ import java.util.List;
 
 public class InfoPartido {
 
-	private Long idPartido;
-	
-	private String estado;
+    private Long idPartido;
 
-	private int golesLocal;
+    private String estado;
 
-	private int golesVisitante;
+    private int golesLocal;
 
-	private String equipoLocal;
+    private int golesVisitante;
 
-	private String equipoVisitante;
-	
-	private String fecha;
+    private String equipoLocal;
 
-	
-	
-	private List<InfoEvento> eventos;
+    private String equipoVisitante;
 
-	public Long getIdPartido() {
-		return idPartido;
-	}
+    private String fecha;
 
-	public void setIdPartido(Long idPartido) {
-		this.idPartido = idPartido;
-	}	
-	
-	public String getEstado() {
-		return estado;
-	}
+    private List<InfoEvento> eventos;
 
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
+    public Long getIdPartido() {
+        return idPartido;
+    }
 
-	public int getGolesLocal() {
-		return golesLocal;
-	}
+    public void setIdPartido(Long idPartido) {
+        this.idPartido = idPartido;
+    }
 
-	public void setGolesLocal(int golesLocal) {
-		this.golesLocal = golesLocal;
-	}
+    public String getEstado() {
+        return estado;
+    }
 
-	public int getGolesVisitante() {
-		return golesVisitante;
-	}
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
 
-	public void setGolesVisitante(int golesVisitante) {
-		this.golesVisitante = golesVisitante;
-	}
+    public int getGolesLocal() {
+        return golesLocal;
+    }
 
-	public String getEquipoLocal() {
-		return equipoLocal;
-	}
+    public void setGolesLocal(int golesLocal) {
+        this.golesLocal = golesLocal;
+    }
 
-	public void setEquipoLocal(String equipoLocal) {
-		this.equipoLocal = equipoLocal;
-	}
+    public int getGolesVisitante() {
+        return golesVisitante;
+    }
 
-	public String getEquipoVisitante() {
-		return equipoVisitante;
-	}
+    public void setGolesVisitante(int golesVisitante) {
+        this.golesVisitante = golesVisitante;
+    }
 
-	public void setEquipoVisitante(String equipoVisitante) {
-		this.equipoVisitante = equipoVisitante;
-	}
-	
-	public List<InfoEvento> getEventos() {
-		return eventos;
-	}
+    public String getEquipoLocal() {
+        return equipoLocal;
+    }
 
-	public void setEventos(List<InfoEvento> eventos) {
-		this.eventos = eventos;
-	}
-	
-	public InfoPartido (Long id, String Estado, String Local, String Visitante, int golesL, int golesV){
-		idPartido = id;
-		estado = Estado;
-		equipoLocal = Local;
-		equipoVisitante = Visitante;
-		golesLocal = golesL;
-		golesVisitante = golesV;
-	}
+    public void setEquipoLocal(String equipoLocal) {
+        this.equipoLocal = equipoLocal;
+    }
 
-	public String getFecha() {
-		return fecha;
-	}
+    public String getEquipoVisitante() {
+        return equipoVisitante;
+    }
 
-	public void setFecha(String fecha) {
-		this.fecha = fecha;
-	}
+    public void setEquipoVisitante(String equipoVisitante) {
+        this.equipoVisitante = equipoVisitante;
+    }
 
-	public InfoPartido() {
-	}
+    public List<InfoEvento> getEventos() {
+        return eventos;
+    }
+
+    public void setEventos(List<InfoEvento> eventos) {
+        this.eventos = eventos;
+    }
+
+    public InfoPartido(Long id, String Estado, String Local, String Visitante, int golesL, int golesV) {
+        this.idPartido = id;
+        this.estado = Estado;
+        this.equipoLocal = Local;
+        this.equipoVisitante = Visitante;
+        this.golesLocal = golesL;
+        this.golesVisitante = golesV;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    public InfoPartido() {
+    }
 
 }
