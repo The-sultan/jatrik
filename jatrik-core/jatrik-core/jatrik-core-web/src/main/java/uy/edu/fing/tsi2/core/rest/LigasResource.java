@@ -54,14 +54,14 @@ public class LigasResource {
         return Response.created(uri).build();
     }
 
-    @Path("/{id}")
+    @Path("/equipo/{id}")
     @Produces("application/json")
     @GET
-    public Response obtenerInfoLiga(@PathParam("id") Long id) {
+    public Response obtenerInfoLiga(@PathParam("id") Long idEquipo) {
 
         InfoLiga resultado = new InfoLiga();
         try {
-            Liga liga = ligaEJB.find(id);
+            Liga liga = ligaEJB.obtenerLigaEquipo(idEquipo);
 
             resultado.setDescripcion(liga.getDescripcion());
             resultado.setId(liga.getId());
@@ -118,4 +118,5 @@ public class LigasResource {
         }
         return Response.serverError().build();
     }
+    
 }

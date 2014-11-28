@@ -335,11 +335,13 @@ public class EJBManagerLigaBean implements ILigas {
         return ligasEJB.find(id);
     }
 
-    public Liga obtenerLigaEquipo(Equipo equipo) {
-        return ligasEJB.findLigaByEquipo(equipo);
+    public Liga obtenerLigaEquipo(Long idEquipo) {
+    	Equipo equipo = equiposEJB.find(idEquipo);
+    	return ligasEJB.findLigaByEquipo(equipo);
     }
 
-    public Liga obtenerLigaPartido(Partido partido) {
+    public Liga obtenerLigaPartido(Long idPartido){
+    	Partido partido = partidosEJB.find(idPartido);
         return ligasEJB.findLigaByPartido(partido);
     }
 

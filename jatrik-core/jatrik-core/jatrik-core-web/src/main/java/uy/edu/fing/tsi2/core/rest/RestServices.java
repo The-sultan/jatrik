@@ -72,7 +72,6 @@ public class RestServices {
 		return entrenamientoResource;
 	}	
 
-	
 	@Path("/simulacion")
 	public  SimuladorResource getSimuladorResource(){
 		return simuladorResource;

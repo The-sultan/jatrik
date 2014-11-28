@@ -18,11 +18,11 @@ public interface ILigas {
         
         void actualizarTablaPosiciones(Partido partido);
         
-        Liga obtenerLigaEquipo(Equipo equipo);
+        Liga obtenerLigaEquipo(Long idEquipo);
 	
         void crearFixtureConEtapas(Liga liga);
         
-        Liga obtenerLigaPartido(Partido partido);
+        Liga obtenerLigaPartido(Long idPartido);
         
         void deleteLiga(Liga liga);
         
