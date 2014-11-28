@@ -4,6 +4,8 @@ import java.util.List;
 import uy.edu.fing.tsi2.jatrik.core.domain.Equipo;
 import uy.edu.fing.tsi2.jatrik.core.domain.Liga;
 import uy.edu.fing.tsi2.jatrik.core.domain.Partido;
+import uy.edu.fing.tsi2.jatrik.core.domain.RelLigaEquipo;
+import uy.edu.fing.tsi2.jatrik.core.domain.RelLigaPartido;
 
 
 public interface ILigas {
@@ -34,7 +36,13 @@ public interface ILigas {
         
         Liga crearLiga(String descripcion);
         
-              
+        List<RelLigaEquipo> obtenerTablaPosiciones(Liga liga);
+        
+        List<RelLigaPartido> obtenerFixture(Liga liga);
+        
+        //Crea equipos con valores generales y una liga que los contiene
+    //Solo la usariamos si quisieramos automatizar la generacion de liga y equipos
+        Long initLigasEquipos(); //Devuelve el id de la liga creada
         
     
 }
