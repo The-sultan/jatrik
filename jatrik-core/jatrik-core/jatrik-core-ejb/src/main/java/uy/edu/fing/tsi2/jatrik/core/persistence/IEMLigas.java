@@ -24,5 +24,11 @@ public interface IEMLigas {
         Liga findLigaByEquipo(Equipo equipo);
         
         Liga findLigaByPartido(Partido partido);
+        
+        List<Liga> obtenerLigasEnCurso();
+        
+        List<Liga> obtenerLigasNoIniciados();
+        
+        
 		
 }

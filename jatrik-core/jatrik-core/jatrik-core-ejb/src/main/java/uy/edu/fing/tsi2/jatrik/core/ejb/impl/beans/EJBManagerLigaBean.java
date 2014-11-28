@@ -124,9 +124,10 @@ public class EJBManagerLigaBean implements ILigas {
         ligasEJB.update(liga);
     }
 
-    public void crearLiga(String descripcion) {
+    public Liga crearLiga(String descripcion) {
         Liga liga = new Liga(descripcion, null, null);
         ligasEJB.add(liga);
+        return liga;
     }
 
     public void crearFixtureConEtapas(Liga liga) {
@@ -230,88 +231,6 @@ public class EJBManagerLigaBean implements ILigas {
 
     }
 
-//    public void crearFixture(Liga liga) {
-//
-//        logger.info("#### CREANDO FIXTURE ####");
-//
-//        List<Equipo> equipos = new ArrayList<Equipo>();
-//
-//        Set<RelLigaEquipo> tabla = liga.getRelLigaEquipo();
-//
-//        for (RelLigaEquipo relLigaEquipo : tabla) {
-//            Equipo equipo = relLigaEquipo.getEquipo();
-//            equipos.add(equipo);
-//        }
-//
-//        int cantEquipos = equipos.size();
-//        if (cantEquipos > 1) {
-//            List<Partido> partidosDeIda = new ArrayList<Partido>();
-//            List<Partido> partidosDeVuelta = new ArrayList<Partido>();
-//
-//            int i = 0;
-//            long primerFechaIda = (new Date()).getTime() + UN_MINUTO;// +
-//            // TIEMPO_ENTRE_PARTIDOS;
-//            long primerFechaVuelta = primerFechaIda
-//                    + (TIEMPO_ENTRE_PARTIDOS * factorial(cantEquipos - 1))
-//                    + UN_MINUTO;
-//            Date fechaInicio = new Date(primerFechaIda);
-//            Date fechaFin = null;
-//
-//            for (int j = 0; j < cantEquipos; j++) {
-//                Equipo equipo1 = equipos.get(j);
-//                for (int k = j + 1; k < cantEquipos; k++, i++) {
-//                    Equipo equipo2 = equipos.get(k);
-//
-//                    Partido partidoIda = new Partido(new Date(primerFechaIda
-//                            + (TIEMPO_ENTRE_PARTIDOS * i)),
-//                            EnumEstadoPartido.PENDIENTE, equipo1, equipo2, 0, 0);
-//                    partidoIda.setEtapa(etapaAux);
-//                    partidosDeIda.add(partidoIda);
-//                    Partido partidoVuelta = new Partido(new Date(
-//                            primerFechaVuelta + (TIEMPO_ENTRE_PARTIDOS * i)),
-//                            EnumEstadoPartido.PENDIENTE, equipo2, equipo1, 0, 0);
-//                    partidoVuelta.setEtapa(etapaAux + cantEquipos / 2);
-//                    partidosDeVuelta.add(partidoVuelta);
-//
-//                    // Me guardo la fecha del último partido para setearla en la
-//                    //liga .
-//                    fechaFin = new Date(primerFechaVuelta
-//                            + (TIEMPO_ENTRE_PARTIDOS * i));
-//                    etapaAux++;
-//                }
-//                etapaAux = etapa++;
-//            }
-//
-//            Set<RelLigaPartido> fixture = new HashSet<RelLigaPartido>();
-//
-//            for (Partido partido : partidosDeIda) {
-//                logger.info("Partido    ida: " + partido.getLocal().getNombre()
-//                        + "-" + partido.getVisitante().getNombre() + " fecha: "
-//                        + partido.getFechaInicio());
-//                partidosEJB.add(partido);
-//                fixture.add(new RelLigaPartido(liga, partido));
-//
-//            }
-//            for (Partido partido : partidosDeVuelta) {
-//                logger.info("Partido vuelta: " + partido.getLocal().getNombre()
-//                        + "-" + partido.getVisitante().getNombre() + " fecha: "
-//                        + partido.getFechaInicio());
-//                partidosEJB.add(partido);
-//                fixture.add(new RelLigaPartido(liga, partido));
-//            }
-//
-//            liga.setRelLigaPartido(fixture);
-//            liga.setFechaInicio(fechaInicio);
-//            liga.setFechaFin(fechaFin);
-//
-//            ligasEJB.add(liga);
-//
-//        }
-//
-//        logger.info("#### FIN CREAR FIXTURE ####");
-//
-//    }
-    
     public void actualizarTablaPosiciones(Partido partido) {
         Liga liga = ligasEJB.findLigaByPartido(partido);
         Set<RelLigaEquipo> tabla = liga.getRelLigaEquipo();
@@ -387,4 +306,23 @@ public class EJBManagerLigaBean implements ILigas {
     public Liga obtenerLigaPartido(Partido partido){
         return ligasEJB.findLigaByPartido(partido);
     }
+    
+    public void deleteLiga(Liga liga) {
+	ligasEJB.delete(liga);		
+    }
+    
+    public List<Liga> obtenerLigasEnCurso() {
+	return ligasEJB.obtenerLigasEnCurso();
+    }
+    
+    public List<Liga> obtenerLigasVigentes() {
+	return ligasEJB.obtenerLigasNoIniciados();
+    }
+    
+    public Liga updateLiga(Liga liga) {
+	return ligasEJB.update(liga);
+    }
+    
+    
+
 }
