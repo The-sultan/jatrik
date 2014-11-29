@@ -5,10 +5,10 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
- 
 
-	<h:form id="formEntr" >
-	<p:growl id="growl" showDetail="true" sticky="false" life="3000" /> 
+
+	<h:form id="formEntr">
+		<p:growl id="growl" showDetail="true" sticky="false" life="3000" />
 		<h:panelGroup layout="block" id="pnlEroor"
 			rendered="#{entrenamientoController.error}">
 
@@ -176,7 +176,7 @@
 
 		</h:panelGroup>
 
-		
+
 
 
 
@@ -187,14 +187,13 @@
 
 		<p:remoteCommand name="comenzarEntrenamiento"
 			action="#{entrenamientoController.comenzarEntrenamiento}"
-			update="formEntr growl" ajax="true"/>
-			
-			
-			<p:remoteCommand name="dummy"
-			action="#{entrenamientoController.dummy}"
-			ajax="false" />
-			
-			<script>
+			update="formEntr growl" ajax="true" />
+
+
+		<p:remoteCommand name="dummy"
+			action="#{entrenamientoController.dummy}" ajax="false" />
+
+		<script>
 			var entrenamientoSeleccionado = '';
 			var jugadoresSeleccionados = '';
 			var listIds = [];
@@ -270,10 +269,8 @@
 			setHandlers();
 
 			dummy([]);
-			
-			
 		</script>
-			
+
 	</h:form>
 
 </div>

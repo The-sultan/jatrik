@@ -130,8 +130,8 @@
 			style=" width: 30%; height: 500px; float: right;">
 
 
-			<div id="jug" class="titular jugadorVenta"
-				style="width: 7%; margin-left: 30%; margin-top: 30%;">
+			<h:panelGroup layout="block" id="jug" class="titular jugadorVenta" 
+				style="width: 7%; margin-left: 30%;margin-top: 10%;" rendered="#{not empty marketPlaceController.transferenciaSeleccionadaCompra}">
 				<p:panel id="rpnlCompJug"
 					style="background-color: rgba(255, 255, 255,0);border-color:rgba(0,0,0,0);background-image:none;">
 					<ui:insert name="jugador">
@@ -158,8 +158,8 @@
 
 				</p:panel>
 				<div style="width: 550%; text-align: center;">
-					<p:inputText style="text-align: center; " value="#{marketPlaceController.transferenciaSeleccionadaCompra.precio}"></p:inputText>
-					<p:commandButton value="Comprar"  actionListener="#{marketPlaceController.compraDeJugador}"
+					<p:inputText style="text-align: center; " value="#{marketPlaceController.precioTransferencia}"></p:inputText>
+					<p:commandButton value="Comprar"  actionListener="#{marketPlaceController.transferenciaSeleccionadaCompra.precio}"
 						icon="ui-icon-star" update="formMrkt">
 						<f:param name="productId" value="10" />
 					</p:commandButton>
@@ -168,7 +168,7 @@
 
 				</div>
 
-			</div>
+			</h:panelGroup>
 
 
 

@@ -151,11 +151,11 @@ public class MarketPlaceController implements Serializable {
 			obtenerJugadoresEnVenta();
 			FacesContext context = FacesContext.getCurrentInstance();
 			context.addMessage(null, new FacesMessage("Venta realizada",
-					"Se realizo correctamente la venta"));
+					"El jugador fue puesto en venta"));
 		} catch (Exception e) {
 			FacesContext context = FacesContext.getCurrentInstance();
 			context.addMessage(null, new FacesMessage("Error",
-					"Ocurrio un error al realizar la venta"));
+					"Ocurrio un error al realizar la publicacion"));
 		}
 
 	}
