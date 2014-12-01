@@ -85,6 +85,16 @@
 										<f:ajax render=":content" />
 									</h:commandLink>
 
+
+
+								</p:column>
+
+								<p:column rowspan="2">
+									<h:commandLink style="color:blue;"
+										action="#{partidoController.simularPartidoAdmin}">
+					SIMULAR
+					<f:param name='partidoId' value='#{part.idPartido}' />
+									</h:commandLink>
 								</p:column>
 							</p:row>
 							<p:row>
@@ -94,7 +104,7 @@
 
 
 							<p:row>
-								<p:column colspan="4">
+								<p:column colspan="5">
 								</p:column>
 							</p:row>
 						</c:forEach>
@@ -110,8 +120,8 @@
 		</div>
 
 
-		<p:poll id="poll" interval="50" listener="#{ligaController.actualizar}"
-			update="formLiga" />
+		<p:poll id="poll" interval="10"
+			listener="#{ligaController.actualizar}" update="formLiga" />
 	</h:form>
 
 </div>

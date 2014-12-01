@@ -50,7 +50,7 @@
 									<h:outputText value="Marcar" />
 								</f:facet>
 								<p:commandLink action="#{correoController.marcarLeido}"
-									id="link" update="entradaForm">
+									id="link" update=":entradaForm">
 									<h:outputText value="leido" rendered="#{correo.leido == false}" />
 									<h:outputText value="no leido"
 										rendered="#{correo.leido == true}" />
@@ -115,7 +115,7 @@
 						</tr>
 						<tr>
 							<td><p:commandButton value="Enviar"
-									action="#{correoController.send}" update="enviarForm :mailbox" />
+									action="#{correoController.send}" update="enviarForm :entradaForm" />
 							</td>
 							<td></td>
 						</tr>
