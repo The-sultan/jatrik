@@ -182,7 +182,11 @@ public class EJBManagerEquipoBean implements IEquipos {
 		Equipo equipo = new Equipo();
 		equipo.setNombre(infoEquipo.getNombre());
 		equipo.setEstadio(infoEquipo.getEstadio().getNombre());
-		// infoUsuario.getInfoEquipo());
+                equipo.setAltura(infoEquipo.getEstadio().getAltura());
+                equipo.setLatitud(infoEquipo.getEstadio().getLatitud());
+                equipo.setLongitud(infoEquipo.getEstadio().getLongitud());
+                equipo.setFondos(infoEquipo.getFondos());
+		
 
 		// Seteo el Usuario al Equipo
 		if(usuario != null){
