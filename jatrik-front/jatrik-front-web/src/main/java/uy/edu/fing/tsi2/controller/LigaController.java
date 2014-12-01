@@ -8,8 +8,8 @@ import java.util.Map;
 import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -23,7 +23,7 @@ import uy.edu.fing.tsi2.navigation.AjaxNavigator;
 @SuppressWarnings("serial")
 @Named
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class LigaController implements Serializable {
 
 	@EJB
@@ -82,6 +82,14 @@ public class LigaController implements Serializable {
 		
 		nav.setContent("partido");
 		
+	}
+	
+	public void actualizar(){
+		infoLiga = ligaEJB.obtenerInfoLiga(sessionBean.getInfoUsuario()
+				.getInfoEquipo().getId());
+		setFechas(new ArrayList<Integer>(infoLiga.getPartidos().keySet()));
+		
+		partidosFecha = infoLiga.getPartidos().get(fechaSeleccionada);
 	}
 	
 

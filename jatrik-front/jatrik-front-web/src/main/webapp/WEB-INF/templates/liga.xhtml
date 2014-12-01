@@ -82,7 +82,7 @@
 									<h:commandLink style="color:blue;"
 										action="#{ligaController.navegarAPartido}">#{part.estado}<f:param
 											name='partidoId' value='#{part.idPartido}' />
-											<f:ajax render=":content" />
+										<f:ajax render=":content" />
 									</h:commandLink>
 
 								</p:column>
@@ -108,6 +108,10 @@
 
 			</div>
 		</div>
+
+
+		<p:poll id="poll" interval="10" listener="#{ligaController.actualizar}"
+			update="formLiga" />
 	</h:form>
 
 </div>
