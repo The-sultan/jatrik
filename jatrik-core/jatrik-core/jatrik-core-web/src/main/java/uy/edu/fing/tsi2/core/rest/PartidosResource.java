@@ -1,8 +1,9 @@
 package uy.edu.fing.tsi2.core.rest;
 
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -44,6 +45,21 @@ public class PartidosResource {
 			InfoEvento infoEvento = new InfoEvento(eventoPartido.getMinuto(), eventoPartido.toString(), eventoPartido.getEvento().getNombre());
 			infoEventos.add(infoEvento);
 		}
+		Collections.sort(infoEventos, new Comparator<InfoEvento>(){
+			@Override
+			public int compare(InfoEvento e1, InfoEvento e2){
+				if(e1.getMinuto() > e2.getMinuto()){
+					return -1;
+				}
+				else if(e1.getMinuto() == e2.getMinuto()){
+					return 0;
+				}
+				else{
+					return 1;
+				}
+			}
+			
+		});
 		infoPartido.setEventos(infoEventos);
 		return infoPartido;
 	}
