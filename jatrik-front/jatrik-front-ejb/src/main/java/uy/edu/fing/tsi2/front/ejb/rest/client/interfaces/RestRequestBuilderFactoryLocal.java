@@ -52,6 +52,6 @@ public interface RestRequestBuilderFactoryLocal {
 
 	Builder makeCorreoUpdatePostRequestBuilder();
 
-	Builder makeGetInfoLiga(Long idLiga);
+	Builder makeGetInfoLiga(Long idEquipo);
 	
 }

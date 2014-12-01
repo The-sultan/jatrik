@@ -201,8 +201,8 @@ public class RestRequestBuilderFactory implements
     }
 
     @Override
-    public Builder makeGetInfoLiga(Long idLiga) {
-        String url = String.format(JATRIK_CORE_URL + "/ligas/" + idLiga);
+    public Builder makeGetInfoLiga(Long idEquipo) {
+        String url = String.format(JATRIK_CORE_URL + "/ligas/equipo/" + idEquipo);
         return crearClienteJersey().resource(url)
                 .type(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON);

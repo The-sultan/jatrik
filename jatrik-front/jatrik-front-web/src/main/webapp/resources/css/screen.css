@@ -327,7 +327,15 @@ input {
 }
 
 .formLiga {
-	background-image: url("../../resources/gfx/equipoEntreno.jpg");
+	background-image: url("../../resources/gfx/fondoVerde.jpg");
+	background-repeat: no-repeat;
+	background-size: contain;
+	height: 1200px;
+	position: relative;
+}
+
+.formPartido {
+	background-image: url("../../resources/gfx/fondoVerde.jpg");
 	background-repeat: no-repeat;
 	background-size: contain;
 	height: 1200px;

@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Model;
 import javax.enterprise.inject.Produces;
 import javax.faces.context.FacesContext;
@@ -23,7 +24,8 @@ import uy.edu.fing.tsi2.model.SessionBeanJatrik;
 
 @SuppressWarnings("serial")
 @Model
-@RequestScoped
+@Named
+@SessionScoped
 public class PartidoController implements Serializable {
 
 	@Inject
@@ -33,25 +35,27 @@ public class PartidoController implements Serializable {
 	@Produces
 	InfoPartido partidoDatos;
 	
+	private int idPartido = 0;
+	
 	@EJB
 	PartidoEJBLocal partidoEJB;
 	
 	@PostConstruct
 	public void initDatos() {
-		//Obtener la info del partido
-		//this.partidoDatos = partidoEJB.getInfoPartido();
+		//Se inicializan los datos cuando desde afuera le setean el id de partido
 	}
 	
-	public void update() throws Exception {
-		//this.partidoDatos = partidoEJB.getInfoPartido(1);
+	public void actualizar() {
+		this.partidoDatos = partidoEJB.getInfoPartido(idPartido);
 	}
+	
 	
 	public void simularPartido(){
 		//partidoEJB.simularPartido(1);
 	}
 	
 	public boolean getStopPolling(){
-		return partidoDatos.getEstado().equals("FINALIZADO");
+		return partidoDatos.getEstado().equals("FINALIZADO") || partidoDatos.getEstado().equals("PENDIENTE");
 	}
 	
 	public List<InfoPartido> getPartidos(){
@@ -63,5 +67,14 @@ public class PartidoController implements Serializable {
 		Map<String,String> params = fc.getExternalContext().getRequestParameterMap();
 		String partidoId =  params.get("partidoId"); 
 		partidoEJB.simularPartido(Integer.valueOf(partidoId));
+	}
+
+	public int getIdPartido() {
+		return idPartido;
+	}
+
+	public void setIdPartido(int idPartido) {
+		this.idPartido = idPartido;
+		this.partidoDatos = partidoEJB.getInfoPartido(idPartido);
 	}
 }

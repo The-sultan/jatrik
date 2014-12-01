@@ -13,6 +13,7 @@ import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEntrenamiento;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoEquipo;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoFormacion;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoJugador;
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoLiga;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoPartido;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoTransferencia;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoTransferenciaCompra;
@@ -22,7 +23,6 @@ import uy.edu.fing.tsi2.jatrik.common.payloads.InfoUsuario;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource.Builder;
-import uy.edu.fing.tsi2.jatrik.common.payloads.InfoLiga;
 
 /**
  * 
@@ -142,8 +142,8 @@ public class RestClientEJB implements RestClientEJBLocal {
 		} else {
 			return response.getEntity(Boolean.class);
 		}
-	}	
-	
+	}
+
 	@Override
 	public void simularPartido(Long partidoId) throws RestClientException {
 		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory
@@ -362,13 +362,13 @@ public class RestClientEJB implements RestClientEJBLocal {
 					"No se pudo obtener el listado de correos del usuario (idUsuario), status code: "
 							+ response.getStatusInfo().getReasonPhrase());
 		}
-		GenericType<List<InfoCorreo>> gType = new GenericType<List<InfoCorreo>>() {};
-		
+		GenericType<List<InfoCorreo>> gType = new GenericType<List<InfoCorreo>>() {
+		};
+
 		return (List) response.getEntity(gType);
 	}
 
-        @Override
-        
+	@Override
 	public List<InfoCorreo> getCorreosEnviadosUsuario(Long idUsuario) {
 		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory
 				.makeCorreosEnviadosGetRequestBuilder(idUsuario);
@@ -380,11 +380,12 @@ public class RestClientEJB implements RestClientEJBLocal {
 					"No se pudo obtener el listado de correos enviados del usuario (idUsuario), status code: "
 							+ response.getStatusInfo().getReasonPhrase());
 		}
-		GenericType<List<InfoCorreo>> gType = new GenericType<List<InfoCorreo>>() {};
-		
+		GenericType<List<InfoCorreo>> gType = new GenericType<List<InfoCorreo>>() {
+		};
+
 		return (List) response.getEntity(gType);
 	}
-        
+
 	@Override
 	public String postNuevoCorreo(InfoCorreo nuevoCorreo)
 			throws RestClientException {
@@ -404,7 +405,7 @@ public class RestClientEJB implements RestClientEJBLocal {
 		String[] partUrlSplitted = ventaLocation.split("/");
 		return partUrlSplitted[(partUrlSplitted.length - 1)];
 	}
-	
+
 	@Override
 	public String postUpdateCorreo(InfoCorreo updateCorreo)
 			throws RestClientException {
@@ -424,10 +425,9 @@ public class RestClientEJB implements RestClientEJBLocal {
 		String[] partUrlSplitted = ventaLocation.split("/");
 		return partUrlSplitted[(partUrlSplitted.length - 1)];
 	}
-        
-        
-        @Override        
-	public List<InfoLiga> getInformacionLiga(Long idLiga) {
+
+	@Override
+	public InfoLiga getInformacionLiga(Long idLiga) {
 		Builder jerseyHttpRequestBuilder = jatrikRequestBuilderFactory
 				.makeGetInfoLiga(idLiga);
 		ClientResponse response = jerseyHttpRequestBuilder
@@ -438,9 +438,11 @@ public class RestClientEJB implements RestClientEJBLocal {
 					"No se pudo obtener el listado de infoLiga (idLiga), status code: "
 							+ response.getStatusInfo().getReasonPhrase());
 		}
-		GenericType<List<InfoLiga>> gType = new GenericType<List<InfoLiga>>() {};
-		
-		return (List) response.getEntity(gType);
+		GenericType<InfoLiga> gType = new GenericType<InfoLiga>() {
+		};
+
+		return response.getEntity(gType);
 	}
-        
+	
+
 }
