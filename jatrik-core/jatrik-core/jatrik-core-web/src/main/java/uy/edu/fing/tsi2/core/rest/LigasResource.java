@@ -3,6 +3,9 @@ package uy.edu.fing.tsi2.core.rest;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +21,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
+
 import uy.edu.fing.tsi2.jatrik.common.payloads.EquipoPosicionLiga;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoLiga;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoPartido;
@@ -25,7 +29,6 @@ import uy.edu.fing.tsi2.jatrik.core.domain.Liga;
 import uy.edu.fing.tsi2.jatrik.core.domain.Partido;
 import uy.edu.fing.tsi2.jatrik.core.domain.RelLigaEquipo;
 import uy.edu.fing.tsi2.jatrik.core.domain.RelLigaPartido;
-
 import uy.edu.fing.tsi2.jatrik.core.ejb.impl.local.EJBManagerEquipoBeanLocal;
 import uy.edu.fing.tsi2.jatrik.core.ejb.impl.local.EJBManagerLigaBeanLocal;
 import uy.edu.fing.tsi2.jatrik.core.utils.DateUtils;
@@ -110,6 +113,15 @@ public class LigasResource {
                 pos.setPartidosEmpatados(tabla.getPartidosEmpatados());
                 posiciones.add(pos);
             }
+            
+            Collections.sort(posiciones,new Comparator<EquipoPosicionLiga>() {
+            	@Override
+            	public int compare(EquipoPosicionLiga arg0,
+            			EquipoPosicionLiga arg1) {
+            		return (new Integer(arg1.getPtos())).compareTo(arg0.getPtos());
+            	}
+			});            
+            
             resultado.setPartidos(partidos);
             resultado.setPosisiones(posiciones);
             return Response.ok(resultado).build();

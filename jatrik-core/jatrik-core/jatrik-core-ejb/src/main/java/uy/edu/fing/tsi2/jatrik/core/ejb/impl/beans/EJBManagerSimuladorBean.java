@@ -93,7 +93,7 @@ public class EJBManagerSimuladorBean implements ISimulacion {
 			partidosEJB.inicializarPartido(partido);
 			for(int i=0; i<=90;i++){
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(6000);
 					simularEvento(partido.getId());
 				} catch (InterruptedException ex) {
 					java.util.logging.Logger.getLogger(EJBManagerSimuladorBean.class.getName()).log(Level.SEVERE, null, ex);
