@@ -118,6 +118,13 @@ public class LigasResource {
             	@Override
             	public int compare(EquipoPosicionLiga arg0,
             			EquipoPosicionLiga arg1) {
+            		
+            		if (arg1.getPtos() == arg0.getPtos()){
+            			return (new Integer(arg1.getGolesAFavor()-arg1.getGolesEnContra())).compareTo(new Integer(arg0.getGolesAFavor()-arg0.getGolesEnContra()));
+            		}
+            			
+            			
+            		
             		return (new Integer(arg1.getPtos())).compareTo(arg0.getPtos());
             	}
 			});            
