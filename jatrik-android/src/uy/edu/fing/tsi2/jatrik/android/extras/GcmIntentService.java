@@ -57,7 +57,7 @@ public class GcmIntentService extends IntentService {
 	        new Intent(this, MainActivity.class), 0);
 	 
 	    NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
-	        this).setSmallIcon(R.drawable.ic_launcher)
+	        this).setSmallIcon(R.drawable.jatrikchico)
 	        .setContentTitle("Jatrik")
 	        .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
 	        .setContentText(msg);

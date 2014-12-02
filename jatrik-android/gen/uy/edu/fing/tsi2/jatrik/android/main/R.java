@@ -1453,13 +1453,13 @@ containing a value of this type.
         public static final int common_signin_btn_text_normal_light=0x7f02006e;
         public static final int common_signin_btn_text_pressed_dark=0x7f02006f;
         public static final int common_signin_btn_text_pressed_light=0x7f020070;
-        public static final int hattrick=0x7f020071;
-        public static final int ic_launcher=0x7f020072;
-        public static final int ic_launcher2=0x7f020073;
-        public static final int ic_plusone_medium_off_client=0x7f020074;
-        public static final int ic_plusone_small_off_client=0x7f020075;
-        public static final int ic_plusone_standard_off_client=0x7f020076;
-        public static final int ic_plusone_tall_off_client=0x7f020077;
+        public static final int ic_launcher2=0x7f020071;
+        public static final int ic_plusone_medium_off_client=0x7f020072;
+        public static final int ic_plusone_small_off_client=0x7f020073;
+        public static final int ic_plusone_standard_off_client=0x7f020074;
+        public static final int ic_plusone_tall_off_client=0x7f020075;
+        public static final int jatrik=0x7f020076;
+        public static final int jatrikchico=0x7f020077;
         public static final int powered_by_google_dark=0x7f020078;
         public static final int powered_by_google_light=0x7f020079;
         public static final int strategy=0x7f02007a;
@@ -1669,6 +1669,7 @@ containing a value of this type.
         public static final int login=0x7f0c0003;
         public static final int main=0x7f0c0004;
         public static final int plantilla=0x7f0c0005;
+        public static final int posiciones=0x7f0c0006;
     }
     public static final class string {
         public static final int EntrarEspanol=0x7f060032;
@@ -1825,6 +1826,7 @@ containing a value of this type.
         public static final int title_activity_historial_partidos=0x7f060033;
         public static final int title_activity_main=0x7f060034;
         public static final int title_activity_plantilla=0x7f060037;
+        public static final int title_activity_posiciones=0x7f060039;
         /**  Text on a placeholder buy button when Google Play services is not
          available or up-to-date 
          */

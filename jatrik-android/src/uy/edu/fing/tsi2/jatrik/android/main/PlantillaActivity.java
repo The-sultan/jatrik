@@ -24,12 +24,7 @@ public class PlantillaActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_plantilla);
 		
 		ArrayList<InfoJugador> jugadores = new ArrayList<InfoJugador>();
-		jugadores.add(((DatosUsuario)this.getApplication()).getUsuario().getInfoEquipo().getGolero());
-		jugadores.addAll(((DatosUsuario)this.getApplication()).getUsuario().getInfoEquipo().getDefensas());
-		jugadores.addAll(((DatosUsuario)this.getApplication()).getUsuario().getInfoEquipo().getMediocampistas());
-		jugadores.addAll(((DatosUsuario)this.getApplication()).getUsuario().getInfoEquipo().getDelanteros());
-		jugadores.addAll(((DatosUsuario)this.getApplication()).getUsuario().getInfoEquipo().getSuplentes());
-		jugadores.addAll(((DatosUsuario)this.getApplication()).getUsuario().getInfoEquipo().getReservas());
+		jugadores.addAll(((DatosUsuario)this.getApplication()).getUsuario().getInfoEquipo().getJugadores());
 		
 		adpt  = new PlantillaAdapter(jugadores, this);
 		adpt.setEquipo(((DatosUsuario)this.getApplication()).getUsuario().getInfoEquipo());

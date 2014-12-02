@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:textColor="#00561D"
+        android:textColor="#1B2A6A"
         android:textStyle="bold"
         android:text="Nombre:"
         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -26,7 +26,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textViewNombreJugador"
         android:layout_marginTop="5sp"
-        android:textColor="#00561D"
+        android:textColor="#1B2A6A"
         android:textStyle="bold"
         android:text="Numero:"
         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -38,7 +38,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textViewNumeroJugador"
         android:layout_marginTop="5sp"
-        android:textColor="#00561D"
+        android:textColor="#1B2A6A"
         android:textStyle="bold"
         android:text="Edad:"
         android:textAppearance="?android:attr/textAppearanceMedium" />  
@@ -50,7 +50,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textViewEdadJugador"
         android:layout_marginTop="5sp"
-        android:textColor="#00561D"
+        android:textColor="#1B2A6A"
         android:textStyle="bold"
         android:text="Altura:"
         android:textAppearance="?android:attr/textAppearanceMedium" />    
@@ -62,7 +62,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textViewAlturaJugador"
         android:layout_marginTop="5sp"
-        android:textColor="#00561D"
+        android:textColor="#1B2A6A"
         android:textStyle="bold"
         android:text="Peso:"
         android:textAppearance="?android:attr/textAppearanceMedium" /> 
@@ -74,7 +74,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textViewPesoJugador"
         android:layout_marginTop="5sp"
-        android:textColor="#00561D"
+        android:textColor="#1B2A6A"
         android:textStyle="bold"
         android:text="Puesto:"
         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -151,7 +151,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textViewPuestoJugador"
         android:layout_marginTop="5sp"
-        android:textColor="#00561D"
+        android:textColor="#1B2A6A"
         android:textStyle="bold"
         android:text="Habilidades"
         android:textAppearance="?android:attr/textAppearanceMedium" />

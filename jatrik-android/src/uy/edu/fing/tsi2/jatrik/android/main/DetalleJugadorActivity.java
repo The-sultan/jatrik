@@ -35,12 +35,7 @@ public class DetalleJugadorActivity extends ActionBarActivity {
 		int idJugador = Integer.valueOf(myIntent.getStringExtra("idJugador"));
 		
 		ArrayList<InfoJugador> jugadores = new ArrayList<InfoJugador>();
-		jugadores.add(((DatosUsuario)this.getApplication()).getUsuario().getInfoEquipo().getGolero());
-		jugadores.addAll(((DatosUsuario)this.getApplication()).getUsuario().getInfoEquipo().getDefensas());
-		jugadores.addAll(((DatosUsuario)this.getApplication()).getUsuario().getInfoEquipo().getMediocampistas());
-		jugadores.addAll(((DatosUsuario)this.getApplication()).getUsuario().getInfoEquipo().getDelanteros());
-		jugadores.addAll(((DatosUsuario)this.getApplication()).getUsuario().getInfoEquipo().getSuplentes());
-		jugadores.addAll(((DatosUsuario)this.getApplication()).getUsuario().getInfoEquipo().getReservas());
+		jugadores.addAll(((DatosUsuario)this.getApplication()).getUsuario().getInfoEquipo().getJugadores());
 		List<InfoHabilidad> habilidades = new ArrayList<InfoHabilidad>();
 		for (InfoJugador j : jugadores) {
 			if (j.getId() == idJugador){

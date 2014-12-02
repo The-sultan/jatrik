@@ -77,12 +77,6 @@ public class PlantillaAdapter extends ArrayAdapter<InfoJugador> {
 		tv2.setTextColor(Color.parseColor("#3B3B3B"));
 		tv4.setTextColor(Color.parseColor("#E4E4E4"));
 		
-		if (equipo.getSuplentes().contains(j))
-			tv3.setText("SUPLENTE"); 
-		else
-			if (equipo.getReservas().contains(j))
-				tv3.setText("RESERVA"); 
-		
         switch ((String)tv3.getText()){
         case "ARQUERO": tv3.setTextColor(Color.parseColor("#110E6B"));
 						break;
@@ -92,10 +86,6 @@ public class PlantillaAdapter extends ArrayAdapter<InfoJugador> {
 						      break;   
         case "DELANTERO": tv3.setTextColor(Color.parseColor("#A41A1A"));
 						  break;
-		case "SUPLENTE": tv3.setTextColor(Color.parseColor("#565656"));
-						 break; 
-		case "RESERVA": tv3.setTextColor(Color.parseColor("#151515"));
-						break;
 
         }
 

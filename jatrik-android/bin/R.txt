@@ -319,13 +319,13 @@ int drawable common_signin_btn_text_normal_dark 0x7f02006d
 int drawable common_signin_btn_text_normal_light 0x7f02006e
 int drawable common_signin_btn_text_pressed_dark 0x7f02006f
 int drawable common_signin_btn_text_pressed_light 0x7f020070
-int drawable hattrick 0x7f020071
-int drawable ic_launcher 0x7f020072
-int drawable ic_launcher2 0x7f020073
-int drawable ic_plusone_medium_off_client 0x7f020074
-int drawable ic_plusone_small_off_client 0x7f020075
-int drawable ic_plusone_standard_off_client 0x7f020076
-int drawable ic_plusone_tall_off_client 0x7f020077
+int drawable ic_launcher2 0x7f020071
+int drawable ic_plusone_medium_off_client 0x7f020072
+int drawable ic_plusone_small_off_client 0x7f020073
+int drawable ic_plusone_standard_off_client 0x7f020074
+int drawable ic_plusone_tall_off_client 0x7f020075
+int drawable jatrik 0x7f020076
+int drawable jatrikchico 0x7f020077
 int drawable powered_by_google_dark 0x7f020078
 int drawable powered_by_google_light 0x7f020079
 int drawable strategy 0x7f02007a
@@ -505,6 +505,7 @@ int menu historial_partidos 0x7f0c0002
 int menu login 0x7f0c0003
 int menu main 0x7f0c0004
 int menu plantilla 0x7f0c0005
+int menu posiciones 0x7f0c0006
 int string EntrarEspanol 0x7f060032
 int string abc_action_bar_home_description 0x7f060024
 int string abc_action_bar_up_description 0x7f060025
@@ -561,6 +562,7 @@ int string title_activity_detalle_partido 0x7f060036
 int string title_activity_historial_partidos 0x7f060033
 int string title_activity_main 0x7f060034
 int string title_activity_plantilla 0x7f060037
+int string title_activity_posiciones 0x7f060039
 int string wallet_buy_button_place_holder 0x7f060022
 int style AppBaseTheme 0x7f050090
 int style AppTheme 0x7f050091

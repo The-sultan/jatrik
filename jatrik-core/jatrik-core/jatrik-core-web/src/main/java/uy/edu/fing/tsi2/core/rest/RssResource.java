@@ -33,8 +33,8 @@ public class RssResource {
 		//feed.setLink("http://jatrik.com");
 		for(Partido partido : partidos){
 			Entry entry = new Entry();
-			entry.setTitle(String.format("%s vs %s en %s", partido.getLocal().getNombre(), partido.getVisitante().getNombre(),
-					partido.getLocal().getEstadio()));
+//			entry.setTitle(String.format("%s vs %s en %s", partido.getLocal().getNombre(), partido.getVisitante().getNombre(),
+//					partido.getLocal().getEstadio()));
 			Content content = new Content();
 			String contenido = "";
 			if(partido.getGolesLocal() == partido.getGolesVisitante()){
@@ -47,7 +47,8 @@ public class RssResource {
 				contenido = String.format("Victoria de %s de visitante ante  %s %d a %d",partido.getVisitante().getNombre(), partido.getLocal().getNombre(),
 						partido.getGolesLocal(), partido.getGolesVisitante());
 			}
-			content.setText(contenido);
+			entry.setTitle(contenido);
+			//content.setText(contenido);
 			entry.setContent(content);
 			feed.getEntries().add(entry);
 		}

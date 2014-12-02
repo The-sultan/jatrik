@@ -34,7 +34,7 @@ public class MainActivity extends ActionBarActivity {
 	
 	// Url del servicio REST que se invoca para el envio del identificador de
 	// registro a la aplicación jee
-	public static final String URL_REGISTRO_ID = "http://192.168.1.34:8080/jatrik-core-web/rest/registration/id/add";
+	public static final String URL_REGISTRO_ID = "http://192.168.3.126:8080/jatrik-core-web/rest/registration/id/add";
 	// Seña númerica que se utiliza cuando se verifica la disponibilidad de los
 	// google play services
 	private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;

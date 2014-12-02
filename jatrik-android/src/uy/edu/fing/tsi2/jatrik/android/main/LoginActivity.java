@@ -3,6 +3,8 @@ package uy.edu.fing.tsi2.jatrik.android.main;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -15,6 +17,8 @@ import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 
 import uy.edu.fing.tsi2.jatrik.android.extras.InfoEquipo;
+import uy.edu.fing.tsi2.jatrik.android.extras.InfoJugador;
+import uy.edu.fing.tsi2.jatrik.android.extras.InfoListaJugadores;
 import uy.edu.fing.tsi2.jatrik.android.extras.InfoUsuario;
 
 import android.app.AlertDialog;
@@ -32,6 +36,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class LoginActivity extends ActionBarActivity {
 
@@ -58,6 +63,7 @@ public class LoginActivity extends ActionBarActivity {
 			
 			InfoUsuario infoUsuario = new InfoUsuario();
 			InfoEquipo infoEquipo = new InfoEquipo();
+			InfoListaJugadores infoJugadores = new InfoListaJugadores();
 			Gson gson = new Gson();
 			
 			String User = ((EditText)findViewById(R.id.editTextUsuario)).getText().toString();
@@ -84,6 +90,16 @@ public class LoginActivity extends ActionBarActivity {
 					infoEquipo = gson.fromJson(text, InfoEquipo.class);		
 					if (infoEquipo!=null){
 						infoUsuario.setInfoEquipo(infoEquipo);
+						String aaa = ((DatosUsuario)LoginActivity.this.getApplication()).getUrlServicios() + "equipos/" + infoUsuario.getInfoEquipo().getId().toString() + "/formaciones/propia";
+						HttpGet httpGet3 = new HttpGet(aaa);
+						response = httpClient.execute(httpGet3, localContext);
+						entity = response.getEntity();
+						text = getASCIIContentFromEntity(entity);
+						List<InfoJugador> jugadores = gson.fromJson(text, new TypeToken<List<InfoJugador>>(){}.getType());
+	
+						if (jugadores!=null){
+							infoUsuario.getInfoEquipo().setJugadores(jugadores);
+						}
 					}
 				}
 			} catch (Exception e) {
@@ -120,7 +136,7 @@ public class LoginActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
-		((DatosUsuario)LoginActivity.this.getApplication()).setUrlServicios("http://192.168.1.34:8080/jatrik-core-web/rest/");
+		((DatosUsuario)LoginActivity.this.getApplication()).setUrlServicios("http://192.168.3.126:8080/jatrik-core-web/rest/");
 		((DatosUsuario)LoginActivity.this.getApplication()).setUltimaNotificacion(1);
 		
 	}

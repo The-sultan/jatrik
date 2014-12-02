@@ -11,7 +11,7 @@
 	        android:layout_marginTop="2sp"
 	        android:layout_marginLeft="5sp"
 	        android:gravity="start"   
-	        android:textColor="#B7B7B7"
+	        android:textColor="#1B2A6A"
 	        android:textSize="22sp" />
 	    
 	   <TextView
@@ -21,6 +21,6 @@
 	        android:layout_marginTop="2sp"
 	        android:layout_marginLeft="10sp"
 	        android:layout_toRightOf="@id/minutoEvento"
-	        android:textColor="#B7B7B7"
+	        android:textColor="#1B2A6A"
 	        android:textSize="18sp" />
 </LinearLayout>

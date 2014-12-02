@@ -60,10 +60,13 @@ public class EventosAdapter extends ArrayAdapter<InfoEvento> {
         tv1.setText(Integer.toString(e.getMinuto())); 
         tv2.setText(e.getDescripcion());   
   
-        convertView.setBackgroundColor(Color.parseColor("#E4E4E4"));
-		tv1.setTextColor(Color.parseColor("#3B3B3B"));
-		tv2.setTextColor(Color.parseColor("#3B3B3B"));
-
+        convertView.setBackgroundColor(Color.parseColor("#E4E4EE"));
+        
+        if (e.getTipo() == "GOL"){
+        	convertView.setBackgroundColor(Color.parseColor("#1B2A6A"));
+			tv1.setTextColor(Color.parseColor("#E4E4EE"));
+			tv2.setTextColor(Color.parseColor("#E4E4EE"));
+        }
 	    return convertView;
 	}
 	

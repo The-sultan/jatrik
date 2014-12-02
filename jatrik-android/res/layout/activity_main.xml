@@ -15,7 +15,7 @@
         android:layout_alignLeft="@+id/textViewEquipo"
         android:layout_below="@+id/textViewEquipo"
         android:layout_marginTop="10dp"
-        android:textColor="#00561D"
+        android:textColor="#1B2A6A"
         android:textStyle="bold"
         android:text="Tu estadio:"
         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textViewEstadio"
         android:layout_below="@+id/textViewEstadio"
-        android:textColor="#00561D"
+        android:textColor="#1B2A6A"
         android:textStyle="bold"
         android:layout_marginTop="10dp"
         android:text="Tus fondos:"
@@ -48,7 +48,7 @@
         android:layout_alignParentLeft="true"
         android:layout_marginTop="20dp"
         android:layout_below="@+id/imageViewStrategy"
-        android:textColor="#00561D"
+        android:textColor="#1B2A6A"
         android:textStyle="bold"
         android:text="Tu equipo:"
         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -60,7 +60,7 @@
         android:layout_above="@+id/textViewEstadio"
         android:layout_toRightOf="@+id/textViewFondos"
         android:layout_marginLeft="3dp"
-        android:textColor="#00561D"
+        android:textColor="#1B2A6A"
         android:text="Nombre Equipo"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -71,7 +71,7 @@
         android:layout_alignBaseline="@+id/textViewEstadio"
         android:layout_alignBottom="@+id/textViewEstadio"
         android:layout_alignLeft="@+id/textNombreEquipo"
-        android:textColor="#00561D"
+        android:textColor="#1B2A6A"
         android:text="Nombre Estadio"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -82,7 +82,7 @@
         android:layout_alignBaseline="@+id/textViewFondos"
         android:layout_alignBottom="@+id/textViewFondos"
         android:layout_alignLeft="@+id/textNombreEquipo"
-        android:textColor="#00561D"
+        android:textColor="#1B2A6A"
         android:text="Fondos"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -94,7 +94,7 @@
         android:layout_centerHorizontal="true"
         android:text="Bienvenido"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#00561D"
+        android:textColor="#1B2A6A"
         android:textStyle="bold" />
 
     <LinearLayout
@@ -110,7 +110,7 @@
 	        android:layout_width="fill_parent"
 	        android:layout_height="40dp"
 	        android:layout_weight="1.5"
-	        android:background="#00561D"
+	        android:background="#1B2A6A"
 	        android:onClick="historialPartidos"
 	        android:text="Partidos"
 	        android:textColor="#FFFFFF"
@@ -128,7 +128,7 @@
 	        android:layout_width="fill_parent"
 	        android:layout_height="40dp"
 	        android:layout_weight="1.5"
-	        android:background="#00561D"
+	        android:background="#1B2A6A"
 	        android:onClick="plantillaEquipo"
 	        android:text="Plantilla"
 	        android:textColor="#FFFFFF"

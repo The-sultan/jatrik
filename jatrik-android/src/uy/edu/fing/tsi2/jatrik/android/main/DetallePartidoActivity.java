@@ -112,7 +112,6 @@ public class DetallePartidoActivity extends ActionBarActivity {
 			        }
 					
 				}
-				Collections.reverse(partido.getEventos());
 				adpt.seteventoList(partido.getEventos());
 				adpt.notifyDataSetChanged();
 		  }

@@ -6,6 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#E4E4EE"
     tools:context="com.example.jatrik_android.MainActivity" >
 
      <TextView
@@ -15,7 +16,7 @@
         android:layout_alignLeft="@+id/imageLogo"
         android:layout_below="@+id/imageLogo"
         android:layout_marginTop="10dp"
-        android:textColor="#00561D"
+        android:textColor="#1B2A6A"
         android:textStyle="bold"
         android:text="Usuario:"
         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -27,7 +28,7 @@
         android:layout_alignLeft="@+id/textViewUsuario"
         android:layout_below="@+id/editTextUsuario"
         android:layout_marginTop="20dp"
-        android:textColor="#00561D"
+        android:textColor="#1B2A6A"
         android:textStyle="bold"
         android:text="Clave:"
         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -63,8 +64,8 @@
         android:layout_below="@+id/editTextClave"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="51dp"
-        android:background="#00561D"
-        android:textColor="#FFFFFF"
+        android:background="#1B2A6A"
+        android:textColor="#E4E4EE"
         android:textStyle="bold"
         android:onClick="LogIn"
         android:text="Entrar" />
@@ -76,6 +77,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:src="@drawable/hattrick" />
+        android:src="@drawable/jatrik" />
 
 </RelativeLayout>
