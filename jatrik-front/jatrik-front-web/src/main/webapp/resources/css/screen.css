@@ -373,7 +373,7 @@ input {
 .formLiga {
 	background-image: url("../../resources/gfx/fondoVerde.jpg");
 	background-repeat: no-repeat;
-	background-size: contain;
+	background-size: cover;
 	height: 1200px;
 	position: relative;
 }
