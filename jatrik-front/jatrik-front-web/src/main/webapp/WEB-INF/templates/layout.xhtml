@@ -68,6 +68,25 @@
 			</div>
 			<div id="info">
 				<div id="logo"></div>
+				<h:outputText value="Chateá"
+					style="float:left;margin-left:10px;font-size: 40px;font-weight: bold;color: rgb(184,184,184) ;text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;" />
+				<div id="aside">
+					<label for="chat-autocomplete"/>
+					<input type="text" id="chat-autocomplete"/>
+					
+					<script type="text/javascript">
+						usuarios = [];
+						<ui:repeat value="#{chatController.usuarios}" var="usuario">
+							usuarios.push('<h:outputText value="${usuario.nick}"/>');
+						</ui:repeat>
+						
+						currentUser = {
+							nick : "#{loginController.sessionBean.nick}"
+						}
+						var index = usuarios.indexOf(currentUser.nick);
+						usuarios.splice(index, 1);
+					</script>
+				</div>
 				<div id="infoGrupo">
 					<h:outputText value="Taller de Sistemas de Informacion 2"
 						style="margin-left:10px;font-size: 20px;font-weight: bold;color: rgb(184,184,184)" />
