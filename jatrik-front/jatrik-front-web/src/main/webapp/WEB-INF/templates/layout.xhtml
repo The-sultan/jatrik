@@ -28,7 +28,8 @@
 	<h:outputStylesheet name="css/tarjeta.css" />
 	<h:outputStylesheet name="css/menu.css" />
 	<script type="text/javascript"
-        src="http://maps.googleapis.com/maps/api/js?sensor=true">
+		src="http://maps.googleapis.com/maps/api/js?sensor=true">
+		
 	</script>
 </h:head>
 <h:body>
@@ -37,7 +38,7 @@
 		<ui:insert name="header">
 		</ui:insert>
 		<div id="container">
-			
+
 			<h:panelGroup id="content" styleClass="content">
 				<ui:insert name="content">
 	                    [Template content will be inserted here]
@@ -46,22 +47,28 @@
 		</div>
 		<div id="footer">
 			<div id="feedsContainer">
-				<h:outputText value="Noticias de tu Liga" style="margin-left:10px;font-size: 40px;font-weight: bold;color: rgb(184,184,184) ;text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;"/>
+				<h:outputText value="Noticias de tu Liga"
+					style="margin-left:10px;font-size: 40px;font-weight: bold;color: rgb(184,184,184) ;text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;" />
 				<div id="feeds">
-					<p:feedReader value="http://localhost:8080/jatrik-core-web/rest/rss" var="feed" size="3">
-					    <h:outputText value="#{feed.title}" style="margin-left:15px;font-weight: bold"/>
-				    	<p:separator />
-					</p:feedReader> 
+					<p:feedReader
+						value="http://localhost:8080/jatrik-core-web/rest/rss" var="feed"
+						size="3">
+						<h:outputText value="#{feed.title}"
+							style="margin-left:15px;font-weight: bold" />
+						<p:separator />
+					</p:feedReader>
 				</div>
 			</div>
 			<div id="info">
-			    <div id="logo"></div>
-			    <div id="infoGrupo">
-			    	<h:outputText value="Taller de Sistemas de Informacion 2" style="margin-left:10px;font-size: 20px;font-weight: bold;color: rgb(184,184,184)"/>
-			    	<h:outputText value="Grupo 5 - 2014" style="margin-left:10px;font-size: 17px;font-weight: bold;color: rgb(184,184,184)"/>
-			    </div>
-			</div>	
-				
+				<div id="logo"></div>
+				<div id="infoGrupo">
+					<h:outputText value="Taller de Sistemas de Informacion 2"
+						style="margin-left:10px;font-size: 20px;font-weight: bold;color: rgb(184,184,184)" />
+					<h:outputText value="Grupo 5 - 2014"
+						style="margin-left:10px;font-size: 17px;font-weight: bold;color: rgb(184,184,184)" />
+				</div>
+			</div>
+
 		</div>
 	</div>
 

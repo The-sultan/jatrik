@@ -50,62 +50,66 @@ public class EstrategiaFalta extends EstrategiaSimulacion{
 
 	@Override
 	public void manejarEvento(Partido partido) {
+		try {
+			Evento eventoFalta = eventosEJB.findByName(EnumEventos.FALTA.name());
+			boolean equipoLocal = this.getNextBoolean();
+			Equipo equipo = equipoLocal ? partido.getLocal() : partido.getVisitante();
+			Formacion formacion = equipoLocal ? partido.getFormacionLocal() : partido.getFormacionVisitante();
+			Jugador delantero = getJugadorEnPosicion(partido, formacion.getJugadores(), EnumPuestoFormacion.DELANTERO);
+			int nivel = this.getNextInt(15) + 1;
+			if(nivel <= 12){
+				nivel = 1;
+			}
+			else if(nivel > 12 && nivel <15){
+				nivel = 2;
+			}
+			else if(nivel == 15){
+				nivel = 3;
+			}
+			
+			
+			List<Comentario> comentarios = comentariosEJB.findComentariosByEventoAndNivel(eventoFalta, Long.valueOf(nivel));
+			int comentarioSorteo = this.getNextInt(comentarios.size());
+			EventoPartidoFalta eventoPartidoFalta = new EventoPartidoFalta(partido.getMinuto(), partido, eventoFalta, Long.valueOf(nivel), delantero, equipo);
+			eventoPartidoFalta.setComentario(comentarios.get(comentarioSorteo));
+			eventosPartidosEJB.add(eventoPartidoFalta);
+			
+			Equipo elOtroEquipo = equipoLocal ? partido.getVisitante() : partido.getLocal();
+			Formacion laOtraFormacion = equipoLocal ? partido.getFormacionVisitante() : partido.getFormacionLocal();
+			Jugador defensaOMediocampista = getJugadorEnPosicion(partido,laOtraFormacion.getJugadores(), EnumPuestoFormacion.DEFENSA, EnumPuestoFormacion.MEDIOCAMPISTA);
+			boolean expulsado = false;
+			if(defensaOMediocampista != null){
+				if(nivel == 2){
 
-		Evento eventoFalta = eventosEJB.findByName(EnumEventos.FALTA.name());
-		boolean equipoLocal = this.getNextBoolean();
-		Equipo equipo = equipoLocal ? partido.getLocal() : partido.getVisitante();
-		Formacion formacion = equipoLocal ? partido.getFormacionLocal() : partido.getFormacionVisitante();
-		Jugador delantero = getJugadorEnPosicion(partido, formacion.getJugadores(), EnumPuestoFormacion.DELANTERO);
-		int nivel = this.getNextInt(15) + 1;
-		if(nivel <= 12){
-			nivel = 1;
-		}
-		else if(nivel > 12 && nivel <15){
-			nivel = 2;
-		}
-		else if(nivel == 15){
-			nivel = 3;
-		}
-		
-		
-		List<Comentario> comentarios = comentariosEJB.findComentariosByEventoAndNivel(eventoFalta, Long.valueOf(nivel));
-		int comentarioSorteo = this.getNextInt(comentarios.size());
-		EventoPartidoFalta eventoPartidoFalta = new EventoPartidoFalta(partido.getMinuto(), partido, eventoFalta, Long.valueOf(nivel), delantero, equipo);
-		eventoPartidoFalta.setComentario(comentarios.get(comentarioSorteo));
-		eventosPartidosEJB.add(eventoPartidoFalta);
-		
-		Equipo elOtroEquipo = equipoLocal ? partido.getVisitante() : partido.getLocal();
-		Formacion laOtraFormacion = equipoLocal ? partido.getFormacionVisitante() : partido.getFormacionLocal();
-		Jugador defensaOMediocampista = getJugadorEnPosicion(partido,laOtraFormacion.getJugadores(), EnumPuestoFormacion.DEFENSA, EnumPuestoFormacion.MEDIOCAMPISTA);
-		boolean expulsado = false;
-		if(defensaOMediocampista != null){
-			if(nivel == 2){
+					if(!partido.getJugadoresConTarjetaAmarilla().contains(defensaOMediocampista)){
+						Evento eventoTarjeta = eventosEJB.findByName(EnumEventos.TARJETA_AMARILLA.name());
+						EventoPartidoTarjetaAmarilla eventoPartidoTarjeta = new EventoPartidoTarjetaAmarilla(partido.getMinuto(), partido, eventoTarjeta, defensaOMediocampista, elOtroEquipo);
+						eventosPartidosEJB.add(eventoPartidoTarjeta);
+						partido.getJugadoresConTarjetaAmarilla().add(defensaOMediocampista);
+					}else{//doble tarjeta amarilla, expulsado
+						Evento eventoTarjeta = eventosEJB.findByName(EnumEventos.TARJETA_AMARILLA_DOBLE.name());
+						EventoPartidoTarjetaAmarillaDoble eventoPartidoTarjeta = new EventoPartidoTarjetaAmarillaDoble(partido.getMinuto(), partido, eventoTarjeta, defensaOMediocampista, elOtroEquipo);
+						eventosPartidosEJB.add(eventoPartidoTarjeta);
+						expulsado = true;
+						//partido.getJugadoresExpulsados().add(defensaOMediocampista);
+					}
 
-				if(!partido.getJugadoresConTarjetaAmarilla().contains(defensaOMediocampista)){
-					Evento eventoTarjeta = eventosEJB.findByName(EnumEventos.TARJETA_AMARILLA.name());
-					EventoPartidoTarjetaAmarilla eventoPartidoTarjeta = new EventoPartidoTarjetaAmarilla(partido.getMinuto(), partido, eventoTarjeta, defensaOMediocampista, elOtroEquipo);
-					eventosPartidosEJB.add(eventoPartidoTarjeta);
-					partido.getJugadoresConTarjetaAmarilla().add(defensaOMediocampista);
-				}else{//doble tarjeta amarilla, expulsado
-					Evento eventoTarjeta = eventosEJB.findByName(EnumEventos.TARJETA_AMARILLA_DOBLE.name());
-					EventoPartidoTarjetaAmarillaDoble eventoPartidoTarjeta = new EventoPartidoTarjetaAmarillaDoble(partido.getMinuto(), partido, eventoTarjeta, defensaOMediocampista, elOtroEquipo);
-					eventosPartidosEJB.add(eventoPartidoTarjeta);
-					expulsado = true;
-					//partido.getJugadoresExpulsados().add(defensaOMediocampista);
+				}
+				if(nivel == 3 || expulsado){
+						Evento eventoTarjeta = eventosEJB.findByName(EnumEventos.TARJETA_ROJA.name());
+						EventoPartidoTarjetaRoja eventoPartidoTarjeta = new EventoPartidoTarjetaRoja(partido.getMinuto(), partido, eventoTarjeta, defensaOMediocampista, elOtroEquipo);
+						eventosPartidosEJB.add(eventoPartidoTarjeta);
+						partido.getJugadoresExpulsados().add(defensaOMediocampista);
 				}
 
+				if(nivel > 1){
+					partidosEJB.update(partido);
+				}
 			}
-			if(nivel == 3 || expulsado){
-					Evento eventoTarjeta = eventosEJB.findByName(EnumEventos.TARJETA_ROJA.name());
-					EventoPartidoTarjetaRoja eventoPartidoTarjeta = new EventoPartidoTarjetaRoja(partido.getMinuto(), partido, eventoTarjeta, defensaOMediocampista, elOtroEquipo);
-					eventosPartidosEJB.add(eventoPartidoTarjeta);
-					partido.getJugadoresExpulsados().add(defensaOMediocampista);
-			}
-
-			if(nivel > 1){
-				partidosEJB.update(partido);
-			}
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
+		
 		
 		
 	}
