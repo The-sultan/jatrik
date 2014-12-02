@@ -65,27 +65,11 @@ public class EJBManagerLigaBean implements ILigas {
             return;
         }
 
-        List<String> nombreEquipos = new ArrayList<>();
-        nombreEquipos.add("Cerro");
-        nombreEquipos.add("Wanderers");
-        nombreEquipos.add("Danubio");
-        nombreEquipos.add("River");
-        nombreEquipos.add("Defensor");
-        nombreEquipos.add("Peñarol");
-        nombreEquipos.add("Nacional");
-        nombreEquipos.add("Rampla");
-        nombreEquipos.add("El Tanque Sisley");
-        nombreEquipos.add("Racing");
-        nombreEquipos.add("Fenix");
-        nombreEquipos.add("Atenas");
-        nombreEquipos.add("Sud America");
-        nombreEquipos.add("Tacuarembo");
-        nombreEquipos.add("Rampla Juniors");
-        nombreEquipos.add("Juventud");
+        
 
-        for (String nombreEquipo : nombreEquipos) {
+        for (int i=0;i<CANT_EQUIPOS_LIGA;i++) {
             InfoEquipo infoEquipo = new InfoEquipo();
-            infoEquipo.setNombre(nombreEquipo);
+            infoEquipo.setNombre("Bot "+i);
             InfoEstadio infoEstadio = new InfoEstadio();
             infoEstadio.setNombre("Estadio1");
             infoEstadio.setAltura(alturaEstadio);

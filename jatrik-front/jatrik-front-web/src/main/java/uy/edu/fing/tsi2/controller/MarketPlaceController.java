@@ -2,22 +2,20 @@ package uy.edu.fing.tsi2.controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Model;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 
 import uy.edu.fing.tsi2.front.ejb.interfaces.EquipoEJBLocal;
 import uy.edu.fing.tsi2.front.ejb.interfaces.TransferenciaEJBLocal;
+import uy.edu.fing.tsi2.jatrik.common.payloads.InfoFormacion;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoJugador;
 import uy.edu.fing.tsi2.jatrik.common.payloads.InfoTransferencia;
 import uy.edu.fing.tsi2.model.SessionBeanJatrik;
@@ -57,9 +55,13 @@ public class MarketPlaceController implements Serializable {
 		transferencias = transferenciaEJB.getTransferencias(sessionBean
 				.getInfoUsuario().getId());
 
-		jugadoresNoEnVenta = equipoEJB.getJugadoresEquipo(sessionBean
-				.getInfoUsuario().getInfoEquipo().getId());
-
+		InfoFormacion formacion = equipoEJB.getFormacionEstandar(sessionBean
+					.getInfoUsuario().getInfoEquipo().getId());
+		jugadoresNoEnVenta = formacion.getSuplentes();
+		jugadoresNoEnVenta.addAll(formacion.getReservas());
+		
+		
+		
 		jugadoresEnVenta = new ArrayList<InfoJugador>();
 		for (InfoTransferencia infoTransferencia : transferencias) {
 			jugadoresEnVenta.add(infoTransferencia.getJugador());

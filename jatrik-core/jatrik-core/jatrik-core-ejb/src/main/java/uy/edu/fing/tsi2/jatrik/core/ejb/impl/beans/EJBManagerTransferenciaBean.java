@@ -1,5 +1,6 @@
 package uy.edu.fing.tsi2.jatrik.core.ejb.impl.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -10,11 +11,14 @@ import javax.ejb.Stateless;
 import org.apache.log4j.Logger;
 
 import uy.edu.fing.tsi2.jatrik.core.domain.Equipo;
+import uy.edu.fing.tsi2.jatrik.core.domain.Formacion;
 import uy.edu.fing.tsi2.jatrik.core.domain.Jugador;
+import uy.edu.fing.tsi2.jatrik.core.domain.JugadorEnFormacion;
 import uy.edu.fing.tsi2.jatrik.core.domain.Transferencia;
 import uy.edu.fing.tsi2.jatrik.core.ejb.ITransferencias;
 import uy.edu.fing.tsi2.jatrik.core.ejb.impl.local.EJBManagerTransferenciaBeanLocal;
 import uy.edu.fing.tsi2.jatrik.core.ejb.impl.remote.EJBManagerTransferenciaBeanRemote;
+import uy.edu.fing.tsi2.jatrik.core.enumerados.EnumPuestoFormacion;
 import uy.edu.fing.tsi2.jatrik.core.persistence.impl.local.EJBEMEquiposLocal;
 import uy.edu.fing.tsi2.jatrik.core.persistence.impl.local.EJBEMJugadoresLocal;
 import uy.edu.fing.tsi2.jatrik.core.persistence.impl.local.EJBEMTransferenciasLocal;
@@ -91,11 +95,14 @@ public class EJBManagerTransferenciaBean implements ITransferencias {
 			logger.info("Se vende el jugador :"
 					+ trans.getJugador().getNombre());
 			equipoVende.getJugadores().remove(jugador);
+			quitarSiExisteJugadorDeFormacion(equipoVende.getFormacion(), jugador);
+			//quitarSiExisteJugadorDeFormacion(equipoVende.getFormacionActual(), jugador);
 			equipoVende.setFondos(equipoVende.getFondos() + trans.getPrecio());
 
 			equipoCompra.getJugadores().add(jugador);
 			equipoCompra.setFondos(diferencia);
-
+			agregarAFormacionComoReserva(equipoCompra.getFormacion(), jugador);
+			//agregarAFormacionComoReserva(equipoCompra.getFormacionActual(), jugador);
 			trans.setComprador(equipoCompra);
 
 			equipos.update(equipoCompra);
@@ -117,5 +124,41 @@ public class EJBManagerTransferenciaBean implements ITransferencias {
 			return transferencias.findTransferenciasLibres();
 	}
 	
+	private void quitarSiExisteJugadorDeFormacion(Formacion formacion, Jugador jugador){
+		if(formacion == null)
+			return;
+		List<JugadorEnFormacion> jugadoresAQuitar = new ArrayList<>();
+		for(JugadorEnFormacion jugadorFormacion : formacion.getJugadores()){
+			if(jugadorFormacion.getJugador().equals(jugador)){
+				jugadoresAQuitar.add(jugadorFormacion);
+				
+			}
+		}
+		formacion.getJugadores().removeAll(jugadoresAQuitar);
+		equipos.updateFormacion(formacion);
+		for(JugadorEnFormacion jugadorFormacion : jugadoresAQuitar){
+			equipos.deleteJugadorFormacion(jugadorFormacion);
+		}
+		
+		
+	}
+	
+	private void agregarAFormacionComoReserva(Formacion formacion, Jugador jugador){
+		if(formacion == null)
+			return;
+		int cantReservas = 0;
+		for(JugadorEnFormacion jugadorFormacion : formacion.getJugadores()){
+			if(jugadorFormacion.getPuestoFormacion() == EnumPuestoFormacion.RESERVA){
+				cantReservas++;
+			}
+		}
+		JugadorEnFormacion jugadorFormacion = new JugadorEnFormacion();
+		jugadorFormacion.setFormacion(formacion);
+		jugadorFormacion.setJugador(jugador);
+		jugadorFormacion.setPuestoFormacion(EnumPuestoFormacion.RESERVA);
+		jugadorFormacion.setIndice(cantReservas);
+		formacion.getJugadores().add(jugadorFormacion);
+		equipos.updateFormacion(formacion);
+	}
 
 }

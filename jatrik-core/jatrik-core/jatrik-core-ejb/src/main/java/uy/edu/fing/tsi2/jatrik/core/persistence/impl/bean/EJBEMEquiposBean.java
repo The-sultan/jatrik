@@ -164,7 +164,7 @@ public class EJBEMEquiposBean implements IEMEquipos {
 
 	@Override
 	public void updateFormacion(Formacion formacion) {
-	entityManager.persist(formacion);
+	entityManager.merge(formacion);
 	}
 	
 	@Override
@@ -175,5 +175,10 @@ public class EJBEMEquiposBean implements IEMEquipos {
 	@Override
 	public void storeFormacion(Formacion formacion) {
 		entityManager.persist(formacion);
+	}
+	
+	@Override
+	public void deleteJugadorFormacion(JugadorEnFormacion jugadorFormacion){
+		entityManager.remove(jugadorFormacion);
 	}
 }

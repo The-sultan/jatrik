@@ -4,6 +4,7 @@ import java.util.List;
 
 import uy.edu.fing.tsi2.jatrik.core.domain.Equipo;
 import uy.edu.fing.tsi2.jatrik.core.domain.Formacion;
+import uy.edu.fing.tsi2.jatrik.core.domain.JugadorEnFormacion;
 
 
 
@@ -27,4 +28,6 @@ public interface IEMEquipos {
 	void storeFormacion(Formacion formacion);
 	
 	void deleteFormacion(Formacion formacion);
+	
+	 void deleteJugadorFormacion(JugadorEnFormacion jugadorFormacion);
 }
